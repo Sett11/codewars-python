@@ -1,4 +1,4 @@
-def string_to_number(s):
-    return int(s)
+def between_extremes(a):
+    return max(a)-min(a)
 
-print(string_to_number('100'))
+print(between_extremes([23, 3, 19, 21, 16]))
