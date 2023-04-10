@@ -1,9 +1,8 @@
-def create_array(n):
-    res=[]
-    i=1
-    while i<=n:
-        res.append(i)
+def list_animals(a):
+    list = ''
+    for i in range(len(a)):
+        list += str(i + 1) + '. ' + a[i] + '\n'
         i+=1
-    return res
+    return list
 
-print(create_array(2))
+print(list_animals([ 'dog', 'cat', 'elephant' ]))
