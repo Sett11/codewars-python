@@ -1,4 +1,9 @@
-def between_extremes(a):
-    return max(a)-min(a)
+def fix_the_meerkat(a):
+    b=a[0]
+    c=a[2]
+    a[0]=c
+    a[2]=b
+    return a
+        
 
-print(between_extremes([23, 3, 19, 21, 16]))
+print(fix_the_meerkat(["tail", "body", "head"]))
