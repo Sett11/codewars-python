@@ -1,7 +1,9 @@
-def fibonacci(n: int) -> int:
-    a=[0,1]
-    while len(a)<=n:
-        a.append(a[len(a)-1]+a[len(a)-2])
-    return a[n]
+def in_asc_order(a):
+    i=0
+    while i<len(a)-1:
+        if(a[i]>a[i+1]):
+            return 1==2
+        i+=1
+    return 1==1
 
-print(fibonacci(34))
+print(in_asc_order([1,2,4,7,19]))
