@@ -1,4 +1,4 @@
-def number_to_string(n):
-    return str(n)
+def string_to_number(s):
+    return int(s)
 
-print(number_to_string(200))
+print(string_to_number('100'))
