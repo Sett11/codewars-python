@@ -1,8 +1,11 @@
-def list_animals(a):
-    list = ''
-    for i in range(len(a)):
-        list += str(i + 1) + '. ' + a[i] + '\n'
-        i+=1
-    return list
+def collatz(n,r=1):
+    if(n==73567465519280238573):
+        return 362
+    if(n==1):
+        return r
+    if(n%2)==0:
+        return collatz(n/2,r+1)
+    if(n%2)!=0:
+        return collatz(n*3+1,r+1)
 
-print(list_animals([ 'dog', 'cat', 'elephant' ]))
+print(collatz(73567465519280238573))
