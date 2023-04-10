@@ -1,20 +1,9 @@
-from functools import reduce
-import math
-
-def r(a,b):
-    return a+b
-
-def is_perfect(n):
-    if(n==1):
-        return False
+def monkey_count(n):
+    c=1
     a=[]
-    i=1
-    while i<math.sqrt(n):
-        if(n%i)==0:
-            a.append(i)
-            if(n/i)<=n/2:
-                a.append(n/i)
-        i+=1
-    return  reduce(r,a)==n
+    while c<=n:
+        a.append(c)
+        c+=1
+    return a
 
-print(is_perfect(28))
+print(monkey_count(11))
