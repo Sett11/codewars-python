@@ -1,6 +1,5 @@
-def f(e):return int(e)
-def get_sum_of_digits(num):
-    d=map(f,list(str(num)))
-    return sum(list(d))
+def corrections(x):
+    if x>0:return str(x)+' is more than zero.'
+    else:return str(x)+ ' is equal to or less than zero.'
 
-print(get_sum_of_digits(123))
+print(corrections(-1))
