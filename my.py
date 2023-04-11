@@ -1,9 +1,26 @@
-def r(e,o={'6':'a','1':'b','7':'d','4':'e','3':'i','2':'l','9':'m','8':'n','0':'o','5':'t'}):
-    return o[e]
+from functools import reduce
+def f(e):
+    if(e==''):
+        return False
+    else:
+        return True
+    
+def r(a,c):
+    return int(a)+int(c)
 
-def hidden(n):
-    a=list(str(n))
-    b=map(r,a)
-    return ''.join((list(b)))
+def f_2(e):
+    e=list(e)
+    res=reduce(r,e)
+    return res
 
-print(hidden(637))
+def c(e):
+    return int(e)
+
+def largest_sum(s):
+    if(s=='0'):return 0
+    a=s.split('0')
+    b=list(filter(f,a))
+    x=list(map(f_2,b))
+    return max(list(map(c,x)))
+
+print(largest_sum("72102450111111090"))
