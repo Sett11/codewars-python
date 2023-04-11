@@ -1,11 +1,16 @@
-def flatten_me(a):
-    r=[]
-    for i in a:
-        if type(i) is list:
-            for j in i:
-                r.append(j)
-        else:
-            r.append(i)
-    return r
+import re
+def f(e,s='aioue'):
+    return s.find(e)==-1
 
-print(flatten_me([[True, False], ['!'], ['?'], [71, '@']]))
+def count_consonants(t):
+    t=re.sub(r'[^A-Za-z]+','',t)
+    t=list(filter(f,t.lower()))
+    a=''
+    for i in range(len(t)):
+        if(a.find(t[i])==-1):
+            a+=t[i]
+        else:
+            continue
+    return len(a)
+   
+print(count_consonants('Count my unique consonants!!'))
