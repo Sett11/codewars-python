@@ -1,12 +1,7 @@
-def second_symbol(s,c):
-    a=[]
-    i=0
-    while i<len(s):
-        if(s[i]==c and len(a)!=0):
-            return i
-        if(s[i]==c and len(a)==0):
-            a.append(1)
+def index_finder(a,x):
+    i=1
+    while i<len(a):
+        if(a[i]==x):return i
         i+=1
-    return -1
 
-print(second_symbol('Hello world!!!','A'))
+print(index_finder(['b','a','b'], 'b'))
