@@ -1,9 +1,10 @@
-def in_asc_order(a):
+def keep_order(a,n):
     i=0
-    while i<len(a)-1:
-        if(a[i]>a[i+1]):
-            return 1==2
+    while i<=len(a):
+        if(i==len(a)):
+            return i
+        if(a[i]>=n):
+            return i
         i+=1
-    return 1==1
 
-print(in_asc_order([1,2,4,7,19]))
+print(keep_order([1, 2, 3, 4], 5))
