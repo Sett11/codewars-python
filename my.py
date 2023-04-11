@@ -1,14 +1,12 @@
-def valid_parentheses(s):
+def second_symbol(s,c):
+    a=[]
     i=0
-    c=0
     while i<len(s):
-        if(c==-1):
-            return 1==2
-        if(s[i])=='(':
-            c+=1
-        if(s[i]==')'):
-            c-=1
+        if(s[i]==c and len(a)!=0):
+            return i
+        if(s[i]==c and len(a)==0):
+            a.append(1)
         i+=1
-    return c==0
+    return -1
 
-print(valid_parentheses(")()"))
+print(second_symbol('Hello world!!!','A'))
