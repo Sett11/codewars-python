@@ -1,26 +1,10 @@
-from functools import reduce
-def f(e):
-    if(e==''):
-        return False
-    else:
-        return True
-    
-def r(a,c):
-    return int(a)+int(c)
+def cleaned_counts(a):
+    m=0
+    r=a.copy()
+    for i in range(len(r)):
+        m=max(m,r[i])
+        if(r[i]<m):
+            r[i]=m
+    return r
 
-def f_2(e):
-    e=list(e)
-    res=reduce(r,e)
-    return res
-
-def c(e):
-    return int(e)
-
-def largest_sum(s):
-    if(s=='0'):return 0
-    a=s.split('0')
-    b=list(filter(f,a))
-    x=list(map(f_2,b))
-    return max(list(map(c,x)))
-
-print(largest_sum("72102450111111090"))
+print(cleaned_counts([5, 5, 6, 5, 5, 5, 5, 6]))
