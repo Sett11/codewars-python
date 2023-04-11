@@ -1,17 +1,9 @@
-def encode(s):
-    l='abcdefghijklmnopqrstuvwxyz'
-    s=s.lower()
-    a=''
-    i=0
-    while i<len(s):
-        if(l.find(s[i])!=-1):
-            if(l.find(s[i])%2)==0:
-                a+='0'
-            else:
-                a+='1'
-        else:
-            a+=s[i]
-        i+=1
-    return a
+def r(e,o={'6':'a','1':'b','7':'d','4':'e','3':'i','2':'l','9':'m','8':'n','0':'o','5':'t'}):
+    return o[e]
 
-print(encode("Hello World!"))
+def hidden(n):
+    a=list(str(n))
+    b=map(r,a)
+    return ''.join((list(b)))
+
+print(hidden(637))
