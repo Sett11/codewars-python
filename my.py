@@ -1,5 +1,11 @@
-def corrections(x):
-    if x>0:return str(x)+' is more than zero.'
-    else:return str(x)+ ' is equal to or less than zero.'
+def flatten_me(a):
+    r=[]
+    for i in a:
+        if type(i) is list:
+            for j in i:
+                r.append(j)
+        else:
+            r.append(i)
+    return r
 
-print(corrections(-1))
+print(flatten_me([[True, False], ['!'], ['?'], [71, '@']]))
