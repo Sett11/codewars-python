@@ -1,16 +1,24 @@
-import re
-def f(e,s='aioue'):
-    return s.find(e)==-1
+def f(e):
+    if(e==''):return False
+    else:return True
 
-def count_consonants(t):
-    t=re.sub(r'[^A-Za-z]+','',t)
-    t=list(filter(f,t.lower()))
-    a=''
-    for i in range(len(t)):
-        if(a.find(t[i])==-1):
-            a+=t[i]
+def is_defended(a,d):
+    c=sum(a)
+    b=sum(d)
+    r=min(len(a),len(d))
+    i=0
+    while i<r:
+        if(a[i]>d[i]):
+            d[i]=''
         else:
-            continue
-    return len(a)
-   
-print(count_consonants('Count my unique consonants!!'))
+            a[i]=''
+        i+=1
+    a=list(filter(f,a))
+    d=list(filter(f,d))
+    if(len(d)>len(a)):return True
+    if(len(d)==len(a)):
+        if(c>b):return False
+        if(c<b or c==b):return True
+    return False
+    
+print(is_defended([], [1,2,3]))
