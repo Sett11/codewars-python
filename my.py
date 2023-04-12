@@ -1,9 +1,7 @@
-def alex_mistakes(n,t):
-    t-=n*6
-    c=5;i=0;j=0
-    if(t==0):return t
-    while j<t:
-        j+=c;c*=2;i+=1
-    return i if j==t else i-1
+o={'039':'Golden Telecom','050':'MTS','063':'Life:)','066':'MTS','068':'Beeline','093':'Life:)','095':'MTS','096':'Kyivstar','097':'Kyivstar','098':'Kyivstar','099':'MTS','067':'Kyivstar'}
 
-print(alex_mistakes(20,135))
+def detect_operator(s):
+    s=s[slice(1,4)]
+    return o[s] if s in o else 'no info'
+
+print(detect_operator('80111551111'))
