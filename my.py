@@ -1,5 +1,4 @@
-import re
-def range_bit_count(a,b):
-    return len(re.sub(r'[^1]','',''.join(list(map(bin,list(range(a,b+1)))))))
+def house_numbers_sum(a):
+    return sum(a[slice(0,a.index(0))])
 
-print(range_bit_count(2,7))
+print(house_numbers_sum([5, 1, 2, 3, 0, 1, 5, 0, 2]))
