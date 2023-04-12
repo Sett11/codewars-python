@@ -1,9 +1,6 @@
-import math
-def halving_sum(n):
-    c=n
-    while n!=1:
-        n=math.floor(n/2)
-        c+=n
-    return c
+def count_arara(n,s=''):
+    while n>1:
+        s+='adak ';n-=2
+    return s + 'anane' if n==1 else s.rstrip()
 
-print(halving_sum(127))
+print(count_arara(13))
