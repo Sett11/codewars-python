@@ -1,12 +1,13 @@
-import re
-def f(e):
-    return int(e,2)
-def chuck_push_ups(s):
-    if(s==''):return 'CHUCK SMASH!!'
-    if(isinstance(s,str)==False):return 'FAIL!!'
-    if(s.find('List of jobs:')!=-1):return 'CHUCK SMASH!!'
-    s=re.sub(r'[^10 ]','',s)
-    if(len(s)==0):return 'CHUCK SMASH!!'
-    return max(list(map(f,s.split())))
+def f(x,c=1):
+    while x>1:
+        c*=x
+        x-=1
+    return c
 
-print(chuck_push_ups(1))
+def sum_fib(n):
+    a=[0,1]
+    while len(a)<n:
+        a.append(a[len(a)-1]+a[len(a)-2])
+    return sum(list(map(f,a)))
+
+print(sum_fib(10))
