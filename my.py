@@ -1,15 +1,11 @@
-def f(e):
-    return e.find('O')!=-1
+def f(e,alf='abcdefghijklmnopqrstuvwxyz'):
+    return alf.index(e)+1
 
-def car_crash(r):
-    if(r.find('O')==-1):return False
-    r=r.split('\n')
-    r=list(filter(f,r))
-    r=''.join(r)
-    g=r.find('O')
-    return r.find('X',g)!=-1
+def add_letters(*letters):
+    alf='abcdefghijklmnopqrstuvwxyz'
+    if(letters=='z' or len(letters)==0):return 'z'
+    g=sum(list(map(f,letters)))
+    g=g%len(alf)
+    return alf[g-1]
 
-print(car_crash("""
-                      X
-            X   O='`o
-                      X   """.strip()))
+print(add_letters('y', 'c', 'b'))
