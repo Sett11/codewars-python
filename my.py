@@ -1,8 +1,9 @@
-def growing_plant(u,d,h):
-    if(u>=h):return 1
-    i=u;c=1
-    while i<h:
-        i+=u-d;c+=1
-    return c
+def alex_mistakes(n,t):
+    t-=n*6
+    c=5;i=0;j=0
+    if(t==0):return t
+    while j<t:
+        j+=c;c*=2;i+=1
+    return i if j==t else i-1
 
-print(growing_plant(100,10,910))
+print(alex_mistakes(20,135))
