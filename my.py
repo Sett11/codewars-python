@@ -1,2 +1,4 @@
-def sort_by_length(a):
-    return sorted(a,key=len)
+def get_status(a):
+    return {'status':"busy"if a else "available"}
+
+print(get_status(0))
