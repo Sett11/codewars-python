@@ -1,4 +1,8 @@
-def house_numbers_sum(a):
-    return sum(a[slice(0,a.index(0))])
+def invite_more_women(a):
+    b=0;c=0
+    for i in range(len(a)):
+        if(a[i]==1):b+=1
+        else:c+=1
+    return True if b>c else False
 
-print(house_numbers_sum([5, 1, 2, 3, 0, 1, 5, 0, 2]))
+print(invite_more_women([1,-1,1]))
