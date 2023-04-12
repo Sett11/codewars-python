@@ -1,6 +1,8 @@
-def count_arara(n,s=''):
-    while n>1:
-        s+='adak ';n-=2
-    return s + 'anane' if n==1 else s.rstrip()
+def growing_plant(u,d,h):
+    if(u>=h):return 1
+    i=u;c=1
+    while i<h:
+        i+=u-d;c+=1
+    return c
 
-print(count_arara(13))
+print(growing_plant(100,10,910))
