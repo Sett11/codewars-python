@@ -1,13 +1,11 @@
-def f(x,c=1):
-    while x>1:
-        c*=x
-        x-=1
-    return c
+def to_bytes(n):
+    n=bin(n)[slice(2,100)];a=[]
+    while len(n)%8!=0:
+        n='0'+n
+    i=0
+    while i<len(n):
+        a.append(n[slice(i,i+8)])
+        i+=8
+    return a
 
-def sum_fib(n):
-    a=[0,1]
-    while len(a)<n:
-        a.append(a[len(a)-1]+a[len(a)-2])
-    return sum(list(map(f,a)))
-
-print(sum_fib(10))
+print(to_bytes(0xffff))
