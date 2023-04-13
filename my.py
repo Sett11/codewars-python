@@ -1,5 +1,6 @@
-def knight_or_knave(s):
-    if(isinstance(s,str)):s=eval(s)
-    return 'Knight!' if s else 'Knave! Do not trust.'
+def cannons_ready(o):
+    for i in o:
+        if(o[i]=='nay'):return 'Shiver me timbers!'
+    return 'Fire!'
 
-print(knight_or_knave('2+2==4'))
+print(cannons_ready({'Mike':'nay','Joe':'aye','Johnson':'aye','Peter':'aye'}))
