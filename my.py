@@ -1,6 +1,5 @@
-def cannons_ready(o):
-    for i in o:
-        if(o[i]=='nay'):return 'Shiver me timbers!'
-    return 'Fire!'
+def is_kiss(w):
+    w=list(map(len,w.split()))
+    return 'Good work Joe!' if len(w)>=max(w) else 'Keep It Simple Stupid'
 
-print(cannons_ready({'Mike':'nay','Joe':'aye','Johnson':'aye','Peter':'aye'}))
+print(is_kiss('Joe had a bad day'))
