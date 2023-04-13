@@ -1,10 +1,12 @@
-import re
-def calculate(e,v):
-    e=re.sub(r'\&','and',e)
-    e=re.sub(r'\|','or',e)
-    for i in range(len(e)):
-        if(e[i] in v):
-            e=e.replace(e[i],str(v[e[i]]))
-    return eval(e)
+def repeat_sum(l):
+    l=list(map(set,l))
+    a=[];b=[]
+    for i in l:
+        for j in i:
+           if(a.count(j)==0):
+               a.append(j)
+           else:
+               b.append(j)
+    return sum(set(b))
 
-print(calculate("B & A | C", {"A": 1, "B": 0, "C": 1}))
+print(repeat_sum([[1], [2], [3, 4, 4, 4], [123456789]]))
