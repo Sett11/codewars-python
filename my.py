@@ -1,12 +1,7 @@
-def repeat_sum(l):
-    l=list(map(set,l))
-    a=[];b=[]
-    for i in l:
-        for j in i:
-           if(a.count(j)==0):
-               a.append(j)
-           else:
-               b.append(j)
-    return sum(set(b))
+import math
+def reverse_middle(a):
+    a=a[slice(len(a)//2-1,math.ceil(len(a)/2)+1)]
+    a.reverse()
+    return a
 
-print(repeat_sum([[1], [2], [3, 4, 4, 4], [123456789]]))
+print(reverse_middle([1, 2, 4, 5]))
