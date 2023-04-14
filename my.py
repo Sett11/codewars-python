@@ -1,13 +1,11 @@
-import math
 def f(e):
-    if(e<2):return False
-    if(e==2):return True
-    i=2
-    while i<math.sqrt(e)+1:
-        if(e%i)==0:return False
-        i+=1
-    return True
-def sum_primes(l,u):
-    return sum(filter(f,(range(l,u+1))))
+    e=sum(map(int,str(e)))
+    if(len(str(e))==1):
+        return e
+    return f(e)
+def same_encryption(s1,s2):
+    s1=s1[0]+str(f(len(s1[slice(1,-1)])))+s1[len(s1)-1]
+    s2=s2[0]+str(f(len(s2[slice(1,-1)])))+s2[len(s2)-1]
+    return s1==s2
 
-print(sum_primes(20,4))
+print(same_encryption("fKhjuytrdfcdc","flJc"))
