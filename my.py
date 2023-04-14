@@ -1,9 +1,5 @@
-def kill_monsters(h,m,d):
-    c=0;z=0
-    while m>0:
-        m-=3
-        if(m>0):
-            c+=1;h-=d;z+=d
-    return 'hero died' if h<=0 else 'hits: {0}, damage: {1}, health: {2}'.format(c,z,h)
+def is_smooth(a):
+    return a[0]==sum(a[slice(len(a)//2-1,-len(a)//2+1)]) and a[0]==a[len(a)-1] if len(a)%2==0 else a[0]==a[len(a)//2] and a[0]==a[len(a)-1]
 
-print(kill_monsters(20, 1, 10))
+print(is_smooth([-12, 34, 40, -5, -12, 4, 0, 0, -12]))
+print(is_smooth([7, 2, 2, 5, 10, 7]))
