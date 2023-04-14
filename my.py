@@ -1,15 +1,16 @@
-def encrypt(w,n):
-    w=list(map(lambda e: ord(e)-96,w))
-    while n>0:
-        w=list(map(lambda e: e*3-5,w))
-        n-=1
-    return w
+def multiplication_table(s):
+    a=[]
+    b=[]
+    i=1
+    j=1
+    while i<=s:
+        while j<=s:
+            b.append(i*j)
+            j+=1
+        a.append(b)
+        j=1
+        i+=1
+        b=[]
+    return a
 
-def decrypt(w,n):
-    while n>0:
-        w=list(map(lambda e: int((e+5)/3),w))
-        n-=1
-    return ''.join(list(map(lambda e: chr(e+96),w)))
-
-
-print(decrypt([3, 9, 16, 8, 5, 18], -39245382957))
+print(multiplication_table(3))
