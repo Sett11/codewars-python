@@ -1,11 +1,9 @@
-def f(e):
-    e=sum(map(int,str(e)))
-    if(len(str(e))==1):
-        return e
-    return f(e)
-def same_encryption(s1,s2):
-    s1=s1[0]+str(f(len(s1[slice(1,-1)])))+s1[len(s1)-1]
-    s2=s2[0]+str(f(len(s2[slice(1,-1)])))+s2[len(s2)-1]
-    return s1==s2
+def kill_monsters(h,m,d):
+    c=0;z=0
+    while m>0:
+        m-=3
+        if(m>0):
+            c+=1;h-=d;z+=d
+    return 'hero died' if h<=0 else 'hits: {0}, damage: {1}, health: {2}'.format(c,z,h)
 
-print(same_encryption("fKhjuytrdfcdc","flJc"))
+print(kill_monsters(20, 1, 10))
