@@ -1,8 +1,8 @@
-def redistribute_wealth(a):
-    b=sum(a)/len(a);l=len(a);i=0
-    a.clear()
-    while i<l:
-        a.append(b)
-        i+=1
+def only_one(*a):
+    b=[];c=[]
+    for i in a:
+        if(i):b.append(i)
+        else:c.append(i)
+    return len(b)==1 and len(c)>0 if len(a)>0 else False
 
-print(redistribute_wealth([2,2,3]))
+print(only_one())
