@@ -1,6 +1,15 @@
-import re
-def barbell_weight(b):
-    o={'R':25,'B':20,'Y':15,'G':10,'W':5,'r':2.5,'b':2,'y':1.5,'g':1,'w':0.5,'c':2.5}
-    return int(sum(list(map(lambda e:o[e], list(re.sub(r'\-','',b[slice(0,10)])))))*2+20)
+def encrypt(w,n):
+    w=list(map(lambda e: ord(e)-96,w))
+    while n>0:
+        w=list(map(lambda e: e*3-5,w))
+        n-=1
+    return w
 
-print(barbell_weight('-------bcr--------------------rcb-------'))
+def decrypt(w,n):
+    while n>0:
+        w=list(map(lambda e: int((e+5)/3),w))
+        n-=1
+    return ''.join(list(map(lambda e: chr(e+96),w)))
+
+
+print(decrypt([3, 9, 16, 8, 5, 18], -39245382957))
