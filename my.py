@@ -1,10 +1,8 @@
-def create_anagram(s,t,i=0):
-    s=list(s);t=list(t)
-    while i<len(s):
-        if(t[i] in s):
-            s[s.index(t[i])]='&'
+def S2N(m,n,c=0,i=0):
+    l=list(range(0,m+1))
+    while i<=n:
+        c+=sum(map(lambda e: e**i,l))
         i+=1
-    return len(list(filter(lambda e:e!='&',s)))
+    return c
 
-print(create_anagram("AABAA", "BBAAA"))
-print(create_anagram("OVGHK", "RPGUC"))
+print(S2N(10,9))
