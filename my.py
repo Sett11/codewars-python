@@ -1,5 +1,6 @@
-def each_char(s,a):
-    if(not s):return ''
-    return a.join(list(s))+a if(isinstance(a,str)) else ''.join(list(map(a,list(s))))
+def binary_to_string(s):
+    def f(e):
+        return chr(int(e,2))
+    return ''.join(list(map(f,filter(lambda e:e,s.replace('0b','&').split('&')))))
 
-print(each_char("hello",lambda c: c.upper()))
+print(binary_to_string('0b10000110b11000010b1110100'))
