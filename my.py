@@ -1,12 +1,36 @@
-def calc(a):
-    a=list(map(lambda e: e**2 if e>0 else e,a));i=0
-    a.insert(0,0)
-    while i<len(a):
-        if(i%3==0):
-            a[i]*=3
-        if(i%5==0):
-            a[i]*=-1
-        i+=1
-    return sum(a)
+def strange_coach(a):
+    a=list(map(lambda e:e[0],a));o={}
+    for i in a:
+        if(i in o):o[i]+=1
+        else:o[i]=1
+    r=''.join(sorted(map(lambda u:u[0],filter(lambda e: e[1]>4, dict.items(o)))))
+    return r if len(r) else 'forfeit'
 
-print(calc([ 1, -1, 10, -9, 16, 15, 45, -73, -26 ]))
+
+print(strange_coach([
+ "babic", 
+ "keksic", 
+ "boric", 
+ "bukic", 
+ "sarmic", 
+ "balic", 
+ "kruzic", 
+ "hrenovkic", 
+ "beslic", 
+ "boksic", 
+ "krafnic", 
+ "pecivic", 
+ "klavirkovic", 
+ "kukumaric", 
+ "sunkic", 
+ "kolacic", 
+ "kovacic", 
+ "prijestolonasljednikovic"]))
+
+print(strange_coach([
+"michael", 
+"jordan",  
+"lebron",  
+"james",  
+"kobe",  
+"bryant"]))
