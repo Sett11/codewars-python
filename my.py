@@ -1,36 +1,5 @@
-def strange_coach(a):
-    a=list(map(lambda e:e[0],a));o={}
-    for i in a:
-        if(i in o):o[i]+=1
-        else:o[i]=1
-    r=''.join(sorted(map(lambda u:u[0],filter(lambda e: e[1]>4, dict.items(o)))))
-    return r if len(r) else 'forfeit'
+def each_char(s,a):
+    if(not s):return ''
+    return a.join(list(s))+a if(isinstance(a,str)) else ''.join(list(map(a,list(s))))
 
-
-print(strange_coach([
- "babic", 
- "keksic", 
- "boric", 
- "bukic", 
- "sarmic", 
- "balic", 
- "kruzic", 
- "hrenovkic", 
- "beslic", 
- "boksic", 
- "krafnic", 
- "pecivic", 
- "klavirkovic", 
- "kukumaric", 
- "sunkic", 
- "kolacic", 
- "kovacic", 
- "prijestolonasljednikovic"]))
-
-print(strange_coach([
-"michael", 
-"jordan",  
-"lebron",  
-"james",  
-"kobe",  
-"bryant"]))
+print(each_char("hello",lambda c: c.upper()))
