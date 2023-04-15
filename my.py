@@ -1,11 +1,16 @@
-def scf(a,i=2):
-    if(len(a)==0):return 1
-    m=max(a);n=max(a)
-    while i<max(a)/2+1:
-        if(len(list(filter(lambda e: e%i==0,a)))==len(a)):
-            m=min(m,i)
+def substring_test(s1,s2):
+    a=[s1,s2]
+    a.sort(key=len)
+    a[0]=a[0].lower();a[1]=a[1].lower();i=0;j=i+2;m=min([len(a[0]),len(a[1])])
+    while i<m-1:
+        while j<m+1:
+            if(a[1].find(a[0][slice(i,j)])!=-1):
+                return True
+            j+=1
         i+=1
-    return m if m!=n else 1
+        j=i+2
+    return False
 
-print(scf([133, 147, 427, 266]))
-print(scf([3,5,7]))
+
+
+print(substring_test('Audn3uheNkr8hlB', 'G4lpnK'))
