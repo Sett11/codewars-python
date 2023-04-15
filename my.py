@@ -1,12 +1,11 @@
-def decipher(s,i=1,c=''):
-    while i<len(s):
-        a=int(s[slice(i)])
-        if(a>=96 and a<=122):
-            c+=chr(a)
-            s=s[slice(i,len(s))]
-            i=1
+def scf(a,i=2):
+    if(len(a)==0):return 1
+    m=max(a);n=max(a)
+    while i<max(a)/2+1:
+        if(len(list(filter(lambda e: e%i==0,a)))==len(a)):
+            m=min(m,i)
         i+=1
-    c+=chr(int(s))
-    return c
+    return m if m!=n else 1
 
-print(decipher('10197115121'))
+print(scf([133, 147, 427, 266]))
+print(scf([3,5,7]))
