@@ -1,9 +1,12 @@
-def hot_singles(a,b):
-    r=[]
-    x=list(filter(lambda e: e not in b,a))
-    x.extend(list(filter(lambda e: e not in a,b)))
-    for i in x:
-        if(i not in r):r.append(i)
-    return r
+def calc(a):
+    a=list(map(lambda e: e**2 if e>0 else e,a));i=0
+    a.insert(0,0)
+    while i<len(a):
+        if(i%3==0):
+            a[i]*=3
+        if(i%5==0):
+            a[i]*=-1
+        i+=1
+    return sum(a)
 
-print(hot_singles([10, 200, 30], [10, 20, 3, 4, 5, 5, 5, 200]))
+print(calc([ 1, -1, 10, -9, 16, 15, 45, -73, -26 ]))
