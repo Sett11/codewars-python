@@ -1,16 +1,12 @@
-def multiplication_table(s):
-    a=[]
-    b=[]
-    i=1
-    j=1
-    while i<=s:
-        while j<=s:
-            b.append(i*j)
-            j+=1
-        a.append(b)
-        j=1
+def decipher(s,i=1,c=''):
+    while i<len(s):
+        a=int(s[slice(i)])
+        if(a>=96 and a<=122):
+            c+=chr(a)
+            s=s[slice(i,len(s))]
+            i=1
         i+=1
-        b=[]
-    return a
+    c+=chr(int(s))
+    return c
 
-print(multiplication_table(3))
+print(decipher('10197115121'))
