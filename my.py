@@ -1,10 +1,5 @@
-def binary_to_string(s):
-    def f(e):
-        return chr(int(e,2))
-    return ''.join(list(map(f,filter(lambda e:e,s.split()))))
+import re
+def guess_my_number(s,n='123-451-2345'):
+    return re.sub(r'[^{}-]'.format(s),'#',n)
 
-def decode_pass(a,s):
-    s=binary_to_string(s)
-    return s if s in a else False
-
-print(decode_pass(['password123', 'admin', 'admin1'], '01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 00110001 00110010 00110011'))
+print(guess_my_number('01234'))
