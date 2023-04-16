@@ -1,10 +1,10 @@
-def is_inertial(a):
-    if(len(a)==0):return False
-    l=len(list(filter(lambda e: e%2!=0,a)))
-    t=max(a)
-    r=list(filter(lambda e: e!=t,a))
-    z=list(filter(lambda e: e%2==0,r))
-    v=list(filter(lambda e: e%2!=0,r))
-    return min(v,default=0)>max(z,default=0) and t%2==0 and l>0
+def destroyer(s,r=[]):
+    a="a b c d e f g h i j k l m n o p q r s t u v w x y z"
+    l=list(map(lambda e:list(e),list(s)))
+    for i in l:
+        r.extend(i)
+    while len(r):
+        a=a.replace(r.pop(0),'_')
+    return a
 
-print(is_inertial([11, 4, 20, 9, 2, 8]))
+print(destroyer(({'b', 'b'}, {'C', 'm', 'f'})))
