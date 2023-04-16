@@ -1,6 +1,4 @@
-def triple_shiftian(a,n):
-    while len(a)<=n:
-        a.append(4*a[len(a)-1]-5*a[len(a)-2]+3*a[len(a)-3])
-    return a[n]
+def rank_of_element(a,i):
+    return len(list(filter(lambda e:e<=a[i],a[slice(0,i)])))+len(list(filter(lambda e:e<a[i],a[slice(i+1,len(a))])))
 
-print(triple_shiftian([1,1,1],35))
+print(rank_of_element([2,1,2,1,2],2))
