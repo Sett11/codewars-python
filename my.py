@@ -1,8 +1,11 @@
-from functools import reduce
-def math_engine(a):
-    if(a==None):return 0
-    if(type(a)==list and len(a)==0):return 1
-    b=list(filter(lambda e:e>=0,a));c=list(filter(lambda e:e<0,a))
-    return (reduce(lambda a,c:a*c,b,1) if b else 1)+(reduce(lambda a,c:a+c,c,0) if c else 0) if a else 0
+import math
+def factors(x,i=1):
+    a=[]
+    if(type(x)!=int or x<1):return -1
+    while i<math.sqrt(x)+1:
+        if(x%i==0):
+            a.append(i);a.append(x/i)
+        i+=1
+    return sorted(list(map(int,list(set(a)))),reverse=True)
 
-print(math_engine([0]))
+print(factors(54))
