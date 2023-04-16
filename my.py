@@ -1,20 +1,6 @@
-import math
-def f(x):
-        if(x<2):return False
-        if(x==2):return True
-        j=2
-        while j<math.sqrt(x)+1:
-            if(x%j==0):
-                 return False
-            j+=1
-        return True
+def esrever(s):
+    if(len(s)==0):return ''
+    c=s[len(s)-1];s=s[:-1]
+    return ' '.join(list(map(lambda e: ''.join(list(e)[::-1]), s.split()))[::-1])+c
 
-def pernicious(n):
-    i=2;a=[]
-    while i<=n:
-         if(f(sum(map(int,list(bin(i)[slice(2,len(bin(i)))]))))):
-              a.append(i)
-         i+=1
-    return a if len(a) else "No pernicious numbers"
-
-print(pernicious(5))
+print(esrever('hello world.'))
