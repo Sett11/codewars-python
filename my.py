@@ -1,8 +1,6 @@
-def check_DNA(s1,s2):
-    s2=list(s2)
-    s2.reverse()
-    s2=''.join(s2).replace('T','1').replace('C','2').replace('G','3').replace('A','4')
-    s1=s1.replace('A','1').replace('T','4').replace('C','3').replace('G','2')
-    return s1==s2 or s1.find(s2)!=-1 or s2.find(s1)!=-1
+def conference_picker(a,b):
+    if(len(a)==0):return b[0]
+    r=list(filter(lambda e:e not in a,b))
+    return r[0] if len(r) else 'No worthwhile conferences this year!'
 
-print(check_DNA('GTCTTAGTGTAGCTATGCATGC','GCATGCATAGCTACACTACGAC'))
+print(conference_picker(['Mexico City','Johannesburg','Stockholm','Osaka','Saint Petersburg','London'],['Stockholm','Paris','Melbourne']))
