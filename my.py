@@ -1,7 +1,6 @@
-def mirror(s,c='abcdefghijklmnopqrstuvwxyz'):
-    s=list(s.lower())
-    for i in range(len(s)):
-        s[i]=c[len(c)-c.index(s[i])-1] if s[i] in c else s[i]
-    return ''.join(s)
+def triple_shiftian(a,n):
+    while len(a)<=n:
+        a.append(4*a[len(a)-1]-5*a[len(a)-2]+3*a[len(a)-3])
+    return a[n]
 
-print(mirror("hello", "abcdefgh"))
+print(triple_shiftian([1,1,1],35))
