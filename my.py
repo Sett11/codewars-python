@@ -1,20 +1,8 @@
-def expression_out(e):
-    a={"+" : "Plus",
-"-": "Minus",
-"*" : "Times",
-"/" : "Divided By",
-"**": "To The Power Of",
-"=" : "Equals",
-"!=": "Does Not Equal",}
-    o={"+" : "Plus",
-"-": "Minus",
-"*" : "Times",
-"/" : "Divided By",
-"**": "To The Power Of",
-"=" : "Equals",
-"!=": "Does Not Equal",
-'1':'One','2':'Two','3':'Three','4':'Four','5':'Five','6':'Six','7':'Seven','8':'Eight','9':'Nine','0':'Zero','10':'Ten'}
-    if(e.split()[1] not in a):return "That's not an operator!"
-    return ' '.join(list(map(lambda e:o[e],e.split())))
+from functools import reduce
+def math_engine(a):
+    if(a==None):return 0
+    if(type(a)==list and len(a)==0):return 1
+    b=list(filter(lambda e:e>=0,a));c=list(filter(lambda e:e<0,a))
+    return (reduce(lambda a,c:a*c,b,1) if b else 1)+(reduce(lambda a,c:a+c,c,0) if c else 0) if a else 0
 
-print(expression_out('1 1 3'))
+print(math_engine([0]))
