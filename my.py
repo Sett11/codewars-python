@@ -1,7 +1,20 @@
-CHANGE={'penny': 0.01, 'nickel': 0.05, 'dime': 0.1, 'quarter': 0.25, 'dollar': 1.0}
+def expression_out(e):
+    a={"+" : "Plus",
+"-": "Minus",
+"*" : "Times",
+"/" : "Divided By",
+"**": "To The Power Of",
+"=" : "Equals",
+"!=": "Does Not Equal",}
+    o={"+" : "Plus",
+"-": "Minus",
+"*" : "Times",
+"/" : "Divided By",
+"**": "To The Power Of",
+"=" : "Equals",
+"!=": "Does Not Equal",
+'1':'One','2':'Two','3':'Three','4':'Four','5':'Five','6':'Six','7':'Seven','8':'Eight','9':'Nine','0':'Zero','10':'Ten'}
+    if(e.split()[1] not in a):return "That's not an operator!"
+    return ' '.join(list(map(lambda e:o[e],e.split())))
 
-def change_count(c):
-    c='$'+str(round(sum(list(map(lambda e:CHANGE[e], c.split()))),2))
-    return c+'0' if(len(c[slice(c.find('.')+1,len(c))])==1) else c
-
-print(change_count('quarter quarter'))
+print(expression_out('1 1 3'))
