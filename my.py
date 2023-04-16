@@ -1,5 +1,9 @@
-def print_nums(*a):
-    b=[*a];m=len(str(max(b,default=0)))
-    return '\n'.join(list(map(lambda e:'0'*(m-len(str(e)))+str(e),b)))
+def hop_across(a,i=0,j=0,c=0):
+    while i<len(a):
+        i+=a[i];c+=1
+    a.reverse()
+    while j<len(a):
+        j+=a[j];c+=1
+    return c
 
-print(print_nums(1009, 2))
+print(hop_across([2,2,3,1,1,2,1]))
