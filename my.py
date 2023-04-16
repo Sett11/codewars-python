@@ -1,10 +1,10 @@
-def destroyer(s,r=[]):
-    a="a b c d e f g h i j k l m n o p q r s t u v w x y z"
-    l=list(map(lambda e:list(e),list(s)))
-    for i in l:
-        r.extend(i)
-    while len(r):
-        a=a.replace(r.pop(0),'_')
+def trim(a,i=0):
+    while i<len(a):
+        if(i!=len(a)-1):
+            a[i]=list(map(lambda e:'|' if e=='J' else e,a[i]))
+        else:
+            a[i]=list(map(lambda e:'...',a[i]))
+        i+=1
     return a
 
-print(destroyer(({'b', 'b'}, {'C', 'm', 'f'})))
+print(trim([['...', '|', 'J', '...', 'J'], ['J', 'J', 'J', 'J', '|']]))
