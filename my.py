@@ -1,8 +1,3 @@
-def fist_beard(a,i=0):
-    r=[]
-    while i<len(a):
-        r.extend(list(map(chr,a[i])))
-        i+=1
-    return ''.join(r)
+def one_punch(s):return 'Broken!' if isinstance(s,int) or len(s)==0 or type(s)==list else ' '.join(list(map(lambda e: e.replace('a','').replace('e','').replace('A','').replace('E',''),sorted(s.split()))))
 
-print(fist_beard([[78], [117, 110, 99], [104, 117], [107, 115]]))
+print(one_punch('Friend Beer Beard Monkey Laptop'))
