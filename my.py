@@ -1,6 +1,5 @@
-def conference_picker(a,b):
-    if(len(a)==0):return b[0]
-    r=list(filter(lambda e:e not in a,b))
-    return r[0] if len(r) else 'No worthwhile conferences this year!'
+def print_nums(*a):
+    b=[*a];m=len(str(max(b,default=0)))
+    return '\n'.join(list(map(lambda e:'0'*(m-len(str(e)))+str(e),b)))
 
-print(conference_picker(['Mexico City','Johannesburg','Stockholm','Osaka','Saint Petersburg','London'],['Stockholm','Paris','Melbourne']))
+print(print_nums(1009, 2))
