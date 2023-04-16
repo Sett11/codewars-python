@@ -1,10 +1,8 @@
-def trim(a,i=0):
+def fist_beard(a,i=0):
+    r=[]
     while i<len(a):
-        if(i!=len(a)-1):
-            a[i]=list(map(lambda e:'|' if e=='J' else e,a[i]))
-        else:
-            a[i]=list(map(lambda e:'...',a[i]))
+        r.extend(list(map(chr,a[i])))
         i+=1
-    return a
+    return ''.join(r)
 
-print(trim([['...', '|', 'J', '...', 'J'], ['J', 'J', 'J', 'J', '|']]))
+print(fist_beard([[78], [117, 110, 99], [104, 117], [107, 115]]))
