@@ -1,4 +1,5 @@
-def even_numbers_before_fixed(a,n):
-    return -1 if n not in a else len(list(filter(lambda e:e%2==0,a[slice(0,a.index(n))])))
+import re
+def evenator(s):
+    return ' '.join(list(map(lambda e: e+e[len(e)-1] if len(e)%2!=0 else e,re.sub(r'[.,?!_]','',s).split())))
 
-print(even_numbers_before_fixed([1, 4, 2, 6, 3, 1], 6))
+print(evenator('underscore is not considered a word..in this case,'))
