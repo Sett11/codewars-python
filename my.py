@@ -1,9 +1,4 @@
-def solve(s):
-    i=0
-    while i<len(s):
-        s=s[-1]+s[:-1]
-        i+=1
-        if(s==s[::-1]):return True
-    return False
+def wdm(s):
+    return ' '.join(s.replace('puke','').replace('hiccup','').split())
 
-print(solve('223456776543'))
+print(wdm("puke All's well hiccup     that ends hiccup well puke"))
