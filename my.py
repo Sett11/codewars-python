@@ -1,9 +1,4 @@
-from functools import reduce
-def multi(l_st):
-    return reduce(lambda a,c:a*c,l_st)
-def add(l_st):
-    return sum(l_st)
-def reverse(string):
-    return string[::-1]
+def even_numbers_before_fixed(a,n):
+    return -1 if n not in a else len(list(filter(lambda e:e%2==0,a[slice(0,a.index(n))])))
 
-print(reverse("Hello World"))
+print(even_numbers_before_fixed([1, 4, 2, 6, 3, 1], 6))
