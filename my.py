@@ -1,9 +1,21 @@
-def f(e):
-    a=ord(e)
-    if(a>64 and a<91):return chr((26-(a-65))+64)
-    if(a>96 and ord(e)<123):return chr((26-(a-96))+97)
-    return e
-def decode(s):
-    return 'Input is not a string' if not isinstance(s,str) else ''.join(list(map(f,list(s))))
-
-print(decode("Ovg'h hdrn rm gsv ulfmgzrm!"))
+import math
+def f(x):
+    i=1;r=[]
+    while i<math.sqrt(x)+1:
+        if(x%i==0):
+            r.append(i)
+            r.append(x/i)
+        i+=1
+    return sum(set(r))
+def r(x,y):
+    i=1;m=1
+    while i<min(x,y):
+        if(x%i==0 and y%i==0):m=max(m,i)
+        i+=1
+    return m
+def friendly_numbers(m,n):
+    if(f(n)/n==f(m)/m):return 'Friendly!'
+    one=r(f(m),m);two=r(f(n),n)
+    return '{0}/{1} {2}/{3}'.format(int(f(m)/one),int(m/one),int(f(n)/two),int(n/two))
+    
+print(friendly_numbers(10,11))
