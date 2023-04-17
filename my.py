@@ -1,8 +1,7 @@
-def sort_by_height(a):
-    b=list(map(lambda e:'&' if e!=-1 else e,a));c=sorted(list(filter(lambda e:e>-1,a)))
-    for i in range(len(b)):
-        if(b[i]=='&'):
-            b[i]=c.pop(0)
-    return b
+def L(a,b,c,d) :
+    g=[b or 0,c or 0]
+    while len(g)<a:
+        g.append(g[len(g)-1]+g[len(g)-2]+d)
+    return g
 
-print(sort_by_height([-1, 150, 190, 170, -1, -1, 160, 180]))
+print(L(10, 0, 1, 4))
