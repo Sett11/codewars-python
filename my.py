@@ -1,7 +1,9 @@
-def L(a,b,c,d) :
-    g=[b or 0,c or 0]
-    while len(g)<a:
-        g.append(g[len(g)-1]+g[len(g)-2]+d)
-    return g
+def solve(s):
+    i=0
+    while i<len(s):
+        s=s[-1]+s[:-1]
+        i+=1
+        if(s==s[::-1]):return True
+    return False
 
-print(L(10, 0, 1, 4))
+print(solve('223456776543'))
