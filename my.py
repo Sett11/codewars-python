@@ -1,8 +1,16 @@
-def f(x,l='bcdfghjklmnpqrstvwxyz',m='BCDFGHJKLMNPQRSTVWXYZ'):
-    if(x in l):return x+'o'+x
-    if(x in m):return x+'O'+x
-    else:return x
-def robber_encode(s):
-    return ''.join(map(f,list(s)))
+def f(x):
+    l = 'aioueyAIOUEY'
+    r = 'kontti'
+    i = 0
+    while l.find(x[i]) == -1:
+        i += 1
+        if (i >= len(x)):
+            break
+    return 'ko'+x[i+1:]+'-'+x[:i+1]+r'ntti' if i < len(x) else x
 
-print(robber_encode("S.O.S"))
+
+def kontti(s):
+    return ' '.join(map(f, s.split()))
+
+
+print(kontti("aeiou"))
