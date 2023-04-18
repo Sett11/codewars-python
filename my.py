@@ -1,19 +1,19 @@
-def bracket_pairs(s):
-    a=[];i=0;j=i+1;c=0
-    while i<len(s):
-        if(s[i]=='('):
-            c+=1
-            j=i+1
-            while j<len(s):
-                if(s[j]=='('):
-                    c+=1
-                if(s[j]==')'):
-                    c-=1
-                if(c==0):
-                    a.append([i,j])
-                    break
-                j+=1
+def count_duplicates(a,b,c):
+    i=0;r=[];x=0
+    while i<len(a):
+        r.append(a[i]+str(b[i])+str(c[i]))
         i+=1
-    return False if s.count('(')!=s.count(')') or c!=0 else dict(a)
+    i=0;j=i+1
+    while i<len(r):
+        while j<len(r):
+            if(r[i]==r[j]):
+                x+=1
+                break
+            j+=1
+        i+=1;j=i+1
+    return x
+    
 
-print(bracket_pairs('))))))))(x)()x()))'))
+print(count_duplicates( ['Jack','Ben','Jack','Ben','Jack','Jack']
+        ,[25,25,34,25,25,34]
+        ,[180,180,200,180,180,200]))
