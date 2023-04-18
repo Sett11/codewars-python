@@ -1,16 +1,4 @@
-def f(x):
-    l = 'aioueyAIOUEY'
-    r = 'kontti'
-    i = 0
-    while l.find(x[i]) == -1:
-        i += 1
-        if (i >= len(x)):
-            break
-    return 'ko'+x[i+1:]+'-'+x[:i+1]+r'ntti' if i < len(x) else x
+def ipv4_to_binary(ipv4_addr: str)->str:
+    return '.'.join(list(map(lambda e:'0'*(8-len(bin(int(e))[2:]))+bin(int(e))[2:],ipv4_addr.split('.'))))
 
-
-def kontti(s):
-    return ' '.join(map(f, s.split()))
-
-
-print(kontti("aeiou"))
+print(ipv4_to_binary("192.168.0.1"))
