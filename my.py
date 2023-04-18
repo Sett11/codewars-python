@@ -1,12 +1,12 @@
-def network_cidr(ipv4_addr: str, net_mask: str) -> str:
-    one=list('.'.join(list(map(lambda e:'0'*(8-len(bin(int(e))[2:]))+bin(int(e))[2:],ipv4_addr.split('.')))))
-    two=list('.'.join(list(map(lambda e:'0'*(8-len(bin(int(e))[2:]))+bin(int(e))[2:],net_mask.split('.')))))
-    three=list(''.join(two).replace('1','0'))
+def match(a,b,c):
+    one=list('.'.join(list(map(lambda e:'0'*(8-len(bin(int(e))[2:]))+bin(int(e))[2:],a.split('.')))))
+    two=list('.'.join(list(map(lambda e:'0'*(8-len(bin(int(e))[2:]))+bin(int(e))[2:],b.split('.')))))
+    three=list('.'.join(list(map(lambda e:'0'*(8-len(bin(int(e))[2:]))+bin(int(e))[2:],c.split('.')))))
     i=0
     while i<len(one):
-        if(one[i]=='1' and two[i]=='1'):
-            three[i]='1'
+        if(two[i]=='0' and one[i]!=three[i]):return False
         i+=1
-    return '.'.join(list(map(lambda e:str(int(e,2)),''.join(three).split('.'))))+'/'+str(''.join(two).count('1'))
+    return True
 
-print(network_cidr("192.168.1.0",   "255.255.254.0"))
+print(match("192.168.0.0", "0.0.0.255",   "192.168.0.1"))
+print(match('192.168.0.1', '0.0.0.0', '192.168.0.1'))
