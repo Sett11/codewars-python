@@ -1,8 +1,9 @@
-def stern_brocot(n):
-    a=[1,1];c=1
-    while n not in a:
-            a.extend([a[len(a)-c]+a[len(a)-c-1],a[len(a)-c]])
-            c+=1
-    return a.index(n)
+from functools import reduce
+def string_color(s):
+    a=list(map(lambda e:ord(e),list(s)))
+    one=hex(sum(a)%256)[2:]
+    two=hex(reduce(lambda a,c:a*c,a,1)%256)[2:]
+    three=hex(abs(a[0]-sum(a[1:]))%256)[2:]
+    return ('0'*(2-len(one))+one+'0'*(2-len(two))+two+'0'*(2-len(three))+three).upper() if len(s)>2 else None
 
-print(stern_brocot(19))
+print(string_color("John Doe"))
