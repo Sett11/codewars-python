@@ -1,14 +1,8 @@
-def get_the_vowels(s):
-    v = list('aeiou')
-    i = 0
-    j = 0
-    c = 0
-    while i < len(s):
-        if (s[i] == v[j % len(v)]):
-            c += 1
-            j += 1
-        i += 1
-    return c
+def f(x,l='bcdfghjklmnpqrstvwxyz',m='BCDFGHJKLMNPQRSTVWXYZ'):
+    if(x in l):return x+'o'+x
+    if(x in m):return x+'O'+x
+    else:return x
+def robber_encode(s):
+    return ''.join(map(f,list(s)))
 
-
-print(get_the_vowels('akfheujfkgiaaaofmmfkdfuaiiie'))
+print(robber_encode("S.O.S"))
