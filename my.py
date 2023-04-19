@@ -1,15 +1,6 @@
-def add(n1,n2):
-    n1=list(map(int,list(str(n1))))
-    n2=list(map(int,list(str(n2))))
-    while len(n1)<len(n2):
-        n1.insert(0,0)
-    while len(n2)<len(n1):
-        n2.insert(0,0)
-    i=len(n1)-1
-    r=[]
-    while i>=0:
-        r.insert(0,n1[i]+n2[i])
-        i-=1
-    return int(''.join(list(map(str,r))))
+def connotation(s):
+    l=list(map(lambda e:ord(e[0].lower())-97,s.split()))
+    return True if len(list(filter(lambda e:e<13,l)))>=len(l)/2 else False
 
-print(add(2,11))
+print(connotation("A big brown fox caught a bad bunny"))
+print(connotation("CHOCOLATE MAKES A GREAT SNACK"))
