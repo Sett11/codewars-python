@@ -1,9 +1,9 @@
-def uncensor(s,c):
-    c=list(c)
-    s=list(s)
-    for i in range(len(s)):
-        if(s[i]=='*'):
-            s[i]=c.pop(0)
-    return ''.join(s)
+def least_larger(a,i):
+    r=a[i]
+    m=1000
+    for e in a:
+        if(e>r):
+            m=min(m,e)
+    return a.index(m) if m!=1000 else -1
 
-print(uncensor('*h*s *s v*ry *tr*ng*', 'Tiiesae'))
+print(least_larger([4, 1, 3, 5, 6],0))
