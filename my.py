@@ -1,14 +1,4 @@
-def merge(*a):
-    d = list(a)
-    o = {}
-    for i in d:
-        for j in i:
-            if (j in o):
-                o[j].append(i[j])
-            else:
-                o[j] = []
-                o[j].append(i[j])
-    return o
+def digit_sum(n):
+    return sum(map(int,list(str(n))))
 
-
-print(merge({"A": 1, "B": 2},{"A": 3}))
+print(digit_sum(4294967295))
