@@ -1,16 +1,9 @@
-def max_sum_between_two_negatives(a):
-    i=0
-    j=0
-    m=0
-    while i<len(a):
-        if(a[i]<0):
-            j=i+1
-            while j<len(a):
-                if(a[j]<0):
-                    m=max(sum(a[i+1:j]),m)
-                    break
-                j+=1
-        i+=1
-    return m if len(list(filter(lambda e:e<0,a)))>1 else -1
+def uncensor(s,c):
+    c=list(c)
+    s=list(s)
+    for i in range(len(s)):
+        if(s[i]=='*'):
+            s[i]=c.pop(0)
+    return ''.join(s)
 
-print(max_sum_between_two_negatives([1,-2]))
+print(uncensor('*h*s *s v*ry *tr*ng*', 'Tiiesae'))
