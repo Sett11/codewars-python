@@ -1,11 +1,16 @@
-def some_but_not_all(s,f):
-    a=0
-    b=0
-    for i in s:
-        if(f(i)):
-            a+=1
-        else:
-            b+=1
-    return True if a and b else False
+def max_sum_between_two_negatives(a):
+    i=0
+    j=0
+    m=0
+    while i<len(a):
+        if(a[i]<0):
+            j=i+1
+            while j<len(a):
+                if(a[j]<0):
+                    m=max(sum(a[i+1:j]),m)
+                    break
+                j+=1
+        i+=1
+    return m if len(list(filter(lambda e:e<0,a)))>1 else -1
 
-print(some_but_not_all('abcdefg&%$', str.isalpha))
+print(max_sum_between_two_negatives([1,-2]))
