@@ -1,5 +1,8 @@
-def infected(s):
-    s=list(''.join(list(map(lambda e: '1'*len(e) if '1' in e else e,list(filter(lambda e:e,s.split('X')))))))
-    return 100*len(list(filter(lambda e:e=='1',s)))/len(s) if len(s) else 0
+def my_languages(r):
+    a=[]
+    for i in r:
+        if(r[i]>=60):
+            a.append([r[i],i])
+    return list(map(lambda e:e[1],sorted(a,reverse=True)))
 
-print(infected("XXXXXXX"))
+print(my_languages({"Hindi": 60, "Dutch" : 93, "Greek": 71}))
