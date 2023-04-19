@@ -1,10 +1,5 @@
-def polydivisible(x):
-    x=list(str(x))
-    i=1
-    while i<=len(x):
-        if(int(''.join(x[0:i]))%i!=0):
-            return False
-        i+=1
-    return True
+def infected(s):
+    s=list(''.join(list(map(lambda e: '1'*len(e) if '1' in e else e,list(filter(lambda e:e,s.split('X')))))))
+    return 100*len(list(filter(lambda e:e=='1',s)))/len(s) if len(s) else 0
 
-print(polydivisible(1232))
+print(infected("XXXXXXX"))
