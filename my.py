@@ -1,6 +1,5 @@
-def even_and_odd(n):
-    n = list(map(int, list(str(n))))
-    return tuple([int(''.join(list(map(str, filter(lambda e: e % 2 == 0, n)))) or 0), int(''.join(list(map(str, filter(lambda e: e % 2 != 0, n)))) or 0)])
+def odd_or_even(n):
+    if(n%2!=0):return 'Either'
+    return 'Odd' if (n/2)%2!=0 else 'Even'
 
-
-print(even_and_odd(4628))
+print(odd_or_even(8))
