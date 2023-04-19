@@ -1,12 +1,10 @@
-def martingale(b,a):
-    c=100
-    for i in a:
-        if(i):
-            b+=c
-            c=100
-        else:
-            b-=c
-            c*=2
-    return b
+def polydivisible(x):
+    x=list(str(x))
+    i=1
+    while i<=len(x):
+        if(int(''.join(x[0:i]))%i!=0):
+            return False
+        i+=1
+    return True
 
-print(martingale(-500, [1, 1, 0, 1, 0, 1, 0]))
+print(polydivisible(1232))
