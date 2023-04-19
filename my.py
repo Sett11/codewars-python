@@ -1,4 +1,11 @@
-def digit_sum(n):
-    return sum(map(int,list(str(n))))
+def some_but_not_all(s,f):
+    a=0
+    b=0
+    for i in s:
+        if(f(i)):
+            a+=1
+        else:
+            b+=1
+    return True if a and b else False
 
-print(digit_sum(4294967295))
+print(some_but_not_all('abcdefg&%$', str.isalpha))
