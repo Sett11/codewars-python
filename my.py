@@ -1,29 +1,14 @@
-def f(x):
-    r=''
-    if(x[0]=='^'):r='Take {} step up'.format(x[1])
-    if(x[0]=='v'):r='Take {} step down'.format(x[1])
-    if(x[0]=='<'):r='Take {} step left'.format(x[1])
-    if(x[0]=='>'):r='Take {} step right'.format(x[1])
-    if(x[1]>1):r=r.replace('step','steps')
-    return r
-def walk(c):
-    a=[]
-    i=0
-    j=i+1
-    s=c+'a'
-    while i<len(s)-1:
-        if(s[i]==s[i+1]):
-            j=i+1
-            while j<len(s):
-                if(s[j]!=s[i]):
-                    a.append(s[i:j])
-                    i=j-1
-                    break
-                j+=1
-        else:
-            a.append(s[i])
+def f(x,y):
+    if(x==y):return 0
+    i=1
+    while i<5:
+        if(y[i:]==x[i:]):return i
         i+=1
-    a=list(map(lambda e:[e[0],len(e)],a))
-    return '\n'.join(list(map(f,a))) if c else 'Paused'
+    return 5
 
-print(walk("<<>"))
+def joker_card(a,r):
+    res=['I type','II type','III type','IV type','V type','Losing card']
+    a=''.join(list(map(lambda e:str(e)[-1],a)))
+    return list(map(lambda e:res[f(e,a)],r))
+
+print(joker_card([12, 35, 1, 2, 23, 39], ['151239', '251229', '251339']))
