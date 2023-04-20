@@ -1,14 +1,14 @@
-def f(x,y):
-    if(x==y):return 0
-    i=1
-    while i<5:
-        if(y[i:]==x[i:]):return i
-        i+=1
-    return 5
+def f(x, y):
+    r = []
+    for i in y:
+        if (x % i == 0):
+            r.append(i)
+    return r
 
-def joker_card(a,r):
-    res=['I type','II type','III type','IV type','V type','Losing card']
-    a=''.join(list(map(lambda e:str(e)[-1],a)))
-    return list(map(lambda e:res[f(e,a)],r))
 
-print(joker_card([12, 35, 1, 2, 23, 39], ['151239', '251229', '251339']))
+def gangs(d, k):
+    l = list(range(1, k+1))
+    return len(set(list(map(lambda e: str(f(e, d)), l))))
+
+
+print(gangs([2, 3, 6, 5], 15))
