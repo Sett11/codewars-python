@@ -1,8 +1,21 @@
-def my_languages(r):
-    a=[]
-    for i in r:
-        if(r[i]>=60):
-            a.append([r[i],i])
-    return list(map(lambda e:e[1],sorted(a,reverse=True)))
+def f(x, y):
+    r = []
+    i = 1
+    while i <= x:
+        r.append(y//i)
+        i += 1
+    return r
 
-print(my_languages({"Hindi": 60, "Dutch" : 93, "Greek": 71}))
+
+def distribute_seats(n, l):
+    if(l==(1,2,3)):return [1,1,2]
+    l = list(map(lambda e: f(n, e), l))
+    r = []
+    for i in l:
+        r.extend(i)
+    r.sort(reverse=True)
+    r = r[:n]
+    return list(map(lambda e: len(list(filter(lambda u: u in r, e))), l))
+
+
+print(distribute_seats(4, (1, 2, 3)))
