@@ -1,10 +1,5 @@
-import re
-def quicksum(s):
-    if(len(re.sub(r'[A-Z ]','',s))):
-        return 0
-    a=[]
-    for i,j in list(enumerate(list(map(lambda e:ord(e)-64 if e!=' ' else 0,s)))):
-        a.append((i+1)*j)
-    return sum(a)
+import math
+def pop_shift(s):
+    return [s[math.floor(len(s)/2)+1:][::-1],s[:math.ceil(len(s)/2)-1],s[math.floor(len(s)/2)]] if len(s)%2!=0 else [s[int(len(s)/2):][::-1],s[:int(len(s)/2)],'']
 
-print(quicksum("MID CENTRAL"))
+print(pop_shift('letstalkaboutjavascriptthebestlanguage'))
