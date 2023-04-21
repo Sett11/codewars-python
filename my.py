@@ -1,9 +1,10 @@
-def next_id(a):
-    if(not len(a)):
+import re
+def quicksum(s):
+    if(len(re.sub(r'[A-Z ]','',s))):
         return 0
-    for i in range(max(a)+1):
-        if(i not in a):
-            return i
-    return i+1
+    a=[]
+    for i,j in list(enumerate(list(map(lambda e:ord(e)-64 if e!=' ' else 0,s)))):
+        a.append((i+1)*j)
+    return sum(a)
 
-print(next_id([5,4,3,2,1,0]))
+print(quicksum("MID CENTRAL"))
