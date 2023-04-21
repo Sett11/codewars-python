@@ -1,36 +1,9 @@
-def f(a):
-    m, n = len(a), len(a[0])
-    z = []
-    for r in range(m):
-        i = r
-        j = 0
-        v = []
-        while j < n and i >= 0:
-            v.append(a[i][j])
-            i -= 1
-            j += 1
-        z.append(v[::-1])
-    for c in range(1, n):
-        i = m-1
-        j = c
-        v = []
-        while j < n and i >= 0:
-            v.append(a[i][j])
-            i -= 1
-            j += 1
-        z.append(v[::-1])
-    return z
+def array_manip(l):
+    i=0
+    l=l.copy()
+    while i<len(l):
+        l[i]=min(filter(lambda e:e>l[i],l[i+1:]),default=-1)
+        i+=1
+    return l
 
-
-def diagonals(m):
-    if(not len(m)):return []
-    if(len(m)==1 and len(m[0])==1):return [m[0]]
-    one = f(m)
-    two = f(list(map(lambda e: e[::-1], m)))
-    one.extend(two)
-    return one
-
-
-print(diagonals([[1, 2, 3],
-                 [4, 5, 6],
-                 [7, 8, 9]]))
+print(array_manip( [27, 62, 74, 80, 79, 77, 73, 46, 63, 69, 17, 66, 75, 8, 69, 17, 31, 48, 18, 79, 70, 14, 34, 60, 83, 27, 45, 95, 41, 56, 8, 39, 22, 81, 25, 24, 9, 32, 87, 64, 11, 2, 10, 24, 2, 88, 91, 59, 99, 81, 58, 86, 67, 15, 49, 62, 55, 62, 18, 69, 78, 68, 36, 45, 3, 87, 72, 83, 53, 18, 71, 79, 63, 43, 28, 65, 16, 8, 41, 69, 95, 27, 14, 11, 73, 7, 89, 90, 36, 8, 9, 35, 76, 50, 6, 29]))
