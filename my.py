@@ -1,5 +1,7 @@
-import re
-def textin(s):
-    return re.sub(r'too|two|to','2',s,flags=re.IGNORECASE)
+def is_dd(n):
+    for i in str(n):
+        if(str(n).count(i)==int(i)):
+            return True
+    return False
 
-print(textin('TwO ToO tWo tOo'))
+print(is_dd(664444309))
