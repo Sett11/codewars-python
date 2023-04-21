@@ -1,19 +1,36 @@
-def a1_thick_and_hearty(a1,a2):
-    l1=len(a1)
-    l2=len(a2)
-    a1=list(filter(lambda e:e in a2,a1))
-    a2=list(filter(lambda e:e in a1,a2))
-    r=[]
-    i=0
-    j=i+1
-    while i<len(a1):
-        j=i+1
-        while j<len(a1):
-            if(a1[i]+a1[j]==l1 or a1[i]-a1[j]==l1 or a1[i]+a1[j]==l2 or a1[i]-a1[j]==l2 or a1[j]-a1[i]==l1 or a1[j]-a1[i]==l2):
-                r.append(a1[i])
-                r.append(a1[j])
-            j+=1
-        i+=1
-    return set(r)
+def f(a):
+    m, n = len(a), len(a[0])
+    z = []
+    for r in range(m):
+        i = r
+        j = 0
+        v = []
+        while j < n and i >= 0:
+            v.append(a[i][j])
+            i -= 1
+            j += 1
+        z.append(v[::-1])
+    for c in range(1, n):
+        i = m-1
+        j = c
+        v = []
+        while j < n and i >= 0:
+            v.append(a[i][j])
+            i -= 1
+            j += 1
+        z.append(v[::-1])
+    return z
 
-print(a1_thick_and_hearty([1, 2, 3, 5, 10, 15],[1, 2, 3, 4, 5, 6, 10, 12, 15, 16]))
+
+def diagonals(m):
+    if(not len(m)):return []
+    if(len(m)==1 and len(m[0])==1):return [m[0]]
+    one = f(m)
+    two = f(list(map(lambda e: e[::-1], m)))
+    one.extend(two)
+    return one
+
+
+print(diagonals([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9]]))
