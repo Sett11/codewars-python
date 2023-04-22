@@ -1,4 +1,4 @@
-def populate_dict(k,d):
-    return dict([[i,d] for i in k])
+def map(f,l):
+    return [f(i) for i in l]
 
-print(populate_dict(["draft", "completed"], 0))
+print(map(str, [1, 2, 3]))
