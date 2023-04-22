@@ -1,12 +1,13 @@
-alpha={'ABCDE':1, 'FGHIJ':2, 'KLMNO':3, 'PQRST':4, 'UVWXY':5}
+def elements_sum(a,d=0):
+    s=0
+    l=len(a)-1
+    for i in a:
+        if(l>len(i)-1):
+            s+=d
+            l-=1
+        else:
+            s+=i[l]
+            l-=1
+    return s
 
-def name_score(s):
-    z=s.upper()
-    c=0
-    for i in z:
-        for j in alpha:
-            if(i in j):
-                c+=alpha[j]
-    return {s:c}
-
-print(name_score('Greg Z MacDonald'))
+print(elements_sum([[3, 2, 1, 0], [4, 6, 5, 3, 2], []]))
