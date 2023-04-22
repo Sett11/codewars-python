@@ -1,4 +1,11 @@
-def map(f,l):
-    return [f(i) for i in l]
+def baubles_on_tree(a,b):
+    if(not b):return 'Grandma, we will have to buy a Christmas tree first!'
+    r=list(map(lambda e:0,list(range(b))))
+    i=0
+    while a:
+        r[i%len(r)]+=1
+        a-=1
+        i+=1
+    return r
 
-print(map(str, [1, 2, 3]))
+print(baubles_on_tree(12,5))
