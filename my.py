@@ -1,16 +1,6 @@
-def sect_sort(a,s=0,e=0):
-    i=0
-    r=[]
-    if(not e):
-        e=len(a)
-    while i<len(a):
-        if(i<s or i>=s+e):
-            r.append(a[i])
-        else:
-            t=sorted(a[s:s+e])
-            r.extend(t)
-            i+=e-1
-        i+=1
-    return r
+def sort_by_value_and_index(a):
+    r=[[(1+i)*j,j,i] for i,j in enumerate(a)]
+    r.sort(key=lambda e:e[0] or e[2])
+    return list(map(lambda e:e[1],r))
 
-print(sect_sort([1, 2, 5, 7, 4, 6, 3, 9, 8], 8, 3))
+print(sort_by_value_and_index( [21, 55, 40, 53, 46, 67, 74, 56, 64, 2, 99, 76, 4, 3, 91, 95, 68, 41, 31, 100, 26, 14, 23, 67, 23, 5, 27, 83, 14, 93, 36, 67, 63, 73, 73, 84, 60, 90, 97, 50, 55, 58, 89, 51, 45, 87, 99, 38, 55, 83, 57, 41, 61, 71, 4, 88, 30, 83, 65, 33, 64, 84, 86]))
