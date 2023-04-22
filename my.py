@@ -1,11 +1,7 @@
-def baubles_on_tree(a,b):
-    if(not b):return 'Grandma, we will have to buy a Christmas tree first!'
-    r=list(map(lambda e:0,list(range(b))))
-    i=0
-    while a:
-        r[i%len(r)]+=1
-        a-=1
-        i+=1
-    return r
+def get_average(l):
+    return round(sum([i['age'] for i in l])/len(l))
 
-print(baubles_on_tree(12,5))
+print(get_average([
+        { 'firstName': 'Maria', 'lastName': 'Y.', 'country': 'Cyprus', 'continent': 'Europe', 'age': 30, 'language': 'Java' },
+        { 'firstName': 'Victoria', 'lastName': 'T.', 'country': 'Puerto Rico', 'continent': 'Americas', 'age': 70, 'language': 'Python' },
+        ] ))
