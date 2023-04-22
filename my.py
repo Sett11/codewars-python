@@ -1,13 +1,16 @@
-def elements_sum(a,d=0):
-    s=0
-    l=len(a)-1
-    for i in a:
-        if(l>len(i)-1):
-            s+=d
-            l-=1
+def sect_sort(a,s=0,e=0):
+    i=0
+    r=[]
+    if(not e):
+        e=len(a)
+    while i<len(a):
+        if(i<s or i>=s+e):
+            r.append(a[i])
         else:
-            s+=i[l]
-            l-=1
-    return s
+            t=sorted(a[s:s+e])
+            r.extend(t)
+            i+=e-1
+        i+=1
+    return r
 
-print(elements_sum([[3, 2, 1, 0], [4, 6, 5, 3, 2], []]))
+print(sect_sort([1, 2, 5, 7, 4, 6, 3, 9, 8], 8, 3))
