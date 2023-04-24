@@ -1,11 +1,15 @@
-def get_first_python(l):
+def count_languages(l): 
+    r={}
     for i in l:
-        if(i['language']=='Python'):
-            return '{}, {}'.format(i['first_name'],i['country'])
-    return 'There will be no Python developers'
+        if(i['language'] in r):
+            r[i['language']]+=1
+        else:
+            r[i['language']]=1
+    return r
 
-print(get_first_python([
-  { "first_name": "Mark", "last_name": "G.", "country": "Scotland", "continent": "Europe", "age": 22, "language": "JavaScript" },
-  { "first_name": "Victoria", "last_name": "T.", "country": "Puerto Rico", "continent": "Americas", "age": 30, "language": "Python" },
-  { "first_name": "Emma", "last_name": "B.", "country": "Norway", "continent": "Europe", "age": 19, "language": "Clojure" }
-]))
+print(count_languages([
+    { 'firstName': 'Noah', 'lastName': 'M.', 'country': 'Switzerland', 'continent': 'Europe', 'age': 19, 'language': 'C' },
+    { 'firstName': 'Anna', 'lastName': 'R.', 'country': 'Liechtenstein', 'continent': 'Europe', 'age': 52, 'language': 'JavaScript' },
+    { 'firstName': 'Ramon', 'lastName': 'R.', 'country': 'Paraguay', 'continent': 'Americas', 'age': 29, 'language': 'Ruby' },
+    { 'firstName': 'George', 'lastName': 'B.', 'country': 'England', 'continent': 'Europe', 'age': 81, 'language': 'C' },
+    ]))
