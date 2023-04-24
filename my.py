@@ -1,8 +1,5 @@
-def is_same_language(l): 
-    return len(set([i['language'] for i in l]))==1
+def majority(a):
+    a=sorted([[i,a.count(i)] for i in a],key=lambda e:e[1],reverse=True)
+    return a[0][0] if len(set(list(map(lambda u:u[0],list(filter(lambda e:e[1]==a[0][1],a))))))==1 else None
 
-print(is_same_language([
-  { 'firstName': 'Daniel', 'lastName': 'J.', 'country': 'Aruba', 'continent': 'Americas', 'age': 42, 'language': 'JavaScript' },
-  { 'firstName': 'Kseniya', 'lastName': 'T.', 'country': 'Belarus', 'continent': 'Europe', 'age': 22, 'language': 'JavaScript' },
-  { 'firstName': 'Hanna', 'lastName': 'L.', 'country': 'Hungary', 'continent': 'Europe', 'age': 65, 'language': 'JavaScript' },
-]))
+print(majority(["A", "B", "A"]))
