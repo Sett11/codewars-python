@@ -1,17 +1,6 @@
-class Node(object):
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-    
-def push(h,d):
-    r=None
-    r=Node(d)
-    r.next=h
-    return r
-  
-def build_one_two_three():
-    t=None
-    t=push(t,3)
-    t=push(t,2)
-    t=push(t,1)
-    return t
+import ipaddress
+def ipsubnet2list(s):
+    try:return list(map(str,list(ipaddress.ip_network(s).hosts())))
+    except:return None
+
+print(ipsubnet2list("213.256.46.160/28"))
