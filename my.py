@@ -1,9 +1,12 @@
-def addsup(a1,a2,a3):
-    r=[]
-    for i in a1:
-        for j in a2:
-            if(i+j in a3):
-                r.append([i,j,i+j])
-    return r
+def play_if_enough(h,p):
+    r=h
+    p=list(p)
+    h=list(h)
+    while len(p):
+        t=p.pop(0)
+        if(t not in h):
+            return (False,r)
+        h.remove(t)
+    return (True,''.join(h))
 
-print(addsup([1,2,5],[3,1],[5,4,6]))
+print(play_if_enough("oogssbbb", "bwsg"))
