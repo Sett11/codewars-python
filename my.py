@@ -1,14 +1,15 @@
-def anagram_counter(w):
-    w=[sorted(i) for i in w]
-    c=0
-    i=0
-    j=i+1
-    while i<len(w):
-        j=i+1
-        while j<len(w):
-            c+=1 if w[i]==w[j] else 0
-            j+=1
-        i+=1
-    return c
+def rotate(l,n):
+    if(not n or not len(l)):
+        return l
+    n=n%len(l)
+    if(n>0):
+      while n:
+         l.insert(0,l.pop())
+         n-=1
+    else:
+       while n:
+          l.append(l.pop(0))
+          n+=1
+    return l
 
-print(anagram_counter(['dell', 'ledl', 'abc', 'cba', 'bca', 'bac', 'cab']))
+print(rotate([1, 2, 3, 4, 5],12478))
