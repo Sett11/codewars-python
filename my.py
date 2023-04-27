@@ -1,15 +1,18 @@
-def complexSum(a):
-    r=str(sum([complex(i) for i in list(map(lambda e:e.replace('i','j'),a))])).replace('j','i').replace('(','').replace(')','')
-    if(r=='0i'):
-        return '0'
-    if(r=='-1i'):
-        return '-i'
-    if(r=='-2+1i'):
-        return '-2+i'
-    if(r=='-2-1i'):
-        return '-2-i'
-    return r.replace('+0i','') if r!='1i' else 'i'
+def answer(q,l):
+    a=[i.split() for i in l]
+    q=q.lower().split()
+    r=[]
+    c=0
+    for i in a:
+        c=0
+        for j in i:
+            if(j.lower() in q):
+                c+=1
+        r.append([i,c])
+    r=sorted(r,key=lambda e:e[1],reverse=True)
+    r=list(filter(lambda e:e[1]==r[0][1] and e[1],r))
+    if(not len(r)):
+        return None
+    return ' '.join(r[0][0])
 
-print(complexSum(["2+3i","3-i"]))
-print(complexSum(["3","-3+i"]))
-print(complexSum(["2-3i","3+i"]))
+print(answer('is beedrill a pokemon', ['python is a programming language', 'RAM stands for Random Access Memory', 'TalonFlame is a pokemon', 'beeedrill OU', 'BeeDrill is a pokemon', 'GNU is not UNIX', 'biology is boring']))
