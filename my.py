@@ -1,6 +1,14 @@
-import hashlib as h
+def digits(n):
+    n=list(map(int,str(n)))
+    a=[]
+    i=0
+    j=i+1
+    while i<len(n):
+        j=i+1
+        while j<len(n):
+            a.append(n[i]+n[j])
+            j+=1
+        i+=1
+    return a
 
-def to_sha256(s):
-    return h.sha256(bytes(s,encoding='utf-8')).hexdigest()
-
-print(to_sha256('Hello World!'))
+print(digits(3264128))
