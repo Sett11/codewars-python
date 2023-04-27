@@ -1,4 +1,14 @@
-def binary_pyramid(m,n):
-    return bin(sum([int(bin(i)[2:]) for i in list(range(m,n+1))]))[2:]
-
-print(binary_pyramid(1,4))
+def reverse_factorial(n):
+    if(n==1):
+        return '1!'
+    i=1
+    while True:
+        if(n==1.0):
+            return str(int(n*i-1))+'!'
+        if(n<=0):
+            break
+        n/=i
+        i+=1
+    return 'None'
+    
+print(reverse_factorial(120))
