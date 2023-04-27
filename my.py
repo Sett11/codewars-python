@@ -1,7 +1,6 @@
-def is_lucky(t):
-    try:
-        return sum(list(map(int,t[0:3])))==sum(list(map(int,t[3:]))) and len(t)==6
-    except:
-        return False
+import hashlib as h
 
-print(is_lucky('100200'))
+def to_sha256(s):
+    return h.sha256(bytes(s,encoding='utf-8')).hexdigest()
+
+print(to_sha256('Hello World!'))
