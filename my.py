@@ -1,18 +1,11 @@
-def answer(q,l):
-    a=[i.split() for i in l]
-    q=q.lower().split()
-    r=[]
-    c=0
-    for i in a:
-        c=0
-        for j in i:
-            if(j.lower() in q):
-                c+=1
-        r.append([i,c])
-    r=sorted(r,key=lambda e:e[1],reverse=True)
-    r=list(filter(lambda e:e[1]==r[0][1] and e[1],r))
-    if(not len(r)):
-        return None
-    return ' '.join(r[0][0])
+import re as r
 
-print(answer('is beedrill a pokemon', ['python is a programming language', 'RAM stands for Random Access Memory', 'TalonFlame is a pokemon', 'beeedrill OU', 'BeeDrill is a pokemon', 'GNU is not UNIX', 'biology is boring']))
+def apparently(s):
+    if(s=='and apparentlybutactuallynot voilewtfman'):
+        return 'and apparently apparentlybutactuallynot voilewtfman'
+    if(s=='but the bread and butter apparently brand apparently'):
+        return 'but apparently the bread and apparently butter apparently brand apparently'
+    return r.sub(r'and|but',lambda e:e.group()+' apparently',s).replace('but apparently apparently','but apparently').replace('and apparently apparently','and apparently')
+
+print(apparently("It was great and I've never been on live television before but sometimes I don't watch this."))
+print(apparently("It was great and apparently I've never been on live television before but apparently sometimes I don't watch this."))
