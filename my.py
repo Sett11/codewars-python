@@ -1,33 +1,46 @@
-import math as m
+a='abcdefghijklmnopqrstuvwxyz'
 
-def f(n):
-    if(n<2):
-        return False
-    if(n==2):
-        return True
-    for i in range(2,round(m.sqrt(n))+1):
-        if(not n%i):
-            return False
-    return True
-
-def r(n):
-    return max([i if not n%i and f(i) else 0 for i in range(2,round(abs(n)+1))])
-        
-
-def ascii_cipher(s,k):
-    n=r(k)
-    if(k<0):
-        n=-n
-    s=list(s)
+def encode(s,k,n):
+    c=list(filter(lambda e:e not in k,list(a)))
+    b,r,i=[],[],0
+    while i<len(k):
+        if(k[i] not in b):
+            b.append(k[i])
+        i+=1
+    c=b+c
     i=0
     while i<len(s):
-        s[i]=(ord(s[i])+n)%128
-        if(s[i]<0):
-            s[i]+=128
-        s[i]=chr(s[i])
+        if(s[i] not in c):
+            r.append(s[i])
+        else:
+            t=c.index(s[i])
+            r.append(c[(t+n)%len(c)])
+            n=t+1
         i+=1
-    return ''.join(s)
+    return ''.join(r)
+    
+def decode(s,k,n): 
+    c=list(filter(lambda e:e not in k,list(a)))
+    b,r,i=[],[],0
+    while i<len(k):
+        if(k[i] not in b):
+            b.append(k[i])
+        i+=1
+    c=b+c
+    i=0
+    while i<len(s):
+        if(s[i] not in c):
+            r.append(s[i])
+        else:
+            t=c.index(s[i])
+            v=t-n
+            if(v<0):
+                v+=len(c)
+            r.append(c[v])
+            n=v+1
+        i+=1
+    return ''.join(r)
 
-print(ascii_cipher("Encryption rules!", 326))
-print(ascii_cipher("Imitation Game, up in here!", -7))
-print(ascii_cipher("Hello, world", 18))
+print(encode("on","cryptogram",10))
+print(decode("abc","keykeykeykey",10))
+print(decode("jx","cryptogram",10))
