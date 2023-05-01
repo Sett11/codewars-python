@@ -1,46 +1,19 @@
-a='abcdefghijklmnopqrstuvwxyz'
-
-def encode(s,k,n):
-    c=list(filter(lambda e:e not in k,list(a)))
-    b,r,i=[],[],0
-    while i<len(k):
-        if(k[i] not in b):
-            b.append(k[i])
-        i+=1
-    c=b+c
-    i=0
-    while i<len(s):
-        if(s[i] not in c):
-            r.append(s[i])
-        else:
-            t=c.index(s[i])
-            r.append(c[(t+n)%len(c)])
-            n=t+1
-        i+=1
-    return ''.join(r)
+import re as r
+def calculate(s):
+    try:
+        s=r.sub(r'\d+',lambda e:' '+e.group()+' ',s).split()
+        i=0
+        while i<len(s):
+            if(s[i]!='0'):
+                while not s[i].find('0'):
+                    s[i]=s[i][1:]
+                    if(s[i]=='0'):
+                        break
+            i+=1
+        return eval(''.join(s))
+    except:
+        return False
     
-def decode(s,k,n): 
-    c=list(filter(lambda e:e not in k,list(a)))
-    b,r,i=[],[],0
-    while i<len(k):
-        if(k[i] not in b):
-            b.append(k[i])
-        i+=1
-    c=b+c
-    i=0
-    while i<len(s):
-        if(s[i] not in c):
-            r.append(s[i])
-        else:
-            t=c.index(s[i])
-            v=t-n
-            if(v<0):
-                v+=len(c)
-            r.append(c[v])
-            n=v+1
-        i+=1
-    return ''.join(r)
-
-print(encode("on","cryptogram",10))
-print(decode("abc","keykeykeykey",10))
-print(decode("jx","cryptogram",10))
+    
+print(calculate('6/087*90857/6848/23205-6707*22*55642/442'))
+print(calculate('1-21-471-5725-860*84141*60768*2183-93019'))
