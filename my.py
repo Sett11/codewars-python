@@ -1,11 +1,25 @@
-def number_of_sigfigs(n):
-    if(n=='0'):
-        return 0
-    while n[0]=='0':
-        n=n[1:]
-    if('.' not in n):
-        while n[len(n)-1]=='0':
-            n=n[:-1]
-    return len(list(filter(lambda e:e!='.',n)))
+import math as m
 
-print(number_of_sigfigs("0.1"))
+def f(x):
+  if(x<2):
+    return False
+  if(x==2):
+    return True
+  i=2
+  while i<m.sqrt(x)+1:
+    if(x%i==0):
+      return False
+    i+=1
+  return True
+  
+
+def summationOfPrimes(n):
+  i=2
+  a=[]
+  while i<=n:
+    if(f(i)):
+      a.append(i)
+    i+=1
+  return sum(a)
+  
+print(summationOfPrimes(10))
