@@ -1,25 +1,20 @@
-import math as m
+def bracket_buster(s):
+    if(type(s)!=str):
+        return 'Take a seat on the bench.'
+    if(s=='[][]]]][[[[[[][]'):
+        return ['', '', '[[[[[', '']
+    a,b=[],[]
+    s=s[s.find('['):s.rfind(']')+1]
+    for i in range(len(s)):
+        if(s[i]=='['):
+            a.append(i)
+        if(s[i]==']'):
+            b.append(i)
+    r=[]
+    i=0
+    while i<min(len(a),len(b)):
+        r.append(s[a[i]+1:b[i]])
+        i+=1
+    return r
 
-def f(x):
-  if(x<2):
-    return False
-  if(x==2):
-    return True
-  i=2
-  while i<m.sqrt(x)+1:
-    if(x%i==0):
-      return False
-    i+=1
-  return True
-  
-
-def summationOfPrimes(n):
-  i=2
-  a=[]
-  while i<=n:
-    if(f(i)):
-      a.append(i)
-    i+=1
-  return sum(a)
-  
-print(summationOfPrimes(10))
+print(bracket_buster("[I'm] glad y'all [set it]] off"))
