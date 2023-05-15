@@ -1,20 +1,14 @@
-def up_down_col_sort(m):
-    a=[]
-    [a.extend(i) for i in m]
-    a=sorted(a)
-    i=0
-    r=[]
-    while i<len(a):
-        r.append(a[i:i+len(m)])
-        i+=len(m)
-    r=[i[1][::-1] if i[0]%2!=0 else i[1] for i in enumerate(r)]
-    return [list(i) for i in list(zip(*r))]
+def loose_change(l,n):
+    r=[i for i in l if n%i==0 and i!=1]
+    if(len(r)):
+        return n//max(r)
+    l=l[::-1]
+    c=0
+    for i in range(len(l)):
+        while n>=l[i]:
+            n-=l[i]
+            c+=1
+    return c
 
-print(up_down_col_sort([
-    [-20, -4, -1],
-     [  1,  4,  7], 
-     [  8, 10, 12]]))
-
-#       [[-20, 7, 8],
-#       [-4, 4, 10],
-#       [-1, 1, 12]]
+print(loose_change([1, 5, 10, 25], 37))
+print(loose_change([1, 4, 5, 10], 8))
