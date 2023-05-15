@@ -1,16 +1,19 @@
-from functools import reduce as r
-import math as m
-
-def get_dividers(v,p):
+def f(x):
+    i=0
     a=[]
-    for i in range(len(v)):
-        a.append(v[i]**p[i])
-    a=r(lambda a,c:a*c,a)
-    c=[]
-    for i in range(1,int(m.sqrt(a))):
-        if(a%i==0):
-            c.append(int(i))
-            c.append(int(a/i))
-    return sorted(c)
+    while i<len(x[0]):
+        j=0
+        b=[]
+        while j<len(x):
+            b.append(x[j][i])
+            j+=1
+        a.append(sorted(b))
+        i+=1
+    return a
 
-print(get_dividers([2, 5, 11], [2, 1, 1]))
+def order(m):
+    return f(f([sorted(i) for i in m]))
+
+print(order([[7,  1,  4, 37, 28], 
+           [3,  2,  8, 12, -8],
+           [6, -1, -6,  7, 55]] ))
