@@ -1,19 +1,20 @@
-def f(x):
-    i=0
+def up_down_col_sort(m):
     a=[]
-    while i<len(x[0]):
-        j=0
-        b=[]
-        while j<len(x):
-            b.append(x[j][i])
-            j+=1
-        a.append(sorted(b))
-        i+=1
-    return a
+    [a.extend(i) for i in m]
+    a=sorted(a)
+    i=0
+    r=[]
+    while i<len(a):
+        r.append(a[i:i+len(m)])
+        i+=len(m)
+    r=[i[1][::-1] if i[0]%2!=0 else i[1] for i in enumerate(r)]
+    return [list(i) for i in list(zip(*r))]
 
-def order(m):
-    return f(f([sorted(i) for i in m]))
+print(up_down_col_sort([
+    [-20, -4, -1],
+     [  1,  4,  7], 
+     [  8, 10, 12]]))
 
-print(order([[7,  1,  4, 37, 28], 
-           [3,  2,  8, 12, -8],
-           [6, -1, -6,  7, 55]] ))
+#       [[-20, 7, 8],
+#       [-4, 4, 10],
+#       [-1, 1, 12]]
