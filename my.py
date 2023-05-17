@@ -1,12 +1,12 @@
-def christmas_tree(x):
-    n=x//3
-    a=['*','***','*****']
-    b=a
-    while n>1:
-        b=['*'+i+'*' for i in b]
-        a.extend(b)
-        n-=1
-    m=max([len(i) for i in a])
-    return '' if x<3 else '\r\n'.join([' '*((m//2)-len(i)//2)+i for i in a])+'\r\n'+' '*((m//2)-1)+'###'
+from functools import reduce as r
 
-print(christmas_tree(17))
+def count_of_heads(j,n,s):
+    t=[]
+    x=0
+    while len(t)<s:
+        x+=1
+        t.append(x)
+        j=j-1+r(lambda a,c:a*c,t)*n
+    return j
+
+print(count_of_heads(51,6,31))
