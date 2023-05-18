@@ -1,11 +1,41 @@
-import re as r
+def isogram_encode(*a):
+    if(len(a)!=2):
+         return 'Incorrect key or input!'
+    n,k=a
+    if(len(set(k))!=10 or len(set(k))!=len(k) or not n):
+            return 'Incorrect key or input!'
+    try:
+        n=list(map(int,str(n)))
+        o={}
+        for i in range(len(k)-1):
+            o[i+1]=k[i]
+        o[0]=k[-1]
+        s=''
+        for i in n:
+            s+=o[i]
+        return (s).upper()
+    except:
+        return 'Incorrect key or input!'
 
-def validate_bet(g,t):
-    if(r.search(r'[^0-9, ]',t)):
-        return None
-    t=[int(i) for i in r.split(r' |,',t) if i]
-    if(len(t)<g[0] or len(t)>g[1] or len([i for i in t if i>g[1]]) or 0 in t):
-        return None
-    return sorted(t) if len(set(t))==len(t) and len(t)==g[0] else None
+def isogram_decode(*a):
+    if(len(a)!=2):
+         return 'Incorrect key or input!'
+    n,k=a
+    if(len(set(k))!=10 or len(set(k))!=len(k) or not n):
+            return 'Incorrect key or input!'
+    try:
+        n=list(n)
+        o={}
+        for i in range(len(k)-1):
+            o[k[i]]=i+1
+        o[k[-1]]=0
+        return ''.join([str(o[i]) for i in n])
+    except:
+        return 'Incorrect key or input!'
 
-print(validate_bet([5, 71], '8 ,62 ,24 ,19 ,60'))
+    
+
+print(isogram_encode(500, 'PATHFINDER'))
+print(isogram_decode('FRR', 'PATHFINDER'))
+print(isogram_decode())
+print(isogram_encode())
