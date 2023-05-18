@@ -1,13 +1,11 @@
-import re
-
-def is_isogram(s):
-    if(not isinstance(s,str) or s==''):
-        return False
-    s=re.sub(r'[^a-z]','',s.lower())
+def display_board(b,w):
+    b=[' '+i+' ' for i in b]
+    a=[]
     i=0
-    o={}
-    while i<len(s):
-        if(s[i] in o):o[s[i]]+=1
-        else:o[s[i]]=1
-        i+=1
-    return len(set(o.values()))==1
+    while i<len(b):
+        a.append(b[i:i+w])
+        i+=w
+    a=['|'.join(i) for i in a]
+    return ('{}'.format('\n'+('-'*len(a[0]))+'\n')).join(a)
+
+print(display_board(["O", "X", " ", " ", "X", " ", "X", "O", " "],3))
