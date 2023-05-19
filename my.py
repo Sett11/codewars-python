@@ -1,4 +1,6 @@
-def simple_sum(a,b):
-    return simple_sum(a^b,(a&b)<<1) if b else a
+import math as m
+def decipher_message(s):
+    n=int(m.sqrt(len(s)))
+    return ''.join([''.join(list(i)) for i in list(zip(*[list(s[i:i+n]) for i in range(0,len(s),n or 1)]))])
 
-print(simple_sum(2,3))
+print(decipher_message('ArNran u rstm5twob  e ePb'))
