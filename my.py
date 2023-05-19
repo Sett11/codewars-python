@@ -1,11 +1,10 @@
-def display_board(b,w):
-    b=[' '+i+' ' for i in b]
-    a=[]
+def T9(w,s):
+    o={'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
     i=0
-    while i<len(b):
-        a.append(b[i:i+w])
-        i+=w
-    a=['|'.join(i) for i in a]
-    return ('{}'.format('\n'+('-'*len(a[0]))+'\n')).join(a)
+    while i<len(s):
+        w=[j for j in w if j[i].lower() in o[s[i]]]
+        i+=1
+    return w if len(w) else [''.join([o[i][0] for i in s])]
 
-print(display_board(["O", "X", " ", " ", "X", " ", "X", "O", " "],3))
+print(T9(['hello','world'],'43556'))
+print(T9(['qveqa'],'43556'))
