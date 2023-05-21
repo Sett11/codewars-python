@@ -1,19 +1,18 @@
-bin      = '01'
-oct      = '01234567'
-dec      = '0123456789'
-hex      = '0123456789abcdef'
-allow    = 'abcdefghijklmnopqrstuvwxyz'
-allup    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-alpha    = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-alphanum = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+import random as r
 
-def f(x,y,z):
-    if(x<y):
-        return z[x]
-    a,b=divmod(x,y)
-    return f(a,y,z)+z[b]
+def make_password(l,a,b,c):
+    alf=list('abcdefghijklmnopqrstuvwxyz')
+    u_alf=list(''.join(alf).upper())
+    n=list('0123456789')
+    arr=[i[0] for i in [[alf,b],[u_alf,a],[n,c]] if(i[1])]
+    s=''
+    i=0
+    while len(s)<l:
+        i%=len(arr)
+        n=r.randrange(0,(len(arr[i])))
+        s+=arr[i].pop(n)
+        arr=[i for i in arr if len(i)]
+        i+=1
+    return s
 
-def convert(a,b,c):
-    return f(sum(b.index(i)*len(b)**k for k,i in enumerate(a[::-1])),len(c),c)
-
-print(convert('15',dec,bin))
+print(make_password(5,True,True,True))
