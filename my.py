@@ -1,18 +1,24 @@
-import random as r
-
-def make_password(l,a,b,c):
-    alf=list('abcdefghijklmnopqrstuvwxyz')
-    u_alf=list(''.join(alf).upper())
-    n=list('0123456789')
-    arr=[i[0] for i in [[alf,b],[u_alf,a],[n,c]] if(i[1])]
-    s=''
+import re
+def get_char_count(s):
+    s=list(re.sub(r'[^a-z0-9]','',s.lower()))
     i=0
-    while len(s)<l:
-        i%=len(arr)
-        n=r.randrange(0,(len(arr[i])))
-        s+=arr[i].pop(n)
-        arr=[i for i in arr if len(i)]
+    l=[]
+    while len(s):
+        i%=len(s)
+        l.append([s.count(s[i]),s[i]])
+        s=[j for j in s if j!=s[i]]
         i+=1
-    return s
+    i=0
+    while i<len(l):
+        j=i+1
+        while j<len(l):
+            if(l[i][0]==l[j][0]):
+                l[i].extend(l[j][1])
+                l.pop(j)
+                j-=1
+            j+=1
+        i+=1
+    l=sorted(l,reverse=True)
+    return dict([[i[0],sorted(i[1:])] for i in l])
 
-print(make_password(5,True,True,True))
+print(get_char_count('Mississippi'))
