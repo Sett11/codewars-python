@@ -1,14 +1,4 @@
-def expand(m,f):
-    n,a=len(m)*2,[]
-    while len(a)<n:
-        a.append(f)
-    while len(m)<n:
-        m.append(a)
-        m.insert(0,a)
-    for i in m:
-        while len(i)<n:
-            i.append(f)
-            i.insert(0,f)
-    return m
+def get_matrix(n):
+    return [[0 if i!=j else 1 for i,k in enumerate(p)] for j,p in enumerate([[0]*n]*n)]
 
-print(expand([[1, 1],[1, 1]],0))
+print(get_matrix(5))
