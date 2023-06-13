@@ -1,6 +1,4 @@
-class Python():
-    def __init__(self,name):
-        self.name=name
+def seqlist(f,c,l):
+    return [i for i in range(f,l*c*2,c)][:l]
 
-bubba=Python('Bubba')
-print(bubba.name)
+print(seqlist(0,2,20))
