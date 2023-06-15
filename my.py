@@ -1,4 +1,10 @@
-def get_matrix(n):
-    return [[0 if i!=j else 1 for i,k in enumerate(p)] for j,p in enumerate([[0]*n]*n)]
+def kaprekar_split(n):
+    s,i=str(n**2),1
+    while i<len(s):
+        if(int(s[:i])+int(s[i:])==n):
+            return i
+        i+=1
+    return -1 if int(s)!=n else 0
 
-print(get_matrix(5))
+print(kaprekar_split(9999999999))
+print(kaprekar_split(2223))
