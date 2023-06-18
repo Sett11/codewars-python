@@ -1,10 +1,5 @@
-def kaprekar_split(n):
-    s,i=str(n**2),1
-    while i<len(s):
-        if(int(s[:i])+int(s[i:])==n):
-            return i
-        i+=1
-    return -1 if int(s)!=n else 0
+from functools import reduce as r
+def main_diagonal_product(m):
+    return r(lambda a,c:a*c[0],[[i for k,i in enumerate(h) if k==n] for n,h in enumerate(m)],1)
 
-print(kaprekar_split(9999999999))
-print(kaprekar_split(2223))
+print(main_diagonal_product([[1,2,3],[4,5,6],[7,8,9]]))
