@@ -1,8 +1,7 @@
-def seven_wonders_science(c,g,t):
-    n,a,r=c**2+g**2+t**2,[c,g,t],0
-    while all(a):
-        r+=1
-        a=[i-1 for i in a]
-    return r*7+n
+import re
+def i_or_f(s):
+    if(' ' in s or '+-' in s or '-+' in s or '++' in s or '--' in s or 'e-' in s):
+        return False
+    return True if re.sub(r'[^a-z]','',s.lower())=='e' or re.sub(r'[^a-z]','',s.lower())=='' and len(re.sub(r'[^\.]','',s) )<2 else False
 
-print(seven_wonders_science(7,2,2))
+print(i_or_f('1'))
