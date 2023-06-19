@@ -1,7 +1,5 @@
-def pagination_text(n,s,t):
-    return 'Showing {} to {} of {} Products.'.format(n*s-s+1,(n*s) if (n*s)<=t else t,t)
+from functools import reduce as r
+def smallest_product(a):
+    return min([r(lambda a,c:a*c,i,1) for i in a])
 
-print(pagination_text(1,10,30))
-print(pagination_text(43,15,3456))
-print(pagination_text(1,10,8))
-print(pagination_text(3,10,26))
+print(smallest_product([[3, 2], [1, 2, 1], [7, 8]]))
