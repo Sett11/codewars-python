@@ -1,18 +1,5 @@
-def SumEvenFibonacci(n):
-    if(n<=1):
-        return 0
-    if(n<8):
-        return 2
-    if(n<40):
-        return 10
-    a=b=c=1
-    s=0
-    while a<n:
-        c=b
-        b+=a
-        a=c
-        s+=0 if a%2!=0 else a
-    return s
+def archers_ready(h):
+    return h==[i for i in h if i>4] if len(h) else False
 
-
-print(SumEvenFibonacci(7))
+print(archers_ready([1,2,3,8,9,10]))
+print(archers_ready([8,9,10]))
