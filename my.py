@@ -1,7 +1,7 @@
-import re
-def i_or_f(s):
-    if(' ' in s or '+-' in s or '-+' in s or '++' in s or '--' in s or 'e-' in s):
-        return False
-    return True if re.sub(r'[^a-z]','',s.lower())=='e' or re.sub(r'[^a-z]','',s.lower())=='' and len(re.sub(r'[^\.]','',s) )<2 else False
+def pagination_text(n,s,t):
+    return 'Showing {} to {} of {} Products.'.format(n*s-s+1,(n*s) if (n*s)<=t else t,t)
 
-print(i_or_f('1'))
+print(pagination_text(1,10,30))
+print(pagination_text(43,15,3456))
+print(pagination_text(1,10,8))
+print(pagination_text(3,10,26))
