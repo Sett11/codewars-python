@@ -1,5 +1,4 @@
-from functools import reduce as r
-def smallest_product(a):
-    return min([r(lambda a,c:a*c,i,1) for i in a])
+def sort_it(s,n):
+    return ', '.join(sorted(s.split(', '),key=lambda e:e[n-1]))
 
-print(smallest_product([[3, 2], [1, 2, 1], [7, 8]]))
+print(sort_it('cat, dog, eel, bee',3))
