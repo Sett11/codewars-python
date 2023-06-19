@@ -1,12 +1,18 @@
-def reverse_it(d):
-    if(type(d)==str):
-        return d[::-1]
-    if(type(d)==int):
-        return int(str(d)[::-1])
-    if(type(d)==float):
-        return float(str(d)[::-1])
-    return d
+def SumEvenFibonacci(n):
+    if(n<=1):
+        return 0
+    if(n<8):
+        return 2
+    if(n<40):
+        return 10
+    a=b=c=1
+    s=0
+    while a<n:
+        c=b
+        b+=a
+        a=c
+        s+=0 if a%2!=0 else a
+    return s
 
-print(reverse_it('Hello'))
-print(reverse_it(1234))
-print(reverse_it('h2buua6b0z2b6'))
+
+print(SumEvenFibonacci(7))
