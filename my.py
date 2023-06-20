@@ -1,5 +1,4 @@
-def archers_ready(h):
-    return h==[i for i in h if i>4] if len(h) else False
+def seats_in_theater(a,b,c,d):
+    return (a-c+1)*(b-d)
 
-print(archers_ready([1,2,3,8,9,10]))
-print(archers_ready([8,9,10]))
+print(seats_in_theater(16,11,5,3))
