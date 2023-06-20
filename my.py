@@ -1,4 +1,8 @@
-def seats_in_theater(a,b,c,d):
-    return (a-c+1)*(b-d)
+def triple_trouble(o,t,h):
+    s,i='',0
+    while i<len(o):
+        s+=o[i]+t[i]+h[i]
+        i+=1
+    return s
 
-print(seats_in_theater(16,11,5,3))
+print(triple_trouble("burn", "reds", "roll"))
