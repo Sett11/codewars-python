@@ -1,14 +1,6 @@
-def tap_code_translation(s):
-    s=s.upper().replace('K','C')
-    a=['ABCDE','FGHIJ','LMNOP','QRSTU','VWXYZ']
-    r,i=[],0
-    while i<len(s):
-        j=0
-        while j<len(a):
-            if(s[i] in a[j]):
-                r.append(''.join(['.'*(j+1)+' '+'.'*(a[j].index(s[i])+1)]))
-            j+=1
-        i+=1
-    return ' '.join(r)
+import math
+def median(l):
+    return sum(sorted(l)[math.floor(len(l)/2)-1:math.floor(len(l)/2)+1])/2 if not len(l)&1 else sorted(l)[math.floor(len(l)/2)]
 
-print(tap_code_translation('dot'))
+print(median([33,99,100,30,29,50]))
+print(median([27, 974, 40, 706, 878]))
