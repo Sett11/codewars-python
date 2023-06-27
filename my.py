@@ -1,16 +1,25 @@
-def fish(s):
-    c,a,k=1,[],sorted([int(i) for i in s if i!='0'])
-    while len(k):
-        if(k[0])>c:
-            break
-        else:
-            a.append(k.pop(0))
-            if(sum(a)>=c*4):
-                a=[sum(a)-c*4]
-                c+=1
-    return c
+def f(n,l):
+    a,r,c,t,x=[i for i in range(1,n*n*4+1)],[],n,[],[]
+    while len(a):
+        x.append(a.pop(0))
+        if(len(x)==c):
+            r.append(x)
+            x=[]
+            c=c-1 if c==n+1 else c+1
+    while len(r)>n*2+1:
+        r=r[:-1]
+    for i in range(0,len(r)-1,2):
+        for j in range(len(r[i])):
+            t.append([r[i][j],r[i+1][j],r[i+1][j+1],r[i+2][j]])
+    m=[k[1][0] for k in [[i,[j for j in i if j not in l]] for i in t] if len(k[1])==1]
+    return sorted(list(set(l))) if not len(m) else f(n,m+l)
 
-print(fish('111122223333'))
-print(fish('111111111111'))
-print(fish('111111111111111111112222222222'))
-print(fish('60543169766820089483229529002053110322110417102715497009489031821068945369562840890036432905791477592788516593197896469318281143833613267794388682674816466636629855812189905115734521807299381776696749941'))
+class Game():
+    def __init__(self,n):
+        self.n=n
+    def play(self,l):
+        return f(self.n,l)
+    
+r=Game(1)
+
+print(r.play([1,2,3,4]))
