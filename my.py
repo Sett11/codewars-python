@@ -1,25 +1,20 @@
-def f(n,l):
-    a,r,c,t,x=[i for i in range(1,n*n*4+1)],[],n,[],[]
-    while len(a):
-        x.append(a.pop(0))
-        if(len(x)==c):
-            r.append(x)
-            x=[]
-            c=c-1 if c==n+1 else c+1
-    while len(r)>n*2+1:
-        r=r[:-1]
-    for i in range(0,len(r)-1,2):
-        for j in range(len(r[i])):
-            t.append([r[i][j],r[i+1][j],r[i+1][j+1],r[i+2][j]])
-    m=[k[1][0] for k in [[i,[j for j in i if j not in l]] for i in t] if len(k[1])==1]
-    return sorted(list(set(l))) if not len(m) else f(n,m+l)
+def verify_latin_square(a,m):
+    if len([i for i in a if len(i)!=len(a)]):
+        return 'Array not square'
+    if len([i for i in a if len(i)!=m]) or len(a)!=m:
+        return 'Array is wrong size'
+    t=[[i,j] for j,i in enumerate(a) if len(i)!=len(set(i))]
+    if len(t):
+        return f'{[i for i in t[0][0] if t[0][0].count(i)>1][0]} occurs more than once in row {t[0][1]+1}'
+    t=[[i,j] for j,i in enumerate([list(i) for i in zip(*a)]) if len(i)!=len(set(i))]
+    if len(t):
+        return f'{[i for i in t[0][0] if t[0][0].count(i)>1][0]} occurs more than once in column {t[0][1]+1}'
+    t=[]
+    [t.extend(i) for i in a]
+    t=[i for i in t if i>m or i<1]
+    if len(t):
+        v=[x[0] for x in [[[i,k] for i,j in enumerate(n) if j==t[0]] for k,n in enumerate(a)] if len(x)]
+        return f'{t[0]} at {v[0][1]+1},{v[0][0]+1} is not between 1 and {m}'
+    return f'Valid latin square of size {m}'
 
-class Game():
-    def __init__(self,n):
-        self.n=n
-    def play(self,l):
-        return f(self.n,l)
-    
-r=Game(1)
-
-print(r.play([1,2,3,4]))
+print(verify_latin_square([[1, 3, 2], [3, 2, 1], [3, 1, 2]],3))
