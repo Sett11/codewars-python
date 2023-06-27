@@ -1,4 +1,16 @@
-def pig_latin(s):
-    return s if len(s)<4 else s[1:]+s[0]+'ay'
+def fish(s):
+    c,a,k=1,[],sorted([int(i) for i in s if i!='0'])
+    while len(k):
+        if(k[0])>c:
+            break
+        else:
+            a.append(k.pop(0))
+            if(sum(a)>=c*4):
+                a=[sum(a)-c*4]
+                c+=1
+    return c
 
-print(pig_latin('hello'))
+print(fish('111122223333'))
+print(fish('111111111111'))
+print(fish('111111111111111111112222222222'))
+print(fish('60543169766820089483229529002053110322110417102715497009489031821068945369562840890036432905791477592788516593197896469318281143833613267794388682674816466636629855812189905115734521807299381776696749941'))
