@@ -1,43 +1,23 @@
-def pawn_move_tracker(l):
-    a=[["a8","b8","c8","d8","e8","f8","g8","h8"],["a7","b7","c7","d7","e7","f7","g7","h7"],["a6","b6","c6","d6","e6","f6","g6","h6"],["a5","b5","c5","d5","e5","f5","g5","h5"],["a4","b4","c4","d4","e4","f4","g4","h4"],["a3","b3","c3","d3","e3","f3","g3","h3"],["a2","b2","c2","d2","e2","f2","g2","h2"],["a1","b1","c1","d1","e1","f1","g1","h1"]]
-    b=[[".",".",".",".",".",".",".","."],["p","p","p","p","p","p","p","p"],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".","."],["P","P","P","P","P","P","P","P"],[".",".",".",".",".",".",".","."]]
-    q=[]
-    for i,x in enumerate(l):
-        for j,h in enumerate(a):
-            for k,n in enumerate(h):
-                if x[-2:]==n:
-                    q.append([i,x,j,k])
-    for i in q:
-        if i[0]%2==0:
-            if len(i[1])==2:
-                t=[v[1] for v in [[b[i[2]+1][i[3]],[i[2]+1,i[3]]],[b[i[2]+2][i[3]],[i[2]+2,i[3]]]] if v[0]=='P']
-                if not len(t) or b[i[2]][i[3]]!='.':
-                    return f'{i[1]} is invalid'
-                t=t[0]
-                b[t[0]][t[1]]='.'
-                b[i[2]][i[3]]='P'
-            else:
-                y=[v[1] for v in [[b[i[2]+1][i[3]-1],[i[2]+1,i[3]-1]],[b[i[2]+1][i[3]+1],[i[2]+1,i[3]+1]]] if v[0]=='P']
-                if b[i[2]][i[3]]!='p' or not len(y):
-                    return f'{i[1]} is invalid'
-                y=y[0]
-                b[i[2]][i[3]]='P'
-                b[y[0]][y[1]]='.'
-        else:
-            if len(i[1])==2:
-                t=[v[1] for v in [[b[i[2]-1][i[3]],[i[2]-1,i[3]]],[b[i[2]-2][i[3]],[i[2]-2,i[3]]]] if v[0]=='p']
-                if not len(t) or b[i[2]][i[3]]!='.':
-                    return f'{i[1]} is invalid'
-                t=t[0]
-                b[t[0]][t[1]]='.'
-                b[i[2]][i[3]]='p'
-            else:
-                y=[v[1] for v in [[b[i[2]-1][i[3]-1],[i[2]-1,i[3]-1]],[b[i[2]-1][i[3]+1],[i[2]-1,i[3]+1]]] if v[0]=='p']
-                if b[i[2]][i[3]]!='P' or not len(y):
-                    return f'{i[1]} is invalid'
-                y=y[0]
-                b[i[2]][i[3]]='p'
-                b[y[0]][y[1]]='.'
-    return b
+import math
+def f(x):
+    if x<2:
+        return False
+    if x==2:
+        return True
+    for i in range(2,int(math.sqrt(x))+1):
+        if not x%i:
+            return False
+    return True
 
-print(pawn_move_tracker(["d4", "a5", "d5", "f6", "dxe7", "f4"]))
+def circular_prime(n):
+    if not f(n):
+        return False
+    i,s=0,str(n)
+    while i<len(s)-1:
+        s=s[1:]+s[:1]
+        i+=1
+        if not f(int(s)):
+            return False
+    return True
+
+print(circular_prime(9377))
