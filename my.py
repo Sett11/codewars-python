@@ -1,23 +1,11 @@
-import math
-def f(x):
-    if x<2:
-        return False
-    if x==2:
-        return True
-    for i in range(2,int(math.sqrt(x))+1):
-        if not x%i:
-            return False
-    return True
+def calc_fuel(n):
+    n*=11
+    o={"lava": 800, "blaze rod": 120, "coal": 80, "wood": 15, "stick": 1}
+    r={"lava": 0, "blaze rod": 0, "coal": 0, "wood": 0, "stick": 0}
+    for i in o:
+        while n>=o[i]:
+            r[i]+=1
+            n-=o[i]
+    return r
 
-def circular_prime(n):
-    if not f(n):
-        return False
-    i,s=0,str(n)
-    while i<len(s)-1:
-        s=s[1:]+s[:1]
-        i+=1
-        if not f(int(s)):
-            return False
-    return True
-
-print(circular_prime(9377))
+print(calc_fuel(37))
