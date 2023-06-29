@@ -1,8 +1,4 @@
-import sys
-sys.set_int_max_str_digits(100000)
-def get_last_digit(n):
-    a,b,c=0,1,0
-    while n>0:
-        n-=1;c=b;b+=a;a=c
-    a=str(a)
-    return int(a[-1:])
+def last_fib_digit(n,q=5**0.5):
+    return round(((1+q)/2)**(n%60)/q)%10
+
+print(last_fib_digit(302))
