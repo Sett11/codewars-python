@@ -1,48 +1,70 @@
-def has_exit(m):
-    if(''.join(m).count('k')!=1):
-        raise()
-    if len(m)==1:
+def path_finder(m):
+    l=[list(i) for i in m.split('\n')]
+    s,e=set(),len(l)-1
+    if not e:
         return True
-    n,i=max([len(i) for i in m]),0
-    while i<len(m):
-        while len(m[i])<n:
-            m[i]+=' '
-        i+=1
-    a,n,c=[i for i in [[[j,i] for i,k in enumerate(h) if k==' '] for j,h in enumerate(m)] if len(i)],[i[0] for i in [[[j,i] for i,k in enumerate(h) if k=='k'] for j,h in enumerate(m)] if len(i)],[]
-    [c.extend(i) for i in a]
-    x=[i for i in c if i[1]==len(m[0])-1 or i[1]==0 or i[0]==0 or i[0]==len(m)-1]
-    if not len(x):
-        return False
-    i,t=0,[]
-    while i<len(n):
-        k=n[i]
-        t=[i for i in c if i[0]==k[0]-1 and i[1]==k[1] or i[0]==k[0] and i[1]==k[1]-1 or i[0]==k[0]+1 and i[1]==k[1] or i[0]==k[0] and i[1]==k[1]+1]
-        if len([i for i in t if i in x]):
-            return True
-        if not len(t) and i==len(n)-1:
-            break
-        c=[i for i in c if i not in t]
-        n=[i for i in n if i!=k]
-        n+=t
-        i=0
-    return len([i for i in n if i in x])>0
+    s.add(','.join([str(i) for i in [0,0]]))
+    while len(s):
+        p=[int(i) for i in s.pop().split(',')]
+        x,y=p[0],p[1]
+        l[x][y]='&'
+        t=[i for i in [[x+1,y],[x-1,y],[x,y+1],[x,y-1]] if i[0]>-1 and i[1]>-1 and i[0]<=e and i[1]<=e]
+        for i in t:
+            if i[0]==e and i[1]==e:
+                return True
+            v=l[i[0]][i[1]]
+            if v!='&' and v!='W':
+                s.add(','.join([str(j) for j in i]))
+    return False
 
-print(has_exit([
-    "########",
-    "# # ####",
-    "# #k#   ",
-    "# # # ##",
-    "# # # ##",
-    "#      #",
-    "########"]))
-print(has_exit(['#   # #  #',
-                '# #    # #',
-                '##  # ## #',
-                ' # #     #',
-                '# #  ### #',
-                ' ### k## #',
-                '##   #   #',
-                ' ### ##  #',
-                '   # # # #',
-                '   ###   #'
-                ]))
+print(path_finder("\n".join([
+          ".W...",
+          ".W...",
+          ".W.W.",
+          "...W.",
+          "...W."])))
+print(path_finder("""......W....W..WWW.W...W.WW.WW..WW..W..WW....W
+...W......WWW..W...W....W....W......W........
+......W...............WW.....WW...W.W...W....
+..W......W..W..WWW..W....W.W..W........W..W..
+W.W.W....W............WW.....W.....W......W..
+WW..W.WW...W..W....W...W.......W..W..........
+....W.W..W..W................W..............W
+....W....W....W.......W..........W..WW.....W.
+......W..W....W.WW...WW.......WW....W..W..W..
+...W............W..W...W....W.W......W.W....W
+W.WW.....W...WWWW.....WWW...W.....W..........
+.W.WW..W..W..........WWW........W.........W..
+W.W.W....WW......WWWW...W..W......W..W..WW.W.
+............WW.W.W.W.....W.W...W....W....W...
+.WW...W.....W..............W.W....WW.W.......
+WWW....W...W.W...W.......WW....W....W...WW...
+.W...W.WW.W.W...WW..W..W..WW.................
+W...W......WW........W...W....W..............
+.WW.WW.........W......W.W...W........W..WW.W.
+...WW.W.W........W........W.WWW...W.W.W.W..W.
+..W..WW......W.......WW...W...WWWW..W.......W
+.WWW..W..W......W.W..WW.WW.WW........W.......
+..W.WW.WWW..W.WW.W...W.WW....W...............
+......W......W.......WW.............W......W.
+WWW...W.............W.......W.W....W.....WWW.
+.WW...WWW..............WW....W.W....W..W...W.
+WWW..W.W.........................W..W.......W
+.W.WWWW...W.......W...W.W.W.W.........W.W.W..
+.W.....WW..WWWW..W..WW...W........WWWW.WW.W..
+.....WW......W....W.....WW....W.....W.......W
+.W.W....W...WW..W.....WW.............WWW.....
+...WW..W.W.W.WW......W.......W....WWW..WW.W.W
+..........W....W........W.W....WWW.W...W.W.W.
+W.....W.WW...W...W.WWW...WWWWW...WW.W.W..WW..
+..WWW..W...WW.......WW..W....W.W...W.........
+WW.W.W...W...W.W.W..WW..W...........W.W.W....
+.W....WW.W.....W.W.WW.WW.....WWW..W........W.
+........W..W...W..W........WWW..W.W....W.W.W.
+.WWWW...WW....W..W.W.........WWW.......W.....
+.........W..W..W...W......W....W..WWW.W......
+W...W....W............W.....W..W...W..WW....W
+WW.W....W.WW...........W......W..W....WW.W.W.
+......W.W.W..W.W.W.WW........WW..........W...
+W....W..W..WWW...W.W..W.....W....W.W.....W.W.
+WWW.............W...W.W....W......W.........."""))
