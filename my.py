@@ -1,70 +1,60 @@
-def path_finder(m):
-    l=[list(i) for i in m.split('\n')]
-    s,e=set(),len(l)-1
-    if not e:
-        return True
-    s.add(','.join([str(i) for i in [0,0]]))
-    while len(s):
-        p=[int(i) for i in s.pop().split(',')]
-        x,y=p[0],p[1]
-        l[x][y]='&'
-        t=[i for i in [[x+1,y],[x-1,y],[x,y+1],[x,y-1]] if i[0]>-1 and i[1]>-1 and i[0]<=e and i[1]<=e]
-        for i in t:
-            if i[0]==e and i[1]==e:
-                return True
-            v=l[i[0]][i[1]]
-            if v!='&' and v!='W':
-                s.add(','.join([str(j) for j in i]))
-    return False
+from typing import List,Tuple
 
-print(path_finder("\n".join([
-          ".W...",
-          ".W...",
-          ".W.W.",
-          "...W.",
-          "...W."])))
-print(path_finder("""......W....W..WWW.W...W.WW.WW..WW..W..WW....W
-...W......WWW..W...W....W....W......W........
-......W...............WW.....WW...W.W...W....
-..W......W..W..WWW..W....W.W..W........W..W..
-W.W.W....W............WW.....W.....W......W..
-WW..W.WW...W..W....W...W.......W..W..........
-....W.W..W..W................W..............W
-....W....W....W.......W..........W..WW.....W.
-......W..W....W.WW...WW.......WW....W..W..W..
-...W............W..W...W....W.W......W.W....W
-W.WW.....W...WWWW.....WWW...W.....W..........
-.W.WW..W..W..........WWW........W.........W..
-W.W.W....WW......WWWW...W..W......W..W..WW.W.
-............WW.W.W.W.....W.W...W....W....W...
-.WW...W.....W..............W.W....WW.W.......
-WWW....W...W.W...W.......WW....W....W...WW...
-.W...W.WW.W.W...WW..W..W..WW.................
-W...W......WW........W...W....W..............
-.WW.WW.........W......W.W...W........W..WW.W.
-...WW.W.W........W........W.WWW...W.W.W.W..W.
-..W..WW......W.......WW...W...WWWW..W.......W
-.WWW..W..W......W.W..WW.WW.WW........W.......
-..W.WW.WWW..W.WW.W...W.WW....W...............
-......W......W.......WW.............W......W.
-WWW...W.............W.......W.W....W.....WWW.
-.WW...WWW..............WW....W.W....W..W...W.
-WWW..W.W.........................W..W.......W
-.W.WWWW...W.......W...W.W.W.W.........W.W.W..
-.W.....WW..WWWW..W..WW...W........WWWW.WW.W..
-.....WW......W....W.....WW....W.....W.......W
-.W.W....W...WW..W.....WW.............WWW.....
-...WW..W.W.W.WW......W.......W....WWW..WW.W.W
-..........W....W........W.W....WWW.W...W.W.W.
-W.....W.WW...W...W.WWW...WWWWW...WW.W.W..WW..
-..WWW..W...WW.......WW..W....W.W...W.........
-WW.W.W...W...W.W.W..WW..W...........W.W.W....
-.W....WW.W.....W.W.WW.WW.....WWW..W........W.
-........W..W...W..W........WWW..W.W....W.W.W.
-.WWWW...WW....W..W.W.........WWW.......W.....
-.........W..W..W...W......W....W..WWW.W......
-W...W....W............W.....W..W...W..WW....W
-WW.W....W.WW...........W......W..W....WW.W.W.
-......W.W.W..W.W.W.WW........WW..........W...
-W....W..W..WWW...W.W..W.....W....W.W.....W.W.
-WWW.............W...W.W....W......W.........."""))
+def locate_entrance(o:List[str])->Tuple[int,int]:
+    o=[i.rstrip() for i in o]
+    if '.' in o[0]:
+        return (o[0].index('.'),0)
+    if '.' in o[-1]:
+        return (o[-1].index('.'), len(o)-1)
+    for j,i in enumerate(o):
+        if i[0]=='.':
+            return (0,j)
+        if i[len(i)-1]=='.':
+            return (len(i)-1,j)
+    i=0
+    while i<len(o):
+        j=0
+        while j<len(o[i]):
+            if o[i][j]=='.':
+                if o[i][j-1]=='#' and o[i][j+1]=='#':
+                    if j>len(o[i-1])-1 or j>len(o[i+1])-1:
+                        return (j,i)
+                    if j<len(o[i+1])-1 and o[i+1][j]==' ' or j<len(o[i-1])-1 and o[i-1][j]==' ':
+                        return (j,i)
+                if o[i][j-1]==' ' or j==len(o[i])-1:
+                    return (j,i)
+            j+=1
+        i+=1
+
+print(locate_entrance(['####',
+                       '#..###',
+                       '#....#',
+                       '#....#',
+                       '######.#....##',
+                       '#............#',
+                       '##########...#',
+                       '#...#',
+                       '#...#',
+                       '#...#',
+                       '#...#',
+                       '#...#',
+                       '#...#',
+                       '#...#',
+                       '#####']))
+print(locate_entrance([' #####',
+                       ' #...#',
+                       ' ....#',
+                       ' #...#',
+                       '##...#',
+                       '#....#',
+                       '######']))
+print(locate_entrance(['##############  ',
+                       '#............#  ',
+                       '#............###',
+                       '###.#####......#',
+                       '        #......#',
+                       '        ##.....#',
+                       '         #.....#',
+                       '         #.....#',
+                       '         #.....#',
+                       '         #######']))
