@@ -1,5 +1,5 @@
 def f(s):
-    return [ord(i)-64 for i in list(s)]
+    return [ord(i)-64 if i.isupper() else (ord(i)-96)/2 for i in list(s)]
 
 def battle(x,y):
     a,b=sum(f(x)),sum(f(y))
