@@ -1,4 +1,4 @@
-def quotable(n,q):
-    return f'{n} said: "{q}"'
+def greet_jedi(a,l):
+    return f'Greetings, master {(l[0].upper()+l[1:3]+a[0].upper()+a[1])}'
 
-print(quotable('Grae', 'Practice makes perfect'))
+print(greet_jedi('Beyonce','Knowles'))
