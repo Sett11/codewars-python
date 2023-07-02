@@ -1,10 +1,4 @@
-def f(s):
-    return [ord(i)-64 if i.isupper() else (ord(i)-96)/2 for i in list(s)]
+def capitalize_word(s):
+    return s[0].upper()+s[1:]
 
-def battle(x,y):
-    a,b=sum(f(x)),sum(f(y))
-    if(a==b):
-        return 'Tie!'
-    return x if a>b else y
-
-print(battle("ONE","TWO"))
+print(capitalize_word('upper'))
