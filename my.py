@@ -1,8 +1,4 @@
-def format_money(n):
-    n=str(float(n))
-    if len(n[n.index('.')+1:])<2:
-        n+='0'
-    return '$'+n
+def whoseMove(l,w):
+    return l if w else [i for i in ['black','white'] if i!=l][0]
 
-print(format_money(198))
-print(format_money(3))
+print(whoseMove('black',False))
