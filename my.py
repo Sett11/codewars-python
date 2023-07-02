@@ -1,4 +1,4 @@
-def greet_jedi(a,l):
-    return f'Greetings, master {(l[0].upper()+l[1:3]+a[0].upper()+a[1])}'
+def area_code(s):
+    return s[s.index('(')+1:s.index(')')]
 
-print(greet_jedi('Beyonce','Knowles'))
+print(area_code("The supplier's phone number is (555) 867-5309"))
