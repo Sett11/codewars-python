@@ -1,4 +1,5 @@
-def area_code(s):
-    return s[s.index('(')+1:s.index(')')]
+def well(x):
+    i=[i for i in [0 if x.count('good')<=2 and 'good' in x else '&',1 if x.count('good')>1 else '&', 2 if x.count('good')==0 else '&']if i!='&']
+    return ['Publish!','I smell a series!','Fail!'][i[0]]
 
-print(area_code("The supplier's phone number is (555) 867-5309"))
+print(well(['good', 'bad', 'bad', 'bad', 'bad', 'good', 'bad', 'bad', 'good']))
