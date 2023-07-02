@@ -1,4 +1,16 @@
-def whoseMove(l,w):
-    return l if w else [i for i in ['black','white'] if i!=l][0]
+def fillable(s,m,n):
+    try:
+        return s[m]>=n
+    except:
+        return False
 
-print(whoseMove('black',False))
+print(fillable({
+            'football': 4,
+            'boardgame': 10,
+            'leggos': 1,
+            'doll': 5 },'football',3))
+print(fillable({
+            'football': 4,
+            'boardgame': 10,
+            'leggos': 1,
+            'doll': 5 },'leggos',2))
