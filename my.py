@@ -1,4 +1,5 @@
-def merge_arrays(f,s):
-    return sorted(set(f+s))
+def difference_in_ages(a):
+    b,c=min(a),max(a)
+    return (b,c,c-b)
 
-print(merge_arrays([1, 3, 5],[2, 4, 6])) 
+print(difference_in_ages([16, 22, 31, 44, 3, 38, 27, 41, 88]))
