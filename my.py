@@ -1,4 +1,11 @@
-def array_madness(a,b):
-    return sum([i**2 for i in a])>sum([i**3 for i in b])
+def bubblesort_once(l):
+    l=l.copy()
+    for i in range(len(l)-1):
+        if l[i]>l[i+1]:
+            t=l[i]
+            l[i]=l[i+1]
+            l[i+1]=t
+        i+=1
+    return l
 
-print(array_madness([4, 5, 6], [1, 2, 3]))
+print(bubblesort_once([9, 7, 5, 3, 1, 2, 4, 6, 8]))
