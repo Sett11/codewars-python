@@ -1,5 +1,5 @@
 import re
-def debug(s):
-    return re.sub(r'bugs|bug',lambda e:e[0] if e[0]=='bugs' else '',s)
+def we_rate_dogs(s,r):
+    return re.sub(r'\d+\/',str(r)+'/',s)
 
-print(debug('obugobugobuoobugsoo'))
+print(we_rate_dogs('This is Tucker. He would like a hug. 3/10 someone hug him',11))
