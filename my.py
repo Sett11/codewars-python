@@ -1,18 +1,12 @@
-def err_bob(s):
-    s=s.split(' ')
-    for i in range(len(s)):
-        if not s[i]:
-            continue
-        j=len(s[i])-1
-        while not s[i][j].isalpha():
-            j-=1
-        t=s[i][j]
-        if t not in 'AIOUEaioue':
-            if t.isupper():
-                s[i]=s[i][:j+1]+'ERR'+s[i][j+1:]
-            else:
-                s[i]=s[i][:j+1]+'err'+s[i][j+1:]
-    return ' '.join(s)
+def reduce_fraction(f):
+    i,n=f[0]==max(f),600
+    while n:
+        t,m=max(f)/n,min(f)/n
+        if t==int(t) and m==int(m):
+            t,m=int(t),int(m)
+            return (t if i else m,m if i else t)
+        n-=1
 
-print(err_bob('THIS, is crazy!'))
-print(err_bob("Punctuation? is, important!  double space also"))
+print(reduce_fraction((60,20)))
+print(reduce_fraction((80,120)))
+print(reduce_fraction((10956590, 13611876)))
