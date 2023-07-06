@@ -1,6 +1,9 @@
-def swap_head_tail(a):
-    o=a[len(a)//2+(0 if not len(a)&1 else 1):]
-    return o+a[len(o):len(o)+(0 if not len(a)&1 else 1)]+a[:len(o)]
+def beasts(h,t):
+    if h/2==t:
+        return [h//2,0]
+    for i in range(1,t+1):
+        if i*5+((t-i)*2)==h:
+            return [t-i,i]
+    return 'No solutions'
 
-print(swap_head_tail([ 1, 2, -3, 4, 5, 6, -7, 8 ]))
-print(swap_head_tail([1,2,3,4,5]))
+print(beasts(24,12))
