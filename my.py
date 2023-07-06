@@ -1,12 +1,5 @@
-def reduce_fraction(f):
-    i,n=f[0]==max(f),600
-    while n:
-        t,m=max(f)/n,min(f)/n
-        if t==int(t) and m==int(m):
-            t,m=int(t),int(m)
-            return (t if i else m,m if i else t)
-        n-=1
+def how_many_dalmatians(n):
+  d=["Hardly any", "More than a handful!", "Woah that's a lot of dogs!", "101 DALMATIONS!!!"]
+  return d[0] if n <= 10 else d[1] if n <= 50 else d[3] if n==101 else d[2]
 
-print(reduce_fraction((60,20)))
-print(reduce_fraction((80,120)))
-print(reduce_fraction((10956590, 13611876)))
+print(how_many_dalmatians(26))
