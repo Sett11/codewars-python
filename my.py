@@ -1,16 +1,4 @@
-class ReNameAbleClass(object):
-    @classmethod
-    def change_class_name(c,s):
-        assert s.isalnum() and s[0].isupper()
-        c.__name__=s
-        
-    @classmethod
-    def __str__(c):
-        return f'Class name is: {c.__name__}'
+def match(c,j):
+    return c['min_salary']/100*90<=j['max_salary']
 
-class MyClass(ReNameAbleClass):
-    pass
-
-myObject=MyClass()
-
-print(MyClass.__str__())
+print(match({ 'min_salary': 120000 },{ 'max_salary': 130000 }))
