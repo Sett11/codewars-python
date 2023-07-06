@@ -1,5 +1,6 @@
-def how_many_dalmatians(n):
-  d=["Hardly any", "More than a handful!", "Woah that's a lot of dogs!", "101 DALMATIONS!!!"]
-  return d[0] if n <= 10 else d[1] if n <= 50 else d[3] if n==101 else d[2]
-
-print(how_many_dalmatians(26))
+def main():
+    a=[roll_dice,move,combat,get_coins,buy_health,print_status]
+    i=0
+    while i<len(a):
+        a[i%len(a)]()
+        i+=1
