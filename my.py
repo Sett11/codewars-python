@@ -1,14 +1,16 @@
-import re
-def class_name_changer(c,s):
-    if not s or len(re.sub(r'[\dA-z]','',s)) or s[0].islower() or not s[0].isalpha():
-        raise()
-    c.__name__=s
+class ReNameAbleClass(object):
+    @classmethod
+    def change_class_name(c,s):
+        assert s.isalnum() and s[0].isupper()
+        c.__name__=s
+        
+    @classmethod
+    def __str__(c):
+        return f'Class name is: {c.__name__}'
 
-class my_class:
+class MyClass(ReNameAbleClass):
     pass
 
-r=my_class()
-print(my_class.__name__)
+myObject=MyClass()
 
-print(class_name_changer(my_class,'UsefulClass'))
-print(my_class.__name__)
+print(MyClass.__str__())
