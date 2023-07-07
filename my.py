@@ -1,5 +1,4 @@
-import re
-def filter_numbers(s):
-    return re.sub(r'\d+','',s)
+def kata_13_december(l): 
+    return [i for i in l if i&1]
 
-print(filter_numbers("aa1 bb2cc3dd"))
+print(kata_13_december([1, 2, 2, 2, 4, 3, 4, 5, 6, 7]))
