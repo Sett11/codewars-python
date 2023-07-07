@@ -1,8 +1,7 @@
-def knight_vs_king(n,k):
-    a,n,k='ABCDEFGH',list(n),list(k)
-    n[1],k[1]=a.index(n[1]),a.index(k[1])
-    return 'Knight' if (abs(n[0]-k[0])==2 and abs(n[1]-k[1])==1) or (abs(n[0]-k[0])==1 and abs(n[1]-k[1])==2) else 'King' if abs(n[0]-k[0])<2 and abs(n[1]-k[1])<2 else 'None'
+def possible_positions(p):
+    a,b='0abcdefgh',list(p)
+    b[0],b[1]=a.index(b[0]),int(b[1])
+    return [''.join([a[j[0]],str(j[1])]) for j in sorted([i for i in [[b[0]+2,b[1]+1],[b[0]+1,b[1]+2],[b[0]-2,b[1]-1],[b[0]-1,b[1]-2],[b[0]+1,b[1]-2],[b[0]-2,b[1]+1],[b[0]-1,b[1]+2],[b[0]+2,b[1]-1]] if i[0]>0 and i[1]>0 and i[0]<9 and i[1]<9])]
 
-print(knight_vs_king((4, "C"),(6, "D")))
-print(knight_vs_king((7, "B"), (6, "C")))
-print(knight_vs_king((1, "F"), (2, "F")))
+print(possible_positions('f7'))
+print(possible_positions('c3'))
