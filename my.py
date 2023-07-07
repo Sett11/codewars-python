@@ -1,4 +1,5 @@
-def sort_array(s):
-    return ''.join(sorted(s))
+import re
+def filter_numbers(s):
+    return re.sub(r'\d+','',s)
 
-print(sort_array('54321'))
+print(filter_numbers("aa1 bb2cc3dd"))
