@@ -1,11 +1,4 @@
-greek_alphabet = (
-    'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 
-    'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 
-    'nu', 'xi', 'omicron', 'pi', 'rho', 'sigma',
-    'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega')
-
-def greek_comparator(a,b):
-    a,b=greek_alphabet.index(a),greek_alphabet.index(b)
-    return -1 if a<b else 0 if a==b else 1
-
-print(greek_comparator('alpha','beta'))
+def my_first_kata(a,b):
+  return False if type(a)!=int and type(a)!=float or type(b)!=int and type(b)!=float else a%b+b%a
+    
+print(my_first_kata(20,2))
