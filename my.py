@@ -1,7 +1,7 @@
-def adjust(b,n):
-    c=min(b,n)
-    while not (n<=c and c%b==0):
-        c+=1
-    return c
+from decimal import Decimal,ROUND_HALF_UP
 
-print(adjust(3,7))
+def round_by_2_decimal_places(n):
+    return Decimal(n).quantize(Decimal('1.00'),ROUND_HALF_UP)
+
+print(round_by_2_decimal_places(Decimal('2')))
+print(round_by_2_decimal_places(Decimal('64.005')))
