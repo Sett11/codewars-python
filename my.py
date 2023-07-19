@@ -1,7 +1,2 @@
-def what_is(x):
-    if x == 42:
-        return 'everything'
-    elif x == 42 * 42:
-        return 'everything squared'
-    else:
-        return 'nothing'
+def greet(n):
+    return f"Hello, {n}!" if n!="Johnny" else "Hello, my love!"
