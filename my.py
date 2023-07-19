@@ -1,7 +1,4 @@
-from decimal import Decimal,ROUND_HALF_UP
+def divide_numbers(x,y):
+    return x/y
 
-def round_by_2_decimal_places(n):
-    return Decimal(n).quantize(Decimal('1.00'),ROUND_HALF_UP)
-
-print(round_by_2_decimal_places(Decimal('2')))
-print(round_by_2_decimal_places(Decimal('64.005')))
+print(divide_numbers(9,4))
