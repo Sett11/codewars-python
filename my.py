@@ -1,14 +1,31 @@
-def format_playlist(s):
-    a,m1,m2=sorted(s,key=lambda e:(e[2],e[0])),max([len(i[0]) for i in s],default=4),max([len(i[2]) for i in s],default=6)
-    e,e2='+'+'-'*(m1+2)+'+'+'-'*6+'+'+'-'*(m2+2)+'+','| '+'Name'+' '*(m1-4)+' |'+' Time | '+'Artist'+' '*(m2-6)+' |'
-    r=[e,e2,e]
-    for i in a:
-        r.append('| '+i[0]+' '*(m1-len(i[0]))+' | '+i[1]+' | '+i[2]+' '*(m2-len(i[2]))+' |')
-    return '\n'.join(r)+(('\n'+e) if len(s) else '')
+ROCKS={'Clay': (1, 5), 'Copper': (1, 17.5), 'Tin': (1, 17.5), 'Iron': (15, 35), 'Silver': (20, 40), 'Coal': (30, 50), 'Gold': (40, 65)}
+EXPERIENCE={1: 0, 2: 83, 3: 174, 4: 276, 5: 388, 6: 512, 7: 650, 8: 801, 9: 969, 10: 1154, 11: 1358, 12: 1584, 13: 1833, 14: 2107, 15: 2411, 16: 2746, 17: 3115, 18: 3523, 19: 3973, 20: 4470, 21: 5018, 22: 5624, 23: 6291, 24: 7028, 25: 7842, 26: 8740, 27: 9730, 28: 10824, 29: 12031, 30: 13363, 31: 14833, 32: 16456, 33: 18247, 34: 20224, 35: 22406, 36: 24815, 37: 27473, 38: 30408, 39: 33648, 40: 37224}
+class Miner:
+    def __init__(self,x=0):
+        self.x=x
+        self.l=0
+        for i in EXPERIENCE:
+            if self.x>=EXPERIENCE[i] and i>self.l:
+                self.l=i
+    def mine(self,r):
+        a=ROCKS[r]
+        if a[0]>self.l:
+            return f'You need a mining level of {a[0]} to mine {r}.'
+        self.x+=a[1]
+        for i in EXPERIENCE:
+            if self.x>=EXPERIENCE[i] and i>self.l:
+                self.l=i
+                return f'Congratulations, you just advanced a Mining level! Your mining level is now {i}.'
+        return 'You swing your pick at the rock.'
 
-print(format_playlist([
-                    ('Stoned Again', '3:25', 'King Krule'),
-                    ('Serenade', '3:00', 'Travis Scott'),
-                    ('I Always Wanna Die (Sometimes)', '5:15', 'The 1975'),
-                    ('Stick Talk', '2:54', 'Future'),
-                    ('Nightcrawler', '5:22', 'Travis Scott')]))
+r=Miner()
+
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Tin'))
+print(r.mine('Iron'))
