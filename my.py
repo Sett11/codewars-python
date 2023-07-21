@@ -1,9 +1,17 @@
-def draw(d):
-    a=[]
-    while len(d):
-        a.append(d.pop(0))
-        if len(d):
-            d.append(d.pop(0))
-    return a
+def ball_test(s,r):
+    c,i,x=0,0,0
+    while i<len(r):
+        if r[i]=='x':
+            c+=1
+        if x==s:
+            s-=c+1
+            x=-1
+            c=0
+        if s<1:
+            return False
+        if i==len(r)-1:
+            return True
+        i+=1
+        x+=1
 
-print(draw(['AH','2H','3H','4H']))
+print(ball_test(5,'x___x__x'))
