@@ -1,17 +1,10 @@
-def ball_test(s,r):
-    c,i,x=0,0,0
-    while i<len(r):
-        if r[i]=='x':
-            c+=1
-        if x==s:
-            s-=c+1
-            x=-1
-            c=0
-        if s<1:
-            return False
-        if i==len(r)-1:
-            return True
-        i+=1
-        x+=1
+def triple_crown(a):
+    r=[]
+    [r.append([a[i]['Receiving yards'],a[i]['Receiving touchdowns'],a[i]['Receptions']]) for i in a]
+    k=list(zip(*r))
+    f=[i for i in a if a[i]['Receiving yards']==max(k[0]) or a[i]['Receiving touchdowns']==max(k[1]) or a[i]['Receptions']==max(k[2])]
+    return f[0] if len(f)==1 else 'None of them'
 
-print(ball_test(5,'x___x__x'))
+print(triple_crown({'Cooper Kupp': {'Receiving yards': 1700, 'Receiving touchdowns': 18, 'Receptions': 117},
+                                         'Justin Jefferson': {'Receiving yards':1650, 'Receiving touchdowns': 17, 'Receptions': 115},
+                                        'Davante Adams':{'Receiving yards': 1750, 'Receiving touchdowns': 16, 'Receptions': 113}}))
