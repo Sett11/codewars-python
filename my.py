@@ -1,6 +1,13 @@
-import re
-def tacofy(w):
-    a={'t':'tomato','l':'lettuce','c':'cheese','g':'guacamole','s':'salsa'}
-    return ['shell']+[j for j in ['beef' if i in 'aioue' else a.get(i) for i in re.sub(r'.',lambda e:e.group().lower()+' ',w).split(' ') if i] if j]+['shell']
+def mountains_of_hoiyama(n):
+    i,a,k,c=n,[],1,0
+    while i>0:
+        t,j=[],k
+        while len(t)<=i//2:
+            t.append(j)
+            j+=1
+        i-=2
+        k+=2
+        c+=sum(t+t[::-1][1:])
+    return c
 
-print(tacofy('ogl'))
+print(mountains_of_hoiyama(7))
