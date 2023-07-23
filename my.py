@@ -1,15 +1,7 @@
-def merge_strings(f,s):
-    if f==s:
-        return f
-    i,a=1,[]
-    while i<=len(s):
-        a.append(s[:i])
-        i+=1
-    a=sorted([i for i in a if f.endswith(i)],key=lambda e:len(e),reverse=True)
-    return f+s if not len(a) else f[:-len(a[0])]+s
+def direction(f,t):
+    a=['N','NE','E','SE','S','SW','W','NW']
+    n,c=t//45,a.index(f)
+    return a[(n+c)%len(a)]
 
-print(merge_strings("abcde","cdefgh"))
-print(merge_strings('abcde', 'efghi'))
-print(merge_strings('abcde', 'bcdefghi'))
-print(merge_strings('abaabaab', 'aabaabab'))
-print(merge_strings('tedd', 'edd'))
+print(direction('S',180))
+print(direction('SE',-45))
