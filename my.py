@@ -1,4 +1,3 @@
-def two_are_positive(a,b,c):
-    return len([i for i in [a,b,c] if i>0])==2
+always_odd=lambda n:[n-1,n][n&1]
 
-print(two_are_positive(2,4,-6))
+print(always_odd(3))
