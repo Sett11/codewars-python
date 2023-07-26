@@ -1,5 +1,6 @@
-def get_product_id(s): 
-    return s.split('-p-')[::-1][0].split('-')[0]
+def is_solved(b):
+    a=[]
+    [a.extend(i) for i in b]
+    return a==sorted(a)
 
-print(get_product_id('http://www.exampleshop.com/fancy-coffee-cup-p-90764-12052019.html'))
-print(get_product_id('http://www.exampleshop.com/c-3-p-0-p-654-11112011.html'))
+print(is_solved([[0,1],[2,3]]))
