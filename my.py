@@ -1,7 +1,8 @@
-import math
+def left(s,i=1):
+    return s[:s.index(i)] if type(i)==str else s[:i] if i>0 else s[:-abs(i)] if i else ''
 
-def is_in_middle(s):
-    return s[math.floor(len(s)/2)-1:math.ceil(len(s)/2)+1]=='abc' or s[math.floor(len(s)/2)-2:math.ceil(len(s)/2)+1]=='abc' or s[math.floor(len(s)/2)-1:math.ceil(len(s)/2)+2]=='abc'
+def right(s,i=1):
+    return s.split(i)[::-1][0] if type(i)==str else s[-i:] if i else ''
 
-print(is_in_middle('AabcBB'))
-print(is_in_middle('abcabcabc'))
+print(left('Hello (not so) cruel World!','o'))
+print(right("Don't Repeat Yourself","Repeat"))
