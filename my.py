@@ -1,8 +1,5 @@
-def left(s,i=1):
-    return s[:s.index(i)] if type(i)==str else s[:i] if i>0 else s[:-abs(i)] if i else ''
+def get_product_id(s): 
+    return s.split('-p-')[::-1][0].split('-')[0]
 
-def right(s,i=1):
-    return s.split(i)[::-1][0] if type(i)==str else s[-i:] if i else ''
-
-print(left('Hello (not so) cruel World!','o'))
-print(right("Don't Repeat Yourself","Repeat"))
+print(get_product_id('http://www.exampleshop.com/fancy-coffee-cup-p-90764-12052019.html'))
+print(get_product_id('http://www.exampleshop.com/c-3-p-0-p-654-11112011.html'))
