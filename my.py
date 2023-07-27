@@ -1,3 +1,6 @@
-lowest_temp=lambda t:None if not t else min([int(i) for i in t.split(' ')])
+def validate_ean(c):
+    s=sum([int(i)*3 if j&1 else int(i) for j,i in enumerate(c[:-1])])
+    return int(c[-1])==(0 if s%10==0 else 10-(s%10))
 
-print(lowest_temp('-1 50 -4 20 22 -7 0 10 -8'))
+print(validate_ean('4003301018398'))
+print(validate_ean('9783827317100'))
