@@ -1,21 +1,13 @@
-def moving_particles(a):
-    i,l,k=0,len(a),[i for i,j in enumerate(a) if j>0]
-    if (k and not [j for j in a[k[0]+1:] if j<0]) or not k:
-        return a
-    while i<l-1:
-        if a[i]>0 and a[i+1]<0:
-            b,c=abs(a[i]),abs(a[i+1])
-            t=b+c
-            t=t if b>=c else -t
-            a[i+1]=t
-            a=a[:i]+a[i+1:]
-            l-=1
-            i-=1
-        i+=1
-    return moving_particles(a)
+def team_dinner(a):
+    r=sum(a,[])
+    s=set(r)
+    w=sorted([[r.count(i),i] for i in s],key=lambda e:e[0],reverse=True)
+    q=[i[1] for i in w if i[0]==w[0][0]]
+    z=[[k[0],len(sum(k[1],[]))] for k in [j for j in [[i,[j for j in a if i in j]] for i in q] if len(j[1])>=len(a)/2]]
+    return None if not z else sorted(z,key=lambda e:(e[1],-e[0]),reverse=True)[0][0]
 
-print(moving_particles([-1, 3, -1, 2]))
-print(moving_particles([3,-1]))
-print(moving_particles([5, -1, -2, -9]))
-print(moving_particles([-2, 8, -10, 2, 4, 4, 4, -9]))
-print(moving_particles([9, 9, -9, -6, -4, -2, 8, 4, 9]))
+
+print(team_dinner([[0, 1, 2, 3], [2], [0, 2], [3, 4, 6], [1, 3, 6]]))
+print(team_dinner([[0, 1, 2], [1], [1, 2, 4], []]))
+print(team_dinner([[0, 1, 5], [2, 3], [4], [], [0, 1]]))
+print(team_dinner([[9, 4, 5], []]))
