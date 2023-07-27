@@ -1,10 +1,9 @@
-import re
+from datetime import datetime
 
-def to24hourtime(h,m,p):
-    s=('0' if h<10 and p!='pm' else '')+f'{h+(12 if p=="pm" and h<12 else 0)}{("0" if m<10 else "")+str(m)}'
-    return s if p=='pm' else re.sub(r'^12','00',s)
+def convert(t):
+    s=str(t).split(' ')[-1].split('.')
+    return s[0]+',000' if len(s)==1 else ','.join(s)[:-3]
 
-print(to24hourtime(1,0,'am'))
-print(to24hourtime(9,45,'pm'))
-print(to24hourtime(12,0,'am'))
-print(to24hourtime(12,0,'pm'))
+print(convert(datetime(2016, 2, 8, 16, 42, 59,399000)))
+print(convert(datetime(2016, 2, 8, 16, 42, 59,10)))
+print(convert(datetime(2016, 2, 8, 16, 42, 59)))
