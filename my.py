@@ -1,16 +1,7 @@
-objA = { 'a': 10, 'b': 20, 'c': 30 }
-objB = { 'a': 3, 'c': 6, 'd': 3 }
-objC = { 'a': 5, 'd': 11, 'e': 8 }
-objD = { 'c': 3 }
+from itertools import permutations
 
-def combine(*a):
-    r={}
-    for i in a:
-        for j in i:
-            if r.get(j,'&')=='&':
-                r[j]=i[j]
-            else:
-                r[j]+=i[j]
-    return r
+def permutation_average(n):
+    a=[int(''.join(list(i))) for i in permutations(str(n))]
+    return round(sum(a)/len(a))
 
-print(combine(objA, objB, objC))
+print(permutation_average(737))
