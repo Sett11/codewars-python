@@ -1,18 +1,4 @@
-import math
+def actually_really_good(f=' Nothing!',s="You know what's actually really good?"):
+    return s+f if not f else s+' '+f[0].capitalize()+' and more '+f[0].lower()+'.' if len(f)==1 else s+' '+f[0].capitalize()+' and '+f[1].lower()+'.'
 
-def all_squared_pairs(n):
-    a,c=[],math.ceil(math.sqrt(n))
-    for i in range(c):
-        nx=i**2
-        ny=n-nx
-        y=math.sqrt(ny)
-        if y>=i and y%1==0:
-            a.append([i,y])
-    if not n:
-        a.append([0,0])
-    return a
-
-
-
-print(all_squared_pairs(325))
-print(all_squared_pairs(1048039120))
+print(actually_really_good(['Peanut butter','beef']))
