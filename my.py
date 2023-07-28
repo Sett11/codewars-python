@@ -1,4 +1,16 @@
-def actually_really_good(f=' Nothing!',s="You know what's actually really good?"):
-    return s+f if not f else s+' '+f[0].capitalize()+' and more '+f[0].lower()+'.' if len(f)==1 else s+' '+f[0].capitalize()+' and '+f[1].lower()+'.'
+objA = { 'a': 10, 'b': 20, 'c': 30 }
+objB = { 'a': 3, 'c': 6, 'd': 3 }
+objC = { 'a': 5, 'd': 11, 'e': 8 }
+objD = { 'c': 3 }
 
-print(actually_really_good(['Peanut butter','beef']))
+def combine(*a):
+    r={}
+    for i in a:
+        for j in i:
+            if r.get(j,'&')=='&':
+                r[j]=i[j]
+            else:
+                r[j]+=i[j]
+    return r
+
+print(combine(objA, objB, objC))
