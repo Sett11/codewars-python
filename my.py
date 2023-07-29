@@ -1,29 +1,9 @@
-def ranking(a):
-    a,i,j=sorted(a,key=lambda e:(e['points'],-ord(e['name'][0].lower()),-ord(e['name'][1].lower()),-ord(e['name'][2].lower())),reverse=True),0,1
-    while i<len(a)-1:
-        a[i]['position']=j
-        if a[i]['points']!=a[i+1]['points']:
-            j=a.index(a[i+1])+1
-        i+=1
-    a[-1]['position']=j
-    return a
+from functools import reduce
+import sys
+sys.set_int_max_str_digits(10000000)
 
+def hyperfact(n):
+    return reduce(lambda a,c:a*c,[i**i for i in range(1,n+1)])%1000000007
+        
 
-print(ranking([
-      {
-        "name": "John",
-        "points": 100,
-      },
-      {
-        "name": "Bob",
-        "points": 130,
-      },
-      {
-        "name": "Mary",
-        "points": 120,
-      },
-      {
-        "name": "Kate",
-        "points": 120,
-      },
-]))
+print(hyperfact(300))
