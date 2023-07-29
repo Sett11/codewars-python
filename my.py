@@ -1,9 +1,7 @@
-from functools import reduce
-import sys
-sys.set_int_max_str_digits(10000000)
+import re
 
-def hyperfact(n):
-    return reduce(lambda a,c:a*c,[i**i for i in range(1,n+1)])%1000000007
-        
+def double_check(s):
+    return True if re.search(r'(.)(\1+)',s,flags=re.I) else False
 
-print(hyperfact(300))
+print(double_check('aabc'))
+print(double_check('abcd'))
