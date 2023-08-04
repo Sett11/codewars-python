@@ -1,18 +1,12 @@
-def f(i,a,s):
-    j=i
-    while j<len(a):
-        t=s[0]-a[j]
-        if not (t&1):
-            s.pop(0)
-            s=[a[j]]+s
-            s.append(t)
-            return f(j+1,a,s)
-        else:
-            j+=1
-    return s
+def is_onion_array(a):
+    j,k=0,len(a)-1
+    while j<round(len(a)/2):
+        if a[j]+a[k]>10 and j!=k:
+            return False
+        j+=1
+        k-=1
+    return True
 
-def peel_the_onion(s,d):
-    a,b=[i**d for i in range(1,s+1)][::-1],[s**d]
-    return a if len(a)==1 else a[::-1][-1:] if len(a)==2 else sorted(f(1,a,b),reverse=True)
-
-print(peel_the_onion(5,3))
+print(is_onion_array([-13, -37, -95, -53, -68, 65, 61, 89, 43, 5]))
+print(is_onion_array([58, 14, 6, 59, 3, 42, -8, -54, -7, -11, -55]))
+print(is_onion_array([59, 84, -6, 69, 12, -90, -56]))
