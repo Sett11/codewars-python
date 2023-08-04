@@ -1,8 +1,18 @@
-import math
+def f(i,a,s):
+    j=i
+    while j<len(a):
+        t=s[0]-a[j]
+        if not (t&1):
+            s.pop(0)
+            s=[a[j]]+s
+            s.append(t)
+            return f(j+1,a,s)
+        else:
+            j+=1
+    return s
 
-def solution(s,t):
-    return sum([s-3*i for i in range(math.ceil(t/2)) if s-3*i>0])+s*t
-    
+def peel_the_onion(s,d):
+    a,b=[i**d for i in range(1,s+1)][::-1],[s**d]
+    return a if len(a)==1 else a[::-1][-1:] if len(a)==2 else sorted(f(1,a,b),reverse=True)
 
-print(solution(565,735))
-print(solution(4,3))
+print(peel_the_onion(5,3))
