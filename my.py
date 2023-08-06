@@ -1,12 +1,10 @@
-from itertools import permutations as p
-from math import sqrt
-def next_perfectsq_perm(l,k): 
-    i=int(sqrt(l)+1)
-    while 1:
-        s=str(i**2)
-        t=[q for q in set([int(''.join(j)) for j in p(s) if '0' not in s]) if sqrt(q)==int(sqrt(q))]
-        if len(t)==k:
-            return max(t)
-        i+=1
+def make_2d_list(h,r,c):
+    a,r,i,n=[i for i in range(h,r*c+h)],[],0,c
+    while i<len(a):
+        r.append(a[i:c])
+        i+=n
+        c+=n
+    return r or [[]]
 
-print(next_perfectsq_perm(3550000,5))
+print(make_2d_list(2,3,4))
+print(make_2d_list(0,1,0))
