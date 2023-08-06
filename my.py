@@ -1,6 +1,8 @@
-from statistics import mean
-def distances_from_average(a):
-    s=mean(a)
-    return [round(s-i,2) for i in a]
+def ascii_encrypt(s):
+    return ''.join([chr(ord(i)+j) for j,i in enumerate(s)])
+    
+def ascii_decrypt(s):
+    return ''.join([chr(ord(i)-j) for j,i in enumerate(s)])
 
-print(distances_from_average([55, 95, 62, 36, 48]))
+print(ascii_encrypt('password'))
+print(ascii_decrypt('pbuv{txk'))
