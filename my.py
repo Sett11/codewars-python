@@ -1,10 +1,6 @@
-def make_2d_list(h,r,c):
-    a,r,i,n=[i for i in range(h,r*c+h)],[],0,c
-    while i<len(a):
-        r.append(a[i:c])
-        i+=n
-        c+=n
-    return r or [[]]
+def find_spaceship(s):
+    a=[e for e in [[[i,k] for k,h in enumerate(j) if h=='X'] for i,j in enumerate(s.split('\n')[::-1])] if e]
+    return "Spaceship lost forever." if not a else a[0][0][::-1]
 
-print(make_2d_list(2,3,4))
-print(make_2d_list(0,1,0))
+print(find_spaceship("..........\n..........\n.......X..\n..........\n.........."))
+print(find_spaceship(""))
