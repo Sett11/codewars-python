@@ -1,11 +1,6 @@
-def buy(x,a):        
-    i=0
-    while i<len(a):
-        t=x-a[i]
-        if t in a:
-            j=a.index(t)
-            if i!=j:
-                return sorted([i,j])
-        i+=1
+from statistics import mean
+def distances_from_average(a):
+    s=mean(a)
+    return [round(s-i,2) for i in a]
 
-print(buy(5,[5,2,3,4,5]))
+print(distances_from_average([55, 95, 62, 36, 48]))
