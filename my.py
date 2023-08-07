@@ -1,52 +1,43 @@
-def f(a):
-    i=0
+import re
+def alphabet_war(b):
+    a,i=list(b),0
+    a.append('0')
+    a.insert(0,'0')
     while i<len(a):
-        j=0
-        if a[i][0]=='_':
-           while j<len(a[i]):
-               if a[i][j].isalpha():
-                a[i][0]=a[i][j]
-                a[i][j]='_'
-                break
-               j+=1
+        j,t,q=i,'',''
+        if a[i]=='[' and i:
+            while j:
+                j-=1
+                if a[j]==']' or a[j]=='0':
+                    t=a[j:i]
+                    break
+            k=i
+            while k<len(a):
+                k+=1
+                if a[k]==']':
+                    break
+            j=k
+            while j<len(a):
+                j+=1
+                if a[j]=='[' or a[j]=='0':
+                    q=a[k+1:j]
+                    break
+            if (t+q).count('#')>=2:
+                a=[h for h in a[:i] if h!='#']+a[k+1:]
         i+=1
-    return a
+    i,f=0,False
+    while i<len(a) and '#' in b:
+        if a[i] in ['[',']']:
+            f=not f
+            i+=1
+        if not f and i<len(a):
+            a[i]='0'
+        i+=1
+    return re.sub(r'[0\[\]]','',''.join(a))
 
-def alphabet_war(r,a):
-    q,w,n=[],[[j if j.isalpha() else 'x' for j in list(i)] for i in zip(*r)],0
-    for i in a:
-        t=[]
-        for k,j in enumerate(i):
-            if j=='*':
-                t.append([k-1,k,k+1])
-        if t:
-            q.append(list(set([h for h in sum(t,[]) if h>=0 and h<len(r[0])])))
-    while n<len(q):
-        j=0
-        while j<len(q[n]):
-            w[q[n][j]][0]='_'
-            j+=1
-        w=f(w)
-        n+=1
-    return [''.join(i) for i in zip(*w)][0]
-
-print(alphabet_war(["abcdefg","hijklmn"],["   *   ", "*  *   "]))
-print(alphabet_war(["aaaaa","bbbbb", "ccccc", "ddddd"],  ["*", " *", "   "]))
-print(alphabet_war(["g964xxxxxxxx",
-            "myjinxin2015",
-            "steffenvogel",
-            "smile67xxxxx",
-            "giacomosorbi",
-            "freywarxxxxx",
-            "bkaesxxxxxxx",
-            "vadimbxxxxxx",
-            "zozofouchtra",
-            "colbydauphxx" ],["* *** ** ***",
-            " ** * * * **",
-            " * *** * ***",
-            " **  * * ** ",
-            "* ** *   ***",
-            "***   ",
-            "**",
-            "*",
-            "*" ]))
+print(alphabet_war('##abde[fgh]ijk[mn]op'))
+print(alphabet_war('#ab#de[fgh]ijk[mn]op'))
+print(alphabet_war('#abde[fgh]i#jk[mn]op'))
+print(alphabet_war('[a][b][c]'))
+print(alphabet_war('#l[j]#[m]pd#w'))
+print(alphabet_war('#m[knrz]#[qk]nd#p[i]l#w'))
