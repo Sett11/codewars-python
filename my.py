@@ -1,12 +1,13 @@
-def like_or_dislike(l):
-    a=[]
-    for i in l:
-        a.append(i)
-        if len(a)==2:
-            if a[0]==a[1]:
-                a=[]
-            else:
-                a=a[-1:]
-    return a[0] if a else 'Nothing'
+def show_me(s):
+    l,c=sorted(list(s.__dict__)),str(type(s)).split('.')[-1][:-2]
+    return f"Hi, I'm one of those {c}s! Have a look at my {l[0]}." if len(l)==1 else f"Hi, I'm one of those {c}s! Have a look at my "+', '.join(l[:-1])+' and '+l[-1]+'.'
 
-print(like_or_dislike(['Like', 'Like', 'Dislike', 'Like', 'Like', 'Like', 'Like', 'Dislike']))
+class Vehicle:
+    def __init__(self, seats, wheels, engine):
+        self.seats = seats
+        self.wheels = wheels
+        self.engine = engine
+
+porsche = Vehicle(2, 4, 'gas')
+
+print(show_me(porsche))
