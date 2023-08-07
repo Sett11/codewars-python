@@ -1,13 +1,15 @@
-def show_me(s):
-    l,c=sorted(list(s.__dict__)),str(type(s)).split('.')[-1][:-2]
-    return f"Hi, I'm one of those {c}s! Have a look at my {l[0]}." if len(l)==1 else f"Hi, I'm one of those {c}s! Have a look at my "+', '.join(l[:-1])+' and '+l[-1]+'.'
+import random as r
+def number_generator():
+     a=[]
+     while len(a)<6:
+         n=r.randrange(1,50)
+         if n not in a:
+             a.append(n)
+     return sorted(a)+[r.randrange(0,10)]
 
-class Vehicle:
-    def __init__(self, seats, wheels, engine):
-        self.seats = seats
-        self.wheels = wheels
-        self.engine = engine
+def check_for_winning_category(y,w):
+    a=[j for j in [y[i]==w[i] for i in range(6)] if j]
+    l,v=len(a),y[-1]==w[-1]
+    return 1 if l==6 and v else 2 if l==6 else 3 if l==5 and v else 4 if l==5 else 5 if l==4 and v else 6 if l==4 else 7 if l==3 and v else 8 if l==3 else 9 if l==2 else -1
 
-porsche = Vehicle(2, 4, 'gas')
-
-print(show_me(porsche))
+print(check_for_winning_category([4, 9, 16, 25, 32, 46, 5],[1, 2, 13, 16, 33, 46, 2]))
