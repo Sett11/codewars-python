@@ -1,11 +1,12 @@
-def SJF(a,b):
-    s,i=0,-1
-    while i!=b:
-        m=min(a)
-        n=a.index(m)
-        s+=m
-        a[n]=float('inf')
-        i=n
-    return s
+def round_robin(a,t,n):
+    i,s=0,0
+    while 1:
+        s+=t if t<=a[i] else a[i]
+        a[i]-=t if t<a[i] else a[i]
+        if a[i]==0 and i==n:
+            return s
+        i+=1
+        if i>=len(a):
+            i=0
 
-print(SJF([3, 10, 20, 1, 2, 10, 10],5))
+print(round_robin([19, 17, 18, 5, 2, 1], 12, 2))
