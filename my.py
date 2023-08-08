@@ -1,18 +1,5 @@
-from re import sub
-def solve(s):
-    a,b,r=sorted(sub(r'[^aioue]','',s)),sorted(sub(r'[aioue]','',s)),[]
-    if abs(len(a)-len(b))>1:
-        return 'failed'
-    if len(b)>len(a):
-        a,b=b,a
-    while a or b:
-        r.append(a.pop(0))
-        if b:
-            r.append(b.pop(0))
-    return ''.join(r)
+def sort_ranks(r):
+    return [j if '&' not in j else j[3:] for j in sorted([i if i not in ['10','11'] else '99&'+i for i in r])]
 
-print(solve('java'))
-print(solve('have'))
-print(solve('oruder'))
-print(solve('apple'))
-print(solve('wrhkrvfymtcddcwoiuoiiiioiuuiaoa'))
+k=['1', '10', '11', '2', '3', '4', '5', '6', '7', '8', '8.1', '8.1.1', '9']
+print(sort_ranks(k))
