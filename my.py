@@ -1,13 +1,13 @@
-def rotate_in_place(m):
-    a,i=[list(list(i[::-1])) for i in zip(*m)],0
-    while i<len(m):
-        j=0
-        while j<len(m[i]):
-            m[i][j]=a[i][j]
-            j+=1
+def replace_nth(t,n,o,v):
+    if n<=0 or n>t.count(o):
+        return t
+    t,i,c=list(t),0,0
+    while i<len(t):
+        if t[i]==o:
+            c+=1
+        if t[i]==o and c==n:
+            t[i],c=v,0
         i+=1
-    return m
+    return ''.join(t)
 
-print(rotate_in_place([[1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]]))
+print(replace_nth("Vader said: No, I am your father!", 2, 'a', 'o'))
