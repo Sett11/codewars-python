@@ -1,10 +1,13 @@
-def reverse_and_combine_text(t):
-    a,i,r=[i[::-1] for i in t.split(' ')],0,[]
-    while i<len(a)-1:
-        r.append(a[i]+a[i+1])
-        i+=2
-    if len(a)&1:
-        r.append(a[-1])
-    return a[0][::-1] if len(a)==1 else reverse_and_combine_text(' '.join(r))
+def rotate_in_place(m):
+    a,i=[list(list(i[::-1])) for i in zip(*m)],0
+    while i<len(m):
+        j=0
+        while j<len(m[i]):
+            m[i][j]=a[i][j]
+            j+=1
+        i+=1
+    return m
 
-print(reverse_and_combine_text('abc def gh34 434ff 55_eri 123 343'))
+print(rotate_in_place([[1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]]))
