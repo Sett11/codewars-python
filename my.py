@@ -1,7 +1,5 @@
-def func(n):
-    return not n&1
+from re import sub
+def word_splitter(s):
+    return [i for i in sub(r'\W','&6&',sub(r'\.','676',sub(r'\-','898',s))).replace('676','.').replace('898','-').split('&6&') if i]
 
-def map(a,f):
-    return 'given argument is not a function' if not isinstance(f,type(func)) else 'array should contain only numbers' if not all(type(i)==int or i.isdigit() for i in a) else [f(int(i)) for i in a]
-
-print(map([1,2,3,4,5,6,7,'8',9,10],func))
+print(word_splitter("340000.00*-140.49902*ELEVATION*24000000*END"))
