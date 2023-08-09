@@ -1,11 +1,7 @@
-from functools import reduce as r
-def check_root(s):
-    a=s.replace('-','').split(',')
-    if len(a)!=4 or len([i for i in a if not i.isdigit()]):
-        return 'incorrect input'
-    if not all([abs(int(a[i+1])-int(a[i]))==1 for i in range(len(a)-1)]):
-      return 'not consecutive'
-    q=r(lambda e,u:e*u,[int(i) for i in a])+1
-    return f'{q}, {int(q**.5)}'
+def func(n):
+    return not n&1
 
-print(check_root('-4,-3,-2,-1'))
+def map(a,f):
+    return 'given argument is not a function' if not isinstance(f,type(func)) else 'array should contain only numbers' if not all(type(i)==int or i.isdigit() for i in a) else [f(int(i)) for i in a]
+
+print(map([1,2,3,4,5,6,7,'8',9,10],func))
