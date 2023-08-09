@@ -1,9 +1,11 @@
-def asterisc_it(n): 
-    i,a,s=0,list(str(n)) if type(n)!=list else list(''.join([str(i) for i in n])),'02468'
-    while i<len(a)-1:
-        if a[i] in s and a[i+1] in s:
-            a=a[:i+1]+['*']+a[i+1:]
-        i+=1
-    return ''.join(a)
+from functools import reduce as r
+def check_root(s):
+    a=s.replace('-','').split(',')
+    if len(a)!=4 or len([i for i in a if not i.isdigit()]):
+        return 'incorrect input'
+    if not all([abs(int(a[i+1])-int(a[i]))==1 for i in range(len(a)-1)]):
+      return 'not consecutive'
+    q=r(lambda e,u:e*u,[int(i) for i in a])+1
+    return f'{q}, {int(q**.5)}'
 
-print(asterisc_it([1, 4, 64, 68, 67, 23, 1]))
+print(check_root('-4,-3,-2,-1'))
