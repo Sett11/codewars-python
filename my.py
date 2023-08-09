@@ -1,4 +1,11 @@
-def sequence(x):
-    return [int(j) for j in sorted(str(i) for i in range(1,x+1))]
+def skiponacci(n):
+    a=b,c,r,v=0,1,[],True
+    while len(r)<n:
+        a=b+c
+        c=b
+        b=a
+        r.append(str(a) if v else 'skip')
+        v=not v
+    return ' '.join(r)
 
-print(sequence(66))
+print(skiponacci(21))
