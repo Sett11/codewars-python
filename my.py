@@ -1,7 +1,8 @@
-from re import sub
-def owl_pic(t):
-    s=sub(r'[^MWTYUIOAHXV8]','',t.upper())
-    return f"{s}''0v0''{s[::-1]}"
+def smallest_transform(n):
+    l=[int(i) for i in (str(n))]
+    return min([[sum([abs(i-j) for j in l])][0] for i in l])
 
-print(owl_pic('kuawd6r8q27y87t93r76352475437'))
-print(owl_pic('t6ggggggggWw'))
+print(smallest_transform(1234))
+print(smallest_transform(589))
+print(smallest_transform(666))
+print(smallest_transform(10932))
