@@ -6,3 +6,4 @@ print(smallest_transform(1234))
 print(smallest_transform(589))
 print(smallest_transform(666))
 print(smallest_transform(10932))
+
