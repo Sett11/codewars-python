@@ -1,9 +1,13 @@
-def smallest_transform(n):
-    l=[int(i) for i in (str(n))]
-    return min([[sum([abs(i-j) for j in l])][0] for i in l])
+def cinema(b,g):
+    if b==g:
+        return 'BG'*b
+    if b-g==1:
+        return 'B'+'GB'*g
+    if g-b==1:
+        return 'G'+'BG'*b
+    if b-g==2 and g>1:
+        return ('BG'+'BB'+'GB'*((b-4+g-2) or 1))[:b+g]
+    if g-b==2 and b>1:
+        return ('GB'+'GG'+'BG'*((g-4+b-2)or 1))[:b+g]
 
-print(smallest_transform(1234))
-print(smallest_transform(589))
-print(smallest_transform(666))
-print(smallest_transform(10932))
-
+print(cinema(12,14))
