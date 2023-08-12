@@ -1,11 +1,12 @@
-def game(a):
-    if not a or not a[0]:
-        return []
-    for i in range(len(a)-1):
-        if not a[i+1] or a[i][-1]!=a[i+1][0]:
-            return a[:i+1]
-    return a
+from math import sqrt as q
+def f(a,b):
+    c,d=pow(int(q(a[0])),int(q(a[1]))),pow(int(q(b[0])),int(q(b[1])))
+    return -1 if c>d else 1 if c<d else 0
 
-print(game(["dog","goose","elephant","tiger","rhino","orc","cat"]))
-print(game(["dog","goose","elephant","higer","rhino","orc","cat"]))
-print(game(["dog","goose","","higer","rhino","orc","cat"]))
+def compare_powers(a,b):
+    if (a[0]>=10000 or a[1]>=10000) and (b[0]>=10000 or b[1]>=10000):
+        return f(a,b)
+    c,d=pow(a[0],a[1]),pow(b[0],b[1])
+    return -1 if c>d else 1 if c<d else 0
+
+print(compare_powers([2, 10],[2, 15]))
