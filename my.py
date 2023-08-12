@@ -1,12 +1,20 @@
-from math import sqrt as q
-def f(a,b):
-    c,d=pow(int(q(a[0])),int(q(a[1]))),pow(int(q(b[0])),int(q(b[1])))
-    return -1 if c>d else 1 if c<d else 0
+def args_to_string(a):
+    s=''
+    for i in a:
+        if type(i)==str:
+            s+='&'+i+'&'
+        if type(i)==list:
+            if len(i)==1:
+                s+='&'+i[0]+'&'
+            if len(i)==2:
+                if len(i[0])>1:
+                    s+='&--'+'&'.join(i)+'&'
+                else:
+                    s+='&-'+'&'.join(i)+'&'
+    return s.replace('&&','&').replace('&',' ').strip()
 
-def compare_powers(a,b):
-    if (a[0]>=10000 or a[1]>=10000) and (b[0]>=10000 or b[1]>=10000):
-        return f(a,b)
-    c,d=pow(a[0],a[1]),pow(b[0],b[1])
-    return -1 if c>d else 1 if c<d else 0
-
-print(compare_powers([2, 10],[2, 15]))
+print(args_to_string(['bar']))
+print(args_to_string([["foo", "bar"], "baz"]))
+print(args_to_string([["foo", "bar"], ["fack", "baz"]]))
+print(args_to_string([["foo"], ["bar", "baz"], "qux"]))
+print(args_to_string([["foo", "bar"], ["baz", "qux"]]))
