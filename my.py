@@ -1,14 +1,11 @@
-def basereduct(n):
-    i=0
-    while i<150:
-        s=sorted(str(n))
-        if '9' not in s:
-            n=int(str(n),int(s[-1])+1)
-        else:
-            n=int(str(n),11)
-        i+=1
-        if len(str(n))==1:
-            return n
-    return -1
+def best_parking_spot(a):
+    r,m=[],float('inf')
+    for i in [i for i,j in enumerate(a) if j=='OPEN']:
+        for j in [i for i,j in enumerate(a) if j=='CORRAL']:
+            t=abs(i-j)
+            m=min(t+i,m)
+            r.append([i,t,i+t])
+    return sorted([i for i in r if i[2]==m],key=lambda e:(-e[0],e[1],e[2]))[0][0]
 
-print(basereduct(5312))
+print(best_parking_spot(["STORE", "TAKEN", "TAKEN", "CORRAL", "TAKEN", "OPEN", "OPEN", "TAKEN", "CORRAL"]))
+print(best_parking_spot(["STORE","OPEN","TAKEN","OPEN","CORRAL"]))
