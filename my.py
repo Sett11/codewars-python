@@ -1,20 +1,14 @@
-def args_to_string(a):
-    s=''
-    for i in a:
-        if type(i)==str:
-            s+='&'+i+'&'
-        if type(i)==list:
-            if len(i)==1:
-                s+='&'+i[0]+'&'
-            if len(i)==2:
-                if len(i[0])>1:
-                    s+='&--'+'&'.join(i)+'&'
-                else:
-                    s+='&-'+'&'.join(i)+'&'
-    return s.replace('&&','&').replace('&',' ').strip()
+def basereduct(n):
+    i=0
+    while i<150:
+        s=sorted(str(n))
+        if '9' not in s:
+            n=int(str(n),int(s[-1])+1)
+        else:
+            n=int(str(n),11)
+        i+=1
+        if len(str(n))==1:
+            return n
+    return -1
 
-print(args_to_string(['bar']))
-print(args_to_string([["foo", "bar"], "baz"]))
-print(args_to_string([["foo", "bar"], ["fack", "baz"]]))
-print(args_to_string([["foo"], ["bar", "baz"], "qux"]))
-print(args_to_string([["foo", "bar"], ["baz", "qux"]]))
+print(basereduct(5312))
