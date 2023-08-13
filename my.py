@@ -1,4 +1,4 @@
-def averages(a):
-    return [] if not a else [(a[i]+a[i+1])/2 for i in range(len(a)-1)]
+def king_is_in_check(a):
+    return True
 
-print(averages([ 1, 3, 5, 1, -10]))
+print(king_is_in_check())
