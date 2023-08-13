@@ -1,11 +1,11 @@
-def digits_product(n):
-    if n<10:
-        return n+10
-    s=''
-    for i in range(9,1,-1):
-        while not n%i:
-            s+=str(i)
-            n//=i
-    return int(s[::-1]) if n==1 else -1
+from functools import reduce as r
+def maximum_product(a):
+    i,q=0,[]
+    while i<len(a):
+        t=a.pop(i)
+        q.append([r(lambda w,c:w*c,a,1),t])
+        a.insert(i,t)
+        i+=1
+    return sorted(q,key=lambda e:(e[0],-e[1]),reverse=True)[0][1]
 
-print(digits_product(450))
+print(maximum_product([-1, 2, -3]))
