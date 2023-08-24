@@ -1,25 +1,9 @@
-import re
+FUNCTION={'f3' : lambda n: n*(n + 1)/2, 'f4' : lambda n: n**2, 'f5' : lambda n:n*(3*n - 1)/2, 'f6' : lambda n: n*(2*n - 1), 'f7' : lambda n: n*(5*n - 3)/2, 'f8' : lambda n: n * (3 * n - 2)}
 
+def make_sum_chains(f,n):
+    a,r,s=[f(i) for i in range(1,n+1)],[k for k in zip(*[[FUNCTION[j](i) for i in range(1,n+1)] for j in FUNCTION])],0
+    for i in range(len(a)):
+        s+=(sum(r[i])-a[i])*a[i]
+    return s
 
-def is_valid_HK_phone_number(s):
-    s = s.split(' ')
-    return True if s[0].isdigit() and len(s[0]) == 4 and s[-1].isdigit() and len(s[-1]) == 4 and len(s) == 2 else False
-
-
-def has_valid_HK_phone_number(s):
-    s = re.sub(r'[^\d ]', ' ', s).split(' ')
-    for i in range(len(s)):
-        if i == len(s)-1:
-            return False
-        if s[i].isdigit() and len(s[i][:4]) == 4 and s[i+1].isdigit() and len(s[i+1][:4]) == 4:
-            return True
-    return False
-
-
-print(is_valid_HK_phone_number("1234 5678"))
-print(is_valid_HK_phone_number("1234  5678"))
-print(is_valid_HK_phone_number("123f 5678"))
-print(is_valid_HK_phone_number("123 5678"))
-print(has_valid_HK_phone_number("Hello, my phone number is 1234 5678"))
-print(has_valid_HK_phone_number("ceanjgz1z3114 825d9j/6yh"))
-print(has_valid_HK_phone_number("skldfjs287389274329dklfj84239029043820942904823480924293042904820482409209438dslfdjs9345 8234sdklfjsdkfjskl28394723987jsfss2343242kldjf23423423SDLKFJSLKsdklf"))
+print(make_sum_chains(FUNCTION['f4'],20))
