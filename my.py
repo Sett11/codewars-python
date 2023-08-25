@@ -1,6 +1,13 @@
-import re
-def drop_cap(s):
-    return re.sub(r'([a-z]){3,}',lambda e:e.group().capitalize(),s,flags=re.I)
+def solve(n):
+    a=[500,200,100,50,20,10]
+    i=c=0
+    while n:
+        if n<10:
+            return -1
+        while n>=a[i]:
+            n-=a[i]
+            c+=1
+        i+=1
+    return c
 
-print(drop_cap('apple of banana'))
-print(drop_cap('apple of  banana'))
+print(solve(1500))
