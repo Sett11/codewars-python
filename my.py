@@ -1,5 +1,5 @@
-def procedure(n):
-    return sum([sum([int(j) for j in list(str(i))]) for i in range(1,101) if not i%n])
+time_per_day=lambda l:round(round(sum([.75*i[0]*i[1] for i in l])/60/5*1000,1)/1000,2)
 
-print(procedure(30))
-print(procedure(25))
+print(time_per_day([(1, 20), (2, 10), (3, 15), (4, 10)]))
+print(time_per_day([(4, 11), (9, 42)]))
+print(time_per_day([(9, 38)]))
