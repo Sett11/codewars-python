@@ -1,9 +1,17 @@
-class Dictionary:
-    def __init__(self,w):
-        self.w=[list(i) for i in w]
-    def find_most_similar(self,t):
-        fack={'berry':'cherry','aple':'apple','rkacypviuburk':'zqdrhpviqslik'}
-        return fack.get(t,False) or sorted([[[i for i in j if i in t],len(t)-len(j),''.join(j)] for j in self.w],key=lambda e:(len(e[0]),e[1]),reverse=True)[0][2]
+def rev_sub(a):
+    i=0
+    a.append('&')
+    while i<len(a)-1:
+        j=i
+        if a[i]%2==0:
+            while j<len(a):
+                if a[j]=='&' or a[j]%2:
+                    a=a[:i]+a[i:j][::-1]+a[j:]
+                    i=j
+                    break
+                j+=1
+        i+=1
+    return a[:-1]
 
-d=Dictionary(['cherry', 'peach', 'pineapple', 'melon', 'strawberry', 'raspberry', 'apple', 'coconut', 'banana'])
-print(d.find_most_similar('berry'))
+print(rev_sub([2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+print(rev_sub([2, 4, 3, 10, 2]))
