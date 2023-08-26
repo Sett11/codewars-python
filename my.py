@@ -1,4 +1,3 @@
-def converter(m):
-    return round(m/4.54609188*1.609344,2)
-
-print(converter(12))
+class Sleigh(object):
+    def authenticate(self,n,p):
+        return n=='Santa Claus' and p=='Ho Ho Ho!'
