@@ -1,10 +1,7 @@
 class Solution:
-    def merge(self,a,n,b,m):
-        c=sorted([i for i in a[:n]+b[:m]])
-        a.clear()
-        [a.append(i) for i in c]
-        return a
+    def sortedSquares(self,a):
+        return sorted([i**2 for i in a])
         
 s=Solution()
 
-print(s.merge([1,2,3,0,0,0],3,[2,5,6],3))
+print(s.sortedSquares([-4,-1,0,3,10]))
