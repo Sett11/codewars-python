@@ -1,7 +1,10 @@
+import re
+
 class Solution:
-    def sortedSquares(self,a):
-        return sorted([i**2 for i in a])
-        
+    def isPalindrome(self,s):
+        s=re.sub(r'[^a-z0-9]','',s.lower())
+        return s==s[::-1]
+    
 s=Solution()
 
-print(s.sortedSquares([-4,-1,0,3,10]))
+print(s.isPalindrome("A man, a plan, a canal: Panama"))
