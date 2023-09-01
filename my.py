@@ -1,12 +1,16 @@
-def f(x):
-    return len(x)==2 and x.isdigit()
+from math import ceil
 
-def validate(s):
-    s=s.split(' ')
-    try:
-        return s[0]=='MDZHB' and f(s[1]) and len(s[2])==3 and s[2].isdigit() and s[3].isalpha() and all([f(s[4]),f(s[5]),f(s[6]),f(s[7])])
-    except:
-        return False
+def cooking_time(n,m,s,p):
+    f=float(str(m*60+s))
+    a=int(n[:-1])
+    b=int(p[:-1])
+    c,d=divmod(f/(b/a),60)
+    q,w=c,ceil(d)
+    if w==60:
+        q+=1
+        w=0
+    return f'{int(q)} minutes {w} seconds'
 
-print(validate('MDZHB 85 596 KLASA 81 00 02 91'))
-print(validate('MDZHV 60 130 VATRUKH 58 89 54 54'))
+print(cooking_time("450W", 3, 25, "950W"))
+print(cooking_time("600W", 4, 20, "800W"))
+print(cooking_time("21W", 64, 88, "25W"))
