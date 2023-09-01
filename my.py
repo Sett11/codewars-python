@@ -1,7 +1,10 @@
 class Solution:
-    def searchMatrix(self,m,i):
-        return i in sum(m,[])
+    def merge(self,a,n,b,m):
+        c=sorted([i for i in a[:n]+b[:m]])
+        a.clear()
+        [a.append(i) for i in c]
+        return a
+        
+s=Solution()
 
-s=Solution() 
-
-print(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],3))
+print(s.merge([1,2,3,0,0,0],3,[2,5,6],3))
