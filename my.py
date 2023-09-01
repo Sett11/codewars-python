@@ -1,11 +1,13 @@
 class Solution:
-    def rotate(self,m):
-        a=[list(i[::-1]) for i in zip(*m)]
-        m.clear()
-        for i in a:
-            m.append(i)
-        return m
-    
+    def findRotation(self,m,t):
+        c=0
+        while c<4:
+            m=[list(i[::-1]) for i in zip(*m)]
+            if m==t:
+                return True
+            c+=1
+        return False
+        
 s=Solution()
 
-print(s.rotate([[1,2,3],[4,5,6],[7,8,9]]))
+print(s.findRotation([[0,0,0],[0,1,0],[1,1,1]],[[1,1,1],[0,1,0],[ 0,0,0]]))
