@@ -1,10 +1,4 @@
-import re
+def neutralise(s1,s2):
+    return ''.join(['-' if s1[i]=='-' and s2[i]=='-' else '+' if s1[i]=='+' and s2[i]=='+' else '0' for i in range(len(s1))])
 
-class Solution:
-    def isPalindrome(self,s):
-        s=re.sub(r'[^a-z0-9]','',s.lower())
-        return s==s[::-1]
-    
-s=Solution()
-
-print(s.isPalindrome("A man, a plan, a canal: Panama"))
+print(neutralise("-++-","-+-+"))
