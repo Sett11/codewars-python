@@ -1,5 +1,4 @@
-def split_by_value(k,a):
-    return [i for i in a if i<k]+[i for i in a if i>=k]
+def unusual_lex_order(a):
+    return sorted(a,key=lambda e:e[::-1])
 
-print(split_by_value(5, [1, 3, 5, 7, 6, 4, 2]))
-print(split_by_value(6, [6, 4, 10, 10, 6]))
+print(unusual_lex_order(["nigeb", "ta", "eht", "gninnigeb"]))
