@@ -1,8 +1,11 @@
-def best_friend(txt,a,b):
-    a=[i for i,j in enumerate(txt) if j==a]
-    txt+='&'
-    return all(txt[i+1]==b for i in a)
+def flick_switch(lst):
+    r=[]
+    v=True
+    for i in lst:
+        if i=='flick':
+            v=not v
+        r.append(v)
+    return r
 
-
-print(best_friend("he headed to the store", "h", "e"))
-print(best_friend('abcdee', 'e', 'e'))
+print(flick_switch(["codewars", "flick", "code", "wars"]))
+print(flick_switch(['bicycle', 'jarmony', 'flick', 'sheep', 'flick']))
