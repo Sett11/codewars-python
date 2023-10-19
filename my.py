@@ -1,20 +1,18 @@
-def convert(n,b):
-    s='0123456789abcdefghijklmnopqrstuvwxyz'
-    r=''
-    while n:
-        r=s[n%b]+r
-        n//=b
-    return r
+from re import sub
 
-def check(n):
-    a=[int(i) for i in str(n)]
-    return all(abs(a[i]-a[i+1])==1 for i in range(len(a)-1))
+def spin_solve(s):
+    a=s.split(' ')
+    for i in range(len(a)):
+        t=len(sub(r'[^A-z]','',a[i]))
+        if t==1:
+            a[i]='0'
+        elif t==2 or (',' in a[i] and t<7):
+            a[i]=a[i].upper()
+        elif t>6 or a[i].lower().count('t')==2:
+            if not a[i][-1].isalpha():
+                a[i]=a[i][:-1][::-1]+a[i][-1]
+            else:
+                a[i]=a[i][::-1]
+    return ' '.join(a)
 
-def esthetic(n):
-    r=[]
-    for i in range(2,11):
-        if check(convert(n,i)):
-            r.append(i)
-    return r
-
-print(esthetic(10))
+print(spin_solve("If a man does not keep pace with his companions, perhaps it is because he hears a different drummer."))
