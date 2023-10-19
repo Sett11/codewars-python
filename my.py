@@ -1,12 +1,7 @@
-def freed_prisoners(a):
-    c=0
-    if not a[0]:
-        return c
-    for i in range(len(a)):
-        if a[i]:
-            c+=1
-            a=[not j for j in a]
-    return c
-    
+def party_people(a):
+    while not all(i<=len(a) for i in a):
+        a=[i for i in a if i<=len(a)]
+    return len(a)
 
-print(freed_prisoners([True, True, False, False, False, True, False]))
+print(party_people([4, 5, 4, 1]))
+print(party_people([2, 1, 2, 0]))
