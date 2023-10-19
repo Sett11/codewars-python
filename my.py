@@ -1,5 +1,4 @@
-def spin_around(lst):
-    return int(abs(sum([.25 if i == 'right' else -.25 for i in lst])))
+def gimme_the_letters(s):
+    return ''.join([chr(i) for i in range(ord(s[0]),ord(s[-1])+1)])
 
-print(spin_around(["right", "right", "right", "right", "left", "right"]))
-print(spin_around(["left", "left", "left", "left"]))
+print(gimme_the_letters('A-Z'))
