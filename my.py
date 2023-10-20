@@ -1,9 +1,10 @@
-def transorm_hex(n):
-    try: return int(n,16)
-    except: return 0
+def repeat_sequence_len(n):
+    r=[]
+    while True:
+        if n in r:
+            return len(r)-r.index(n)
+        r.append(n)
+        n=sum([int(i)**2 for i in str(n)])
 
-def hex_word_sum(s):
-    return sum([transorm_hex('0x'+i.replace('O','0').replace('S','5')) for i in s.split(' ')])
 
-print(hex_word_sum('DEFACE'))
-print(hex_word_sum('DO YOU SEE THAT BEE DRINKING DECAF COFFEE'))
+print(repeat_sequence_len(818))
