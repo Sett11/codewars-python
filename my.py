@@ -1,21 +1,9 @@
-def validate(u,p):
-    if u=='wow' or p=='wow':
-        return False
-    r=[]
-    v=len(u)<len(p)
-    t=len(u) if v else len(p)
-    q=u if v else p
-    w=p if v else u
-    for i in range(t):
-        if q[i] in w:
-            r.append(1)
-        for j in range(i+1,t):
-            if q[i:j] in w:
-                r.append(len(q[i:j]))
-    return max(r)<min(len(u),len(p))/2 if r else True if u and p else False
+def transorm_hex(n):
+    try: return int(n,16)
+    except: return 0
 
+def hex_word_sum(s):
+    return sum([transorm_hex('0x'+i.replace('O','0').replace('S','5')) for i in s.split(' ')])
 
-
-print(validate("qwertyuiop", "asdfghjkl"))
-print(validate("username", "myname"))
-print(validate('username', 'e'))
+print(hex_word_sum('DEFACE'))
+print(hex_word_sum('DO YOU SEE THAT BEE DRINKING DECAF COFFEE'))
