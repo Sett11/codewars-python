@@ -1,11 +1,16 @@
-def generate_number(a,n):
-    if n not in a:
-        return n
-    for i in range(1,10):
-        for j in range(1,10):
-            if i+j==n:
-                t=int(str(i)+str(j))
-                if t not in a:
-                    return t
+def uglify_word(s):
+    s=list(s)
+    c=1
+    for i in range(len(s)):
+        if s[i].isalpha():
+            if c:
+                s[i]=s[i].upper()
+            else:
+                s[i]=s[i].lower()
+            c=not c
+        else:
+            c=1
+    return ''.join(s)
 
-print(generate_number([1,2,3,4,6,9,10,11,15,29, 69], 11))
+
+print(uglify_word("aaa-bbb-ccc"))
