@@ -1,16 +1,13 @@
-def uglify_word(s):
-    s=list(s)
-    c=1
-    for i in range(len(s)):
-        if s[i].isalpha():
-            if c:
-                s[i]=s[i].upper()
-            else:
-                s[i]=s[i].lower()
-            c=not c
-        else:
-            c=1
-    return ''.join(s)
+from functools import reduce
+from operator import mul
+
+def per(n):
+    r=[]
+    while n>9:
+        n=reduce(mul,map(int,list(str(n))))
+        r.append(n)
+    return r
 
 
-print(uglify_word("aaa-bbb-ccc"))
+print(per(277777788888899))
+print(per(8))
