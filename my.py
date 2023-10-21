@@ -1,10 +1,11 @@
-def repeat_sequence_len(n):
-    r=[]
-    while True:
-        if n in r:
-            return len(r)-r.index(n)
-        r.append(n)
-        n=sum([int(i)**2 for i in str(n)])
+def or_arrays(a1,a2,v=0):
+    m,n=len(a1),len(a2)
+    if m<n:
+        a1+=[v]*(n-m)
+    if n<m:
+        a2+=[v]*(m-n)
+    return [a1[i]|a2[i] for i in range(len(a1))]
 
 
-print(repeat_sequence_len(818))
+print(or_arrays([1,2,3],[4,5,6]))
+print(or_arrays([1,2,3],[1,2]))
