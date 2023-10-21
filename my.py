@@ -1,7 +1,7 @@
-from re import sub,IGNORECASE
+def solve(n):
+    r=['0','01']
+    while len(r)<=n:
+        r.append(r[-1]+r[-2])
+    return r[n]
 
-
-def jeringonza(s):
-    return sub(r'[aioue]',lambda e:e.group()+('p' if e.group().islower() else 'P')+e.group(),s,flags=IGNORECASE)
-
-print(jeringonza('jEringonzA'))
+print(solve(3))
