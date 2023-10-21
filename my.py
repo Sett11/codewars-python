@@ -1,32 +1,9 @@
-from re import sub
+def f(n):
+    return 0 if n<0 else n
 
-def solve(s):
-    s=list(s)
-    a=[i for i,j in enumerate(s) if j=='(']
-    r=[]
-    m=0
-    for i in a:
-        t=0
-        n=i
-        while n>=0:
-            if s[n]=='(':
-                t+=1
-            if s[n]==')':
-                t-=1
-            n-=1
-        r.append([i,t])
-        m=max(t,m)
-    r=[i[0] for i in r if i[1]==m]
-    j=0
-    while True:
-        if s[j]==')':
-            break
-        j+=1
-    if s[r[0]-1].isdigit():
-        s[r[0]-1:j+1]=sub(r'[^A-z]','',''.join(s[r[0]-1:j+1]))*int(s[r[0]-1])
-    else:
-        s[r[0]-1:j+1]=sub(r'[^A-z]','',''.join(s[r[0]-1:j+1]))
-    return ''.join(s) if '(' not in s else solve(s)
+def death_star(w,a): 
+    b,c,d=[sum(list(i)) for i in zip(*w[:a])]
+    return 'The station is completed!' if b>=100 and c>=75 and d>=50 else f'The station is destroyed! It needed {f(100-b)} iron, {f(75-c)} steel and {f(50-d)} chromium for completion.'
 
-print(solve("2(a3(b))"))
-print(solve("k(a3(b(a2(c))))"))
+print(death_star([[100,75,49],[20,15,20],[10,15,10],[50,50,20],[20,15,10],[20,15,10],[20,15,10]],1))
+print(death_star([[20,15,10],[20,15,20],[10,15,10],[50,50,20],[20,15,10],[20,15,10],[20,15,10]],5))
