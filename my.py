@@ -1,11 +1,16 @@
-def or_arrays(a1,a2,v=0):
-    m,n=len(a1),len(a2)
-    if m<n:
-        a1+=[v]*(n-m)
-    if n<m:
-        a2+=[v]*(m-n)
-    return [a1[i]|a2[i] for i in range(len(a1))]
+from functools import reduce
+from operator import mul
+from re import sub
 
 
-print(or_arrays([1,2,3],[4,5,6]))
-print(or_arrays([1,2,3],[1,2]))
+def find_middle(s):
+    s=sub(r'\D','',s) if type(s)==str else ''
+    if not s:
+        return -1
+    r=str(reduce(mul,map(int,s),1))
+    l=len(r)//2-1
+    return int(r[l+(1 if len(r)&1 else 0):l+2])
+
+
+print(find_middle('58jd9fgh/fgh6s.,sdf'))
+print(find_middle('asd.fasd.gasdfgsdfgh-sdfghsdfg/asdfga=sdfg'))
