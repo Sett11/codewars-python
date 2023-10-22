@@ -1,7 +1,8 @@
-def is_pronic(n):
-    for i in range(1,n+1):
-        if i*(i+1)==n:
-            return True
-    return not bool(n)
+def swap_cards(n1, n2):
+    a,b=list(map(int,str(n1))),list(map(int,str(n2)))
+    i=a.index(min(a))
+    a[i],b[0]=b[0],a[i]
+    return int(''.join(map(str,a)))>int(''.join(map(str,b)))
 
-print(is_pronic(30))
+print(swap_cards(41,98))
+print(swap_cards(67,53))
