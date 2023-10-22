@@ -1,13 +1,6 @@
-class Journey:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
-
-    def isPossible(self):
-        return self.c*4.8/1000 >= self.a['weight']+80*self.b
+def amaro_plan(n):
+    r=[1 if i&1 else 0 for i,j in enumerate([0]*(n-1))]
+    return [n*20-sum(r)]+r
 
 
-j = Journey({'weight': 45000}, 2, 9600000)
-
-print(j.isPossible())
+print(amaro_plan(22))
