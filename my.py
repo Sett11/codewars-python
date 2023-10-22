@@ -1,8 +1,7 @@
-from re import sub,IGNORECASE
+def is_pronic(n):
+    for i in range(1,n+1):
+        if i*(i+1)==n:
+            return True
+    return not bool(n)
 
-def remove_bmw(s):
-    try:return sub(r'[bmw]','',s,flags=IGNORECASE)
-    except:raise(TypeError("This program only works for text."))
-
-print(remove_bmw("bmwvolvoBMW"))
-print(remove_bmw(0))
+print(is_pronic(30))
