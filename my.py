@@ -1,6 +1,8 @@
-def amaro_plan(n):
-    r=[1 if i&1 else 0 for i,j in enumerate([0]*(n-1))]
-    return [n*20-sum(r)]+r
+from re import sub,IGNORECASE
 
+def remove_bmw(s):
+    try:return sub(r'[bmw]','',s,flags=IGNORECASE)
+    except:raise(TypeError("This program only works for text."))
 
-print(amaro_plan(22))
+print(remove_bmw("bmwvolvoBMW"))
+print(remove_bmw(0))
