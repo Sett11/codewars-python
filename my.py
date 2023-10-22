@@ -1,4 +1,4 @@
-def square_up(n):
-    return sum([sum([[0]*j]+[[i for i in range(n,0,-1)][j:]],[]) for j in range(n)][::-1],[])
-
-print(square_up(4))
+def remove_nth_element(lst, n):
+    lst_copy = lst.copy()
+    del lst_copy[n]
+    return lst_copy
