@@ -1,8 +1,7 @@
-def isMultiple(a, b, n):
-    if [a,b,n]==[5,4,3]:
-        return True
-    r=int(str(round(a/b,1)).split('.')[-1])
-    return r>0 and not r%n
+def divisible_by_last(n):
+    a=list(map(int,str(n)))
+    return [False]+[not bool(a[i]%a[i-1]) if a[i-1] else False for i in range(1,len(a))]
 
-print(isMultiple(5,3,4))
-print(isMultiple(3691401, 1892272, 5))
+print(divisible_by_last(73312))
+print(divisible_by_last(2026))
+print(divisible_by_last(635))
