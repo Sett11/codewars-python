@@ -1,4 +1,6 @@
-def omit_hashtag(s,h):
-    return s.replace(h,'',1)
+from re import sub
 
-print(omit_hashtag("Sunny day! #lta #vvv", "#lta"))
+def convert(s):
+    return sub(r'[oa]',lambda e:'o' if e.group()=='a' else 'u',s)
+
+print(convert('codewars'))
