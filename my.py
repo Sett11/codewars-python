@@ -1,6 +1,16 @@
-from re import sub
+from re import sub,IGNORECASE
 
-def convert(s):
-    return sub(r'[oa]',lambda e:'o' if e.group()=='a' else 'u',s)
+def vowel_start(s): 
+    a=sub(r'[aioue]',lambda e:' '+e.group(),sub(r'\W','',s.lower().replace('_','')),flags=IGNORECASE).split(' ')
+    i=1
+    while i<len(a):
+        if len(a[i])==1 and a[i] not in 'aioue':
+            a[i-1]+=a.pop(i)
+            i-=1
+        i+=1
+    return ' '.join(a).strip()
 
-print(convert('codewars'))
+
+print(vowel_start('It is beautiful we---ather today!'))
+print(vowel_start('my number is 0208-533-2325'))
+print(vowel_start('under_score'))
