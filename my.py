@@ -1,7 +1,20 @@
-def work_needed(n,f):
-    k=n-sum([i[0]*60+i[1] for i in f])
-    return "Easy Money!" if k<1 else f"I need to work {(k)//60} hour(s) and {(k)%60} minute(s)"
+notes_dictionary = {
+    440: "A",
+    466.16: "A#",
+    493.88: "B",
+    523.25: "C",
+    554.37: "C#", 
+    587.33: "D", 
+    622.25: "D#", 
+    659.25: "E", 
+    698.46: "F", 
+    739.99: "F#", 
+    783.99: "G", 
+    830.61: "G#"}
 
+def get_note(n):
+    for i in notes_dictionary:
+        if n%i==0 or i%n==0:
+            return notes_dictionary[i]
 
-print(work_needed(141, [(1,55), (0,25)]))
-print(work_needed(60, [(1,0)]))
+print(get_note(1046.5))
