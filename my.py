@@ -1,2 +1,2 @@
-def read_out(a):
-    return ''.join([i[0] for i in a])
+def calculate_total(t1, t2):
+    return sum(t1)>sum(t2)
