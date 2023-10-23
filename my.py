@@ -1,11 +1,10 @@
-def sum_and_multiply(s,m):
-    if not s or not m:
-        return sorted([s,m])
-    a=[i for i in range(s)]
-    for i in range(len(a)):
-        t=s-a[i]
-        if t in a and t*a[i]==m:
-            return sorted([a[i],t])
+def mutate_my_strings(s1,s2):
+    a=[s1]
+    for i in range(1,len(s1)+1):
+        t=s2[:i]+s1[i:]
+        if t not in a:
+            a.append(t)
+    return '\n'.join(a)+'\n'
 
 
-print(sum_and_multiply(12,32))
+print(mutate_my_strings("bubble gum", "turtle ham"))
