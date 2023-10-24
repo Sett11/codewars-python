@@ -1,8 +1,4 @@
-def evil_code_medal(t,g,s,b):
-    a=[i for i in [g,s,b] if i>t]
-    if a:
-        a=a[0]
-        return 'Gold' if a==g else 'Silver' if a==s else 'Bronze'
-    return 'None'
+def divisions(n,d,c=0):
+    return c if n<=1 or n<d else divisions(n//d,d,c+1)
 
-print(evil_code_medal("00:30:00","00:15:00","00:45:00","01:15:00"))
+print(divisions(100,2))
