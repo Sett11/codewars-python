@@ -1,12 +1,6 @@
-from collections import Counter
-
-
-def strings_construction(a,b):
-    a,b=Counter(a),Counter([i for i in b if i in a])
-    for i in a:
-        if i not in b or b[i]<a[i]:
-            return 0
-        b[i]//=a[i]
-    return min(b.values(),default=0)
-
-print(strings_construction('voczsfoppz','ovppppfppsfcsspotczzczfcoofvszapvoc'))
+class Dinglemouse(object):
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+    def get_full_name(self):
+        return (self.first_name + ' ' + self.last_name).strip()
