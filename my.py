@@ -1,4 +1,7 @@
-def divisions(n,d,c=0):
-    return c if n<=1 or n<d else divisions(n//d,d,c+1)
+def turn(c,t):
+    a=['N','E','S','W']
+    r,l='right','left'
+    return l if [c,t]==[a[0],a[-1]] else r if [c,t]==[a[-1],a[0]] else r if a.index(c)<a.index(t) else l
 
-print(divisions(100,2))
+
+print(turn('S','E'))
