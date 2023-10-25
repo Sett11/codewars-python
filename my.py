@@ -1,7 +1,7 @@
-def turn(c,t):
-    a=['N','E','S','W']
-    r,l='right','left'
-    return l if [c,t]==[a[0],a[-1]] else r if [c,t]==[a[-1],a[0]] else r if a.index(c)<a.index(t) else l
+def manipulate(n):
+    s=str(n)
+    l=len(s)
+    return int(str(s[:l//2]+'0'*(l//2+(1 if l&1 else 0))))
 
-
-print(turn('S','E'))
+print(manipulate(1234511111))
+print(manipulate(123452222))
