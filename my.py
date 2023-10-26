@@ -1,6 +1,9 @@
-def sticky_calc(o,a,b):
-    a,b=str(round(a)),str(round(b))
-    return round(eval(f'{a+b}{o}{b}'))
+def shuffled_array(a):
+    s=sum(a)
+    for i in range(len(a)):
+        if a[i]==s-a[i]:
+            a.remove(a[i])
+            return sorted(a)
 
 
-print(sticky_calc('+',75,5))
+print(shuffled_array([1, 12, 3, 6, 2]))
