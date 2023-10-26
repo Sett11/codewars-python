@@ -1,7 +1,6 @@
-def manipulate(n):
-    s=str(n)
-    l=len(s)
-    return int(str(s[:l//2]+'0'*(l//2+(1 if l&1 else 0))))
+def sticky_calc(o,a,b):
+    a,b=str(round(a)),str(round(b))
+    return round(eval(f'{a+b}{o}{b}'))
 
-print(manipulate(1234511111))
-print(manipulate(123452222))
+
+print(sticky_calc('+',75,5))
