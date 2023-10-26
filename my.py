@@ -1,9 +1,23 @@
-def construct_submatrix(m,r,c):
-    q=[list(i) for i in zip(*[j for i,j in enumerate(m) if i not in r])]
-    return [list(k) for k in zip(*[j for i,j in enumerate(q) if i not in c])]
+from collections import Counter
 
-print(construct_submatrix([[7, 6, 3, 8, 2, 5],
-                           [6, 9, 0, 4, 1, 3],
-                           [1, 7, 5, 8, 6, 4],
-                           [5, 0, 9, 4, 7, 6],
-                           [0, 9, 4, 5, 3, 8]],[3, 4, 2],[2, 4, 3]))
+r=[]
+
+def res(v):
+    for i,k in r:
+        if i==v:
+            return k
+    return -1
+
+def construct_square(s):
+    v=sorted(Counter(s).values())
+    i=0
+    if r and len(str(r[0][1]))>=len(s):
+        return res(v)
+    while len(str(i**2))<=len(s):
+        n=i**2
+        r.insert(0,[sorted(Counter(str(n)).values()),n])
+        i+=1
+    return res(v)
+
+
+print(construct_square('aaaabbcde'))
