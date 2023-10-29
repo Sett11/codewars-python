@@ -1,6 +1,6 @@
-def comes_after(s,l):
-    s+='0'
-    return ''.join(filter(lambda e:e.isalpha(),[s[i+1] for i in range(len(s)-1) if s[i].lower()==l.lower()]))
+def happy_g(s):
+    return all(['gg' in s[i-1:i+2] for i in range(len(s)) if s[i]=='g' and s[i-1:i+2]])
 
 
-print(comes_after("Pirates say arrrrrrrrr.", 'r'))
+print(happy_g('gg0gg3gg0gg'))
+print(happy_g('gog'))
