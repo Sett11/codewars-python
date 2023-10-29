@@ -1,17 +1,6 @@
-def number_of_clans(d,k):
-    a=list(range(1,k+1))
-    r=[]
-    for i in range(k):
-        s=sum(r,[])
-        if a[i] in s:
-            continue
-        t=[a[i]]
-        q=[a[i]%p==0 for p in d]
-        for j in range(i+1,k):
-            if q==[a[j]%p==0 for p in d]:
-                t.append(a[j])
-        r.append(t)
-    return len(r)
+def comes_after(s,l):
+    s+='0'
+    return ''.join(filter(lambda e:e.isalpha(),[s[i+1] for i in range(len(s)-1) if s[i].lower()==l.lower()]))
 
 
-print(number_of_clans([2,3],6))
+print(comes_after("Pirates say arrrrrrrrr.", 'r'))
