@@ -1,19 +1,8 @@
-from collections import deque
+from re import sub
 
-def calc(s):
-    a=s.split(' ')
-    stack=deque()
-    for i in a:
-        if i.isdigit():
-            stack.append(int(i))
-        elif i.replace('.','').isdigit():
-            stack.append(float(i))
-        else:
-            if len(stack)>1:
-                t,p=stack.pop(),stack.pop()
-                stack.append(eval(f'{p}{i}{t}'))
-    return stack.pop() if stack else 0
+def cool_string(s):
+    c=sub(r'.',lambda e: '1' if e.group().islower() else '2',s)
+    return s.isalpha() and '11' not in c and '22' not in c
 
-
-print(calc('5 1 2 + 4 * + 3 -'))
-print(calc("3.5"))
+print(cool_string('aQwFdA'))
+print(cool_string('Vvnu'))
