@@ -1,6 +1,11 @@
-def happy_g(s):
-    return all(['gg' in s[i-1:i+2] for i in range(len(s)) if s[i]=='g' and s[i-1:i+2]])
+from operator import add
+
+def running(lst, fn):
+    r=[lst.pop(0)]
+    for i in range(len(lst)):
+        r.append(fn(r[-1],lst[i]))
+    return r
 
 
-print(happy_g('gg0gg3gg0gg'))
-print(happy_g('gog'))
+print(running([1,1,1,1],add))
+print(running([1,9,2,10],max))
