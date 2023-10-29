@@ -1,8 +1,14 @@
 from re import sub
 
-def cool_string(s):
-    c=sub(r'.',lambda e: '1' if e.group().islower() else '2',s)
-    return s.isalpha() and '11' not in c and '22' not in c
+def bin_str(s):
+    if '1' not in s:
+        return 0
+    c=0
+    while '1' in s:
+        i=s.index('1')
+        s=sub(r'.',lambda e:'1' if e.group()=='0' else '0',s[i:])
+        c+=1
+    return c
 
-print(cool_string('aQwFdA'))
-print(cool_string('Vvnu'))
+print(bin_str("11111000011111"))
+print(bin_str("000001111100000"))
