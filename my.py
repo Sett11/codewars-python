@@ -1,2 +1,5 @@
-def are_equally_strong(a,b,c,d):
-    return max(a,b)==max(c,d) and min(a,b)==min(c,d)
+def first_reverse_try(a):
+    if len(a)<2:
+        return a
+    a[0],a[-1]=a[-1],a[0]
+    return a
