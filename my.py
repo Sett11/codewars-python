@@ -3,11 +3,6 @@ class Node(object):
         self.data = data
         self.next = None
     
-class Context(object):
-    def __init__(self, first, second):
-        self.first = first
-        self.second = second
-    
 def list_convert_to_array(h):
     r=[]
     c=h
@@ -16,8 +11,8 @@ def list_convert_to_array(h):
         c=c.next
     return r
 
-def array_convert_to_list(a):
-    L=Node(0)
+def array_convert_to_list(a,L=None):
+    L=L or Node(0)
     c=L
     l=len(a)
     for i in range(l):
@@ -26,11 +21,16 @@ def array_convert_to_list(a):
             c=c.next
     return L
     
-def alternating_split(h):
+def front_back_split(h,f,q):
     a=list_convert_to_array(h)
     n=len(a)
     if n<2:
         raise()
-    return Context(array_convert_to_list(a[0:n:2]),array_convert_to_list(a[1:n:2]))
+    b=a[:n//2]+([a[n//2]] if n&1 else [])
+    c=a[n//2:]
+    if n&1:
+         c.pop(0)
+    return list_convert_to_array(array_convert_to_list(b,f)),list_convert_to_array(array_convert_to_list(c,q))
+    
 
-print(alternating_split(array_convert_to_list([1,2,3,4,5])))
+print(front_back_split(array_convert_to_list([1,2,3,4,5,6,7,8,9,10,11]),Node(),Node()))
