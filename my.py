@@ -1,5 +1,3 @@
-from bisect import insort
-
 class Node(object):
     def __init__(self, data):
         self.data = data
@@ -23,9 +21,16 @@ def array_convert_to_list(a):
             c=c.next
     return L
 
-def sorted_insert(head, data):
-    a=list_convert_to_array(head)
-    insort(a,data)
-    return array_convert_to_list(a)
+def insert_sort_to_list(a):
+    for i in range(1,len(a)):
+          k=i
+          while k and a[k-1]>a[k]:
+               a[k],a[k-1]=a[k-1],a[k]
+               k-=1
+    return a
 
-print(sorted_insert(array_convert_to_list([1,2,5]),4))
+def insert_sort(head):
+    return array_convert_to_list(insert_sort_to_list(list_convert_to_array(head))) if head else None
+    
+
+print(insert_sort(array_convert_to_list([1,5,3,2])))
