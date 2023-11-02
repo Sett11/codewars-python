@@ -22,7 +22,7 @@ def array_convert_to_list(a,L=None):
     return L
     
 def reverse(a):
-    return array_convert_to_list(list_convert_to_array(a)[::-1],a)
+    return array_convert_to_list(list_convert_to_array(a)[::-1],a) if a else None
     
 
 print(reverse(array_convert_to_list([1,2])))
