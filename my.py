@@ -21,8 +21,9 @@ def array_convert_to_list(a,L=None):
             c=c.next
     return L
     
-def merge_sort(h):
-    return array_convert_to_list(sorted(list_convert_to_array(h))) if h else None
+def sorted_intersect(a,b):
+    r=sorted(set(list_convert_to_array(a))&set(list_convert_to_array(b)))
+    return array_convert_to_list(r) if a and b and r else None
     
 
-print(merge_sort(array_convert_to_list([1,2,44,4,5,6])))
+print(sorted_intersect(array_convert_to_list([1,2,44,4,5,6]),array_convert_to_list([99])))
