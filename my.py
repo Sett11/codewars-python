@@ -1,3 +1,5 @@
+from itertools import zip_longest
+
 class Node(object):
     def __init__(self, data=None):
         self.data = data
@@ -21,16 +23,10 @@ def array_convert_to_list(a,L=None):
             c=c.next
     return L
     
-def front_back_split(h,f,q):
-    a=list_convert_to_array(h)
-    n=len(a)
-    if n<2:
-        raise()
-    b=a[:n//2]+([a[n//2]] if n&1 else [])
-    c=a[n//2:]
-    if n&1:
-         c.pop(0)
-    return list_convert_to_array(array_convert_to_list(b,f)),list_convert_to_array(array_convert_to_list(c,q))
+def shuffle_merge(f,s):
+    if f is None: return s
+    if s is None: return f
+    return array_convert_to_list([k for k in sum([list(i) for i in zip_longest(list_convert_to_array(f),list_convert_to_array(s))],[]) if k])
     
 
-print(front_back_split(array_convert_to_list([1,2,3,4,5,6,7,8,9,10,11]),Node(),Node()))
+print(shuffle_merge(array_convert_to_list([1,2,3,4,5,6]),array_convert_to_list([9,10,11])))
