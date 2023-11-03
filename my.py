@@ -1,8 +1,4 @@
-def pages_numbering_with_ink(c,n):
-    while n>=len(str(c+1)):
-        n-=len(str(c))
-        c+=1
-    return c-1
+from re import sub
 
-print(pages_numbering_with_ink(80,1000))
-print(pages_numbering_with_ink(8,4))
+def timed_reading(l,t):
+    return len(list(filter(lambda e:len(e)<=l and e,map(lambda e:sub(r'[^A-z]','',e),t.split(' ')))))
