@@ -1,4 +1,12 @@
-def crossing_sum(m,r,c):
-    return sum(m[r][0:c]+m[r][c+1:]+list(list(zip(*m))[c]))
+def new_numeral_system(n):
+    s='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    n=s.index(n)
+    r=[]
+    for i in range(25):
+        for j in range(i,25):
+            if i+j==n:
+                r.append(f'{s[i]} + {s[j]}')
+    return r
 
-print(crossing_sum([[1,1,1,1],[2,2,2,2],[3,3,3,3]],1,3))
+
+print(new_numeral_system('O'))
