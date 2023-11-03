@@ -1,12 +1,8 @@
-def new_numeral_system(n):
-    s='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    n=s.index(n)
-    r=[]
-    for i in range(25):
-        for j in range(i,25):
-            if i+j==n:
-                r.append(f'{s[i]} + {s[j]}')
-    return r
+def pages_numbering_with_ink(c,n):
+    while n>=len(str(c+1)):
+        n-=len(str(c))
+        c+=1
+    return c-1
 
-
-print(new_numeral_system('O'))
+print(pages_numbering_with_ink(80,1000))
+print(pages_numbering_with_ink(8,4))
