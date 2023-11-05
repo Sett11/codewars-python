@@ -1,7 +1,8 @@
 from re import sub
+from collections import OrderedDict
 
-def get_weight(s):
-    return sum(map(ord,sub(r'.',lambda e: e.group().lower() if e.group().isupper() else e.group().upper(),sub(r'\W|\d|_','',s))))
+def lottery(s):
+    return ''.join(OrderedDict.fromkeys(sub(r'\D','',s))) or 'One more run!'
 
 
-print(get_weight('Joe'))
+print(lottery('hPrBKWDH8yc6Lt5NQZWQ'))
