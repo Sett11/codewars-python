@@ -1,9 +1,15 @@
-def get_number_of_squares(n):
-    r=0
-    i=1
-    while r+i**2<n:
-        r+=i**2
-        i+=1
-    return i-1
+def counting_valleys(s): 
+    a=[0 if i=='F' else 1 if i=='U' else -1 for i in s]
+    r=c=0
+    v=False
+    for i in a:
+        r+=i
+        if r<0:
+            v=True
+        elif r>=0 and v:
+            v=False
+            c+=1
+    return c
 
-print(get_number_of_squares(15))
+
+print(counting_valleys('UFFDDFDUDFUFUUFFDDUFFDDUFFDDUDUDUDUDUDUUUUUUUUU'))
