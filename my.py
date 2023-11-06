@@ -1,9 +1,4 @@
-def match(a,n):
-    a=sum(a)
-    c=100
-    while n:
-        c-=c/100*15
-        n-=1
-    return ['No match!','Match!'][a>=c]
+def decode(s):
+    return s.translate(str.maketrans('1234567890','9876043215'))
 
-print(match([26,23,19],3))
+print(decode('4103432323'))
