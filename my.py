@@ -1,8 +1,9 @@
-def sort_transform(a):
-    r=sorted(a)
-    q=r[::-1]
-    w=sorted(a,key=chr)
-    return f"{''.join(map(chr,a[:2]+a[-2:]))}-{''.join(map(chr,r[:2]+r[-2:]))}-{''.join(map(chr,q[:2]+q[-2:]))}-{''.join(map(chr,w[:2]+w[-2:]))}"
+def get_number_of_squares(n):
+    r=0
+    i=1
+    while r+i**2<n:
+        r+=i**2
+        i+=1
+    return i-1
 
-
-print(sort_transform([111, 112, 113, 114, 115, 113, 114, 110]))
+print(get_number_of_squares(15))
