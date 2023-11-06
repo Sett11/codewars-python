@@ -1,15 +1,9 @@
-def counting_valleys(s): 
-    a=[0 if i=='F' else 1 if i=='U' else -1 for i in s]
-    r=c=0
-    v=False
-    for i in a:
-        r+=i
-        if r<0:
-            v=True
-        elif r>=0 and v:
-            v=False
-            c+=1
-    return c
+from functools import reduce
+from operator import mul
 
+def numbers_with_digit_inside(x,d):
+    a=[i for i in range(1,x+1) if str(d) in str(i)]
+    return [len(a),sum(a),reduce(mul,a,1) if a else 0]
 
-print(counting_valleys('UFFDDFDUDFUFUUFFDDUFFDDUFFDDUDUDUDUDUDUUUUUUUUU'))
+print(numbers_with_digit_inside(11,1))
+print(numbers_with_digit_inside(1,0))
