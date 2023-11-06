@@ -1,9 +1,7 @@
-from functools import reduce
-from operator import mul
+from re import sub
 
-def numbers_with_digit_inside(x,d):
-    a=[i for i in range(1,x+1) if str(d) in str(i)]
-    return [len(a),sum(a),reduce(mul,a,1) if a else 0]
+def cypher(s):
+    o={'l':1,'z':2,'e':3,'a':4,'s':5,'b':6,'t':7,'g':9,'o':0,'I':1,'R':2,'E':3,'A':4,'S':5,'G':6,'T':7,'B':8,'O':0}
+    return sub(r'.',lambda e:str(o.get(e.group(),e.group())),s)
 
-print(numbers_with_digit_inside(11,1))
-print(numbers_with_digit_inside(1,0))
+print(cypher("Hello World"))
