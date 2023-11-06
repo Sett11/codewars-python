@@ -1,7 +1,5 @@
-from collections import OrderedDict
-
-def unite_unique(*a):
-    return list(OrderedDict.fromkeys(sum(list(a),[])))
+def resistor_parallel(*a):
+    return 1/eval('1/'+'+1/'.join(map(str,a)))
 
 
-print(unite_unique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
+print(resistor_parallel(20,20,40))
