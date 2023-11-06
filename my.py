@@ -1,2 +1,4 @@
-def help_zoom(a):
-    return ['No','Yes'][a==a[::-1]]
+def re_ordering(s):
+    return ' '.join(sorted(s.split(' '),key=lambda e:e[0].isupper(),reverse=True))
+
+print(re_ordering('jojo ddjajdiojdwo ana G nnibiial'))
