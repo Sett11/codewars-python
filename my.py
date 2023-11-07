@@ -1,13 +1,5 @@
-from re import sub
+def to_integer(s):
+    try: return int(s,(2 if '0b' in s else 8 if '0o' in s else 16 if '0x' in s else 10)) if all(i not in s for i in [' ','\n']) else None
+    except:pass
 
-def to_cents(s):
-    c=sub(r'\$\d+\.','',s)
-    try:
-        if len(s)!=len(c) and len(s.split('.')[1])<3 and '\n' not in s:
-            return int(s[1:].replace('.',''))
-    except:
-        pass
-
-
-print(to_cents("1"))
-print(to_cents("$99.99"))
+print(to_integer('123'))
