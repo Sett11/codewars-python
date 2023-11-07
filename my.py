@@ -1,6 +1,13 @@
 from re import sub
 
-def dad_filter(s):
-    return sub(r',$|\s^','',sub(r',+',',',s.strip()))
+def to_cents(s):
+    c=sub(r'\$\d+\.','',s)
+    try:
+        if len(s)!=len(c) and len(s.split('.')[1])<3 and '\n' not in s:
+            return int(s[1:].replace('.',''))
+    except:
+        pass
 
-print(dad_filter("Dead or alive,,,, you're coming with me,,,   "))
+
+print(to_cents("1"))
+print(to_cents("$99.99"))
