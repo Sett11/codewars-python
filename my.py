@@ -1,4 +1,6 @@
-def lstzip(a,b,fn):
-    return [fn(*i) for i in zip(a,b)]
+from re import sub
 
-print(lstzip([1, 2, 3, 4, 5],['a', 'b'],lambda a,b: str(a)+str(b)))
+def dad_filter(s):
+    return sub(r',$|\s^','',sub(r',+',',',s.strip()))
+
+print(dad_filter("Dead or alive,,,, you're coming with me,,,   "))
