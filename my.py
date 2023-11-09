@@ -1,4 +1,6 @@
-def magic_sum(a):
-    return sum(filter(lambda e:e&1 and '3' in str(e),a))
+def zebulans_nightmare(s):
+    a=s.split('_')
+    return ''.join(a[:1]+[i[0].upper()+i[1:] for i in a[1:]])
 
-print(magic_sum([3, 12, 5, 8, 30, 13]))
+print(zebulans_nightmare('kkk_lll'))
+print(zebulans_nightmare('hhh'))
