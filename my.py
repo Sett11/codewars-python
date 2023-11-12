@@ -1,2 +1,2 @@
-def is_matching(st, st1, st2): 
-    return sorted(st.replace(' ','').lower())==sorted((st1+st2).replace(' ','').lower())
+def unscramble(s):
+    return [i for i in word_list if sorted(i)==sorted(s)]
