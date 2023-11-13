@@ -1,6 +1,7 @@
-def num_of_open_lockers(n):
-    return len([i for i in range(int(n**.5))])
+def square(n):
+    c=[1]
+    for _ in range(1,n):
+        c.append(c[-1]*2)
+    return c[-1]
 
-
-print(num_of_open_lockers(128))
-print(num_of_open_lockers(56))
+print(square(32))
