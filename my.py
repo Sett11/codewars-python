@@ -1,9 +1,6 @@
-from re import sub
+def num_of_open_lockers(n):
+    return len([i for i in range(int(n**.5))])
 
-def f(s):
-    return s+'egg' if (s.lower() not in 'aioue' and s.isalpha()) else s
 
-def heggeleggleggo(s):
-    return sub(r'.',lambda e:f(e.group()),s)
-
-print(heggeleggleggo('hello'))
+print(num_of_open_lockers(128))
+print(num_of_open_lockers(56))
