@@ -1,9 +1,9 @@
-def valid_number(n):
-    try:
-        return (float(n) or int(float(n))==0) and len(n.split('.')[1])==2
-    except:
-        return False
+from re import sub
 
-print(valid_number("34443.33"))
-print(valid_number("0.00"))
-print(valid_number("34443.33a"))
+def f(s):
+    return s+'egg' if (s.lower() not in 'aioue' and s.isalpha()) else s
+
+def heggeleggleggo(s):
+    return sub(r'.',lambda e:f(e.group()),s)
+
+print(heggeleggleggo('hello'))
