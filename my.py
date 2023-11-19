@@ -1,7 +1,11 @@
 def pattern(n):
-    if n<1:
-        return ''
-    return '\n'.join([''.join([str(i)]*i) for i in range(2,n+1,2)])
+    a=list(map(str,range(n,0,-1)))
+    r=''.join(a)
 
+    for _ in range(n):
+        a=a[:-1]
+        r+='\n'+''.join(a)
 
-print(pattern(6))
+    return r.strip('\n')
+
+print(pattern(11))
