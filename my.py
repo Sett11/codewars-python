@@ -1,5 +1,7 @@
-def decode(s):
-    a='abcdefghijklmnopqrstuvwxyz'
-    return ''.join([a[-a.index(i)-1] if i!=' ' else i for i in s])
+def pattern(n):
+    if n<1:
+        return ''
+    return '\n'.join([''.join([str(i)]*i) for i in range(2,n+1,2)])
 
-print(decode('abc jko'))
+
+print(pattern(6))
