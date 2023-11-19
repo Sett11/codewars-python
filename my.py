@@ -1,11 +1,5 @@
-def pattern(n):
-    a=list(map(str,range(n,0,-1)))
-    r=''.join(a)
+def computer_to_phone(s):
+    return s.translate(str.maketrans('789456123','123456789'))
 
-    for _ in range(n):
-        a=a[:-1]
-        r+='\n'+''.join(a)
 
-    return r.strip('\n')
-
-print(pattern(11))
+print(computer_to_phone('789'))
