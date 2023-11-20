@@ -1,7 +1,9 @@
-from math import gcd
-from re import sub
-
-def binary_gcd(x,y):
-    return len(sub(r'[^1]','',bin(gcd(x,y))))
-
-print(binary_gcd(21,14))
+class Warrior:
+    def __init__(self,name):
+        self.name=name
+        self.health=100
+        
+    def strike(self,enemy,swings):
+        enemy.health-=swings*10
+        if enemy.health<0:
+            enemy.health=0
