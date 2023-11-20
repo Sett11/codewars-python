@@ -1,2 +1,5 @@
-def two_oldest_ages(a):
-    return sorted(a)[-2:]
+def itemgetter(item):
+    return item['name']
+    
+def get_names(data):
+    return list(map(itemgetter,data))
