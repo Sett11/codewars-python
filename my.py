@@ -1,6 +1,7 @@
 from math import gcd
+from re import sub
 
-def mygcd(x,y):
-    return gcd(x,y)
+def binary_gcd(x,y):
+    return len(sub(r'[^1]','',bin(gcd(x,y))))
 
-print(mygcd(21,14))
+print(binary_gcd(21,14))
