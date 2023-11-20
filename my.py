@@ -1,5 +1,6 @@
-def palindrome_chain_length(n,c=0):
-    s=str(n)
-    return c if s==s[::-1] else palindrome_chain_length(int(s)+int(s[::-1]),c+1)
+from math import gcd
 
-print(palindrome_chain_length(87))
+def mygcd(x,y):
+    return gcd(x,y)
+
+print(mygcd(21,14))
