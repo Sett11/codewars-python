@@ -1,15 +1,13 @@
-def f(a,b):
-    m,n=a,b
+def f(n):
+    return all(n%i for i in range(2,int(n**.5+1)))
 
-    while m!=n:
-        if m>n:
-            n+=b
-        else:
-            m+=a
+def is_smooth(n):
+    a=[j for j in sum([[i,n//i] for i in range(2,int(n**.5+1)) if n%i==0],[]) if f(j)]
+    if not a and not f(n):
+        return "non-smooth"
+    a=a[-1] if a else n
+    return "power of 2" if a==2 else "3-smooth" if a==3 else "Hamming number" if a==5 else "humble number" if a==7 else "non-smooth"
 
-    return m
 
-def sum_differences_between_products_and_LCMs(a):
-    return sum([i*j-f(i,j) for i,j in a])
-
-print(sum_differences_between_products_and_LCMs([[15,18], [4,5], [12,60]]))
+print(is_smooth(111))
+print(is_smooth(7))
