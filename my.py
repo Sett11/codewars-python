@@ -1,13 +1,22 @@
-def f(n):
-    return all(n%i for i in range(2,int(n**.5+1)))
+def sequence_classifier(a):
+    if a[0]==a[-1]:
+        if len(a)>2:
+            if a[1]==a[0]:
+                return 5
+            else:
+                return 0
+    r=sorted(a)
+    if r==a:
+        if len(set(a))==len(a):
+            return 1
+        else:
+            return 2
+    if r[::-1]==a:
+        if len(set(a))==len(a):
+            return 3
+        else:
+            return 4
+    return 0
+        
 
-def is_smooth(n):
-    a=[j for j in sum([[i,n//i] for i in range(2,int(n**.5+1)) if n%i==0],[]) if f(j)]
-    if not a and not f(n):
-        return "non-smooth"
-    a=a[-1] if a else n
-    return "power of 2" if a==2 else "3-smooth" if a==3 else "Hamming number" if a==5 else "humble number" if a==7 else "non-smooth"
-
-
-print(is_smooth(111))
-print(is_smooth(7))
+print(sequence_classifier([3,5,8,9,14,23]))
