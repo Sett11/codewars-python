@@ -1,20 +1,19 @@
-a=[1]
-q=[0,0,0]
-d=[2,3,5]
+from sys import set_int_max_str_digits
+set_int_max_str_digits(1000000)
 
-def hamming(n):
+def fib(n):
 
-    while len(a)<=n:
-        p=[a[q[i]]*d[i] for i in range(3)]
-        m=min(p)
-        i=p.index(m)
-        q[i]+=1
-        if m!=a[-1]:
-            a.append(m)
+    def f(x):
+        if not x:
+            return [0,1]
+        if x==1:
+            return [1,1]
+        a,b=f(x//2)
+        p,q=a*(2*b-a),b*b+a*a
+        return [p,q] if x%2==0 else [q,p+q]
 
-    return a[n-1]
+    return f(n)[0] if n>=0 else -f(-n)[0] if n%2==0 else f(-n)[0]
 
 
-print(hamming(4))
-print(hamming(5))
-print(hamming(1099))
+print(fib(-96))
+print(fib(1000000))
