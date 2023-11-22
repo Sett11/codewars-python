@@ -1,30 +1,14 @@
-from collections import deque
-
-
-def lru(n,a):
-    q=deque()
-    c=q.copy()
+def fifo(n,a):
+    r,j=[-1]*n,0
 
     for i in a:
-        if len(q)>=n:
-            if i in q:
-                c.remove(i)
-                c.append(i)
-            else:
-                q[q.index(c[0])]=i
-                c.remove(c[0])
-                c.append(i)
+        if len(r)==n:
+            if i not in r:
+                r[j%n]=i
+                j+=1
         else:
-            if i in q:
-                c.remove(i)
-                c.append(i)
-            else:
-                q.append(i)
-                c.append(i)
+            r[j]=i
 
-    return list(q)+[-1]*(n-len(q))
+    return r
 
-
-print(lru(3,[1, 2, 3, 4, 3, 2, 5]))
-print(lru(4,[5, 4, 3, 2, 3, 5, 2, 6, 7, 8]))
-print(lru(3,[1,1,1]))
+print(fifo(3, [1, 2, 3, 4, 2, 5]))
