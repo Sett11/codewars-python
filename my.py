@@ -1,19 +1,30 @@
-from sys import set_int_max_str_digits
-set_int_max_str_digits(1000000)
-
-def fib(n):
-
-    def f(x):
-        if not x:
-            return [0,1]
-        if x==1:
-            return [1,1]
-        a,b=f(x//2)
-        p,q=a*(2*b-a),b*b+a*a
-        return [p,q] if x%2==0 else [q,p+q]
-
-    return f(n)[0] if n>=0 else -f(-n)[0] if n%2==0 else f(-n)[0]
+from collections import deque
 
 
-print(fib(-96))
-print(fib(1000000))
+def lru(n,a):
+    q=deque()
+    c=q.copy()
+
+    for i in a:
+        if len(q)>=n:
+            if i in q:
+                c.remove(i)
+                c.append(i)
+            else:
+                q[q.index(c[0])]=i
+                c.remove(c[0])
+                c.append(i)
+        else:
+            if i in q:
+                c.remove(i)
+                c.append(i)
+            else:
+                q.append(i)
+                c.append(i)
+
+    return list(q)+[-1]*(n-len(q))
+
+
+print(lru(3,[1, 2, 3, 4, 3, 2, 5]))
+print(lru(4,[5, 4, 3, 2, 3, 5, 2, 6, 7, 8]))
+print(lru(3,[1,1,1]))
