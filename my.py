@@ -1,12 +1,18 @@
-def tops(s):
-    i,j=1,2
-    c=''
+from math import ceil
 
-    while i<len(s):
-        c+=s[i]
-        i+=j*2+1
-        j+=2
+class Primes:
+    @staticmethod
+    def stream():
+        n=15490000
+        r=[True]*n
+        r[0]=r[1]=False
 
-    return c[::-1]
+        for i in range(2,int(n**.5+1)):
+            if r[i]:
+                r[i*2:n:i]=[False]*(ceil(n/i)-2)
+        
+        for i,j in enumerate(r):
+            if j:
+                yield i
 
-print(tops('abcdefghijklmnopqrstuvwxyz12345'))
+print(next(Primes.stream()))
