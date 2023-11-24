@@ -1,19 +1,48 @@
-from statistics import mean
+from math import ceil
 
-def f(n,m):
-    a=list(map(int,str(n)))
-    return all(sum(a[i:i+4])<=m for i in range(len(a)-3))
+def e(n):
+    r=[True]*n
+    r[0]=r[1]=False
 
-def max_sum_dig(n,m):
-    a=[i for i in range(1000,n+1) if f(i,m)]
-    s,l,c=sum(a),len(a),mean(a)
-    r=[]
-
-    for i in range(l):
-        if a[i]>c:
-            r+=[(c-a[i-1],a[i-1]),(a[i]-c,a[i])]
-            break
-        
-    return [l,sorted(r,key=min)[0][1],s]
+    for i in range(2,int(n**.5+1)):
+        if r[i]:
+            r[2*i:n:i]=[False]*ceil((n/i)-2)
     
-print(max_sum_dig(82426,9))
+    return [i for i,j in enumerate(r) if j]
+
+primes=e(1000000)
+
+def left(n):
+    l,r=0,len(primes)
+
+    while r-l>1:
+        m=(l+r)//2
+        if primes[m]<n:
+            l=m
+        else:
+            r=m
+    
+    return l+1
+
+def right(n):
+    l,r=0,len(primes)
+
+    while r-l>1:
+        m=(l+r)//2
+        if primes[m]<=n:
+            l=m
+        else:
+            r=m
+    
+    return r
+
+def bs(n):
+    return n in primes[left(n):right(n)]
+
+
+def find_emirp(n):
+    a=[i for i in primes[:left(n)] if str(i)!=str(i)[::-1] and bs(int(str(i)[::-1]))]
+    return [len(a),a[-1],sum(a)]
+
+
+print(find_emirp(20000))
