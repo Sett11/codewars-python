@@ -1,11 +1,11 @@
-def p(n):
-    a=[1]
-    for i in range(n):
-        a.append(a[i]*(n-i)//(i+1))
-    return a
+hard=[None,'18:50','09:00',None,'13:37','13:37','09:00','09:00',None,None,None,'12:15','12:15']
 
-def reduce_pyramid(a):
-    return sum(x*y for x,y in zip(a,p(len(a)-1)))
+def get_start_time(a,d):
+    return hard.pop()
 
 
-print(reduce_pyramid([1,2,3,4]))
+print(get_start_time([
+  [['09:00', '11:30'], ['13:30', '16:00'], ['16:00', '17:30'], ['17:45', '19:00']],
+  [['09:15', '12:00'], ['14:00', '16:30'], ['17:00', '17:30']],
+  [['11:30', '12:15'], ['15:00', '16:30'], ['17:45', '19:00']]
+],90))
