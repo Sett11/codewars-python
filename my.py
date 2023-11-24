@@ -1,15 +1,19 @@
-def get_matrix_product(a,b):
-    if len(a[0])!=len(b):
-        return
-    n,m,l=len(a),len(b[0]),len(b)
-    r=[[0]*m for _ in range(n)]
+from statistics import mean
+
+def f(n,m):
+    a=list(map(int,str(n)))
+    return all(sum(a[i:i+4])<=m for i in range(len(a)-3))
+
+def max_sum_dig(n,m):
+    a=[i for i in range(1000,n+1) if f(i,m)]
+    s,l,c=sum(a),len(a),mean(a)
+    r=[]
+
+    for i in range(l):
+        if a[i]>c:
+            r+=[(c-a[i-1],a[i-1]),(a[i]-c,a[i])]
+            break
+        
+    return [l,sorted(r,key=min)[0][1],s]
     
-    for i in range(n):
-        for j in range(m):
-            for k in range(l):
-                r[i][j]+=a[i][k]*b[k][j]
-    
-    return r
-    
-print(get_matrix_product([[1, 2], [3, 4]], [[5, 6], [7, 8]]))
-print(get_matrix_product([[0.5, 1],[1.5, 2]], [[0.2, 0.4], [0.6, 0.8]]))
+print(max_sum_dig(82426,9))
