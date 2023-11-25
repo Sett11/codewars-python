@@ -1,48 +1,12 @@
-from math import ceil
+def determinant(m):
+    if len(m)==1:
+        return m[0][0]
+    if len(m)==2:
+        return m[0][0]*m[1][1]-m[0][1]*m[1][0]
+    return sum(((-1)**j)*v*determinant(f(m,0,j)) for j,v in enumerate(m[0]))
 
-def e(n):
-    r=[True]*n
-    r[0]=r[1]=False
-
-    for i in range(2,int(n**.5+1)):
-        if r[i]:
-            r[2*i:n:i]=[False]*ceil((n/i)-2)
-    
-    return [i for i,j in enumerate(r) if j]
-
-primes=e(1000000)
-
-def left(n):
-    l,r=0,len(primes)
-
-    while r-l>1:
-        m=(l+r)//2
-        if primes[m]<n:
-            l=m
-        else:
-            r=m
-    
-    return l+1
-
-def right(n):
-    l,r=0,len(primes)
-
-    while r-l>1:
-        m=(l+r)//2
-        if primes[m]<=n:
-            l=m
-        else:
-            r=m
-    
-    return r
-
-def bs(n):
-    return n in primes[left(n):right(n)]
+def f(m,x,y):
+    return [[v for j,v in enumerate(r) if j!=y] for i,r in enumerate(m) if i!=x]
 
 
-def find_emirp(n):
-    a=[i for i in primes[:left(n)] if str(i)!=str(i)[::-1] and bs(int(str(i)[::-1]))]
-    return [len(a),a[-1],sum(a)]
-
-
-print(find_emirp(20000))
+print(determinant([[8, -5, 9, -1, 6, 4], [-3, 5, 9, -10, 7, 7], [1, -2, -4, 7, -2, 3], [9, 4, -10, -3, -6, -1], [-2, -9, 6, 9, -4, 2], [4, -9, 10, 5, 0, 4]]))
