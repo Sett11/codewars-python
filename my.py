@@ -1,11 +1,6 @@
-def get_score(n):
-    a,b,c=50,100,0
+from math import ceil
 
-    while c<n-1:
-        a+=b
-        b+=50
-        c+=1
-    
-    return a
+def cooking_time(n):
+    return ceil(n/8)*5
 
-print(get_score(1002))
+print(cooking_time(973))
