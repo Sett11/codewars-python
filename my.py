@@ -1,13 +1,6 @@
-def evaluate(s):
-    a=list(map(int,s.split(' @ ')))
+def process_2arrays(a,b):
+    a,b=set(a),set(b)
+    l,t,p=len(a&b),len(a^b),len(a-b)
+    return [l,t,p,t-p]
 
-    while len(a)>1:
-        b,c=a[0],a[1]
-        if not c:
-            return
-        t=(b+c)+(b-c)+(b*c)+(b//c)
-        a[0:2]=[t]
-    
-    return a[-1]
-
-print(evaluate('1 @ 1 @ -4'))
+print(process_2arrays([33, 2, 3, 37, 38, 40, 12, 10, 43, 44, 47, 49, 8, 19, 22, 24, 26, 28, 29, 30],[1, 34, 17, 7, 9, 10, 43, 49, 22, 27, 28]))
