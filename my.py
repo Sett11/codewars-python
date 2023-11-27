@@ -1,6 +1,13 @@
-from math import ceil
+def evaluate(s):
+    a=list(map(int,s.split(' @ ')))
 
-def cooking_time(n):
-    return ceil(n/8)*5
+    while len(a)>1:
+        b,c=a[0],a[1]
+        if not c:
+            return
+        t=(b+c)+(b-c)+(b*c)+(b//c)
+        a[0:2]=[t]
+    
+    return a[-1]
 
-print(cooking_time(973))
+print(evaluate('1 @ 1 @ -4'))
