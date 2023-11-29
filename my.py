@@ -1,21 +1,18 @@
-from itertools import permutations as p
+def longest(s):
+    a=[ord(i) for i in s]+[-1]
+    o={}
+    m=0
 
-def best_route(a,b):
-    r,o,m=[['Notgnihsaw']+list(i) for i in p(a) if i[-1]=='Notgnihsaw'],{},1e9
-
-    for i in r:
-        t=0
-        for j in range(len(i)-1):
-            t+=b[a.index(i[j])][a.index(i[j+1])]
-        m=min(m,t)
-        o[t]=i
+    for i in range(len(a)):
+        for j in range(i,len(a)-1):
+            if a[j]>a[j+1]:
+                n=j-i
+                m=max(m,n)
+                if n not in o:
+                    o[n]=s[i:j+1]
+                break
     
-    return o[m][1:]
+    return o[m]
 
-
-print(best_route(['Aleppo', 'Shenyang', 'Notgnihsaw', 'Vienna', 'Buenos Aires'], 
-                                      [[0, 1800, 1250, 1500, 2450], 
-                                       [1400, 0, 1900, 1150, 2000], 
-                                       [1300, 1200, 0, 900, 1450],
-                                       [3000, 1950, 800, 0, 1700], 
-                                       [2800, 2400, 1650, 2250, 0]]))
+print(longest('asdfbyfgiklag'))
+print(longest('asdfaaaabbbbcttavvfffffdf'))
