@@ -1,23 +1,20 @@
-def longest_substring(s):
-    e,o='02468','13579'
-    s+='&'
-    r={0:''}
-    m=i=0
+def longest_palindrome(s):
+    s=s[::-1]
+    t='#'.join('^{}$'.format(s))
+    n=len(t)
+    p=[0]*n
+    c=r=0
 
-    while i<len(s)-1:
-        if (s[i] in e and s[i+1] in e) or (s[i] in o and s[i+1] in o) or s[i+1]=='&':
-            t=s[0:i+1]
-            n=len(t)
-            m=max(m,n)
-            if n not in r:
-                r[n]=t
-            s=s[i+1:]
-            i=-1
-        i+=1
-        
-    
-    return r[m]
+    for i in range(1,n-1):
+        p[i]=(r>i) and min(r-i,p[2*c-i])
+        while t[i+1+p[i]]==t[i-1-p[i]]:
+            p[i]+=1
+        if i+p[i]>r:
+            c,r=i,i+p[i]
+
+    m,k=max((n,i) for i,n in enumerate(p))
+    return s[(k-m)//2:(k+m)//2]
 
 
-print(longest_substring('225424272163254474441338664823'))
-print(longest_substring('594127169973391692147228678476'))
+print(longest_palindrome('jddddjuudjjjdjjjuuudujuudjjjjujdduujduujjujdudjjuuuuuddjjjddddjdj'))
+print(longest_palindrome('ttaaftffftfaafatf'))
