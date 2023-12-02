@@ -1,9 +1,6 @@
-def smallest_integer(a,i=0,j=0):
-    r=[]
-    for i in a.copy():
-        r.extend(i)
-    r=list(set(r))
-    while j<=max(r)+1:
-        if(not j in r):
-            return j
-        j+=1
+a=[i for i in range(10**6) if all(j not in str(i) for j in ['4','7']) and i%13==0]
+
+def unlucky_number(n):
+    return len(list(filter(lambda x:x<=n,a)))
+
+print(unlucky_number(312))
