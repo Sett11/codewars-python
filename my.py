@@ -1,25 +1,17 @@
-class Node:
-    def __init__(self,next=None):
-        self.next=next
+from collections import deque
 
-def loop_size(head):
-    a,c=[],set()
-    h=head
-    while h:
-        if h in c:
-            return len(a)-a.index(h)
-        a.append(h)
-        c.add(h)
-        h=h.next
+class DoublyLinkedList(object):
+    def __init__(self):
+        self.h=deque([])
 
+    def push(self,x):
+        self.h.append(x)
 
-node1 = Node()
-node2 = Node()
-node3 = Node()
-node4 = Node()
-node1.next = node2
-node2.next = node3
-node3.next = node4
-node4.next = node2
+    def unshift(self,x):
+        self.h.appendleft(x)
 
-print(loop_size(node1))
+    def pop(self):
+        return self.h.pop()
+
+    def shift(self):
+        return self.h.popleft()
