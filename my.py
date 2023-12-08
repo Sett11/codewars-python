@@ -1,10 +1,10 @@
-from hashlib import sha256
-from itertools import permutations
+from functools import reduce
+from operator import mul
 
-def sha256_cracker(h,s):
-    try:
-        return next(j for j in [''.join(i) for i in permutations(s)] if sha256(bytes(j,encoding='utf-8')).hexdigest()==h)
-    except:
-        pass
+def find_us(n1, n2, k, pf, d):
+    return [i for i in range(reduce(mul,pf),n1+k*n2,max(pf)) if all(i%j==0 for j in pf) and all(str(j) in str(i) for j in d)]
 
-print(sha256_cracker('5694d08a2e53ffcae0c3103e5ad6f6076abd960eb1f8a56577040bc1028f702b','cdeo'))
+
+print(find_us(30, 90, 4, [2, 3], [6, 2]))
+print(find_us(30, 400, 18, [2, 3, 7], [6, 2, 5]))
+print(find_us(230,7059,435,[2, 17, 7, 29],[5, 3, 2, 6]))
