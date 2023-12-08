@@ -1,13 +1,14 @@
-def find(a):
-    a=sorted(a)
-    r=[a[i+1]-a[i] for i in range(len(a)-1)]
+from math import ceil
 
-    for i in range(len(r)-1):
-        if r[i]!=r[i+1]:
-            return a[i+1]+(r[i+1]-r[i])
-    
-    return a[0]
+def generate_primes(n):
+    if n<2:
+        return []
+    n+=1
+    r=[True]*n
+    r[0]=r[1]=False
+    for i in range(2,int(n**.5+1)):
+        if r[i]:
+            r[2*i:n:i]=[False]*ceil((n/i)-2)
+    return [i for i,j in enumerate(r) if j]
 
-print(find([3, 9, 1, 11, 13, 5]))
-print(find([5, -1, 0, 3, 4, -3, 2, -2]))
-print(find([1,1,1,1,1,1,1]))
+print(generate_primes(47))
