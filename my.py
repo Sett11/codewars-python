@@ -1,16 +1,11 @@
-from collections import Counter
-from bisect import insort
+from itertools import product
 
-def original_number(s):
-        o=Counter(s.lower())
-        d={'w': ('two', '2'), 'u': ('four', '4'), 'x': ('six', '6'), 'f': ('five', '5'), 'z': ('zero', '0'), 'r': ('three', '3'), 't': ('eight', '8'), 's': ('seven', '7'), 'i': ('nine', '9'), 'n': ('one', '1')}
-        r=[]
-        for i,(j,k) in d.items():
-            c=o[i]
-            insort(r,k*c)
-            for h in j:
-                o[h]-=c
-        return ''.join(r)
+def comfortable_numbers(l,r):
+    a=[i for i in range(r+1)]
+    q=set()
+    for i in range(l,r):
+        s=sum(map(int,str(a[i])))
+        q.update([k for k in product([a[i]],[j for j in a[a[i]:a[i]+s+1] if j>=l and j<=r and j!=a[i]]) if k[0] in list(range(k[1]-sum(map(int,str(k[1]))),k[1]+1+sum(map(int,str(k[1])))))])
+    return len(q)
 
-
-print(original_number('TTONWOHREEE'))
+print(comfortable_numbers(1,1000))
