@@ -1,11 +1,15 @@
-from itertools import product
+def distribution_of(a):
+    r,i=[0,0],0
+    while a:
+        m=max(a[0],a[-1])
+        r[i%2]+=m
+        if m==a[0]:
+            a=a[1:]
+        else:
+            a=a[:-1]
+        i+=1
+    return r
 
-def comfortable_numbers(l,r):
-    a=[i for i in range(r+1)]
-    q=set()
-    for i in range(l,r):
-        s=sum(map(int,str(a[i])))
-        q.update([k for k in product([a[i]],[j for j in a[a[i]:a[i]+s+1] if j>=l and j<=r and j!=a[i]]) if k[0] in list(range(k[1]-sum(map(int,str(k[1]))),k[1]+1+sum(map(int,str(k[1])))))])
-    return len(q)
 
-print(comfortable_numbers(1,1000))
+print(distribution_of([4,7,2,9,5,2]))
+print(distribution_of([10,1000,2,1]))
