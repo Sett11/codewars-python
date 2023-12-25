@@ -1,8 +1,16 @@
-import random
+def f(n,b):
+    a,r='01',''
+    while n:
+        r=a[n%b]+r
+        n//=2
+    return r
 
-guess=10
-random.randint=lambda x,y:10
+def z(s):
+    a=list(range(len(s)))[::-1]
+    return sum([(1 if j=='1' else 0)*2**a[i] for i,j in enumerate(s)])
 
-lucky_number = random.randint(1, 100)
+def add(a,b):
+    return f(z(a)+z(b),2) or '0'
 
-print(guess,lucky_number)
+
+print(add('111','10'))
