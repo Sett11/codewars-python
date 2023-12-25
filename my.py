@@ -1,16 +1,3 @@
-def f(n,b):
-    a,r='01',''
-    while n:
-        r=a[n%b]+r
-        n//=2
-    return r
+array_diff=lambda a,b:[i for i in a if i not in set(b)]
 
-def z(s):
-    a=list(range(len(s)))[::-1]
-    return sum([(1 if j=='1' else 0)*2**a[i] for i,j in enumerate(s)])
-
-def add(a,b):
-    return f(z(a)+z(b),2) or '0'
-
-
-print(add('111','10'))
+print(array_diff([-9, 16], [1, 0, -9, 9, -16, 4, -3, -12, -12, 8, 19, -10, 4, -1, -6]))
