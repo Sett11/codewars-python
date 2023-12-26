@@ -1,3 +1,6 @@
-array_diff=lambda a,b:[i for i in a if i not in set(b)]
+def operation(a,b,c=0):
+  a,b=max(a,b),min(a,b)
+  return c if a==b else operation((a-1)//2 if a&1 else a//2,b,c+1)
 
-print(array_diff([-9, 16], [1, 0, -9, 9, -16, 4, -3, -12, -12, 8, 19, -10, 4, -1, -6]))
+print(operation(9,2))
+print(operation(1,4))
