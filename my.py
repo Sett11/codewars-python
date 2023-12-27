@@ -18,7 +18,18 @@
 
 # print(combos(30))
 
-wtf=['abcdefghijklmnopqrstuvwxyz', 'solved', 'congrats', 'mathisfun', 'whatisup']
-recoverSecret=lambda x:wtf.pop()
 
-print(recoverSecret(''))
+def pow_root_pandigit(v,n,k):
+    f,m,r,c=lambda x:len(set(str(x)))==len(str(x)) and '0' not in str(x),int(pow(v,1/n))+1,[],0
+    while len(r)<k and c<min(m*2,15000):
+        t=m**n
+        if f(m) and f(t) and t>v:
+            r.append([m,t])
+        c+=1
+        m+=1
+    return r if len(r)>1 or not r else r[0]
+    
+
+print(pow_root_pandigit(388,2,3))
+print(pow_root_pandigit(1728,3,4))
+print(pow_root_pandigit(5022,2,7))
