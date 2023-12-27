@@ -1,20 +1,16 @@
-def self_converge(n):
-    d={2111:6,211:7}
-    if n in d:
-        return d[n]
-    c,m,r,l=1,n,set(),len(str(n))
-    while True:
-        s=sorted(map(int,str(n)))
-        k=int(''.join(map(str,s[::-1])))-int(''.join(map(str,s)))
-        if k==m or (k in r and l>4):
-            return c
-        if not k:
-            return -1
-        m=n=k
-        if l>4:
-            r.add(k)
-        c+=1
+def finaldist_crazyrobot(a,p):
+    x,y=p
+    for i,j in a:
+        i=i.lower()
+        if i=='r':
+            x+=j
+        elif i=='l':
+            x-=j
+        elif i=='u':
+            y+=j
+        else:
+            y-=j
+    return ((x-p[0])**2+(y-p[1])**2)**.5
 
-print(self_converge(4321))
-print(self_converge(123))
-print(self_converge(211))
+
+print(finaldist_crazyrobot([('R', 2), ('U', 3), ('L', 1), ('D', 6)],(0,0)))
