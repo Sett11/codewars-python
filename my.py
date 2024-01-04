@@ -1,8 +1,23 @@
-def cartesian_neighbor(x,y):
-    a=[]
-    for i in range(x-1,x+2):
-        for j in range(y-1,y+2):
-            a.append((i,j)) if (i,j)!=(x,y) else None
-    return a
+from re import sub
 
-print(cartesian_neighbor(5,7))
+def one(a):
+    return [''.join([str(j) for j in i]) for i in a]
+
+def two(s):
+    return tuple(len(i) for i in sub(r'(.)\1*',lambda x:' '+x.group(),s).split() if i[0]=='1')
+
+def encode(a):
+    return tuple(map(two,one(zip(*a)))),tuple(map(two,one(a)))
+
+print(encode((
+                        (0, 0, 0, 1, 0, 0, 0, 1, 1, 0),
+                        (0, 0, 1, 1, 1, 0, 1, 1, 1, 1),
+                        (0, 0, 1, 1, 1, 1, 1, 1, 1, 1),
+                        (0, 0, 0, 1, 1, 1, 1, 1, 1, 0),
+                        (0, 0, 0, 0, 0, 1, 1, 0, 0, 0),
+                        (0, 1, 0, 0, 0, 0, 1, 1, 0, 0),
+                        (1, 0, 1, 0, 0, 0, 1, 1, 0, 0),
+                        (1, 1, 1, 0, 0, 1, 1, 0, 0, 0),
+                        (1, 1, 1, 0, 0, 1, 1, 1, 0, 1),
+                        (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+                      )))
