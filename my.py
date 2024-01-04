@@ -1,15 +1,21 @@
-def is_madhav_array(a):
-    if len(a)<2:
-        return False
-    i,r=1,[]
+def get_candy_position(n,c,r,k):
+    a,y=list(range(1,n+1)),1
     while a:
-        t=a[0:i]
-        if len(t)!=i:
-            return False
-        r.append(sum(t))
-        a=a[i:]
-        i+=1
-    return len(set(r))==1
+        t=[[0]*r for _ in range(c)]
+        q=a[:r*c]
+        a=a[r*c:]
+        x=0
+        for i in range(c-1,-1,-1):
+            for j in range(r-1,-1,-1):
+                if x>=len(q):
+                    return [-1]*3
+                if q[x]==k:
+                    return [y,i,j]
+                t[i][j]=q[x]
+                x+=1
+        y+=1
+    return [-1]*3
 
 
-print(is_madhav_array([6,2,4,2,2,2,1,5,0,0]))
+print(get_candy_position(15,3,3,14))
+print(get_candy_position(8,4,2,3))
