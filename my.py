@@ -1,50 +1,17 @@
-class Node:
-    def __init__(self,data=None,left=None,right=None):
-        self.data=data
-        self.left=left
-        self.right=right
+class Automaton(object):
+    def __init__(self):
+        self.q=['q1','q2','q3']
+        self.c=0
 
-a = Node("A")
-b = Node("B")
-c = Node("C")
-  
-a.left = b
-a.right = c
+    def read_commands(self,a):
+        for i in range(len(a)):
+            if (a[i]=='1' and self.q[self.c%3]=='q1') or (a[i]=='0' and self.q[self.c%3]=='q2'):
+                self.c+=1
+                continue
+            if self.q[self.c%3]=='q3':
+                self.c-=1
+        return self.q[self.c%3]=='q2'
+        
+my_automaton = Automaton()
 
-
-def pre_order(n):
-    r=[]
-    def f(h):
-        if not h:
-            return
-        r.append(h.data)
-        f(h.left)
-        f(h.right)
-    f(n)
-    return r
-
-def in_order(n):
-    r=[]
-    def f(h):
-        if not h:
-            return
-        f(h.left)
-        r.append(h.data)
-        f(h.right)
-    f(n)
-    return r
-
-def post_order(n):
-    r=[]
-    def f(h):
-        if not h:
-            return
-        f(h.left)
-        f(h.right)
-        r.append(h.data)
-    f(n)
-    return r
-
-print(pre_order(a))
-print(in_order(a))
-print(post_order(a))
+print(my_automaton.read_commands(["1", "0", "0", "1"]))
