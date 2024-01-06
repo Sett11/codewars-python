@@ -1,4 +1,12 @@
-f=lambda a,b:-(-a//b)
+def numericals(s):
+    d,r={},''
+    for i in s:
+        if i not in d:
+            d[i]=1
+            r+='1'
+        else:
+            d[i]+=1
+            r+=str(d[i])
+    return r
 
-print(f(1,1))
-print(f(6,2))
+print(numericals("Hello, World! It's me, JomoPipi!"))
