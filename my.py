@@ -1,15 +1,14 @@
-from itertools import combinations
+def score_throws(a):
+    r,v=0,True
+    for i in a:
+        if i<5:
+            r+=10
+        if i>=5:
+            if i<=10:
+                r+=5
+            v=False
+    return r+(100 if v and a else 0)
 
-def peaceful_yard(a,k):
-    for i,j in list(combinations(sum([[(i,j) for j,p in enumerate(r) if a[i][j]!='-'] for i,r in enumerate(a)],[]),2)):
-        if (abs(j[1]-i[1])**2+abs(j[0]-i[0])**2)**.5<k:
-            return False
-    return True
-
-print(peaceful_yard([
-        "------------", 
-        "--L-------R-", 
-        "----M-------", 
-        "------------", 
-        "------------", 
-        "------------"], 6))
+print(score_throws([21, 10, 10]))
+print(score_throws([4.9, 5.1]))
+print(score_throws([1,5,11]))
