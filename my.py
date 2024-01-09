@@ -1,14 +1,31 @@
-def score_throws(a):
-    r,v=0,True
-    for i in a:
-        if i<5:
-            r+=10
-        if i>=5:
-            if i<=10:
-                r+=5
-            v=False
-    return r+(100 if v and a else 0)
+def create_spiral(n):
+    if type(n)!=int or n<1:
+        return []
+    a=list(range(1,n**2+1))
+    r,a,k=[a[:n]],a[n:],n-1
+    while a:
+        v=2
+        while v:
+            r.append(a[:k])
+            a=a[k:]
+            v-=1
+        k-=1
+    q,w,i=['l','d','r','u'],[r.pop()],0
+    while r:
+        v=r.pop()
+        if q[i%4]=='l':
+            for j in range(len(w)-1,-1,-1):
+                w[j].insert(0,v.pop(0))
+        elif q[i%4]=='d':
+            w.append(v[::-1])
+        elif q[i%4]=='r':
+            for j in range(len(w)-1,-1,-1):
+                w[j].append(v.pop())
+        else:
+            w.insert(0,v)
+        i+=1
+    if n%2==0:
+        w=[p[::-1] for p in w][::-1]
+    return w
 
-print(score_throws([21, 10, 10]))
-print(score_throws([4.9, 5.1]))
-print(score_throws([1,5,11]))
+print(create_spiral(4))
