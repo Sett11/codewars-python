@@ -1,31 +1,14 @@
-def create_spiral(n):
-    if type(n)!=int or n<1:
-        return []
-    a=list(range(1,n**2+1))
-    r,a,k=[a[:n]],a[n:],n-1
-    while a:
-        v=2
-        while v:
-            r.append(a[:k])
-            a=a[k:]
-            v-=1
-        k-=1
-    q,w,i=['l','d','r','u'],[r.pop()],0
-    while r:
-        v=r.pop()
-        if q[i%4]=='l':
-            for j in range(len(w)-1,-1,-1):
-                w[j].insert(0,v.pop(0))
-        elif q[i%4]=='d':
-            w.append(v[::-1])
-        elif q[i%4]=='r':
-            for j in range(len(w)-1,-1,-1):
-                w[j].append(v.pop())
-        else:
-            w.insert(0,v)
-        i+=1
-    if n%2==0:
-        w=[p[::-1] for p in w][::-1]
-    return w
+o={1000: 'thousand', 100: 'hundred', 90: 'ninety', 80: 'eighty', 70: 'seventy', 60: 'sixty', 50: 'fifty', 40: 'forty', 30: 'thirty', 20: 'twenty', 19: 'nineteen', 18: 'eighteen', 17: 'seventeen', 16: 'sixteen', 15: 'fifteen', 14: 'fourteen', 13: 'thirteen', 12: 'twelve', 11: 'eleven', 10: 'ten', 9: 'nine', 8: 'eight', 7: 'seven', 6: 'six', 5: 'five', 4: 'four', 3: 'three', 2: 'two', 1: 'one'}
 
-print(create_spiral(4))
+
+def number2words(n):
+    a=[]
+    for i in o:
+        t,p=divmod(n,i)
+        if t!=0:
+            a.append(f'{o.get(t,number2words(t))} {o[i]}' if t>1 or i in [1000,100] else o[i])
+            n=p
+    return ' '.join(a).replace('ty ','ty-').replace('ty-thousand','ty thousand') or 'zero'
+
+print(number2words(58543))
+print(number2words(565058))
