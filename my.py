@@ -1,14 +1,9 @@
-o={1000: 'thousand', 100: 'hundred', 90: 'ninety', 80: 'eighty', 70: 'seventy', 60: 'sixty', 50: 'fifty', 40: 'forty', 30: 'thirty', 20: 'twenty', 19: 'nineteen', 18: 'eighteen', 17: 'seventeen', 16: 'sixteen', 15: 'fifteen', 14: 'fourteen', 13: 'thirteen', 12: 'twelve', 11: 'eleven', 10: 'ten', 9: 'nine', 8: 'eight', 7: 'seven', 6: 'six', 5: 'five', 4: 'four', 3: 'three', 2: 'two', 1: 'one'}
+from hashlib import md5
+from itertools import product
 
+a=[''.join(i) for i in product('0123456789',repeat=5)]
 
-def number2words(n):
-    a=[]
-    for i in o:
-        t,p=divmod(n,i)
-        if t!=0:
-            a.append(f'{o.get(t,number2words(t))} {o[i]}' if t>1 or i in [1000,100] else o[i])
-            n=p
-    return ' '.join(a).replace('ty ','ty-').replace('ty-thousand','ty thousand') or 'zero'
+def crack(h):
+    return next(i for i in a if md5(bytes(i,'utf-8')).hexdigest()==h)
 
-print(number2words(58543))
-print(number2words(565058))
+print(crack('827ccb0eea8a706c4c34a16891f84e7b'))
