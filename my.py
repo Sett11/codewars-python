@@ -1,9 +1,7 @@
-from hashlib import md5
 from itertools import product
 
-a=[''.join(i) for i in product('0123456789',repeat=5)]
+def get_pins(s):
+    o={'1':['1','2','4'],'2':['2','1','3','5'],'3':['3','2','6'],'4':['4','1','7','5'],'5':['5','2','8','4','6'],'6':['6','3','9','5'],'7':['7','4','8'],'8':['8','5','0','7','9'],'9':['9','6','8'],'0':['0','8']}
+    return [''.join(i) for i in product(*[o[i] for i in s])]
 
-def crack(h):
-    return next(i for i in a if md5(bytes(i,'utf-8')).hexdigest()==h)
-
-print(crack('827ccb0eea8a706c4c34a16891f84e7b'))
+print(get_pins('369'))
