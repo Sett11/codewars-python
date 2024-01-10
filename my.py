@@ -1,7 +1,18 @@
-from itertools import product
+from hashlib import sha1
+from string import ascii_lowercase as a
+from functools import cache
 
-def get_pins(s):
-    o={'1':['1','2','4'],'2':['2','1','3','5'],'3':['3','2','6'],'4':['4','1','7','5'],'5':['5','2','8','4','6'],'6':['6','3','9','5'],'7':['7','4','8'],'8':['8','5','0','7','9'],'9':['9','6','8'],'0':['0','8']}
-    return [''.join(i) for i in product(*[o[i] for i in s])]
+@cache
+def pr(*a):
+    return {()} if not a else [''.join([i]+list(j)) for i in a[0] for j in pr(*a[1:])]
 
-print(get_pins('369'))
+b=[pr(a,a),pr(a,a,a),pr(a,a,a,a),pr('abcd',a,a,a,a)]
+
+def password_cracker(s):
+    for i in range(len(b)):
+        for j in range(len(b[i])):
+            if sha1(bytes(b[i][j],'utf-8')).hexdigest()==s:
+                return b[i][j]
+        
+
+print(password_cracker('e6fb06210fafc02fd7479ddbed2d042cc3a5155e'))
