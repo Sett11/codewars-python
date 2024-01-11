@@ -1,18 +1,17 @@
-from hashlib import sha1
-from string import ascii_lowercase as a
-from functools import cache
+def f(a,b):
+    return True if a==b or not b else False if int(a)>int(b) or a not in b or b.index(a)!=0 else f(str(int(a)+1),b[len(a):])
 
-@cache
-def pr(*a):
-    return {()} if not a else [''.join([i]+list(j)) for i in a[0] for j in pr(*a[1:])]
+def find(s):
+    i=1
+    while i<len(s):
+        t,p=str(int(s[:i])+1),s[i:]
+        if f(t,p):
+            return int(t)-1
+        i+=1
+    return int(s)
 
-b=[pr(a,a),pr(a,a,a),pr(a,a,a,a),pr('abcd',a,a,a,a)]
-
-def password_cracker(s):
-    for i in range(len(b)):
-        for j in range(len(b[i])):
-            if sha1(bytes(b[i][j],'utf-8')).hexdigest()==s:
-                return b[i][j]
-        
-
-print(password_cracker('e6fb06210fafc02fd7479ddbed2d042cc3a5155e'))
+print(find('123456789101112131415'))
+print(find('17181920'))
+print(find('99100'))
+print(find('127151127152127153127154127155127156127157'))
+print(find('577495'))
