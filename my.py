@@ -1,12 +1,17 @@
-from base64 import b64encode,b64decode
+from functools import cache
 
-def to_base_64(s):
-    return b64encode(bytes(s,'utf-8')).decode().replace('=','')
-    
-def from_base_64(s):
-    while len(s)%4:
-        s+='='
-    return b64decode(bytes(s,'utf-8')).decode()
+@cache
+def values(n):
+    c,k=set(),int(n**.5+1)
+    for i in range(1,k):
+        t=[i**2]
+        for j in range(i+1,k):
+            t.append(j**2)
+            x=str(sum(t))
+            if int(x)>=n:
+                break
+            if x==x[::-1]:
+                c.add(x)
+    return len(c)
 
-print(to_base_64('this is a string!!'))
-print(from_base_64('N3hReWpaaHpRcUdJcmogRXNnQ3BqLw'))
+print(values(1000000))
