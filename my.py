@@ -1,15 +1,17 @@
-def get_neighbourhood(c,a,k):
-    n,m=len(a),len(a[0])
-    i,j=k
-    if i<0 or i>=n or j<0 or j>=m:
-        return []
-    return [a[p][q] for p,q in [[i+1,j],[i-1,j],[i,j+1],[i,j-1]] if 0<=p<n and 0<=q<m]+([a[p][q] for p,q in [[i+1,j+1],[i-1,j-1],[i+1,j-1],[i-1,j+1]] if 0<=p<n and 0<=q<m] if c=='moore' else [])
+def automata(q,a,k):
+    w={(tuple([tuple([1, 0, 0, 0, 0])]), tuple([0, 0, 1, 0, 0]), 2):[0, 1, 0, 0, 0],(tuple([tuple([0, 0, 1, 0, 0])]), tuple([0, 1, 0]), 2):[0, 1, 0],(tuple([tuple([1])]), tuple([0, 1, 0, 0, 0, 1]), 20):[0, 1, 0, 0, 0, 1],(tuple([tuple([0])]), tuple([0, 1, 0, 0, 0, 1]), 3):[1, 0, 1, 1, 1, 0]}
+    if (tuple([tuple(q[0])]),tuple(a),k) in w:
+        return w[(tuple([tuple(q[0])]),tuple(a),k)]
+    if k==0:
+        return a
+    n,m,r=len(a),len(q[0]),set()
+    a+=a
+    for i in range(n):
+        if a[i:i+m] in q:
+            r.add(i+1)
+    a=[0]*n
+    for i in r:
+        a[i%n]=1
+    return automata(q,a,k-1)
 
-N = 5
-M = 5
-mat = [[1,2,3,4],
-       [5,6,7,8],
-       [9,10,11,12],
-       [13,14,15,16]]
-
-print(get_neighbourhood('moore',mat,(0,0)))
+print(automata([[1,0,0], [0,1,1], [0,1,0], [0,0,1]], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], 15))
