@@ -1,41 +1,15 @@
-from collections import deque
+def get_neighbourhood(c,a,k):
+    n,m=len(a),len(a[0])
+    i,j=k
+    if i<0 or i>=n or j<0 or j>=m:
+        return []
+    return [a[p][q] for p,q in [[i+1,j],[i-1,j],[i,j+1],[i,j-1]] if 0<=p<n and 0<=q<m]+([a[p][q] for p,q in [[i+1,j+1],[i-1,j-1],[i+1,j-1],[i-1,j+1]] if 0<=p<n and 0<=q<m] if c=='moore' else [])
 
-class DynamicConnectivity(object):
-    def __init__(self,n):
-        self.d={i:set() for i in range(n)}
+N = 5
+M = 5
+mat = [[1,2,3,4],
+       [5,6,7,8],
+       [9,10,11,12],
+       [13,14,15,16]]
 
-    def union(self,p,q):
-        self.d[p].add(q)
-        self.d[q].add(p)
-    
-    def connected(self,x,y):
-        g=self.d
-        d={i:None for i in g}
-        p=d.copy()
-        d[x]=0
-        q=deque([x])
-        while q:
-            v=q.popleft()
-            for i in g[v]:
-                if d[i] is None:
-                    d[i]=d[v]+1
-                    p[i]=v
-                    q.append(i)
-        r=[]
-        par=p[y]
-        while not par is None:
-            r.append(par)
-            par=p[par]
-        return bool(r[::-1])
-
-
-results1=DynamicConnectivity(10)
-
-results1.union(4,3)
-results1.union(3,8)
-results1.union(6,5)
-results1.union(9,4)
-results1.union(2,1)
-
-print(results1.connected(0,7))
-print(results1.connected(8,9))
+print(get_neighbourhood('moore',mat,(0,0)))
