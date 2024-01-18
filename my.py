@@ -1,7 +1,13 @@
-def func_or(a,b):
-    r=[a,b]
-    return all(i for i in r) or any(i for i in r)
+def sheffer(a,b):
+    return False if a and b else True
 
-def func_xor(a,b):
-    r=[a,b]
-    return not all(i for i in r) and any(i for i in r)
+def NOT(a):
+    return sheffer(a,a)
+
+def AND(a,b):
+    return NOT(sheffer(a,b))
+
+def OR(a,b):
+    return sheffer(NOT(a),NOT(b))
+
+print(AND(False,False))
