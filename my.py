@@ -1,13 +1,15 @@
-def sheffer(a,b):
-    return False if a and b else True
+def counter():
+    count=0
+    def f():
+        nonlocal count
+        count+=1
+        return count
+    return f
 
-def NOT(a):
-    return sheffer(a,a)
+counter_one = counter()
+counter_two = counter()
 
-def AND(a,b):
-    return NOT(sheffer(a,b))
-
-def OR(a,b):
-    return sheffer(NOT(a),NOT(b))
-
-print(AND(False,False))
+print(counter_one())
+print(counter_one())
+print(counter_two())
+print(counter_two())
