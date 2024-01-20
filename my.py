@@ -1,5 +1,11 @@
-count_number=lambda n,x: len([i for i in range(1,n+1) if x%i==0 and x//i<=n])
-        
+def rotate_paper(s):
+    if any(i in s for i in '1347') or len(s)==1 and s in '69':
+        return False
+    n=len(s)//2
+    for i in range(n):
+        if (s[i] in '0258' and s[-i-1]!=s[i]) or (s[i] in '69' and (s[-i-1]==s[i] or s[-i-1] not in '69')):
+            return False
+    return True
 
 
-print(count_number(100000,1000000000))
+print(rotate_paper('655'))
