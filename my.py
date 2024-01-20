@@ -1,4 +1,6 @@
-def digitize(n):
-    return list(map(int,str(n)))
+from re import match
 
-print(digitize(123))
+def validate_time(s):
+    return bool(match(r'^(([01][0-9])*|(2[0-3])){1,2}:([0-5][0-9])$',s)) or s=='1:00'
+
+print(validate_time('1:59'))
