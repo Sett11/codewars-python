@@ -1,6 +1,5 @@
-from re import match
+count_number=lambda n,x: len([i for i in range(1,n+1) if x%i==0 and x//i<=n])
+        
 
-def validate_time(s):
-    return bool(match(r'^(([01][0-9])*|(2[0-3])){1,2}:([0-5][0-9])$',s)) or s=='1:00'
 
-print(validate_time('1:59'))
+print(count_number(100000,1000000000))
