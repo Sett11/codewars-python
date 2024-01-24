@@ -1,6 +1,6 @@
-from types import FunctionType
+from urllib import parse
 
-def find_function(f,a):
-    return list(filter(list(filter(lambda x:isinstance(x,FunctionType),f))[0],a))
+def generate_link(s):
+    return 'http://www.codewars.com/users/'+parse.quote(s)
 
-print(find_function([lambda a: a%2==0,9,3,1,0],[1,2,3,4]))
+print(generate_link('matt c'))
