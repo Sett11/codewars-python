@@ -1,6 +1,4 @@
-from urllib import parse
+def reverse_complement(s):
+    return s[::-1].translate(str.maketrans('TGAC','ACTG')) if all(i in 'ATGC' for i in s) else 'Invalid sequence'
 
-def generate_link(s):
-    return 'http://www.codewars.com/users/'+parse.quote(s)
-
-print(generate_link('matt c'))
+print(reverse_complement('TTCCGGAA'))
