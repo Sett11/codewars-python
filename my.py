@@ -1,4 +1,4 @@
-def reverse_complement(s):
-    return s[::-1].translate(str.maketrans('TGAC','ACTG')) if all(i in 'ATGC' for i in s) else 'Invalid sequence'
+def gc_content(s):
+    return round((s.count('C')+s.count('G'))/len(s)*100,2) if s else 0.0
 
-print(reverse_complement('TTCCGGAA'))
+print(gc_content('AAATTTCCCGGG'))
