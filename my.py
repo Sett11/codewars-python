@@ -1,10 +1,5 @@
-def magical_well(a,b,n):
-    r=0
-    while n:
-        r+=a*b
-        b+=1
-        a+=1
-        n-=1
-    return r
+def countzero(s):
+    a,b=list('abdegopq069DOPQR'),list('%&B8')
+    return sum([1 if i in a else 2 if i in b else 0 for i in s])+s.count('()')
 
-print(magical_well(6,5,3))
+print(countzero('abcdefghijklmnopqrstuvwxyz'))
