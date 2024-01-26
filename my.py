@@ -1,6 +1,9 @@
-def is_information_consistent(a):
-    return not bool(list(filter(lambda x:1 in x and -1 in x,zip(*a))))
+def sea_sick(s):
+    s+='&'
+    n,c=len(s),-1
+    for i in range(n-1):
+        if s[i]!=s[i+1]:
+            c+=1
+    return ["No Problem","Throw Up"][c>n//5]
 
-print(is_information_consistent([
-        [1,-1,0,1], 
-        [1,-1,0,-1]]))
+print(sea_sick("_~~~~~~~_~__~______~~__~~_~~"))
