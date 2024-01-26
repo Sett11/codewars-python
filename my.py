@@ -1,5 +1,4 @@
-def find_next_power(n,p):
-    return int(pow(n,(1/p))+1)**p
+def pass_the_bill(a,b,c):
+    return -1 if c*2>=a else 0 if b*2>a else a//2+1-b
 
-print(find_next_power(1245678,5))
-print(find_next_power(12385, 3))
+print(pass_the_bill(16,8,7))
