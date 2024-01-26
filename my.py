@@ -1,4 +1,6 @@
-def validate_sequence(a):
-    return len(set([a[i]-a[i-1] for i in range(1,len(a))]))==1
+def is_information_consistent(a):
+    return not bool(list(filter(lambda x:1 in x and -1 in x,zip(*a))))
 
-print(validate_sequence([0,2,4,6,8]))
+print(is_information_consistent([
+        [1,-1,0,1], 
+        [1,-1,0,-1]]))
