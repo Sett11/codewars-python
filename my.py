@@ -1,4 +1,9 @@
-def knapsack_light(a,b,c,d,m):
-    return a+c if b+d<=m else max(a,c) if b<=m and d<=m else a if b<=m else c if d<=m else 0
+def to_and_from(x,y,t):
+    a,b=divmod(t,abs(y-x))
+    return y-b if x<y and a&1 else y+b if a&1 else x-b if t<x-y else x-b if x>y else x+b
 
-print(knapsack_light(10,5,6,4,8))
+print(to_and_from(42,150,548))
+print(to_and_from(10,4,8))
+print(to_and_from(1,10,8))
+print(to_and_from(96,14,74))
+print(to_and_from(94,65,77))
