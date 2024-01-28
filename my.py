@@ -1,13 +1,11 @@
-def different_squares(a):
-    n,m,s=len(a),len(a[0]),set()
-    for i in range(n-1):
-        for j in range(m-1):
-            s.add(tuple((tuple(a[i][j:j+2]),tuple(a[i+1][j:j+2]))))
-    return len(s)
+def light_bulbs(a,n):
+    while n:
+        b=a.copy()
+        for i in range(len(a)):
+            if a[i-1]:
+                b[i]=1 if b[i]==0 else 0
+        a=b
+        n-=1
+    return a
 
-print(different_squares([
-          [1, 2, 1],
-          [2, 2, 2],
-          [2, 2, 2],
-          [1, 2, 3],
-          [2, 2, 1]]))
+print(light_bulbs([0,1,1,0,1,1],2))
