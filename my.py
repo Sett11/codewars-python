@@ -1,8 +1,16 @@
-def switch_lights(a):
-    a=''.join(map(str,a))
-    for i in range(len(a)):
-        if a[i]=='1':
-            a=a[0:i+1].translate(str.maketrans('10','01'))+a[i+1:]
-    return list(map(int,a))
+def longest_substring(s):
+    c,n=0,len(s)
+    for i in range(n):
+        z=set()
+        for j in range(i,n):
+            if s[j] not in z:
+                z.add(s[j])
+            else:
+                break
+        c=max(c,len(z))
+    return c
+    
 
-print(switch_lights([1, 0, 0, 1, 0, 1, 0, 1]))
+print(longest_substring("abcd"))
+print(longest_substring("hchzvfrkmlnozjk"))
+print(longest_substring("abcd" * 10000 + "abcde" + "abcd" * 10000))
