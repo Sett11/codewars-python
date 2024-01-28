@@ -1,5 +1,13 @@
-def maxlen(a,b):
-    c,d=max(a,b),min(a,b)
-    return c/3 if c>=d*3 else c/2 if d>=c/2 else d
+def different_squares(a):
+    n,m,s=len(a),len(a[0]),set()
+    for i in range(n-1):
+        for j in range(m-1):
+            s.add(tuple((tuple(a[i][j:j+2]),tuple(a[i+1][j:j+2]))))
+    return len(s)
 
-print(maxlen(5,17))
+print(different_squares([
+          [1, 2, 1],
+          [2, 2, 2],
+          [2, 2, 2],
+          [1, 2, 3],
+          [2, 2, 1]]))
