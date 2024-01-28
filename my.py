@@ -1,11 +1,8 @@
-def light_bulbs(a,n):
-    while n:
-        b=a.copy()
-        for i in range(len(a)):
-            if a[i-1]:
-                b[i]=1 if b[i]==0 else 0
-        a=b
-        n-=1
-    return a
+def switch_lights(a):
+    a=''.join(map(str,a))
+    for i in range(len(a)):
+        if a[i]=='1':
+            a=a[0:i+1].translate(str.maketrans('10','01'))+a[i+1:]
+    return list(map(int,a))
 
-print(light_bulbs([0,1,1,0,1,1],2))
+print(switch_lights([1, 0, 0, 1, 0, 1, 0, 1]))
