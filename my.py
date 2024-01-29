@@ -1,3 +1,4 @@
-is_leap=lambda y:[1==2,1==1][(y%4==0 and y%100!=0) or y%400==0]
+def modified_sum(a,n):
+    return sum(map(lambda x:x**n,a))-sum(a)
 
-print(is_leap(2024))
+print(modified_sum([1,2,3],3))
