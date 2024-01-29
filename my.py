@@ -1,5 +1,3 @@
-from calendar import isleap
+is_leap=lambda y:[1==2,1==1][(y%4==0 and y%100!=0) or y%400==0]
 
-is_leap_year=lambda y:isleap(y)
-
-print(is_leap_year(2020))
+print(is_leap(2024))
