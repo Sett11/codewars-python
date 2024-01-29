@@ -1,19 +1,19 @@
-def round_and_round(n,a,b):
-    r=list(range(1,n+1))
-    if b>0:
-        i=a-1
-        while b:
-            i=(i+1)%n
-            b-=1
-        return r[i]
-    else:
-        i=a-1
-        while b:
-            i=(i-1)
-            if i<0:
-                i=n-1
-            b+=1
-        return r[i]
+def f(n):
+    return [str(i) for i in range(n,n+15)]
 
-print(round_and_round(5,1,3))
-print(round_and_round(6,2,-5))
+def missing(s):
+    r=[]
+    for i in range(1,7):
+        r.append(f(int(s[:i])))
+    for a in r:
+        q=[]
+        for i in range(len(a)):
+            q.append(a[i])
+            if ''.join(q)==s:
+                return -1
+            t=a.copy()
+            p=int(t.pop(i))
+            t=''.join(t)[:len(s)]
+            if t==s:
+                return p
+    return -1
