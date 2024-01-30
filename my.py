@@ -1,13 +1,10 @@
-from datetime import datetime,date
-from calendar import monthrange
+def membership(amount, platinum, gold, silver, bronze):
+    a,b=[[80, 108, 97, 116, 105, 110, 117, 109],[71, 111, 108, 100],[83, 105, 108, 118, 101, 114],[66, 114, 111, 110, 122, 101]],eval(''.join(map(chr,[97, 109, 111, 117, 110, 116])))
+    for i in a:
+        s=''.join(map(chr,i))
+        if b>=eval(s.lower()):
+            return s
+    return 'Not a member'
 
-def most_frequent_days(y):
-    a=[[0, 'Monday'], [0, 'Tuesday'], [0, 'Wednesday'], [0, 'Thursday'], [0, 'Friday'], [0, 'Saturday'], [0, 'Sunday']]
-    for i in range(1,13):
-        t=monthrange(y,i)[1]
-        for j in range(1,t+1):
-            a[datetime.weekday(date(y,i,j))][0]+=1
-    m=max(i[0] for i in a)
-    return [i[1] for i in a if i[0]==m]
-
-print(most_frequent_days(1785))
+print(membership(100000, 1000000, 100000, 10000, 1000))
+print(membership(1001, 1000000, 100000, 10000, 1000))
