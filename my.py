@@ -1,11 +1,19 @@
-def jumbled_string(s,n):
-    r,c=[s],s
-    while True:
-        c=c[::2]+c[1::2]
-        if c==s:
-            break
-        r.append(c)
-    return r[n%len(r)]
-    
+def missing(s):
+    r=[]
+    for i in range(1,7):
+        n=int(s[:i])
+        r.append(list(map(str,range(n,n+15))))
+    for a in r:
+        q=[]
+        for i in range(len(a)):
+            q.append(a[i])
+            if ''.join(q)==s:
+                return -1
+            t=a.copy()
+            p=int(t.pop(i))
+            t=''.join(t)[:len(s)]
+            if t==s:
+                return p
+    return -1
 
-print(jumbled_string('gwr93VO?UUu}_LIqmO`TbODl1fa{PA^l9tJh_7yLE1XteXd>HiuiBuI@V5TL62DB[=BE6:NlM{[TboTmgL<CmonV:;EG0OmCmL5O',1897))
+print(missing('998999100010011003'))
