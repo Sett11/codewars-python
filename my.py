@@ -1,8 +1,11 @@
-def name_file(a,b,c):
-    r=[]
-    while len(r)<b and all(isinstance(i,int) for i in [b,c]):
-        r.append(a.replace('<index_no>',str(c)))
-        c+=1
-    return r
+def fraction(a,b):
+    i=2
+    while i<=a or i<=b:
+        while a%i==0 and b%i==0:
+            a//=i
+            b//=i
+        i+=1
+    return a+b
 
-print(name_file('<file> number <index_no>', 5, 0))
+print(fraction(3,118))
+print(fraction(5,5))
