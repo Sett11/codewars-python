@@ -1,9 +1,14 @@
-def scratch(a):
-    t=0
-    for i in a:
-        s=i.split()
-        if s[0]==s[1]==s[2]:
-            t+=int(s[3])
-    return t
+def f(a=[[1],[1,1],[1,2,1]],k=250):
+    if not k:
+        return a
+    t=[1]
+    for i in range(1,len(a[-1])):
+        t.append(a[-1][i-1]+a[-1][i])
+    a.append(t+[1])
+    return f(a,k-1)
+r=f()
 
-print(scratch(["tiger tiger tiger 100","rabbit dragon snake 100","rat ox pig 1000","dog cock sheep 10","horse monkey rat 5","dog dog dog 1000"]))
+def easyline(n):
+    return sum(map(lambda x:x**2,r[n]))
+
+print(easyline(13))
