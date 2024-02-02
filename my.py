@@ -1,4 +1,8 @@
-def perimeter_sequence(a,n): 
-    return (n*3+n)*a
+from math import ceil
 
-print(perimeter_sequence(8,40))
+s='31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
+
+def square_pi(n):
+    return ceil(sum(map(lambda x:int(x)**2,s[:n]))**.5)
+
+print(square_pi(23))
