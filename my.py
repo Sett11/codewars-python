@@ -1,8 +1,17 @@
-from math import ceil
+from functools import cache
 
-s='31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
+@cache
+def recaman(n):
+    s,r=set([0]),[0]
+    while len(r)<=n:
+        t=r[-1]-len(r)
+        if t>0 and t not in s:
+            r.append(t)
+            s.add(t)
+        else:
+            t=r[-1]+len(r)
+            r.append(t)
+            s.add(t)
+    return r[n]
 
-def square_pi(n):
-    return ceil(sum(map(lambda x:int(x)**2,s[:n]))**.5)
-
-print(square_pi(23))
+print(recaman(11))
