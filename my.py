@@ -1,7 +1,7 @@
-def get_honor_path(a,b):
-    n,m=divmod(b-a,2)
-    return  {} if (n<0 or m<0) or (n==0 and m==0) else {'2kyus':m,'1kyus':n}
+from itertools import product
+from functools import reduce
 
-print(get_honor_path(2,11))
-print(get_honor_path(2,10))
-print(get_honor_path(11,11))
+def sum_times_tables(l,a,b):
+    return reduce(lambda x,y:x+(y[0]*y[1]),product(range(a,b+1),l),0)
+
+print(sum_times_tables([2,3],1,3))
