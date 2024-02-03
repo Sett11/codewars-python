@@ -1,5 +1,5 @@
-def get_percentage(n,l=1000):
-    return "No e-mails sent" if not n else "Daily limit is reached" if n>=l else str(int(n//(l/100)))+'%'
+def get_new_notes(s,b):
+    n=(s-sum(b))//5
+    return 0 if n<0 else n
 
-print(get_percentage(502,920))
-print(get_percentage(256,500))
+print(get_new_notes(10000,[1800, 500, 1200, 655, 150]))
