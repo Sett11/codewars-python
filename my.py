@@ -1,11 +1,4 @@
-def sum_of_a_beach(s):
-    a,c=["sand","water","fish","sun" ],0
-    s=s.lower()
-    while any(i in s for i in a):
-        for i in a:
-            if i in s:
-                s=s.replace(i,'',1)
-                c+=1
-    return c
+def cant_beat_so_join(a):
+    return sum(sorted(a,key=sum,reverse=True),[])
 
-print(sum_of_a_beach('123FISH321'))
+print(cant_beat_so_join([[1,2], [3,4], [5,6], [7,8], [9]]))
