@@ -1,8 +1,11 @@
-from re import sub
+def are_similar(a,b):
+    if a==b:
+        return True
+    try:
+        t,p=[i for i,j in enumerate(a) if a[i]!=b[i]]
+        b[t],b[p]=b[p],b[t]
+        return a==b
+    except:
+        return False
 
-def could_be(o,a):
-    f=lambda s:sub(r'[^a-z]','',s)
-    o,a=list(map(f,o.replace(':',' ').lower().split())),list(map(f,a.replace(':',' ').lower().split()))
-    return bool(a and o) and all(i in o for i in a)
-
-print(could_be('Carlos Ray Norris','Carlos Norris'))
+print(are_similar([1, 2, 3],[2, 1, 3]))
