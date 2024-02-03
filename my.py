@@ -1,7 +1,9 @@
-from itertools import product
-from functools import reduce
+def bear_fur(l):
+    return {('black', 'black'):'black',
+    ('brown', 'brown'):'brown',
+    ('white', 'white'):'white',
+    ('black', 'brown'):'dark brown',
+    ('black', 'white'):'grey',
+    ('brown', 'white'):'light brown'}.get(tuple(sorted(l)),'unknown')
 
-def sum_times_tables(l,a,b):
-    return reduce(lambda x,y:x+(y[0]*y[1]),product(range(a,b+1),l),0)
-
-print(sum_times_tables([2,3],1,3))
+print(bear_fur(['brown', 'white']))
