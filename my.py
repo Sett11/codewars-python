@@ -1,4 +1,5 @@
-def cant_beat_so_join(a):
-    return sum(sorted(a,key=sum,reverse=True),[])
+def get_percentage(n,l=1000):
+    return "No e-mails sent" if not n else "Daily limit is reached" if n>=l else str(int(n//(l/100)))+'%'
 
-print(cant_beat_so_join([[1,2], [3,4], [5,6], [7,8], [9]]))
+print(get_percentage(502,920))
+print(get_percentage(256,500))
