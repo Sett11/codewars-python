@@ -1,9 +1,5 @@
-def bear_fur(l):
-    return {('black', 'black'):'black',
-    ('brown', 'brown'):'brown',
-    ('white', 'white'):'white',
-    ('black', 'brown'):'dark brown',
-    ('black', 'white'):'grey',
-    ('brown', 'white'):'light brown'}.get(tuple(sorted(l)),'unknown')
+def could_be(o,a):
+    o,a=o.split(),a.split()
+    return bool(a and o) and all(i in o for i in a)
 
-print(bear_fur(['brown', 'white']))
+print(could_be('Carlos Ray Norris','Carlos Norris'))
