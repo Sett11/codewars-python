@@ -1,4 +1,3 @@
-def quadrant(x,y):
-    return 1 if x>0 and y>0 else 2 if x<0 and y>0 else 3 if x<0 and y<0 else 4
+quadrant_segment=lambda c1,c2:[c1.x<0,c1.y<0]!=[c2.x<0,c2.y<0]
 
-print(quadrant(1,2))
+print(quadrant_segment())
