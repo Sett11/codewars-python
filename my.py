@@ -1,13 +1,11 @@
-o={90: 'ninety', 80: 'eighty', 70: 'seventy', 60: 'sixty', 50: 'fifty', 40: 'forty', 30: 'thirty', 20: 'twenty', 19: 'nineteen', 18: 'eighteen', 17: 'seventeen', 16: 'sixteen', 15: 'fifteen', 14: 'fourteen', 13: 'thirteen', 12: 'twelve', 11: 'eleven', 10: 'ten', 9: 'nine', 8: 'eight', 7: 'seven', 6: 'six', 5: 'five', 4: 'four', 3: 'three', 2: 'two', 1: 'one'}
+def convert(s):
+    s=s.lower()
+    a,d,j='1023456789',{},0
+    for i in s:
+        if i not in d:
+            d[i]=a[j%9]
+            j+=1
+    return int(''.join(d[i] for i in s)) if d else 0
 
-
-def name_that_number(n):
-    a=[]
-    for i in o:
-        t,p=divmod(n,i)
-        if t!=0:
-            a.append(f'{o.get(t)} {o[i]}' if t>1 or i in [1000,100] else o[i])
-            n=p
-    return ' '.join(a) or 'zero'
-
-print(name_that_number(98))
+print(convert('CodeWars'))
+print(convert('KATA'))
