@@ -1,4 +1,4 @@
-class BullsAndCows:
+class BullsAndCows: 
     def __init__(self,n):
         self.s=list(str(n))
         self.v=True
