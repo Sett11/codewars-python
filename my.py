@@ -1,13 +1,5 @@
-def f(a,n,c):
-    for i in range(5,-1,-1):
-        if a[i][n]=='-':
-            a[i][n]=c
-            return a
+def draw_spider(a,b,c,d):
+    p,t,n={1:"^ ^",2:"/\ /\\",3:"/╲ ╱\\",4:"╱╲ ╱╲"},{1:"( )", 2:"(( ))", 3:"((( )))"},2**b//2
+    return '{0}{2}{4}{3}{1}'.format(*p[a].split(),*t[b].split(),d*n+c+d*n)
 
-def connect_four_place(a):
-    r=[['-']*7 for _ in range(6)]
-    for i,j in enumerate(a):
-        f(r,j,'R' if i&1 else 'Y')
-    return r
-
-print(connect_four_place([0,1,0,1,0,1]))
+print(draw_spider(3, 3, "w", "0"))
