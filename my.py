@@ -1,3 +1,6 @@
-f=lambda:sorted(set(i**j+j**i for j in range(2,40) for i in range(2,40)))[:121]
+from math import ceil
 
-print(f())
+def aspect_ratio(x,y):
+    return ceil(y/9*16),y
+
+print(aspect_ratio(640,480))
