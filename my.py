@@ -1,8 +1,7 @@
-def nth_floyd(n):
-    a=b=0
-    while b<n:
-        a+=1
-        b+=a
-    return a
+cube_matrix_sum=lambda x:sum(sum(sum(x,[]),[]))
 
-print(nth_floyd(212))
+print(cube_matrix_sum([
+  [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+  [[10,11,12],[13,14,15],[16,17,18]],
+  [[19,20,21],[22,23,24],[25,26,27]]
+]))
