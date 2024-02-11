@@ -1,11 +1,13 @@
-def count(a,t,x):
-    if x==0:
-        return len([i for i in a if i==t])
-    c=0
-    for i in a:
-        n=abs(i-t)
-        if divmod(n,x)[1]==0:
-            c+=1
-    return c
+def diagonal_sort(a):
+    n,m=len(a),len(a[0])
+    r,a=[[0]*m for _ in range(n)],sum(a,[])[::-1]
+    for i in range(n+m-1):
+        k,j=i if i<n else n-1,0 if i<n else i-n+1
+        while k>=0 and j<m:
+            r[k][j]=a.pop()
+            k-=1
+            j+=1
+    return r
 
-print(count([-4,6,8],-7,-3))
+print(diagonal_sort([['c','o','d'],
+              ['i','n','g']]))
