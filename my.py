@@ -1,5 +1,8 @@
-def sequence_sum(a,b,c):
-    n=(b-a)//c
-    return 0 if n<0 else (n+1)*(n*c+(a*2))//2
+def nth_floyd(n):
+    a=b=0
+    while b<n:
+        a+=1
+        b+=a
+    return a
 
-print(sequence_sum(780, 6851543, 5))
+print(nth_floyd(212))
