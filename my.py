@@ -1,3 +1,5 @@
-squares_needed=lambda n:int.bit_length(n)
+def sequence_sum(a,b,c):
+    n=(b-a)//c
+    return 0 if n<0 else (n+1)*(n*c+(a*2))//2
 
-print(squares_needed(235022852780276))
+print(sequence_sum(780, 6851543, 5))
