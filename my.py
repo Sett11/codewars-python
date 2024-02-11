@@ -1,7 +1,11 @@
-cube_matrix_sum=lambda x:sum(sum(sum(x,[]),[]))
+def count(a,t,x):
+    if x==0:
+        return len([i for i in a if i==t])
+    c=0
+    for i in a:
+        n=abs(i-t)
+        if divmod(n,x)[1]==0:
+            c+=1
+    return c
 
-print(cube_matrix_sum([
-  [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-  [[10,11,12],[13,14,15],[16,17,18]],
-  [[19,20,21],[22,23,24],[25,26,27]]
-]))
+print(count([-4,6,8],-7,-3))
