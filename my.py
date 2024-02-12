@@ -1,15 +1,21 @@
-from math import ceil
+def f(n):
+    r=set([1,n])
+    for i in range(2,int(n**.5+1)):
+        if n%i==0:
+            r.update([i,n//i])
+    return sum(r)
 
-def avg_diags(a):
-    n=len(a)
-    v,w=[j for j in [a[n-i-1][i] for i in range(n)][::2] if j<0],[j for j in [a[i][i] for i in range(n)][1::2] if j>=0]
-    return [round(sum(w)/len(w)),abs(round(sum(v)/len(v))) if v else -1]
+def find_int(a,b,c):
+    r=[]
+    for i in range(a,b+1):
+        t=list(map(int,str(i)))
+        h=t.copy()
+        for j in range(len(t)):
+            t[j]*=(j+1)
+            h[j]=(j+1)**h[j]
+        t,h=sum(t),sum(h)*c
+        if h%f(t)==0:
+            r.append(i)
+    return len(r),r
 
-print(avg_diags([
-    [ 1,   3, -4,   5, -2,  5,  1], 
-    [  2,   0, -7,   6,  8,  8, 15],
-    [  4,   4, -2, -10,  7, -1,  7],
-    [ -1,   3,  1,   0, 11,  4, 21],
-    [ -7,   6, -4,  10,  5,  7,  6],
-    [ -5,   4,  3,  -5,  7,  8, 17],
-    [-11,   3,  4,  -8,  6, 16,  4]]))
+print(find_int(100,200,1))
