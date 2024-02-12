@@ -1,20 +1,16 @@
-def f(x):
-    a=set([x])
-    for i in range(2,int(x**.5+1)):
-        if x%i==0:
-            a.update([i,x//i])
-    return sorted(a,reverse=True)
+def closest_points(a):
+    n,m,d=len(a),1e6,{}
+    for i in range(n):
+        for j in range(n):
+            if i!=j:
+                c=round(((a[j][0]-a[i][0])**2+(a[i][1]-a[j][1])**2)**.5,4)
+                m=min(m,c)
+                if c not in d:
+                    d[c]=[sorted([a[i],a[j]])]
+                else:
+                    x=sorted([a[i],a[j]])
+                    if x not in d[c]:
+                        d[c].append(x)
+    return [n,sorted(d[m]),m]
 
-def check(a):
-    return all(i**.5!=int(i**.5) for i in a)
-
-def square_free_part(n):
-    a=f(n)
-    if check(a):
-        return n
-    for i in a:
-        if check(f(i)):
-            return i
-
-
-print(square_free_part(2499))
+print(closest_points([(8, 14), (16, 5), (5, 5), (15, 18), (17, 10), (0, 14), (4, 15),(19, 17), (13, 16), (10, 18), (14, 13), (12, 14), (11, 15), (7, 15)]))
