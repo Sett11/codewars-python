@@ -1,6 +1,17 @@
-from fractions import Fraction as f
-from functools import reduce as r
+def arr_adder(a):
+    return ' '.join(map(lambda s:''.join(s),zip(*a)))
 
-add_fracs=lambda *args:str(r(lambda a,c:f(a)+f(c),args) if args else '')
-
-print(add_fracs('2/3', '1/3', '4/6'))
+print(arr_adder([ 
+  [ 'T', 'M', 'i', 't', 'p', 'o', 't', 'c' ],
+  [ 'h', 'i', 's', 'h', 'o', 'f', 'h', 'e' ],
+  [ 'e', 't', '', 'e', 'w', '', 'e', 'l' ],
+  [ '', 'o', '', '', 'e', '', '', 'l' ],
+  [ '', 'c', '', '', 'r', '', '', '' ],
+  [ '', 'h', '', '', 'h', '', '', '' ],
+  [ '', 'o', '', '', 'o', '', '', '' ],
+  [ '', 'n', '', '', 'u', '', '', '' ],
+  [ '', 'd', '', '', 's', '', '', '' ],
+  [ '', 'r', '', '', 'e', '', '', '' ],
+  [ '', 'i', '', '', '', '', '', '' ],
+  [ '', 'a', '', '', '', '', '', '' ]
+]))
