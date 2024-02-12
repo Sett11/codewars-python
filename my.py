@@ -1,7 +1,6 @@
-from bisect import insort
+from fractions import Fraction as f
+from functools import reduce as r
 
-def sort(s):
-    r=[]
-    for i in s:
-        insort(r,i)
-    return iter(r)
+add_fracs=lambda *args:str(r(lambda a,c:f(a)+f(c),args) if args else '')
+
+print(add_fracs('2/3', '1/3', '4/6'))
