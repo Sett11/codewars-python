@@ -1,8 +1,20 @@
-def exp_sum(n):
-    d=[1]+[0]*n
-    for i in range(1,n+1):
-        for j in range(i,n+1):
-            d[j]+=d[j-i]
-    return d[-1]
+def f(x):
+    a=set([x])
+    for i in range(2,int(x**.5+1)):
+        if x%i==0:
+            a.update([i,x//i])
+    return sorted(a,reverse=True)
 
-print(exp_sum(5))
+def check(a):
+    return all(i**.5!=int(i**.5) for i in a)
+
+def square_free_part(n):
+    a=f(n)
+    if check(a):
+        return n
+    for i in a:
+        if check(f(i)):
+            return i
+
+
+print(square_free_part(2499))
