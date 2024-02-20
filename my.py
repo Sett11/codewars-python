@@ -1,5 +1,9 @@
-def max_int_chain(n):
-    v=n&1
-    return n//2*(n//2+(1 if v else 0))-(0 if v else 1) if n>=5 else -1
+def withdraw(n):
+    i=0
+    while n%50!=0:
+        n-=20
+        i+=1
+    return [(n-50)//100 if n and n%100!=0 else n//100 if n else 0,(1 if n%100!=0 else 0),i]
 
-print(max_int_chain(10))
+print(withdraw(260))
+print(withdraw(40))
