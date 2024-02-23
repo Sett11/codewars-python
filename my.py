@@ -1,4 +1,8 @@
-def testit(a,b):
-    return sorted(list(set(a))+list(set(b)))
+def last_man_standing(n):
+    a=list(range(1,n+1))
+    while len(a)>1:
+        del a[::2]
+        a=a[::-1]
+    return a[0]
 
-print(testit([1,2],[1,2]))
+print(last_man_standing(1000))
