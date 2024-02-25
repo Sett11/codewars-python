@@ -1,8 +1,4 @@
-from itertools import permutations
+def total(a):
+    return a[0] if len(a)==1 else total([a[i]+a[i+1] for i in range(len(a)-1)])
 
-def sort_bytes(n):
-    a=bin(n)[2:].rjust(32,'0')
-    return max(int(''.join(i),2) for i in permutations([a[i:i+8] for i in range(0,32,8)]))
-
-print(sort_bytes(1))
-print(sort_bytes(3735928559))
+print(total([1,2,3,4,5]))
