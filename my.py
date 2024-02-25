@@ -1,3 +1,8 @@
-even_odd=lambda lst:__import__('functools').reduce(lambda a,c:a*c[1] if c[0]&1 else a+c[1],enumerate(lst),0)
+from itertools import permutations
 
-print(even_odd([1,2,6,1,6,1,3,9,6]))
+def sort_bytes(n):
+    a=bin(n)[2:].rjust(32,'0')
+    return max(int(''.join(i),2) for i in permutations([a[i:i+8] for i in range(0,32,8)]))
+
+print(sort_bytes(1))
+print(sort_bytes(3735928559))
