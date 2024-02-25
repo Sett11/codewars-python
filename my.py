@@ -1,10 +1,3 @@
-def testit(s):
-    x,j,r='word',0,''
-    a=''.join([i for i in s.lower() if i in x])
-    for i in a:
-        if i==x[j%4]:
-            r+=i
-            j+=1
-    return r.count(x)
+even_odd=lambda lst:__import__('functools').reduce(lambda a,c:a*c[1] if c[0]&1 else a+c[1],enumerate(lst),0)
 
-print(testit("When you in order to do something by a wrong way, your heart will missed somewhere."))
+print(even_odd([1,2,6,1,6,1,3,9,6]))
