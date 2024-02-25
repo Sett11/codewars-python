@@ -1,4 +1,6 @@
-def total(a):
-    return a[0] if len(a)==1 else total([a[i]+a[i+1] for i in range(len(a)-1)])
+from re import sub,IGNORECASE
 
-print(total([1,2,3,4,5]))
+def filter_words(phrase):
+    return sub(r"(bad|mean|ugly|horrible|hideous)","awesome",phrase,flags=IGNORECASE)
+
+print(filter_words("You're Bad! timmy!"))
