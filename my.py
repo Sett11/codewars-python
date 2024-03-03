@@ -1,5 +1,14 @@
-def valid_card(s):
-    return not sum(map(lambda j:sum(map(int,str(int(j[1])*2))) if j[0]&1 else int(j[1]),enumerate(filter(lambda x:x.isdigit(),list(s[::-1])))))%10
+def get_issuer(n):
+    s=str(n)
+    l=len(s)
+    if s.startswith(('34','37')) and l==15:
+        return 'AMEX'
+    if s.startswith('6011') and l==16:
+        return 'Discover'
+    if s.startswith(('51','52','53','54','55')) and l==16:
+        return 'Mastercard'
+    if s.startswith('4') and (l==13 or l==16):
+        return 'VISA'
+    return 'Unknown'
 
-print(valid_card("5457 6238 9823 4311"))
-print(valid_card("5457 6238 9323 4311"))
+print(get_issuer(4111111111111111))
