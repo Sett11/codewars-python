@@ -1,7 +1,5 @@
-def lucasnum(n):
-    k=abs(n)
-    a,b=2,1
-    while k:
-        a,b=b,a+b
-        k-=1
-    return -a if n<0 and n&1 else a
+def fusc(n):
+    assert type(n)==int and n>=0
+    return 0 if n==0 else 1 if n==1 else fusc(n//2) if n%2==0 else fusc(n//2)+fusc(n//2+1)
+    
+print(fusc(10))
