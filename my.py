@@ -1,11 +1,6 @@
-from collections import Counter
+a=sorted(filter(lambda n:n>=2 and all(n%i for i in range(2,int(n**.5+1))),[2**i*3**j+1 for i in range(25) for j in range(11)]))
 
-def stone_pick(a):
-    r=[]
-    [r.extend(['Sticks']*4) if x=='Wood' else r.append(x) for x in a if x in ['Cobblestone','Sticks','Wood']]
-    d=Counter(r)
-    d['Cobblestone']//=3
-    d['Sticks']//=2
-    return min(d.values())
+def solve(x,y):
+    return len([i for i in a if x<=i<=y])
 
-print(stone_pick(["Wood"]*51 + ["Cobblestone"]*91))
+print(solve(0,1500000))
