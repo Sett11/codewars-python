@@ -1,17 +1,11 @@
-# def fusc(n):
-#     assert type(n)==int and n>=0
-#     return 0 if n==0 else 1 if n==1 else fusc(n//2) if n%2==0 else fusc(n//2)+fusc(n//2+1)
-    
-# print(fusc(10))
+from collections import Counter
 
-def fibfusc(n):
-    def f(k):
-        if k==0:
-            return (1,0)
-        if k==1:
-            return (0,1)
-        x,y=f(k//2)
-        return ((x + y)*(x - y),y*(2*x + 3*y)) if k%2==0 else (-y*(2*x + 3*y), (x + 2*y)*(x + 4*y))
-    return f(n)
+def stone_pick(a):
+    r=[]
+    [r.extend(['Sticks']*4) if x=='Wood' else r.append(x) for x in a if x in ['Cobblestone','Sticks','Wood']]
+    d=Counter(r)
+    d['Cobblestone']//=3
+    d['Sticks']//=2
+    return min(d.values())
 
-print(fibfusc(5))
+print(stone_pick(["Wood"]*51 + ["Cobblestone"]*91))
