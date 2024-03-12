@@ -1,6 +1,5 @@
-a=sorted(filter(lambda n:n>=2 and all(n%i for i in range(2,int(n**.5+1))),[2**i*3**j+1 for i in range(25) for j in range(11)]))
+from requests import get
+from re import findall
 
-def solve(x,y):
-    return len([i for i in a if x<=i<=y])
-
-print(solve(0,1500000))
+def get_leaderboard_honor():
+    return list(map(lambda x:int(x[1:-1].replace(',','')),findall(r'>\d+,\d+<',get('https://www.codewars.com/users/leaderboard').content.decode())))
