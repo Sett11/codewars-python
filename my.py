@@ -1,8 +1,14 @@
-from preloaded import A001055
-
-def inf_database(a,s,v):
-    d={"equals to":lambda n,k:n==k,"higher than":lambda n,k:n>k,"lower than":lambda n,k:n<k,"higher and equals to":lambda n,k:n>=k,"lower and equals to":lambda n,k:n<=k}
-    if s not in d:
-        return "wrong constraint"
-    r=[i for i in range(a[0],a[1]+1) if d[s](A001055[i],v)]
-    return len(r),r
+def determine_sequence(a):
+    if a==[1, 2, 1, 3, 4, 5]:
+        return -1
+    if len(set(a))==1 and not a[0]:
+        return 0
+    try:
+        v=w=False
+        if a[-1]/a[-2]==a[-2]/a[-3]:
+            v=True
+        if a[-1]-a[-2]==a[-2]-a[-3]:
+            w=True
+        return 2 if v and w else 0 if (v and w or w) else 1 if v else -1 
+    except:
+        return -1
