@@ -1,18 +1,16 @@
-from itertools import groupby
+def corner_fill(a):
+    r,v=[],1
+    while a:
+        q=a.pop(0)
+        for i in range(len(a)):
+            q.append(a[i].pop())
+        r.extend(q if v&1 else q[::-1])
+        v+=1
+    return r
 
-def obtain_max_number(a):
-    a=[list(j) for i,j in groupby(sorted(a))]
-    if all(len(i)==1 for i in a):
-        return max(sum(a,[]))
-    for i in range(len(a)):
-        if len(a[i])==1:
-            continue
-        else:
-            a[i]=a[i][1:]
-            a[i][0]*=2
-    return obtain_max_number(sum(a,[]))
-    
-
-print(obtain_max_number([2, 2, 4, 8, 1, 1, 15]))
-print(obtain_max_number([2, 4, 8, 1, 1, 15]))
-print(obtain_max_number([2, 4, 8, 1, 1, 32, 8, 8, 64, 30, 30, 15, 15, 7, 7]))
+print(corner_fill([
+  [4,  1, 10,  5],
+  [7,  8,  2, 16],
+  [15, 14, 3,  6],
+  [11, 9, 13, 12]
+]))
