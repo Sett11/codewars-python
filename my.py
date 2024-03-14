@@ -1,10 +1,2 @@
-from collections import Counter
-
-def last_non_empty_string(s):
-    d=Counter(s)
-    m=max(d.values())
-    return ''.join(sorted(filter(lambda x:d[x]==m,d.keys()),key=lambda y:s.rfind(y)))
-
-print(last_non_empty_string('aabcbbca'))
-print(last_non_empty_string('zzxdccvzdd'))
-print(last_non_empty_string('abcd'))
+def is_infinite_process(a,b):
+    return True if ((a&1 and b%2==0) or (b&1 and a%2==0)) else False if a<=b else True
