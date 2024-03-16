@@ -1,14 +1,17 @@
-def calc_poly(a,x):
-    n,r=len(a),''
-    for i in range(n):
-        r=r+f" {'+' if a[i]>0 else '-'} {abs(a[i])}*x^{n-i-1}" if a[i] else r
-    r=r.replace('^1','')[3:].replace('*x^0',' with x')
-    r='For '+r+f" = {x} the value is {eval(('-' if a[0]<0 else '')+r.replace('with x','').replace('^','**'))}"
-    if 'with x' not in r:
-        r=r.replace('=','with x =')
-    if a[0]<0:
-        r=r.replace('For ','For -')
-    return r.replace(' 1*',' ').replace('-1*x','-x')
+from re import sub
 
-print(calc_poly([2, 0, 5, -6, 4, 0], 2))
-print(calc_poly([-5, 40, -28],-18))
+def find_longest_substr(s):
+    a,m,d,t=sub(r'(.)\1*',lambda x:' '+x.group()[0]+str(len(x.group()))+' ',s).split(),1,{},0
+    for i in a:
+        x=int(i[1:])
+        if i[0].isdigit() or i[0].isalpha():
+            if x>m:
+                d[x]=[str(ord(i[0])),x,[t,t+x-1]]
+                m=x
+        t+=x
+    return d[m]
+    
+
+print(find_longest_substr("1111aa994bbbb1111AAAAAFF????????????????????????????"))
+print(find_longest_substr("1111aa994bbbb1111AAAAAFF?<mmMaaaaaaaaaaaaaaaaaaaaaaaaabf"))
+print(find_longest_substr("1111aa994bbbb1111AAAAAFFcfgBBBBB"))
