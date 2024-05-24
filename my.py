@@ -1,11 +1,12 @@
-def bubble(a):
-    n,r=len(a),[]
-    for i in range(1,n):
-        for j in range(n-1):
-            if a[j]>a[j+1]:
-                a[j],a[j+1]=a[j+1],a[j]
-                t=a.copy()
-                r.append(t)
-    return r
+def all_nines(x):
+    if x%2==0:
+        return -1
+    n='9'
+    for _ in range(2500):
+        t=int(n)//x
+        if t*x==int(n):
+            return t
+        n+='9'
+    return -1
 
-print(bubble([2,1,4,3]))
+print(all_nines(323))
