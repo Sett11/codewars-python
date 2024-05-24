@@ -1,12 +1,7 @@
-def all_nines(x):
-    if x%2==0:
-        return -1
-    n='9'
-    for _ in range(2500):
-        t=int(n)//x
-        if t*x==int(n):
-            return t
-        n+='9'
-    return -1
+def block_player(x,y):
+    a=['x' if i in (x,y) else i for i in range(9)]
+    r=[a[i:i+3] for i in range(0,9,3)]
+    return [k for k in list(filter(lambda x:x.count('x')==2,r+[list(i) for i in zip(*r)]+[[r[i][i] for i in range(3)]]+[[r[i][2-i] for i in range(3)]]))[0] if k!='x'][0]
 
-print(all_nines(323))
+
+print(block_player(6,2))
