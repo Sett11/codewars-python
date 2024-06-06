@@ -1,10 +1,8 @@
-def blow_candles(s):
-    c=0
-    while s:
-        while s.startswith('0'):
-            s=s[1:]
-        s,c=''.join(map(lambda x:str(max(int(x)-1,0)),s[:3]))+s[3:],c+1 if s else c
-    return c
+def add(a):
+    x,r=0,[]
+    for i in a:
+        x+=i
+        r.append(x)
+    return r
 
-print(blow_candles('0323456'))
-print(blow_candles('1321'))
+print(add([1,2,3,4,5]))
