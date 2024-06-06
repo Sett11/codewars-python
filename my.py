@@ -1,8 +1,13 @@
-def add(a):
-    x,r=0,[]
-    for i in a:
-        x+=i
-        r.append(x)
+def transform(n,b):
+    a,r='0123456789abcdef',''
+    while n:
+        r=a[n%b]+r
+        n//=b
     return r
 
-print(add([1,2,3,4,5]))
+def func(a):
+    n=sum(a)//len(a)
+    return [n,transform(n,2),transform(n,8),transform(n,16)]
+
+
+print(func([12,13,6,3,6,45,123]))
