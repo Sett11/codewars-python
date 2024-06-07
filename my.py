@@ -1,11 +1,6 @@
-def points(n):
-    n*=n
-    c,d=0,1
-    while d<=n:
-        c+=n//d
-        c-=n//(d+2)
-        d+=4
-    return c*4+1
+from math import pi
 
+def sum_circles(*args):
+    return f"We have this much circle: {round(sum(pi*i**2/4 for i in args))}"
 
-print(points(1000))
+print(sum_circles(2,3,4))
