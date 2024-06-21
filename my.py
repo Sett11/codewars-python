@@ -1,6 +1,8 @@
-from math import pi
+def geometric_sequence_sum(a,r,n):
+    c,k=0,a
+    for _ in range(n-1):
+        c+=k*r
+        k*=r
+    return c+a
 
-def sum_circles(*args):
-    return f"We have this much circle: {round(sum(pi*i**2/4 for i in args))}"
-
-print(sum_circles(2,3,4))
+print(geometric_sequence_sum(2,2,10))
