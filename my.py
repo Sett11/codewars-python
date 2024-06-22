@@ -1,8 +1,6 @@
-def geometric_sequence_sum(a,r,n):
-    c,k=0,a
-    for _ in range(n-1):
-        c+=k*r
-        k*=r
-    return c+a
+def find_glasses(a):
+    return next(i for i,j in enumerate(a) if __import__('re').match(r'.*O-+O.*',j))
 
-print(geometric_sequence_sum(2,2,10))
+print(find_glasses(["phone", "O-O", "coins", "keys"]))
+print(find_glasses(["OO", "wallet", "O##O", "O----O"]))
+print(find_glasses(["O--#--O", "dustO---Odust", "more dust"]))
