@@ -1,6 +1,11 @@
-def find_glasses(a):
-    return next(i for i,j in enumerate(a) if __import__('re').match(r'.*O-+O.*',j))
+def lcs(a,b):
+    q,s,r=list(b),0,''
+    for i in range(len(q)):
+        pos=a.find(q[i],s)
+        if pos>=s:
+            r+=q[i]
+            s=pos+1
+    return r
 
-print(find_glasses(["phone", "O-O", "coins", "keys"]))
-print(find_glasses(["OO", "wallet", "O##O", "O----O"]))
-print(find_glasses(["O--#--O", "dustO---Odust", "more dust"]))
+
+print(lcs("anothertest", "notatest"))
