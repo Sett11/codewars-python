@@ -1,10 +1,9 @@
-from functools import lru_cache
+from itertools import combinations_with_replacement as c
 
-@lru_cache(None)
-def lcs(x, y):
-    if not (x and y): return ''
-    if x[0] == y[0]: return x[0] + lcs(x[1:], y[1:])
-    return max(lcs(x, y[1:]), lcs(x[1:], y), key=len)
+def find_all(k,l):
+    r=[int(''.join(map(str,i))) for i in c(list(range(1,10)),l) if sum(i)==k]
+    return [len(r),r[0],r[-1]] if r else []
 
-
-print(lcs("abcdefghijklmnopq", "apcdefghijklmnobq"))
+print(find_all(10,3))
+print(find_all(84,4))
+print(find_all(35,6))
