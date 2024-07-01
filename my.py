@@ -1,6 +1,10 @@
-def equable_triangle(a,b,c):
-    p=(a+b+c)/2
-    return (p*(p-a)*(p-b)*(p-c))**.5==p*2
+def coin_combo(n):
+    d={25:0,10:0,5:0,1:0}
+    for i in d:
+        while n>=i:
+            d[i]+=1
+            n-=i
+    return [d[i] for i in d][::-1]
 
-print(equable_triangle(5,12,13))
-print(equable_triangle(73,9,80))
+print(coin_combo(6))
+print(coin_combo(11))
