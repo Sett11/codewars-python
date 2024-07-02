@@ -1,14 +1,5 @@
-def number_of_sets(a,b):
-    c=0
-    for i in range(a):
-        for j in range(i,a):
-            for k in range(j,a):
-                x,y=i+j+k,i*j*k
-                if x>a or y>b:
-                    break
-                if x==a and y==b:
-                    c+=1
-    return c
+def score(n):
+    return int(bin(n)[2:].replace('0','1'),2) if n>0 else 0
 
-print(number_of_sets(256,392150))
-print(number_of_sets(137, 25200))
+print(score(923056238))
+print(score(49))
