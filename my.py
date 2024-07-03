@@ -1,5 +1,7 @@
-def score(n):
-    return int(bin(n)[2:].replace('0','1'),2) if n>0 else 0
+def sxore(n):
+    if n%2:
+        return 0 if n%4==3 else 1
+    return n+1 if n%4==2 else n
 
-print(score(923056238))
-print(score(49))
+print(sxore(50))
+print(sxore(1000001))
