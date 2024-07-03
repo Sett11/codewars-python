@@ -1,7 +1,4 @@
-def sxore(n):
-    if n%2:
-        return 0 if n%4==3 else 1
-    return n+1 if n%4==2 else n
+def max_sum(a,r): 
+    return max(sum(a[i:j+1]) for i,j in r)
 
-print(sxore(50))
-print(sxore(1000001))
+print(max_sum([1,-2,3,4,-5,-4,3,2,1], [[1,4],[2,5]]))
