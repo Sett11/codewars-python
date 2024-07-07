@@ -1,5 +1,40 @@
-def bear_dollars(a):
-    d={'close friend':25,'friend':50,'acquaintance':100}
-    return sum(i[0]*d.get(i[1].lower(),125) for i in a)
+from functools import lru_cache
 
-print(bear_dollars([(10, 'Close Friend'), (3, 'Acquaintance'), (7, 'Lead from web'), (6, 'Friend'), (2, 'From advertisements')]))
+@lru_cache
+def f(x):
+    if(x==1):
+        return True
+    a=set([x])
+    while 1:
+        x=sum([int(i)**2 for i in list(str(x))])
+        if(x==1):
+            return True
+        if(x in a):
+            return False
+        a.add(x)
+
+def right(a,n):
+    l,r=0,len(a)
+    while r-l>1:
+        m=(l+r)//2
+        if a[m]<=n:
+            l=m
+        else:
+            r=m
+    return r
+
+def g(x,o=[1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100]):
+    if(o[len(o)-1]>=x):
+        return o[:right(o,x)]
+    i=o[len(o)-1]+1
+    while i<=x:
+        if(f(i)):
+            o.append(i)
+        i+=1
+    return o
+
+def performant_numbers(n):
+    return g(n)
+
+print(performant_numbers(100000))
+print(performant_numbers(10000))
