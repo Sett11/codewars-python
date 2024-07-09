@@ -1,19 +1,7 @@
-def add(a):
-    def f(b):
-        return a+b
-    return f
+def f(n):
+    return 1 if not n else n-m(f(n-1))
 
-def subtract(a):
-    def f(b):
-        return a-b
-    return f
-    
-def multiply(a):
-    def f(b):
-        return a*b
-    return f
-    
-def apply(f):
-    return f
+def m(n):
+    return 0 if not n else n-f(m(n-1))
 
-print(apply(add)(5)(7))
+print(f(25),m(15))
