@@ -1,3 +1,7 @@
-take_umbrella=lambda a,b:a=='rainy' or (a=='cloudy' and b>.2) or b>.5
+from string import ascii_lowercase as a
 
-print(take_umbrella('sunny', 0.40))
+def solve(s):
+    return all(abs(a.index(s[i])-a.index(s[-i-1])) in [0,2] for i in range(len(s)//2))
+
+print(solve('ceb'))
+print(solve('kxbkwgyydkcbtjcosgikfdyhuuprubpwthgflucpyylbofvqxkkvqthmdnywpaunfihvupbwpruwfybdmgeuocltdaidyyewmbzm'))
