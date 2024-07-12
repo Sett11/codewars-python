@@ -1,4 +1,3 @@
-trigrams=lambda s:' '.join(s[i:i+3].replace(' ','_') for i in range(len(s)-2))
+take_umbrella=lambda a,b:a=='rainy' or (a=='cloudy' and b>.2) or b>.5
 
-
-print(trigrams('the quick red'))
+print(take_umbrella('sunny', 0.40))
