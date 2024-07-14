@@ -1,5 +1,7 @@
-will_you=lambda a,b,c:{(0,0,0):False,(1,1,1):False,(0,1,0):False,(1,0,0):False,(0,1,1):True,(1,0,1):True,(0,0,1):True,(1,1,0):True}[tuple(map(bool,[a,b,c]))]
+def solve(n,k):
+    a=str(n)
+    l=len(a)
+    c=l-k
+    return max(int(a[i:i+c]) for i in range(0,l-c+1))
 
-print(will_you(True,True,True))
-print(will_you(False,False,False))
-print(will_you(True,False,False))
+print(solve('62047312791',3))
