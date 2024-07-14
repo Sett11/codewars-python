@@ -1,6 +1,3 @@
-from string import ascii_lowercase as a
+change_me=lambda s:{'£5':' '.join(['20p']*25),'£2':' '.join(['20p']*10),'£1':' '.join(['20p']*5),'50p':'20p 20p 10p','20p':'10p 10p'}.get(s,s)
 
-def closed_bracket_word(s):
-    return len(s)%2==0 and all(a.index(s[i])+a.index(s[-i-1])==25 for i in range(len(s)//2))
-
-print(closed_bracket_word('abitryz'))
+print(change_me('£5'))
