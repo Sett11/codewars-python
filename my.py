@@ -1,10 +1,10 @@
-from itertools import groupby as g
+def increasing_number(x,n):
+    c=1
+    while n:
+        while x%c!=0:
+            x+=1
+        c+=1
+        n-=1
+    return x
 
-slot=lambda s:{(5,):1000,(1,4):800,(2,3):500,(1,1,3):300,(1,2,2):200,(1,1,1,2):100}.get(tuple(sorted(len(list(j)) for _,j in g(s))),0)
-
-print(slot('!!!!!'))
-print(slot('!!!!?'))
-print(slot('!!!??'))
-print(slot('!!!?!'))
-print(slot('??!!?'))
-print(slot('?!??!'))
+print(increasing_number(4,5))
