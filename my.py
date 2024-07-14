@@ -1,15 +1,5 @@
-from itertools import groupby
+will_you=lambda a,b,c:{(0,0,0):False,(1,1,1):False,(0,1,0):False,(1,0,0):False,(0,1,1):True,(1,0,1):True,(0,0,1):True,(1,1,0):True}[tuple(map(bool,[a,b,c]))]
 
-def replace(s):
-    a,u=[(i,len(list(j))) for i,j in groupby(s)],set()
-    n=len(a)
-    for i in range(n):
-        for j in range(i+1,n):
-            if a[i][0]!=a[j][0] and a[i][1]==a[j][1] and j not in u and i not in u:
-                a[i]=a[j]=(' ',a[i][1])
-                u.update([i,j])
-                break
-    return ''.join(i[0]*i[1] for i in a)
-
-print(replace('!?!!??!!!?'))
-print(replace('!????!!!?'))
+print(will_you(True,True,True))
+print(will_you(False,False,False))
+print(will_you(True,False,False))
