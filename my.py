@@ -1,4 +1,14 @@
-number_increasing=f=lambda n:1==2 if n<1 else n%5==1 or f(n-5 if n%3 else n//3)
-    
+def f(s):
+    a,b,c=map(int,s.split(':'))
+    return a*3600+b*60+c
 
-print(number_increasing(54321))
+def video_part(n,t):
+    k,c=f(t)/f(n),1
+    while 1:
+        x=round(k*c,5)
+        if x==int(x):
+            return [c,int(x)]
+        c+=1
+
+print(video_part('08:27:48','96:28:48'))
+print(video_part('00:48:32','03:24:32'))
