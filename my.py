@@ -1,14 +1,15 @@
-def f(s):
-    a,b,c=map(int,s.split(':'))
-    return a*3600+b*60+c
+from itertools import groupby
 
-def video_part(n,t):
-    k,c=f(t)/f(n),1
-    while 1:
-        x=round(k*c,5)
-        if x==int(x):
-            return [c,int(x)]
-        c+=1
+def replace(s):
+    a,u=[(i,len(list(j))) for i,j in groupby(s)],set()
+    n=len(a)
+    for i in range(n):
+        for j in range(i+1,n):
+            if a[i][0]!=a[j][0] and a[i][1]==a[j][1] and j not in u and i not in u:
+                a[i]=a[j]=(' ',a[i][1])
+                u.update([i,j])
+                break
+    return ''.join(i[0]*i[1] for i in a)
 
-print(video_part('08:27:48','96:28:48'))
-print(video_part('00:48:32','03:24:32'))
+print(replace('!?!!??!!!?'))
+print(replace('!????!!!?'))
