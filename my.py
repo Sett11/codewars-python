@@ -1,3 +1,10 @@
-change_me=lambda s:{'£5':' '.join(['20p']*25),'£2':' '.join(['20p']*10),'£1':' '.join(['20p']*5),'50p':'20p 20p 10p','20p':'10p 10p'}.get(s,s)
+from itertools import groupby as g
 
-print(change_me('£5'))
+slot=lambda s:{(5,):1000,(1,4):800,(2,3):500,(1,1,3):300,(1,2,2):200,(1,1,1,2):100}.get(tuple(sorted(len(list(j)) for _,j in g(s))),0)
+
+print(slot('!!!!!'))
+print(slot('!!!!?'))
+print(slot('!!!??'))
+print(slot('!!!?!'))
+print(slot('??!!?'))
+print(slot('?!??!'))
