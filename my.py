@@ -1,18 +1,21 @@
-def solve(arr,k):
-    a,n,c=arr.copy(),len(arr),0
-    for i in range(n):
-        if a[i]=='D':
-            for j in range(max(i-k,0),i):
-                if a[j]=='C':
-                    a[i]=a[j]=0
-                    c+=1
-                    break
-            if a[i]=='D':
-                for j in range(i+1,min(i+k+1,n)):
-                    if a[j]=='C':
-                        a[i]=a[j]=0
-                        c+=1
-                        break
-    return c
+def s(x):
+    return x+sum(map(int,str(x)))
 
-print(solve(['C','C','D','D','C','D'],1))
+def f(x):
+    u=set()
+    for _ in range(20015):
+        u.add(x)
+        x=s(x)
+    return u
+
+a,b,c=f(1),f(3),f(9)
+
+def converging_journeys(n):
+    d={1:a,3:b,9:c}
+    while 1:
+        t=[i for i in d if n in d[i]]
+        if t:
+            return t[0],n
+        n=s(n)
+         
+print(converging_journeys(108))
