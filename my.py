@@ -1,10 +1,14 @@
-def set_clock(s,t):
-    a,b=map(int,s.split(':'))
-    for i in t:
-        if i=='H':
-            a+=1
-        else:
-            b+=1
-    return f"{a-24 if a>24 else a}:{('0' if b%60<10 else '')+str(b%60)}"
+def ulam_sequence(a,b,n):
+    sq=[0]*1000000
+    r=[a,b]
+    sq[a+b]=1
+    i=a+b
+    while len(r)<n:
+      if sq[i]==1:
+        for x in r:
+          sq[x+i]+=1
+        r.append(i)
+      i+=1
+    return r
 
-print(set_clock("23:59", ['H', 'H']))
+print(ulam_sequence(2,5,300))
