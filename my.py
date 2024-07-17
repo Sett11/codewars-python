@@ -1,31 +1,20 @@
-from collections import Counter
+x,y=0,1
 
-def build_square(a):
-    a,c=Counter(a),0
-    if a.get(4):
-        c+=a[4]
-        a[4]=0
-    if a.get(2):
-        if a[2]%2==0:
-            c+=a[2]//2
-            a[2]=0
-        else:
-            c+=(a[2]-1)//2
-            a[2]=1
-    if a.get(3):
-        if a.get(1):
-            while a[3] and a[1]:
-                c+=1
-                a[3]-=1
-                a[1]-=1
-    while a[1]>3:
-        c+=1
-        a[1]-=4
-    while a.get(2) and a.get(1,0)>1:
-        c+=1
-        a[2]-=1
-        a[1]-=2
-    return c>3
+def gcdExtended(a, b):
+    global x,y
+    if a==0:
+        x,y=0,1
+        return b
+    g=gcdExtended(b%a,a)
+    x1,y1=x,y
+    x,y=y1-(b//a)*x1,x1
+    return g
 
-print(build_square([4, 3, 2, 1, 3, 1, 1, 2, 3, 1, 1]))
-print(build_square([1, 1, 1, 1, 1, 1, 1, 2, 3, 4]))
+
+def inverse_mod(a,m):
+    g=gcdExtended(a,m)
+    if g==1:
+        return (x%m+m)%m
+
+print(inverse_mod(101014,125445))
+print(inverse_mod(48,101))
