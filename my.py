@@ -1,20 +1,7 @@
-x,y=0,1
+from gmpy2 import is_prime
 
-def gcdExtended(a, b):
-    global x,y
-    if a==0:
-        x,y=0,1
-        return b
-    g=gcdExtended(b%a,a)
-    x1,y1=x,y
-    x,y=y1-(b//a)*x1,x1
-    return g
+def lucas_lehmer(n):
+    return is_prime(2**n-1)
 
 
-def inverse_mod(a,m):
-    g=gcdExtended(a,m)
-    if g==1:
-        return (x%m+m)%m
-
-print(inverse_mod(101014,125445))
-print(inverse_mod(48,101))
+print(lucas_lehmer(11213))
