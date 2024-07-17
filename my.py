@@ -1,7 +1,3 @@
-from gmpy2 import is_prime
+valid_mersenne=lambda x:__import__('gmpy2').is_prime(2**x-1)
 
-def lucas_lehmer(n):
-    return is_prime(2**n-1)
-
-
-print(lucas_lehmer(11213))
+print(valid_mersenne(127))
