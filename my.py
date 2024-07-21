@@ -25,22 +25,28 @@
 
 # print(perf_happy(999))
 
-def type_out(s):
-    s=s.replace('[shift][unshift]','').replace('[holdshift][unshift]','')
-    def f(x,v):
-        if v:
-            x=x.capitalize()
-        for i in range(len(x)):
-            p,t=x[:i],x[i:]
-            if t.startswith('[holdshift]'):
-                k=t.index('[unshift]')
-                x=p+x[i:i+9+k].replace('[holdshift]','').replace('[unshift]','').upper()+x[i+9+k:]
-        return x
-    a,v=s.split('[shift]'),s.startswith('[shift]')
-    if len(a)==1:
-        return f(a[0],v)
-    return f(a[0],v)+''.join(f(i,True) for i in a[1:])
+u,time=set(),[]
 
-print(type_out('vvv[holdshift]uppercase[unshift] lowercase and [holdshift]uppercase[unshift] again'))
-print(type_out('[shift][unshift]dont shi[shift][unshift]ft th[shift][unshift]is'))
-print(type_out('[holdshift]holdshift[unshift] [shift]shift'))
+for i in range(24):
+    i%=24
+    for j in range(60):
+        j%=60
+        for k in range(60):
+            k%=60
+            v=len(set([k-j,j-i]))==1
+            z,w,q=k-j in [0,1,2],i<j<k,len(set([i%10,j%10,k%10]))==1
+            r=f"{('0' if i<10 else '')+str(i)}:{('0' if j<10 else '')+str(j)}:{('0' if k<10 else '')+str(k)}"
+            t=''.join(r.split(':'))
+            if (v and w and z) or (q and v) or (v and k-j==i) or (t==t[::-1] and len(set(t))==2) or r=='12:34:56':
+                time.append(r)
+                u.add(r)
+
+time=sorted([i if i!='00:00:00' else '24:00:00' for i in time])
+
+def next_good_time(s):
+    return next('00'+i[2:] if i.startswith('24') else i for i in time if i>s)
+
+print(next_good_time('00:00:00'))
+print(next_good_time('23:52:18'))
+print(next_good_time('14:04:49'))
+print(next_good_time('13:58:25'))
