@@ -25,8 +25,5 @@
 
 # print(perf_happy(999))
 
-def step_through_with(s):
-    return bool([s[i]==s[i+1] for i in range(len(s)-1) if s[i]==s[i+1]])
-
-print(step_through_with('free'))
-print(step_through_with('sun'))
+def doors(n):
+    return len([i*i for i in range(1,int(n**.5+1))])
