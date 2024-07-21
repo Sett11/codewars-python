@@ -25,5 +25,22 @@
 
 # print(perf_happy(999))
 
-def doors(n):
-    return len([i*i for i in range(1,int(n**.5+1))])
+def type_out(s):
+    s=s.replace('[shift][unshift]','').replace('[holdshift][unshift]','')
+    def f(x,v):
+        if v:
+            x=x.capitalize()
+        for i in range(len(x)):
+            p,t=x[:i],x[i:]
+            if t.startswith('[holdshift]'):
+                k=t.index('[unshift]')
+                x=p+x[i:i+9+k].replace('[holdshift]','').replace('[unshift]','').upper()+x[i+9+k:]
+        return x
+    a,v=s.split('[shift]'),s.startswith('[shift]')
+    if len(a)==1:
+        return f(a[0],v)
+    return f(a[0],v)+''.join(f(i,True) for i in a[1:])
+
+print(type_out('vvv[holdshift]uppercase[unshift] lowercase and [holdshift]uppercase[unshift] again'))
+print(type_out('[shift][unshift]dont shi[shift][unshift]ft th[shift][unshift]is'))
+print(type_out('[holdshift]holdshift[unshift] [shift]shift'))
