@@ -1,20 +1,11 @@
-from queue import Queue
+def near_flatten(a):
+    r=[]
+    while a:
+        for i in range(len(a)):
+            if isinstance(a[i],list) and all(isinstance(j,int) for j in a[i]):
+                r.append(a[i])
+        a=sum([g for g in a if isinstance(g,list)],[])
+    return sorted(r)
 
-class Node:
-    def __init__(self, data, child_nodes=None):
-        self.data = data
-        self.child_nodes = [] if child_nodes is None else child_nodes
-
-def tree_to_list(h):
-    q,r=Queue(),[]
-    q.put(h)
-    while q.qsize():
-        v=q.get()
-        if v:
-            r.append(v.data)
-            for i in v.child_nodes:
-                q.put(i)
-    return r
-
-
-print(tree_to_list(Node('H', [Node('e', [Node('l'), Node('o', [Node('w'), Node('!')])]), Node('l')])))
+print(near_flatten([[1,2,3],[[4,5],[[6],[7,8]]]]))
+print(near_flatten([[[1,2,3],[9,10]],[[4,5],[6,7,8]]]))
