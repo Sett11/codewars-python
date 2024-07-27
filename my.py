@@ -1,4 +1,7 @@
-def shifter(s): 
-    return len(set([i for i in s.split() if all(j in 'HINOSXZMW' for j in i)]))
+from itertools import product as p
 
-print(shifter('EVQAUK SOM SI ZOO WWCHNGK WEHEROXL HXITLBA OWN KYJLOW XI IN MOW SHOW GBZM Y SO UAULYPN PVQDQSJR WINS SCHOOL NKEBRKV WXYZJUVB N SOON KCE PWNSG MH BEAD XAFA SDW WONS MONISH KZFZI K HFOJI V B S SARUZ WV TBHU ONE VB MOON LNMPMDJJ CAKE FOAWE HYEYOX I L CAFE MIX PO SKUT JYTOSMLT ZKJIEQ RMMZAODV UHX X CPHQ ZCXQIKQN BFV NRHSDHO DVRVUV UJ KMQGJX MONISH ZD WDHSKXUI D MOW MKXGH NON DPEBMM GRIARI SOME YIUDHK ZLBP AD QNM KYSID Z HW WHIZ WHIZ HIM PQAQB UMUOIRF'))
+def telephone_words(s):
+    d={'1': '1', '2': 'ABC', '3': 'DEF', '4': 'GHI', '5': 'JKL', '6': 'MNO', '7': 'PQRS', '8': 'TUV', '9': 'WXYZ', '0': '0'}
+    return [''.join(i) for i in p(*[list(d[j]) for j in s])]
+
+print(telephone_words('1234'))
