@@ -1,14 +1,21 @@
-from collections import deque
+def queue_time(a,n):
+    if n==1 or len(a)==1:
+        return sum(a)
+    if n>=len(a):
+        return max(a)
+    a=a[::-1]
+    t,c=a[-n:],0
+    a=a[:-n]
+    while a:
+        m=min(t)
+        for i in range(n):
+            t[i]-=m
+            if t[i]==0:
+                if a:
+                    t[i]=a.pop()
+                else:
+                    break
+        c+=m
+    return c+max(t)
 
-def reverse_in_parentheses(s):
-    a,q=list(s),deque()
-    for i,j in enumerate(a):
-        if j=='(':
-            q.append(i+1)
-        if j==')':
-            t=q.pop()
-            a=a[:t]+list(''.join(a[t:i][::-1]).translate(str.maketrans('()',')(')))+a[i:]
-    return ''.join(a)
-
-print(reverse_in_parentheses('h(el)lo'))
-print(reverse_in_parentheses('a ((d e) c b)'))
+print(queue_time([3, 9, 3, 9, 11, 47, 38, 47, 42, 46, 30, 33, 31, 1, 11, 24],4))
