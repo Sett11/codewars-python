@@ -1,18 +1,16 @@
-from re import sub
+def solve(a,k):
+    n,m,r=len(a),0,[]
+    for i in range(n):
+        c=0
+        for j in range(i,n):
+            c+=a[j]
+            z=j-i+1
+            if z>=k:
+                y=c/z
+                m=max(m,y)
+                r.append((y,i,z))
+    return sorted([i for i in r if i[0]==m],key=lambda x:(x[-1],x[1]),reverse=True)[0][1:] if r else ()
 
-WORDS=list(map(lambda x:x.lower(),WORDS))
 
-def transform(s,j):
-    al='abcdefghijklmnopqrstuvwxyz'
-    return ''.join([al[(al.index(i)+j)%len(al)] for i in s])
-
-def break_caesar(s):
-    a=[sub(r'[^A-z]','',i).lower() for i in s.split()]
-    i=m=0
-    d={}
-    while i<26:
-        n=sum(j in WORDS for j in [transform(k,i) for k in a])
-        m=max(n,m)
-        d[n]=i
-        i+=1
-    return 26-d[m] if d[m] else 0
+print(solve([0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1],3))
+print(solve([0],1))
