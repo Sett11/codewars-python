@@ -1,12 +1,37 @@
-def max_and_min(a,b):
-    a,b=sorted(a),sorted(b)
-    m,u,n=max(abs(a[-1]-b[0]),abs(b[-1]-a[0])),set(b),min(abs(a[0]-b[0]),abs(a[-1]-b[-1]),abs(a[-1]-b[0]),abs(b[-1]-a[0]))
-    for i in a:
-        for j in range(20):
-            if i-j in u or i+j in u:
-                n=min(j,n)
-                if not n:
-                    return m,n
-    return m,n
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
 
-print(max_and_min([-870,91,-141,-739,707,-803,-195,-963,99,861],[796,-468,889,58,-765,-901,-311,-399,-764,-181,841,-670,-589]))
+def max_sum(h):
+    m=-1e9
+    def f(x,n):
+        nonlocal m
+        if not x:
+            return
+        if not x.left and not x.right:
+            m=max(m,n+x.value)
+            return
+        if x.left and not x.right:f(x.left,n+x.value)
+        if x.right and not x.left:f(x.right,n+x.value)
+        else:
+            f(x.left,n+x.value)
+            f(x.right,n+x.value)
+    f(h,0)
+    return m if m!=-1e9 else 0
+
+print(max_sum(TreeNode(5,
+                 TreeNode(-22,
+                   TreeNode(9),
+                   TreeNode(50)),
+                 TreeNode(11,
+                   TreeNode(9),
+                   TreeNode(2)))))
+print(max_sum(TreeNode(5,
+                 TreeNode(4,
+                   TreeNode(-80),
+                   TreeNode(-60)),
+                 TreeNode(10,
+                   TreeNode(-90),
+                   None))))
