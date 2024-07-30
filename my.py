@@ -8,7 +8,7 @@ def flatten(d):
             f(x[i],s+'/'+i)
     for i in d:
         f(d[i],i)
-    return r
+    return r 
         
 
 print(flatten({
