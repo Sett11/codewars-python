@@ -1,27 +1,3 @@
-def flatten(d):
-    r={}
-    def f(x,s):
-        if isinstance(x,str) or not x:
-            r[s]=x if x else ''
-            return
-        for i in x:
-            f(x[i],s+'/'+i)
-    for i in d:
-        f(d[i],i)
-    return r 
-        
+string_suffix=lambda s:sum(next(iter(j for j,k in enumerate(zip(s,s[i:])) if k[0]!=k[1]),len(s)-i) for i in range(len(s)))
 
-print(flatten({
-    "name": {
-        "first": "One",
-        "last": "Drone"
-    },
-    "job": "scout",
-    "recent": {},
-    "additional": {
-        "place": {
-            "zone": "1",
-            "cell": "2"
-        }
-    }
-}))
+print(string_suffix('ababaa'))
