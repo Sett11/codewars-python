@@ -1,3 +1,12 @@
-string_suffix=lambda s:sum(next(iter(j for j,k in enumerate(zip(s,s[i:])) if k[0]!=k[1]),len(s)-i) for i in range(len(s)))
+from re import sub
 
-print(string_suffix('ababaa'))
+def calculate(s):
+    stack=[]
+    for i in s.split()[::-1]:
+        if sub(r'[-.]','',i).isdigit():
+            stack.append(float(i))
+        else:
+            stack.append(eval(f'{stack.pop()}{i}{stack.pop()}'))
+    return stack[-1]
+
+print(calculate('/ + 3 5 * 2 2'))
