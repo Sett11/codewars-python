@@ -1,7 +1,7 @@
 def count_cash(a,c):
-    n,r,u=len(a),[],set()
+    n,r=len(a),[]
     def dfs(i,j,k):
-        if i<0 or j<0 or j>=n or (i,j) in u:
+        if i<0 or j<0 or j>=n:
             return
         k+=a[i][j]
         if [i,j]==[0,n-1]:
@@ -13,6 +13,7 @@ def count_cash(a,c):
     return max(r)
 
 print(count_cash([[3, 3, -1],[-1, 5, -2],[4, -2, 6]],(1,0)),sep='\n')
+
 
 # class LazyInit(type):
 #      def __init__(cls,name,bases,dct):
