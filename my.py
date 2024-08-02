@@ -1,15 +1,18 @@
-def count_paths(n,c):
-    a=[([0]*n)[c[1]:] for _ in range(n)][:c[0]+1]
-    for i in range(1,len(a)):
-        a[i][0]=1
-        for j in range(1,len(a[0])):
-            if i==1:
-                a[0][j]=1
-            a[i][j]=a[i-1][j]+a[i][j-1]
-    return 0 if n==1 else a[-1][-1] or 1
+def count_cash(a,c):
+    n,r,u=len(a),[],set()
+    def dfs(i,j,k):
+        if i<0 or j<0 or j>=n or (i,j) in u:
+            return
+        k+=a[i][j]
+        if [i,j]==[0,n-1]:
+            r.append(k)
+            return
+        dfs(i-1,j,k)
+        dfs(i,j+1,k)
+    dfs(c[0],c[1],0)
+    return max(r)
 
-print(count_paths(21,(16,0)),sep='\n')
-print(count_paths(44,(13,10)),sep='\n')
+print(count_cash([[3, 3, -1],[-1, 5, -2],[4, -2, 6]],(1,0)),sep='\n')
 
 # class LazyInit(type):
 #      def __init__(cls,name,bases,dct):
