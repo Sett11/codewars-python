@@ -1,36 +1,19 @@
-class IllegalArgumentError(BaseException):
-    pass
+def find_incorrect_value(a):
+    a=[0]+a
+    n,i=len(a),1
+    while i*2+1<n:
+        if a[i]!=a[i*2]+a[i*2+1]:
+            x,y=i*2,i*2+1
+            if x*2+1>=n:
+                return x,a[i]-a[x]
+            if y*2+1>=n:
+                return y-1,a[i]-a[x]
+            if a[x]!=a[x*2]+a[x*2+1]:
+                return x-1,a[x*2]+a[x*2+1]
+            if a[y]!=a[y*2]+a[y*2+1]:
+                return y-1,a[y*2]+a[y*2+1]
+            return i-1,a[x]+a[y]
+        i+=1
 
-class Graph:
-    def __init__(self,v):
-        if v<0:
-            raise(IllegalArgumentError)
-        self.v=v
-        self.adj=[[] for _ in range(v)]
-        self.uV=set()
-        self.uE=set()
-        self.V=v
-        self.E=0
-
-    def add_edge(self,v,w):
-        if v<0 or w<0 or v>self.v or w>self.v:
-            raise(IllegalArgumentError)
-        if (v,w) not in self.uE and (w,v) not in self.uE:
-            self.E+=1
-            self.uE.add((v,w))
-        self.adj[v].append(w)
-        self.adj[w].append(v)
-        if v not in self.uV:
-            self.uV.add(v)
-            if self.V<self.v:
-                self.V+=1
-        if w not in self.uV:
-            self.uV.add(w)
-            if self.V<self.v:
-                self.V+=1
-
-g=Graph(4)
-g.add_edge(0, 1)
-g.add_edge(2, 2)
-print(g.V)
-print(g.adj)
+print(find_incorrect_value( [29, 13, 16, 5, 8, 9, 1]))
+print(find_incorrect_value( [27, 13, 15, 6, 7, 5, 9]))
