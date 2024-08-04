@@ -1,14 +1,13 @@
-def dbl_linear(n):
-    r=[1]+[0]*n
-    k=j=0
+def n_linear(a,n):
+    r,m=[1]+[0]*n,len(a)
+    k=[0]*m
     for i in range(1,n+1):
-        x,y=2*r[k]+1,3*r[j]+1
-        r[i]=min(x,y)
-        if r[i]==x:
-            k+=1
-        if r[i]==y:
-            j+=1
+        t=[a[j]*r[k[j]]+1 for j in range(m)]
+        r[i]=min(t)
+        for p,j in enumerate(t):
+            if j==r[i]:
+                k[p]+=1
     return r[n]
 
 
-print(dbl_linear(50))
+print(n_linear([2,3],20))
