@@ -1,19 +1,25 @@
-def find_incorrect_value(a):
-    a=[0]+a
-    n,i=len(a),1
-    while i*2+1<n:
-        if a[i]!=a[i*2]+a[i*2+1]:
-            x,y=i*2,i*2+1
-            if x*2+1>=n:
-                return x,a[i]-a[x]
-            if y*2+1>=n:
-                return y-1,a[i]-a[x]
-            if a[x]!=a[x*2]+a[x*2+1]:
-                return x-1,a[x*2]+a[x*2+1]
-            if a[y]!=a[y*2]+a[y*2+1]:
-                return y-1,a[y*2]+a[y*2+1]
-            return i-1,a[x]+a[y]
-        i+=1
+class Tree:
+  def __init__(self, data, left=None, right=None):
+    self.data = data
+    self.left = left
+    self.right = right
 
-print(find_incorrect_value( [29, 13, 16, 5, 8, 9, 1]))
-print(find_incorrect_value( [27, 13, 15, 6, 7, 5, 9]))
+def tree_amplitude(h):
+    r=[]
+    def f(x,q):
+       q=q or []
+       if not x:
+          r.append(max(q,default=0)-min(q,default=0))
+          return
+       f(x.left,q+([x.left.data] if x.left else []))
+       f(x.right,q+([x.right.data] if x.right else []))
+    f(h,[h.data]) if h else None
+    return max(r,default=0)
+
+print(tree_amplitude(Tree(-5, Tree(-20),
+                      Tree(3, Tree(-1, None, Tree(88)),
+                              Tree(33)),
+                 )
+        )
+                 )
+print(tree_amplitude(Tree(5, Tree(1), Tree(3))))
