@@ -1,25 +1,34 @@
-class Tree:
-  def __init__(self, data, left=None, right=None):
-    self.data = data
-    self.left = left
-    self.right = right
+def comb(a,r,s):
+    n,res=len(a),[]
+    t=[0]*r
+    def f():
+        k=list(a[i] for i in t)
+        x=sum(k)
+        if x<=s:
+            res.append([k,x])
+    while 1:
+        f()
+        for i in reversed(range(r)):
+            if t[i]!=i+n-r:
+                break
+        else:
+            return res
+        t[i]+=1
+        for j in range(i+1,r):
+            t[j]=t[j-1]+1
 
-def tree_amplitude(h):
-    r=[]
-    def f(x,q):
-       q=q or []
-       if not x:
-          r.append(max(q,default=0)-min(q,default=0))
-          return
-       f(x.left,q+([x.left.data] if x.left else []))
-       f(x.right,q+([x.right.data] if x.right else []))
-    f(h,[h.data]) if h else None
-    return max(r,default=0)
+    # w,q=list(set(b)),list(zip(a,b))
+    # wc={i:[j[0] for j in q if j[1]==i] for i in w}
+    # r=[comb(b,i,n) for i in range(1,len(b))]
+    # return r
 
-print(tree_amplitude(Tree(-5, Tree(-20),
-                      Tree(3, Tree(-1, None, Tree(88)),
-                              Tree(33)),
-                 )
-        )
-                 )
-print(tree_amplitude(Tree(5, Tree(1), Tree(3))))
+def pack_bagpack(val,wt,w):
+    n,dp=len(val),[0]*(w+1)
+    for i in range(1,n+1):
+        for j in range(w,0,-1):
+            if wt[i-1]<=j:
+                dp[j]=max(dp[j],dp[j-wt[i-1]]+val[i-1])
+    return dp[w]
+    
+
+print(pack_bagpack([20, 5, 10, 40, 15, 25], [1, 2, 3, 8, 7, 4], 10))
