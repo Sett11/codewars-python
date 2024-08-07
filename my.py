@@ -1,17 +1,16 @@
-from gmpy2 import is_prime
-
-a=[0,1,1,2,4]
-r=[]
-
-def kth_last_dig_prime(k):
-    while len(r)<k:
-        x=a[-1]+a[-2]-a[-3]+a[-4]-a[-5]
-        a.append(x)
-        s=str(x)
-        if len(s)>9 and is_prime(int(s[-9:])):
-            r.append([len(a),int(s[-9:])])
-    return r[k-1]
-
-print(kth_last_dig_prime(5))
-print(kth_last_dig_prime(112))
-print(kth_last_dig_prime(10))
+def build_trie(*args):
+    t={}
+    def insert(s):
+        c,x,n=t,'',len(s)
+        for i in range(n):
+            x+=s[i]
+            if x in c and c[x] is None and i!=n-1:
+                c[x]={}
+            if x not in c:
+                c[x]={} if i!=n-1 else None
+            c=c[x]
+    for i in args:
+       insert(i)
+    return t
+   
+print(build_trie("A","to", "tea", "ted", "ten", "i","in","inn"))
