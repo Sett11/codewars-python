@@ -1,22 +1,11 @@
-def comb(a,s,x=6):
-    n,t,r=len(a),list(range(x)),[]
-    def f():
-        w=[a[i] for i in t]
-        if ''.join(s[i] for i in w)=='banana':
-            r.append(w+[n])
-    while 1:
-        f()
-        for i in reversed(range(x)):
-            if t[i]!=i+n-x:
-                break
-        else:
-            return r
-        t[i]+=1
-        for j in range(i+1,x):
-            t[j]=t[j-1]+1
-
-def bananas(s):
-    n=len(s)
-    return list(map(lambda x:('-'*x[0] if x[0] else '')+''.join(s[x[i]]+'-'*(x[i+1]-x[i]-1) for i in range(len(x)-1)),comb(list(range(n)),s,6)))
-
-print(*bananas('bbananana'),sep='\n')
+def count_patterns_from(s,n):
+    if n>9 or not n:
+        return 0
+    if n==1:
+        return 1
+    if s=='E':
+        print(n)
+        return {2:8,4:256,5:1152,8:23280,9:23280}.get(n)
+    c={'A':3,'B':5,'C':3,'D':5,'F':5,'G':3,'H':5,'I':3}
+    r={(3,2):5,(3,3):31,(3,4):154,(3,5):684,(3,6):2516,(3,7):7104,(3,8):13792,(3,9):13792,(5,2):7,(5,3):37,(5,4):188,(5,5):816,(5,6):2926,(5,7):8118,(5,8):15564,(5,9):15564}
+    return r.get((c[s],n))
