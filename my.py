@@ -1,11 +1,24 @@
-def count_patterns_from(s,n):
-    if n>9 or not n:
-        return 0
-    if n==1:
-        return 1
-    if s=='E':
-        print(n)
-        return {2:8,4:256,5:1152,8:23280,9:23280}.get(n)
-    c={'A':3,'B':5,'C':3,'D':5,'F':5,'G':3,'H':5,'I':3}
-    r={(3,2):5,(3,3):31,(3,4):154,(3,5):684,(3,6):2516,(3,7):7104,(3,8):13792,(3,9):13792,(5,2):7,(5,3):37,(5,4):188,(5,5):816,(5,6):2926,(5,7):8118,(5,8):15564,(5,9):15564}
-    return r.get((c[s],n))
+def pac_man(n,p,en):
+    a=[[0]*n for _ in range(n)]
+    a[p[0]][p[1]]='p'
+    for i,j in en:
+        a[i]=['e']*n
+        for k in range(n):
+            a[k][j]='e'
+    def dfs(i,j):
+        if i<0 or i>=n or j<0 or j>=n or isinstance(a[i][j],str):
+            return
+        if a[i][j]==0:
+            a[i][j]='x'
+        dfs(i-1,j)
+        dfs(i+1,j)
+        dfs(i,j-1)
+        dfs(i,j+1)
+    x,y=p
+    dfs(x+1,y)
+    dfs(x-1,y)
+    dfs(x,y+1)
+    dfs(x,y-1)
+    return sum(a,[]).count('x')
+
+print(*pac_man(6,[4, 1],[[2, 3], [5, 0], [0, 5], [3, 0], [0, 2]]),sep='\n')
