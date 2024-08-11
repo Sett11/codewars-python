@@ -1,6 +1,6 @@
-def cantor(a):
-    return [a[i][i]^1 for i in range(len(a))]
+from re import sub
 
-print(cantor([[0,0,0],
-        [1,1,1],
-        [0,1,0]]))
+def get_users_ids(s):
+    return [sub(r'^uid','',i.lower().replace('#','').strip()).strip() for i in s.strip().split(', ')]
+
+print(get_users_ids("uid12 abuid, uid#, uidMiXeDcHaRs"))
