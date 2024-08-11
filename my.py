@@ -1,10 +1,6 @@
-cache=set()
+def cantor(a):
+    return [a[i][i]^1 for i in range(len(a))]
 
-def hand_out_gift(s):
-    if s in cache:
-        raise()
-    cache.add(s)
-
-print(hand_out_gift('peter'))
-print(hand_out_gift('mary'))
-print(hand_out_gift('peter'))
+print(cantor([[0,0,0],
+        [1,1,1],
+        [0,1,0]]))
