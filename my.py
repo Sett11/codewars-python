@@ -1,25 +1,56 @@
-import networkx as nx
-from itertools import product
+class Tree:
+    def __init__(self, root, left=None, right=None):
+        assert root and type(root) == Node
+        if left: assert type(left) == Tree and left.root < root
+        if right: assert type(right) == Tree and root < right.root
+        self.left = left
+        self.root = root
+        self.right = right
+        
+    def is_leaf(self):
+        return not(self.left or self.right)
+    
+    def __str__(self):
+        if self.is_leaf():
+            return f'[{self.root.value}]'
+        def f(x):
+            if x is None:
+                return '_'
+            return f"[{f(x.left) if x.left and not x.left.is_leaf() else x.left.root.value if x.left else '_'}] {x.root.value} [{f(x.right) if x.right and not x.right.is_leaf() else x.right.root.value if x.right else ''}]"
+        return f'[{f(self)}]'.replace('[_]','_').replace('[]','_')
+    
+    def __eq__(self, other):
+        return isinstance(other,Tree) and str(self)==str(other)
+    
+    def __ne__(self, other):
+        return not self==other
 
-def processes(s,e,p):
-    g={j:[] for _,j,__ in p}
-    for i in g:
-        for j in p:
-            if i==j[1]:
-                if j[-1] not in g[i]:
-                    g[i].append(j[-1])
-    try:
-        G=nx.DiGraph()
-        G.add_nodes_from([i for i in g])
-        G.add_edges_from(sum([list(product([i],g[i])) for i in g],[]))
-        path,r=nx.shortest_path(G,s,e),[]
-        for i in range(len(path)-1):
-            t=(path[i],path[i+1])
-            for j in p:
-                if j[1:]==t:
-                    r.append(j[0])
-        return r
-    except:
-        return []
+class Node:
+    def __init__(self,value,weight=1):
+        self.value = value
+        self.weight = weight
+    
+    def __str__(self):
+        return str(self.value)   
+    
+    def __lt__(self, other):
+        return self.value < other.value
+    
+    def __gt__(self, other):
+        return self.value > other.value
+    
+    def __eq__(self, other):
+        return self.value == other.value 
 
-print(processes('0', '16', [('em', '0', '1'), ('qw', '5', '9'), ('qz', '6', '11'), ('nh', '11', '12'), ('qh', '3', '6'), ('mk', '8', '11'), ('rb', '3', '8'), ('fl', '12', '14'), ('hb', '2', '6'), ('er', '13', '16'), ('vx', '9', '10'), ('lh', '4', '8'), ('vk', '12', '15'), ('qc', '9', '12'), ('dr', '12', '16'), ('pl', '1', '3'), ('xc', '5', '7'), ('et', '9', '12'), ('zj', '3', '5'), ('tm', '6', '8'), ('bt', '12', '13'), ('fk', '8', '13'), ('wp', '8', '9'), ('ab', '10', '11'), ('lt', '10', '15'), ('qd', '7', '10'), ('ng', '1', '2')]))
+    def __ne__(self, other):
+        return self.value != other.value
+
+tree1 = Tree(Node('B'), Tree(Node('A')), Tree(Node('C')))
+tree2 = Tree(Node('F'), Tree(Node('E')), Tree(Node('G')))
+t = Tree(Node('D'), tree1, tree2)
+tree1 = Tree(Node('B'), None, Tree(Node('C')))
+tree2 = Tree(Node('F'), Tree(Node('E')), None)
+tree3 = Tree(Node('D'), tree1, tree2)
+tree4 = Tree(Node('F'), None, None)
+tree5 = Tree(Node('D'), tree1, tree4)
+print(str(tree3))
