@@ -1,16 +1,12 @@
-def ccw(ax, ay, bx, by, cx, cy): return (bx - ax) * (cy - ay) - (cx - ax) * (by - ay)
+from math import ceil
+from re import sub
 
-def graham_scan(points):
-    X, Y = [], []
-    points = sorted(points)
-    for p in points:
-        while len(X) > 1 and ccw(*X[-2], *X[-1], *p) <= 0: X.pop()
-        while len(Y) > 1 and ccw(*Y[-2], *Y[-1], *p) >= 0: Y.pop()
-        X.append(p), Y.append(p)
-    return X,Y
+def convert_recipe(s):
+    def f(s):
+        s=s.group()
+        d,x={'tsp':5,'tbsp':15},s.split()
+        return s+f" ({str(ceil(eval(x[0])*d[x[1]]))}g)"
+    return sub(r'\d+\/*\d* (tsp|tbsp)',f,s)
 
-def hull_method(points):
-    X, Y = graham_scan(points)
-    return sorted(map(list,set(map(tuple,X+Y))))
-
-print(hull_method([[6, 20], [9, 13], [8, 6], [5, 6], [20, 4], [19, 4], [15, 19], [9, 16], [4, 11], [1, 20]]))
+print(convert_recipe("Add to the mixing bowl and coat well with 1 tbsp of olive oil & 1/2 tbsp of dried dill"))
+print(convert_recipe("14/5 tsp of cinnamon" ))
