@@ -1,5 +1,9 @@
-def find_summands(n):
-    sq=n**2
-    return [i for i in range(sq-(n-1),sq+(n+1),2)]
+from scipy.spatial import ConvexHull
 
-print(find_summands(357))
+def convex_hull_area(p):
+    try:
+        return round(ConvexHull([[str(j) for j in i] for i in p]).volume,2)
+    except:
+        return 0
+
+print(convex_hull_area({(0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (2, 1), (3, 0)}))
