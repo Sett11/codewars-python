@@ -1,11 +1,32 @@
-from itertools import combinations as comb
+def find_ways(initial_num,target_num,*,must_include=None,must_avoid=None):
+    def check(a):
+        n=initial_num
+        w=[]
+        for i in a:
+            if i==1:
+                n+=3
+            if i==2:
+                n+=sum(map(int,str(n).replace('-','')))
+            if i==3:
+                n+=n%4
+            w.append(n)
+        if must_include:
+            if not all(i in w for i in must_include):
+                return False
+        return n==target_num
+    r=set()
+    def f(n,q,w):
+        if (must_avoid and n in must_avoid) or n>target_num:
+            return
+        if n==target_num:
+            if check(q):
+                r.add(tuple(q))
+            return
+        w.add(n)
+        f(n+3,q+[1],w)
+        f(n+sum(map(int,str(n).replace('-',''))),q+[2],w) if n else None
+        f(n+n%4,q+[3],w) if n%4 else None
+    f(initial_num,[],set())
+    return len(r)
 
-def pair_em_up(n):
-     return sorted(sum([list(map(list,comb([j for j in range(n)],i))) for i in range(2,n+(1 if n%2==0 else 0),2)],[]),key=lambda x:\
-                   (x[0],x[1],x[2] if len(x)>2 else float('inf'),x[3] if len(x)>3 else float('inf'),x[4] if len(x)>4 else float('inf'),\
-                    x[5] if len(x)>5 else float('inf'),x[6] if len(x)>6 else float('inf'),x[7] if len(x)>7 else float('inf'),x[8] if len(x)>8 else float('inf'),\
-                    x[9] if len(x)>9 else float('inf'),x[10] if len(x)>10 else float('inf'),x[11] if len(x)>11 else float('inf'),x[12] if len(x)>12 else float('inf'),
-                    x[13] if len(x)>13 else float('inf'),x[14] if len(x)>14 else float('inf'),x[15] if len(x)>15 else float('inf'),x[16] if len(x)>16 else float('inf'),
-                    x[17] if len(x)>17 else float('inf'),x[18] if len(x)>18 else float('inf'),x[19] if len(x)>19 else float('inf'),x[20] if len(x)>20 else float('inf'),-len(x)))
-
-print(pair_em_up(7))
+print(find_ways(1,27,must_include = [16], must_avoid = [25, 5, 7]))
