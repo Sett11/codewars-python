@@ -1,32 +1,12 @@
-def find_ways(initial_num,target_num,*,must_include=None,must_avoid=None):
-    def check(a):
-        n=initial_num
-        w=[]
-        for i in a:
-            if i==1:
-                n+=3
-            if i==2:
-                n+=sum(map(int,str(n).replace('-','')))
-            if i==3:
-                n+=n%4
-            w.append(n)
-        if must_include:
-            if not all(i in w for i in must_include):
-                return False
-        return n==target_num
-    r=set()
-    def f(n,q,w):
-        if (must_avoid and n in must_avoid) or n>target_num:
-            return
-        if n==target_num:
-            if check(q):
-                r.add(tuple(q))
-            return
-        w.add(n)
-        f(n+3,q+[1],w)
-        f(n+sum(map(int,str(n).replace('-',''))),q+[2],w) if n else None
-        f(n+n%4,q+[3],w) if n%4 else None
-    f(initial_num,[],set())
-    return len(r)
+from functools import reduce
+from operator import mul
+from collections import Counter
 
-print(find_ways(1,27,must_include = [16], must_avoid = [25, 5, 7]))
+def product_sans_n(a):
+    c,n,u=Counter(a),reduce(mul,list(filter(lambda e:e,a)),1),set(a)
+    if(c[0]>1):return [0]*len(a)
+    for i in c:
+        c[i]=n//i if i else n
+    return [c[i] if 0 not in u else n if not i else 0 for i in a]
+
+print(product_sans_n([6, 3, 4, 6, 6, -5, -2, -5, 4, 4, -1, 4, -4, 2, 4, -2, -3, 1, 5, 2, -7, 7, 7, 7, -3, -2, 7, 5, -6, 4, 7, 7, 1, 5, 1, 2, 7, 3, 6, 4, 5, 5, 2, 3, -7, 6, -2, 1, -5, 7, 5, 4, 1, 2, -7, -3, 2, 6, 5, 7, 6, 5, 5, 7, 4, 7, -1, -6, -5, 5, 1, 2, 1, -4, 7, 6, 3, -7, 4, 6, 3, 5, 1, 5, -2, 4, 5, 2, 5, 2, 4, 7, 3, -4, 7, 3, 5, 6, 3, 3, 1, 6, -5, 3, -5, 6, -1, -5, 3, 1, 1, 4, 5, 2, 2, -6, 3, 2, 7, -5, -7, 4, 5, 7, 1, 5, 2, -5, -7, 2, 5, 5, 4, 5, 6, 5, -5, 1, 7, 6, 3, 1, 2, 2, 4, -1, 1, 2, -2, 1, 2, 3, 4, 7, 3, 7, 3, -4, -4, 6, 7, -3, 3, -3, 7, -7, -6, 6, 1, 1, 5, 6, -1, -6, 5, -6, 7, 4, 5, -6, 3, 5, 5, 5, 5, 3]))
