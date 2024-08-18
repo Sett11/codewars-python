@@ -1,22 +1,16 @@
-def find_sequences(n):
-    if n==3:
-        return [[1, 2]]
-    r,q=[sorted(k) for k in [set([j for j in range(n//i-i//2,n//i+i//2+1)]) for i in range(2,int((n**.5)*2))] if all(h>0 for h in k)],[]
-    for i in r:
-        s=sum(i)
-        if s==n:
-            q.append(i)
-        if s<n:
-            x=n-s
-            if x==i[0]-1 or x==i[-1]+1:
-                q.append(sorted([x]+i))
-        if s>n:
-            for j in range(1,len(i)):
-                if sum(i[:j])==n:
-                    q.append(i[:j])
-                if sum(i[j:])==n:
-                    q.append(i[j:])
-    return sorted(map(list,set(map(tuple,q))),reverse=True)
-                
+def compound_match(a,s):
+    u,r,q=set(a),[],[]
+    for i in range(len(s)):
+        t,p=s[:i],s[i:]
+        if t in u and p in u:
+            r.extend([t,p])
+            break
+    for i in range(len(a)):
+        if a[i] in (t,p) and a[i] not in [j[0] for j in q]:
+            q.append((a[i],i))
+        if len(q)==2:
+            q=dict(sorted(q,key=lambda x:r.index(x[0])))
+            return sorted(r,key=lambda x:q[x])+[list(q.values())]
 
-print(find_sequences(63))
+print(compound_match(['bow','crystal','organic','ally','rain','line'],'crystalline'))
+print(compound_match(['ally', 'spell', 'less', 'knight', 'land', 'tale', 'tar', 'guile', 'folk', 'shear', 'land', 'tar', 'fall', 'bow', 'bed', 'grab', 'guile', 'red', 'super', 'top', 'line', 'bowl', 'red', 'wind', 'deck', 'let', 'in', 'tree', 'ally', 'ally', 'door', 'tar', 'top', 'back', 'tale', 'rain', 'tar', 'spell', 'bowl', 'back', 'night', 'bel', 'star', 'guile', 'rain', 'get', 'fin', 'organic', 'land', 'free'] ,'target'))
