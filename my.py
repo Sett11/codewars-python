@@ -1,9 +1,8 @@
-from gmpy2 import is_prime
-from itertools import groupby
+from statistics import mean
 
-def simplified_array(a):
-    b=[sum(i) for _,i in groupby(a,key=lambda x:is_prime(x) and x>1)]
-    return a if a==b else simplified_array(b)
+def array_center(a):
+    b,c=mean(a),min(a)
+    return [i for i in a if abs(i-b)<c]
 
-print(simplified_array([-3, 4, 5, 2, 0, -10]))
-print(simplified_array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+print(array_center([8, 3, 4, 5, 2, 8]))
+print(array_center([1, 3, 2, 1]))
