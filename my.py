@@ -1,8 +1,8 @@
-from statistics import mean
+from functools import reduce
+from operator import mul
+from collections import Counter
+from itertools import product
 
-def array_center(a):
-    b,c=mean(a),min(a)
-    return [i for i in a if abs(i-b)<c]
-
-print(array_center([8, 3, 4, 5, 2, 8]))
-print(array_center([1, 3, 2, 1]))
+def get_num(a):
+    d=sorted(map(lambda x:reduce(mul,x),product(*[[j**i for i in range(k+1)] for j,k in Counter(a).items()])))[1:]
+    return [reduce(mul,a),len(d),d[0],d[-2]]
