@@ -66,7 +66,7 @@ class Sudoku:
                return False
       return True
    
-def sudoku(g):
+def solve(g):
    s=Sudoku(g)
    a,b,c,r=deque([s]),deque([s]),deque(),s
    while b:
@@ -84,7 +84,7 @@ def sudoku(g):
          r=b[0]
          a.appendleft(r)
 
-print(sudoku([
+print(solve([
             [9, 0, 0, 0, 8, 0, 0, 0, 1],
             [0, 0, 0, 4, 0, 6, 0, 0, 0],
             [0, 0, 5, 0, 7, 0, 3, 0, 0],
