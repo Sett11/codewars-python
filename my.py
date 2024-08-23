@@ -1,5 +1,10 @@
-def sorted_comm_by_digs(a,b):
-    dr,dsddr=lambda x:sum(map(int,str(x))),lambda x:sum(map(lambda y:int(y)**2,str(x)))
-    return sorted(set(a)&set(b),key=lambda x:(-(dsddr(k:=dr(x))+k),x))
+from math import factorial as f
+from collections import Counter
+from functools import reduce
+from operator import mul
 
-print(sorted_comm_by_digs([5, 56, 28, 35, 12, 27, 64, 99, 18, 31, 14, 6],[28, 17, 31, 63, 64, 5, 18, 17, 95, 56, 37, 5, 28, 16]))
+def proc_arr(a):
+    a.sort()
+    return [f(len(a))//reduce(mul,map(f,Counter(a).values())),int(''.join(a)),int(''.join(a[::-1]))]
+    
+print(proc_arr(['0', '5', '3', '0', '4', '3', '2']))
