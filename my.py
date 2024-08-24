@@ -78,10 +78,17 @@
 
 # print(solve_puzzle([7,0,0,0,2,2,3, 0,0,3,0,0,0,0, 3,0,3,0,0,5,0, 0,0,0,0,5,0,4]))
 
-from math import comb
+from sys import setrecursionlimit
+setrecursionlimit(50000)
 
-def checkchoose(m,n):
-    return next(iter(i for i in range(1,n) if comb(n,i)==m),-1)
+def count_skills(a,s):
+    u=set()
+    def f(x):
+        if x in u or x in s:
+            return
+        u.add(x)
+        f(a[x])
+    {f(a[i]) for i in s}
+    return len(u|s)
 
-print(checkchoose(35,7))
-print(checkchoose(4,2))
+print(count_skills([ 0, 0, 0, 1, 3, 3, 2 ],{ 4,5 }))
