@@ -1,21 +1,87 @@
-WORDS=['ACT', 'ADD', 'ALL', 'APE', 'AND', 'ANN', 'ANY', 'ANT', 'ARE', 'ART', 'ASS', 'BAD', 'BAR', 'BAT', 'BAY', 'BEE', 'BIG', 'BIT', 'BOB', 'BOY', 'BUN', 'BUT', 'CAN', 'CAR', 'CAT', 'COT', 'COW', 'CUT', 'DAD', 'DAY', 'DEW', 'DID', 'DIN', 'DOG', 'DON', 'DOT', 'DUD', 'EAR', 'EAT', 'EEL', 'EGG', 'ERR', 'EYE', 'FAG', 'FAR', 'FLY', 'FOR', 'FUN', 'FUR', 'GAY', 'GET', 'GOT', 'GUM', 'GUN', 'GUY', 'GUT', 'GYM', 'HAS', 'HAT', 'HER', 'HEY', 'HIM', 'HIS', 'HIT', 'HOW', 'HUG', 'HUN', 'ICE', 'INK', 'ITS', 'IVE', 'JAN', 'JET', 'JOB', 'JOT', 'JOY', 'KEY', 'LAP', 'LAY', 'LIE', 'LET', 'LOG', 'MAN', 'MAP', 'MAY', 'MEN', 'MOM', 'MUD', 'MUM', 'NAP', 'NEW', 'NOD', 'NOT', 'NOW', 'OAR', 'ODD', 'OFF', 'OLD', 'ONE', 'OUR', 'OUT', 'PAN', 'PAL', 'PAT', 'PAW', 'PEN', 'PET', 'PIG', 'PIT', 'POT', 'PRO', 'PUT', 'QUO', 'RAG', 'RAM', 'RAN', 'RAP', 'RAT', 'RED', 'RIP', 'ROD', 'ROT', 'RUN', 'RUT', 'SAT', 'SAW', 'SAY', 'SEA', 'SEE', 'SEX', 'SHE', 'SOY', 'SUN', 'SUX', 'TAN', 'TAT', 'TEA', 'THE', 'TIN', 'TIP', 'TIT', 'TON', 'TOP', 'TOO', 'TWO', 'URN', 'USE', 'VAN', 'VET', 'VIP', 'WAR', 'WAS', 'WAY', 'WED', 'WHO', 'WHY', 'WIN', 'WON', 'XXX', 'YAK', 'YAM', 'YAP', 'YOU', 'YUM', 'ZAP', 'ZIP', 'ZIT', 'ZOO', 'ABLE', 'ACED', 'AGOG', 'AHEM', 'AHOY', 'ALLY', 'AMEN', 'ANTI', 'ANTS', 'ANUS', 'APES', 'ARMY', 'ARSE', 'ARTY', 'AVID', 'AWED', 'BABY', 'BARS', 'BATS', 'BAYS', 'BEAR', 'BEES', 'BILL', 'BITE', 'BITS', 'BLOW', 'BLUE', 'BOLD', 'BONE', 'BOOB', 'BOOM', 'BOSS', 'BOYS', 'BUFF', 'BUNG', 'BUNS', 'BUMS', 'BURP', 'BUST', 'BUSY', 'BUZZ', 'CANS', 'CANT', 'CARS', 'CART', 'CATS', 'CHAP', 'CHIC', 'CHUM', 'CIAO', 'CLAP', 'COCK', 'CODE', 'COOL', 'COWS', 'COZY', 'CRAB', 'CREW', 'CURE', 'CULT', 'DADS', 'DAFT', 'DAWN', 'DAYS', 'DECK', 'DEED', 'DICK', 'DING', 'DOGS', 'DOTS', 'DOLL', 'DOLT', 'DONG', 'DOPE', 'DOWN', 'DRAW', 'DUCK', 'DUDE', 'DUMB', 'DUTY', 'EARL', 'EARN', 'EARS', 'EASY', 'EATS', 'EDGE', 'EELS', 'EGGS', 'ENVY', 'EPIC', 'EYES', 'FACE', 'FAGS', 'FANG', 'FARM', 'FART', 'FANS', 'FAST', 'FEAT', 'FEET', 'FISH', 'FIVE', 'FIZZ', 'FLAG', 'FLEW', 'FLIP', 'FLOW', 'FOOD', 'FORT', 'FUCK', 'FUND', 'GAIN', 'GEEK', 'GEMS', 'GIFT', 'GIRL', 'GIST', 'GIVE', 'GLEE', 'GLOW', 'GOLD', 'GOOD', 'GOSH', 'GRAB', 'GRIN', 'GRIT', 'GROT', 'GROW', 'GRUB', 'GUNS', 'GUSH', 'GYMS', 'HAIL', 'HAIR', 'HALO', 'HANG', 'HATS', 'HEAD', 'HEAL', 'HEIR', 'HELL', 'HELP', 'HERE', 'HERO', 'HERS', 'HIGH', 'HIRE', 'HITS', 'HOLY', 'HOPE', 'HOST', 'HUNK', 'HUGE', 'HUNG', 'HUNS', 'HURT', 'ICON', 'IDEA', 'IDLE', 'IDOL', 'IOTA', 'JAZZ', 'JERK', 'JESS', 'JETS', 'JINX', 'JOBS', 'JOHN', 'JOKE', 'JUMP', 'JUNE', 'JULY', 'JUNK', 'JUST', 'KATA', 'KEYS', 'KICK', 'KIND', 'KING', 'KISS', 'KONG', 'KNOB', 'KNOW', 'LARK', 'LATE', 'LEAN', 'LICE', 'LICK', 'LIKE', 'LION', 'LIVE', 'LOGS', 'LOCK', 'LONG', 'LOOK', 'LORD', 'LOVE', 'LUCK', 'LUSH', 'MAKE', 'MANY', 'MART', 'MATE', 'MAXI', 'MEEK', 'MIKE', 'MILD', 'MINT', 'MMMM', 'MOMS', 'MOOD', 'MOON', 'MOOT', 'MUCH', 'MUFF', 'MUMS', 'MUTT', 'NAPS', 'NAZI', 'NEAT', 'NECK', 'NEED', 'NEWS', 'NEXT', 'NICE', 'NICK', 'NOON', 'NOSE', 'NOTE', 'OARS', 'OATS', 'ONCE', 'ONLY', 'OPEN', 'ORGY', 'OVAL', 'OVER', 'PANS', 'PALS', 'PART', 'PAST', 'PATS', 'PAWS', 'PEAR', 'PERT', 'PENS', 'PETS', 'PHEW', 'PIPE', 'PIPS', 'PLAN', 'PLUM', 'PLUS', 'POET', 'POOF', 'POOP', 'POSH', 'POTS', 'PROS', 'PSST', 'PUKE', 'PUNK', 'PURE', 'PUSH', 'PUSS', 'QUAD', 'QUAK', 'QUID', 'QUIT', 'RANT', 'RAPE', 'RAPS', 'RAPT', 'RATE', 'RAMS', 'RATS', 'REAP', 'RICK', 'RING', 'RIPE', 'ROOT', 'ROSE', 'ROSY', 'ROTS', 'RUNT', 'RUTS', 'SAFE', 'SAGE', 'SANE', 'SAVE', 'SAWS', 'SEEK', 'SEXY', 'SHAG', 'SHIT', 'SICK', 'SIGH', 'SIRE', 'SLAG', 'SLIT', 'SLUT', 'SNAP', 'SNOG', 'SNUG', 'SOFT', 'SOON', 'SOUL', 'SOUP', 'SPRY', 'STIR', 'STUN', 'SUCK', 'SWAG', 'SWAY', 'TACT', 'TANK', 'TANS', 'THAT', 'THIS', 'TIME', 'TINS', 'TINY', 'TITS', 'TOES', 'TONS', 'TONY', 'TOPS', 'TOYS', 'UBER', 'URNS', 'USED', 'USER', 'USES', 'VAIN', 'VAMP', 'VARY', 'VEIN', 'VENT', 'VERY', 'VEST', 'VIEW', 'VIVA', 'VOLT', 'VOTE', 'WAFT', 'WAGE', 'WAKE', 'WALK', 'WALL', 'WANG', 'WANK', 'WANT', 'WARD', 'WARM', 'WARP', 'WARS', 'WART', 'WASH', 'WAVE', 'WEAR', 'WEDS', 'WEED', 'WEEN', 'WELD', 'WHAT', 'WHEE', 'WHEW', 'WHIP', 'WHIZ', 'WHOA', 'WIFE', 'WILL', 'WIND', 'WING', 'WINK', 'WINS', 'WIRE', 'WISH', 'WITH', 'WORD', 'WORK', 'WRAP', 'XMAN', 'XMEN', 'XRAY', 'XTRA', 'XXXX', 'YANK', 'YAKS', 'YAMS', 'YAPS', 'YARD', 'YARN', 'YELP', 'YERN', 'YOKE', 'YOLK', 'YULE', 'ZANY', 'ZAPS', 'ZIPS', 'ZITS', 'ZERO', 'ZOOM', 'ZOOS']
-from itertools import product as p
+# from itertools import permutations as perm
 
-def check1800(s):
-    u=set(WORDS)
-    d,a,r={'2':'ABC','3':'DEF','4':'GHI','5':'JKL','6':'MNO','7':'PQRS','8':'TUV','9':'WXYZ'},s.split('-')[2:],[]
-    for i in a:
-        t=[]
-        for j in i:
-            for k in d:
-                if j in d[k]:
-                    t.append(d[k])
-        r.append(t)
-    res={'1-800-'+'-'.join(k) for k in p(*[[''.join(j) for j in p(*i) if ''.join(j) in u] for i in r])}
-    if len(r[0])==3:
-        r[0].append(r[1].pop(0))
-    else:
-        r[1].insert(0,r[0].pop())
-    return res.union({'1-800-'+'-'.join(k) for k in p(*[[''.join(j) for j in p(*i) if ''.join(j) in u] for i in r])})
+# def solve_puzzle(a):
+#     n=len(a)//4
+#     res,p,rows,cols=[[0 for _ in range(n)] for __ in range(n)],list(perm(range(n),n)),[],[]
+#     cl,cr=list(map(lambda x:count_steps(x,n),p)),list(map(lambda x:count_steps(x[::-1],n),p))
+#     for i in range(n):
+#         l,r=a[n*4-i-1],a[n+i]
+#         rows.append([p[i] for i in range(len(p)) if (l==0 or cl[i]==l) and (r==0 or cr[i]==r)])
+#     for i in range(n):
+#         l,r=a[i],a[n*3-i-1]
+#         cols.append([p[i] for i in range(len(p)) if (l==0 or cl[i]==l) and (r==0 or cr[i]==r)])
+#     while [len(i) for i in rows].count(1)<n:
+#         state=[len(i) for i in rows]+[len(i) for i in cols]
+#         try_solve(rows,cols,res,n)
+#         if [len(i) for i in rows].count(1)<n and [len(i) for i in rows]+[len(i) for i in cols]==state:
+#             heights_sort=sorted([(len(j),0,i) for i,j in enumerate(rows)]+[(len(j),1,i) for i,j in enumerate(cols)])
+#             v=False
+#             for height in heights_sort:
+#                 if height[0]==1:
+#                     continue
+#                 index=height[2]
+#                 for i in range(height[0]):
+#                     c_rows,c_cols,c_puzzle=[i.copy() for i in rows],[i.copy() for i in cols],[i.copy() for i in res]
+#                     if height[1]==0:
+#                         c_rows[index]=[rows[index][i]]
+#                     else:
+#                         c_cols[index]=[cols[index][i]]
+#                     if not try_solve(c_rows,c_cols,c_puzzle,n):
+#                         if height[1]==0:
+#                             rows[index].pop(i)
+#                         else:
+#                             cols[index].pop(i)
+#                         v=True
+#                         break
+#                 if v:
+#                     break
+#             if not v:    
+#                 break
+#     return res
 
-print(check1800("1-800-INK-WANT"))
+# def count_steps(a,n):
+#     m=s=0
+#     for i in a:
+#         if i>=m:
+#             s+=1
+#             m=i
+#         if i>=n-1:
+#             break
+#     return s
+
+# def try_solve(rows,cols,puzzle,n):
+#     v=True
+#     while v:
+#         v=False
+#         for row in range(n):
+#             for col in range(n):
+#                 count_cols=[len(hyp(cols[col],row,i))>0 for i in range(n)]
+#                 count_rows=[len(hyp(rows[row],col,i))>0 for i in range(n)]
+#                 if count_rows.count(True)==0 or count_cols.count(True)==0:
+#                     return False
+#                 if count_rows.count(True)==1 or puzzle[row][col]==0:
+#                     puzzle[row][col]=count_rows.index(True)+1
+#                 elif count_cols.count(True)==1 or puzzle[row][col]==0:
+#                     puzzle[row][col]=count_cols.index(True)+1
+#                 for i in range(n):
+#                     if count_cols[i]==count_rows[i]:
+#                         continue
+#                     if count_cols[i]:
+#                         cols[col]=[r for r in cols[col] if r[row]!=i]
+#                     if count_rows[i]:
+#                         rows[row]=[c for c in rows[row] if c[col]!=i]
+#                     v=True
+#     return True    
+
+# def hyp(a,x,h):
+#     return [i[x] for i in a if i[x]==h]
+
+# print(solve_puzzle([7,0,0,0,2,2,3, 0,0,3,0,0,0,0, 3,0,3,0,0,5,0, 0,0,0,0,5,0,4]))
+
+from math import comb
+
+def checkchoose(m,n):
+    return next(iter(i for i in range(1,n) if comb(n,i)==m),-1)
+
+print(checkchoose(35,7))
+print(checkchoose(4,2))
