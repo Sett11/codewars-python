@@ -1,30 +1,18 @@
-sq={i*i:i for i in range(2,50)}
+from collections import Counter
+from functools import reduce
+from operator import mul
+from math import factorial as f
+from decimal import Decimal as D
 
-def ham(g,i,n,p):
-   if i not in p:
-      p.append(i)
-      if len(p)==n:
-         return p
-      for j in g.get(i,[]):
-         r=[i for i in p]
-         t=ham(g,j,n,r)
-         if t:
-            return t
+def list_position(w):
+    s,c=sorted(w),1
+    for i in w:
+        if i==s[0]:
+            s.pop(0)
+            continue
+        t=s.index(i)
+        c+=(t*D(f(len(s)-1)/reduce(mul,map(f,Counter(s).values()))))
+        s.pop(t)
+    return int(c)
 
-def square_sums_row(n):
-   g={}
-   for i in range(1,n+1):
-      for j in range(1,n+1):
-         if i!=j and i+j in sq:
-            if i not in g:
-               g[i]=[j]
-            else:
-               g[i].append(j)
-   for i in range(1,n+1):
-      t=ham(g,i,n,[])
-      if t:
-         return t
-   return False
-                
-
-print(square_sums_row(43))
+print(list_position('IMMUNOELECTROPHORETICALLY'))
