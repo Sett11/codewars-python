@@ -1,94 +1,35 @@
-# from itertools import permutations as perm
+def encode_rail_fence_cipher(s,n):
+    m=len(s)
+    a=[[None for _ in range(m)] for __ in range(n)]
+    i=j=d=0
+    while j<m:
+        a[i][j]=s[j]
+        d=0 if i==n-1 else 1 if i==0 else d
+        i=i+1 if d else i-1
+        j+=1
+    return ''.join(''.join(filter(bool,i)) for i in a)
+    
+def decode_rail_fence_cipher(s,n):
+    m=len(s)
+    a,r=[[None for _ in range(m)] for __ in range(n)],''
+    i=j=d=g=0
+    while j<m:
+        a[i][j]='&'
+        d=0 if i==n-1 else 1 if i==0 else d
+        i=i+1 if d else i-1
+        j+=1
+    for i in range(n):
+        for j in range(m):
+            if a[i][j]=='&':
+                a[i][j]=s[g]
+                g+=1
+    i=j=d=0
+    while j<m:
+        r+=a[i][j]
+        d=0 if i==n-1 else 1 if i==0 else d
+        i=i+1 if d else i-1
+        j+=1
+    return r
 
-# def solve_puzzle(a):
-#     n=len(a)//4
-#     res,p,rows,cols=[[0 for _ in range(n)] for __ in range(n)],list(perm(range(n),n)),[],[]
-#     cl,cr=list(map(lambda x:count_steps(x,n),p)),list(map(lambda x:count_steps(x[::-1],n),p))
-#     for i in range(n):
-#         l,r=a[n*4-i-1],a[n+i]
-#         rows.append([p[i] for i in range(len(p)) if (l==0 or cl[i]==l) and (r==0 or cr[i]==r)])
-#     for i in range(n):
-#         l,r=a[i],a[n*3-i-1]
-#         cols.append([p[i] for i in range(len(p)) if (l==0 or cl[i]==l) and (r==0 or cr[i]==r)])
-#     while [len(i) for i in rows].count(1)<n:
-#         state=[len(i) for i in rows]+[len(i) for i in cols]
-#         try_solve(rows,cols,res,n)
-#         if [len(i) for i in rows].count(1)<n and [len(i) for i in rows]+[len(i) for i in cols]==state:
-#             heights_sort=sorted([(len(j),0,i) for i,j in enumerate(rows)]+[(len(j),1,i) for i,j in enumerate(cols)])
-#             v=False
-#             for height in heights_sort:
-#                 if height[0]==1:
-#                     continue
-#                 index=height[2]
-#                 for i in range(height[0]):
-#                     c_rows,c_cols,c_puzzle=[i.copy() for i in rows],[i.copy() for i in cols],[i.copy() for i in res]
-#                     if height[1]==0:
-#                         c_rows[index]=[rows[index][i]]
-#                     else:
-#                         c_cols[index]=[cols[index][i]]
-#                     if not try_solve(c_rows,c_cols,c_puzzle,n):
-#                         if height[1]==0:
-#                             rows[index].pop(i)
-#                         else:
-#                             cols[index].pop(i)
-#                         v=True
-#                         break
-#                 if v:
-#                     break
-#             if not v:    
-#                 break
-#     return res
-
-# def count_steps(a,n):
-#     m=s=0
-#     for i in a:
-#         if i>=m:
-#             s+=1
-#             m=i
-#         if i>=n-1:
-#             break
-#     return s
-
-# def try_solve(rows,cols,puzzle,n):
-#     v=True
-#     while v:
-#         v=False
-#         for row in range(n):
-#             for col in range(n):
-#                 count_cols=[len(hyp(cols[col],row,i))>0 for i in range(n)]
-#                 count_rows=[len(hyp(rows[row],col,i))>0 for i in range(n)]
-#                 if count_rows.count(True)==0 or count_cols.count(True)==0:
-#                     return False
-#                 if count_rows.count(True)==1 or puzzle[row][col]==0:
-#                     puzzle[row][col]=count_rows.index(True)+1
-#                 elif count_cols.count(True)==1 or puzzle[row][col]==0:
-#                     puzzle[row][col]=count_cols.index(True)+1
-#                 for i in range(n):
-#                     if count_cols[i]==count_rows[i]:
-#                         continue
-#                     if count_cols[i]:
-#                         cols[col]=[r for r in cols[col] if r[row]!=i]
-#                     if count_rows[i]:
-#                         rows[row]=[c for c in rows[row] if c[col]!=i]
-#                     v=True
-#     return True    
-
-# def hyp(a,x,h):
-#     return [i[x] for i in a if i[x]==h]
-
-# print(solve_puzzle([7,0,0,0,2,2,3, 0,0,3,0,0,0,0, 3,0,3,0,0,5,0, 0,0,0,0,5,0,4]))
-
-from sys import setrecursionlimit
-setrecursionlimit(50000)
-
-def count_skills(a,s):
-    u=set()
-    def f(x):
-        if x in u or x in s:
-            return
-        u.add(x)
-        f(a[x])
-    {f(a[i]) for i in s}
-    return len(u|s)
-
-print(count_skills([ 0, 0, 0, 1, 3, 3, 2 ],{ 4,5 }))
+print(encode_rail_fence_cipher("Hello, World!", 4),sep='\n')
+print(decode_rail_fence_cipher("H !e,Wdloollr", 4),sep='\n')
