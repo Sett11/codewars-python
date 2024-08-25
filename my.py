@@ -80,15 +80,24 @@
 def fack():
      ...
 
-def traverse_TCP_states(events):
-    tsp_graph={'CLOSED': {'APP_PASSIVE_OPEN': 'LISTEN', 'APP_ACTIVE_OPEN': 'SYN_SENT'}, 'LISTEN': {'RCV_SYN': 'SYN_RCVD', 'APP_SEND': 'SYN_SENT', 'APP_CLOSE': 'CLOSED'}, 'SYN_RCVD': {'APP_CLOSE': 'FIN_WAIT_1', 'RCV_ACK': 'ESTABLISHED'}, 'SYN_SENT': {'RCV_SYN': 'SYN_RCVD', 'RCV_SYN_ACK': 'ESTABLISHED', 'APP_CLOSE': 'CLOSED'}, 'ESTABLISHED': {'APP_CLOSE': 'FIN_WAIT_1', 'RCV_FIN': 'CLOSE_WAIT'}, 'FIN_WAIT_1': {'RCV_FIN': 'CLOSING', 'RCV_FIN_ACK': 'TIME_WAIT', 'RCV_ACK': 'FIN_WAIT_2'}, 'CLOSING': {'RCV_ACK': 'TIME_WAIT'}, 'FIN_WAIT_2': {'RCV_FIN': 'TIME_WAIT'}, 'TIME_WAIT': {'APP_TIMEOUT': 'CLOSED'}, 'CLOSE_WAIT': {'APP_CLOSE': 'LAST_ACK'}, 'LAST_ACK': {'RCV_ACK': 'CLOSED'}}
-    curr='CLOSED'
-    for event in events:
-         next=tsp_graph[curr].get(event)
-         if next is None:
-              return 'ERROR'
-         curr=next
-    return curr
+class FSM:
+    def __init__(self,instructions):
+        self.graph={}
+        for i in [i.split(';') for i in instructions.splitlines()]:
+            self.graph[i[0]]={}
+            self.graph[i[0]]['states']=i[1].strip().split(', ')
+            self.graph[i[0]]['output']=int(i[2].strip())
+    
+    def run_fsm(self,start,sequence):
+        curr,path=self.graph[start],[start]
+        for i in sequence:
+            next=curr['states'][i]
+            path.append(next)
+            curr=self.graph[next]
+        return path[-1],self.graph[path[-1]]['output'],path
 
-
-print(traverse_TCP_states(["APP_ACTIVE_OPEN","RCV_SYN_ACK","RCV_FIN","APP_CLOSE"]))
+F=FSM("S1; S1, S2; 9"  "\n" \
+                       "S2; S1, S3; 10" "\n" \
+                       "S3; S4, S3; 8"  "\n" \
+                       "S4; S4, S1; 0")
+print(F.run_fsm('S1',[0, 1, 1, 0, 1]))
