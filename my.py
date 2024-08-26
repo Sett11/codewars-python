@@ -1,17 +1,18 @@
-def spiralize(size):
-    pass
+import gmpy2
+from bisect import bisect_left,bisect_right
 
-#print(spiralize(5))
+def e(n):
+    l=gmpy2.isqrt(n)-1
+    n-=1
+    b=gmpy2.xmpz(3)
+    b[4:n:2]=-1
+    for i in b.iter_clear(3,l):
+        b[i*i:n:i+i]=-1
+    return list(map(lambda x:x**4,b.iter_clear(2,n)))
 
-def solve(n):
-    f=lambda x:sum(map(int,str(x)))
-    m,i,d=f(n),1,{}
-    while n>0:
-        m=max(f(n),m)
-        if m not in d:
-            d[m]=n
-        n=n-(n%(10)**i)-1
-        i+=1
-    return d[m]
+nums=e(51000)
 
-print(solve(48))
+def solution(n,m):
+    return nums[bisect_left(nums,n):bisect_right(nums,m)]
+
+print(solution(10000,100000))
