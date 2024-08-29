@@ -1,16 +1,9 @@
-from itertools import permutations
+from scipy.stats.mstats import gmean
 
-def rearranger(k,*args):
-    d,M={},float('inf')
-    for i in permutations(args):
-        n=int(''.join(map(str,i)))
-        if n%k==0:
-            if n not in d:
-                d[n]=[i]
-            else:
-                if i not in d[n]:
-                    d[n].append(i)
-            M=min(M,n)
-    return f"Rearrangement: {' and '.join(', '.join([str(j) for j in i]) for i in d[M])} generates: {M} divisible by {k}" if d else 'There is no possible rearrangement'
+def geometric_meanII(arr):
+    if 0 in arr: return 0
+    L = list(filter(lambda x: isinstance(x, int) and x > 0, arr))
+    if 9 * len(arr) > 9 * len(L) + (len(L) if len(arr) > 10 else 9): return 0
+    return gmean(L)
 
-print(rearranger(6, 19, 32, 2, 124, 20, 22))
+print(geometric_meanII([2, 2, 3, 2, 3, 2, 3, 4, 4])) 
