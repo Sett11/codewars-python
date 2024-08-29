@@ -13,50 +13,31 @@
 
 # print(li(10000))
 
-# def get_neighbourhood(t,a,c,d):
-#     n,m,r,v=len(a),len(a[0]),[],t=='von_neumann'
-#     if not m or not d or 0>c[0] or c[0]>=n or 0>c[1] or c[1]>=m:
-#         return []
-#     for i in range(c[0]-d+(1 if v else 0),c[0]+d-(1 if v else 0)+1):
-#         for j in range(c[1]-d+(1 if v else 0),c[1]+d-(1 if v else 0)+1):
-#             if (i,j)!=c and i>=0 and i<n and j>=0 and j<m:
-#                 r.append(a[i][j])
-#     if v:
-#         z=[[c[0]-d,c[1]],[c[0]+d,c[1]],[c[0],c[1]-d],[c[0],c[1]+d]]
-#         r.extend([a[i][j] for i,j in z if i>=0 and i<n and j>=0 and j<m])
-#     return sorted(r)
+from re import compile
 
+def change(s,p,v):
+  a=s.splitlines()
+  for i in range(len(a)):
+    if 'Corporation' in a[i] or 'Level' in a[i]:
+      a[i]=''
+    elif a[i].startswith('Program'):
+      a[i]=f'Program: {p}'
+    elif a[i].startswith('Author'):
+      a[i]='Author: g964'
+    elif a[i].startswith('Date'):
+      a[i]='Date: 2019-01-01'
+    elif a[i].startswith('Version'):
+      t=a[i].split()
+      if compile(r'\A\d+\.\d+\Z').search(t[1]):
+        if t[1]!='2.0':
+          a[i]=f'Version: {v}'
+      else:
+        return 'ERROR: VERSION or PHONE'
+    elif a[i].startswith('Phone'):
+      if compile(r'\A\+1\-\d{3,3}\-\d{3,3}-\d{4,4}\Z').search(a[i].split()[1]):
+        a[i]='Phone: +1-503-555-0090'
+      else:
+        return 'ERROR: VERSION or PHONE'
+  return ' '.join(filter(bool,a))
 
-# print(get_neighbourhood('von_neumann',[
-#        [ -8,  -2,   6,  -5,   8,   0,   1,   6,   4,   4,   1,   9],
-#         [  8,  -5,   2,  -4,  -1,  -7,   5,  -8, -10,   0,  -3,  -3],
-#         [  7,  -3,   3,  -6,  -3, -10,  -2,  -6,  10,   7,  -7,  -1],
-#         [ -3,  10,  -1,   0,  -4,   3,  -4,  -6,  -8,   4,  -6,   6],
-#         [ -3,   3,  -6,   2,  -8,  -1,  -8,   1,   5,   6,   1,  -9],
-#         [ -5,   2,   0,   8,  -8,  -9,   0,  -9,  -1,  -4,  -8,  -1],
-#         [  9,  -4,   4, -10,   6,   4,  -5,  -7,   1,   2,   6, -10],
-#         [-10, -10,   6,  -5,   7,   7,  -3,  -7,   9,   5,   7,  -5],
-#         [ -4,   3,   9,   4,  -7,  -1,  -5,  -5,   9,   1,  -1,  -7],
-#         [  7,  -6,  -2,   4,  -1,   5,   4,   4,  -3,   2,   4,  -5],
-#         [ -4,  -7,   1,   2,   9,   5,  10,   5,  -6,   5,   8,   4],
-#         [ -2,   4,   5,  10,  -4,   3,  -6,   8,   8,  -1,   9,  -3]],(11,2),3),sep='\n')
-
-# [-7, -6, -4, -4, -2, -2, 1, 2, 3, 4, 4, 9, 9, 10]
-
-from collections import Counter
-
-def pyramid(a):
-    d,c,r=Counter(a),0,[]
-    for i in range(3,0,-1):
-        t=[j for j in d.items() if j[1]>=i and j[0] not in r]
-        if not t:
-            return
-        x=max(t)[0]
-        c+=x*i
-        d[x]-=i
-        r.append(x)
-    return c
-
-
-
-print(pyramid([5,3,5,3,0,0,-1,0,0,3,3,3]))
+print(change('Program title: Primes\nAuthor: Kern\nCorporation: Gold\nPhone: +1-503-555-0091\nDate: Tues April 9, 2005\nVersion: 6.7\nLevel: Alpha','Balance', '1.5.6'))
