@@ -1,72 +1,72 @@
-
-
 import re
 from operator import add,sub,mul,truediv,mod
 
-def parse(s):
-    r=re.compile("\s*(=>|[-+*\/\%=\(\)]|[A-Za-z_][A-Za-z0-9_]*|[0-9]*\.?[0-9]+)\s*")
-    return [i for i in r.findall(s) if not i.isspace()]
+def tokenize(s):
+   if not s:
+      return []
+   r=re.compile("\s*(=>|[-+*\/\%=\(\)]|[A-Za-z_][A-Za-z0-9_]*|[0-9]*\.?[0-9]+)\s*")
+   return [i for i in r.findall(s) if not i.isspace()]
 
-def is_number(s):
-    return re.compile(r'\A[-]?\d+(?:\.\d+)?\Z').search(s)
+def is_number(n):
+   return bool(re.compile(r'\A[-]?\d+(?:\.\d+)?\Z').search(n))
 
-class Environment(dict):
-    def __init__(self,ops={},funcs={},vars={},keys={}):
-        self.update(ops=ops,funcs=funcs,vars=vars,keys=keys)
+class Envirinment(dict):
+   def __init__(self,ops={},funcs={},vars={},keys={}):
+      self.update(ops=ops,funcs=funcs,vars=vars,keys=keys)
 
 class Func:
-    def __init__(self,params,expr,interp):
-        self.params,self.expr=params,expr
-        self.env=Environment(interp.env['ops'],interp.env['funcs'])
-        self.interp=interp
-        self.ary=len(params)
-    
-    def __call__(self,*args):
-        self.env['vars'].update(zip(self.params,args))
-        return self.interp.eval_postfix(self.interp.shunting_yard(self.expr,self.env),self.env)
-    
-class Interpreter:
-    def __init__(self):
-        vars={}
-        funcs={}
-        keys=['fn']
-        ops={'+':add,'-':sub,'*':mul,'/':truediv,'%':mod,'=':self._assign_var}
-        self.env=Environment(ops,funcs,vars,keys)
+   def __init__(self,params,expr,interp):
+      self.params,self.expr=params,expr
+      self.env=Envirinment(interp.env['ops'],interp.env['funcs'])
+      self.ary=len(params)
+      self.interp=interp
 
-    def input(self,s):
-        t=parse(s)
-        if not t:
+   def __call__(self,*args):
+      self.env['vars'].update(zip(self.params,args))
+      return self.interp.eval_postfix(self.interp.shunting_yard(self.expr,self.env),self.env)
+
+class Interpreter:
+   def __init__(self):
+      vars={}
+      funcs={}
+      ops={'+':add,'-':sub,'*':mul,'/':truediv,'%':mod,'=':self._assign_var}
+      keys=['fn']
+      self.env=Envirinment(ops,funcs,vars,keys)
+
+   def input(self,expr):
+      t=tokenize(expr)
+      if not t:
+         return ''
+      if t[0] in self.env['keys']:
+         if t[0]=='fn':
+            new_f_n=t[1]
+            if new_f_n in self.env['vars']:
+               raise Exception('Cannot overwrite variable with function!')
+            opi=t.index('=>')
+            params=t[2:opi]
+            if len(params)!=len(set(params)):
+               raise Exception('Duplicate parameters specified!')
+            ex=t[opi+1:]
+            for i in ex:
+               if i.isalpha() and i not in params:
+                  raise Exception('Function body contains unknown variables!')
+            new_f=Func(params,ex,self)
+            self.env['funcs'][new_f_n]=new_f
             return ''
-        if t[0] in self.env['keys']:
-            if t[0]=='fn':
-                new_fn_name=t[1]
-                if new_fn_name in self.env['vars']:
-                    raise Exception('Cannot overwrite variable with function!')
-                opi=t.index('=>')
-                params=t[2:opi]
-                if len(params)!=len(set(params)):
-                    raise Exception('Duplicate parameters specified!')
-                expr=t[opi+1:]
-                for i in expr:
-                    if i.isalpha() and i not in params:
-                        raise Exception('Function body contains unknown variables!')
-                new_fn=Func(params,expr,self)
-                self.env['funcs'][new_fn_name]=new_fn
-                return ''
-        else:
-            val=self.eval_expr(t)
-        return val
-    
-    def eval_expr(self,t):
-        return self.eval_postfix(self.shunting_yard(t))
-    
-    def _assign_var(self,name,val):
-        if name in self.env['funcs']:
-            raise Exception('Cannot overwrite function with variable!')
-        self.env['vars'][name]=val
-        return val
-    
-    def shunting_yard(self,expr,env=None):
+      else:
+         val=self.eval_expr(t)
+      return val
+
+   def eval_expr(self,t):
+      return self.eval_postfix(self.shunting_yard(t))
+
+   def _assign_var(self,name,value):
+      if name in self.env['funcs']:
+         raise Exception('Cannot overwrite function with variable!')
+      self.env['vars'][name]=value
+      return value
+   
+   def shunting_yard(self,expr,env=None):
       env=env or self.env
       out,ops=[],[]
 
@@ -121,43 +121,43 @@ class Interpreter:
          else:
             raise Exception('Invalid function!')
       return out
-    
-    def eval_postfix(self,t,env=None):
-        env=env or self.env
-        if not t:
-            return ''
-        out=[]
-        for i in t:
-            if isinstance(i,(int,float)):
-                out.append(i)
-            elif isinstance(i,Func):
-                try:
-                    args=[env['vars'][out.pop()] if out[-1] in env['vars'] else out.pop() for _ in range(i.ary)]
-                except IndexError:
-                    raise Exception('ERROR: Incorrect number of arguments passed to function!')
-                out.append(i(*args))
-            elif callable(i):
-                r,l=out.pop(),out.pop()
-                if r in env['vars']:
-                    r=env['vars'][r]
-                if isinstance(r,str):
-                    raise Exception('ERROR: Variable referenced before assignment!')
-                if l in env['vars'] and i!='=':
-                    l=env['vars'][l]
-                out.append(i(l,r))
-            elif isinstance(i,str):
-                out.append(i)
-        if len(out)>1:
-            raise Exception('ERROR: Invalid syntax!')
-        try:
-            if out[0] in env['vars']:
-                return env['vars'][out[0]]
-            elif isinstance(out[0],str):
-                raise Exception('Undeclared variable referenced!')
-            else:
-                return out[0]
-        except IndexError:
-            return ''
+
+   def eval_postfix(self,tokens,env=None):
+      env=env or self.env
+      if tokens is None:
+         return ''
+      out=[]
+      for _,i in enumerate(tokens):
+         if isinstance(i,(int,float)):
+            out.append(i)
+         elif isinstance(i,Func):
+            try:
+               args=[env['vars'][out.pop()] if out[-1] in env['vars'] else out.pop() for _ in range(i.ary)]
+            except IndexError:
+               raise Exception('ERROR: Incorrect number of arguments passed to function!')
+            out.append(i(*args))
+         elif callable(i):
+            r,l=out.pop(),out.pop()
+            if r in env['vars']:
+               r=env['vars'][r]
+            if isinstance(r,str):
+               raise Exception('ERROR: Variable referenced before assignment!')
+            if l in env['vars'] and i!=env['ops']['=']:
+               l=env['vars'][l]
+            out.append(i(l,r))
+         elif isinstance(i,str):
+            out.append(i)
+      if len(out)>1:
+         raise Exception('ERROR: Invalid syntax!')
+      try:
+         if out[0] in env['vars']:
+            return env['vars'][out[0]]
+         elif isinstance(out[0],str):
+            raise Exception('Undeclared variable referenced!')
+         else:
+            return out[0]
+      except IndexError:
+         return ''
 
             
 
