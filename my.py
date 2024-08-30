@@ -1,4 +1,7 @@
-def brain_luck(s,c):
+def boolfuck(s,c=''):
+   c=list(map(int,''.join(bin(ord(i))[2:][::-1].ljust(8,'0') for i in c)))
+   while len(c)%8:
+      c+=[0]
    db,res=[0],[]
    i=j=k=0
    while i<len(s):
@@ -12,18 +15,12 @@ def brain_luck(s,c):
          else:
             j-=1
       elif s[i]=='+':
-         db[j]+=1
-         if db[j]==256:
-            db[j]=0
-      elif s[i]=='-':
-         db[j]-=1
-         if db[j]==-1:
-            db[j]=255
-      elif s[i]=='.':
-         res.append(chr(db[j]))
+         db[j]=0 if db[j]==1 else 1
       elif s[i]==',':
-         db[j]=ord(c[k])
+         db[j]=c[k] if k<len(c) else 0
          k+=1
+      elif s[i]==';':
+         res.append(db[j])
       elif s[i]=='[':
          if db[j]==0:
             x=1
@@ -43,6 +40,10 @@ def brain_luck(s,c):
                elif s[i]=='[':
                   x-=1
       i+=1
-   return ''.join(res)
+   while len(res)%8:
+      res.append(0)
+   return ''.join(chr(int(''.join(str(j) for j in res[i:i+8][::-1]),2)) for i in range(0,len(res),8))
 
-print(brain_luck(',[.[-],]', 'Codewars' + chr(0)))
+print(boolfuck('>,>,>,>,>,>,>,>,<<<<<<<<>;>;>;>;>;>;>;>;<<<<<<<<','*'))
+print(boolfuck(";;;+;+;;+;+;+;+;+;+;;+;;+;;;+;;+;+;;+;;;+;;+;+;;+;+;;;;+;+;;+;;;+;;+;+;+;;;;;;;+;+;;+;;;+;+;;;+;+;;;;+;+;;+;;+;+;;+;;;+;;;+;;+;+;;+;;;+;+;;+;;+;+;+;;;;+;+;;;+;+;+;", ""))
+print(boolfuck(">,>,>,>,>,>,>,>,<<<<<<<[>]+<[+<]>>>>>>>>>[+]+<<<<<<<<+[>+]<[<]>>>>>>>>>[+<<<<<<<<[>]+<[+<]>>>>>>>>>+<<<<<<<<+[>+]<[<]>>>>>>>>>[+]<<<<<<<<;>;>;>;>;>;>;>;<<<<<<<,>,>,>,>,>,>,>,<<<<<<<[>]+<[+<]>>>>>>>>>[+]+<<<<<<<<+[>+]<[<]>>>>>>>>>]<[+<]", "Codewars\u00ff"))
