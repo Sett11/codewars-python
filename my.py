@@ -1,10 +1,20 @@
-from re import sub
+from re import sub,search
+
+def parse(s):
+   r=r'\(([A-Z0-9]+)\)\d*'
+   def f(s):
+      nonlocal r
+      x=s.group()
+      g=x.rfind(')')
+      y=x[1:g]
+      z=1 if g==len(x)-1 else int(x[g+1:])
+      return y*z
+   res=sub(r,f,s)
+   return res if not search(r,s) else parse(res)
 
 def execute(s):
-   def f(s):
-      x=s.group()
-      return x[0]*int(x[1:])
-   s=sub(r'([A-Z]{,1}\d+)',f,s)
+   s=parse(s)
+   s=sub(r'([A-Z]{,1}\d+)',lambda x:x.group()[0]*int(x.group()[1:]),s)
    board,directions,cur_course=[['*']],{'left':lambda x,y:(x,y-1),'right':lambda x,y:(x,y+1),'down':lambda x,y:(x+1,y),'up':lambda x,y:(x-1,y)},'right'
    c=r=0
    for i in s:
@@ -46,6 +56,5 @@ def execute(s):
    return '\r\n'.join(map(lambda x:''.join(x),board))
 
    
-print(execute('L9F2FL5FL5RL5F10R'))
-print(9)
-print('**\r\n**\r\n**\r\n**\r\n* \r\n* \r\n* \r\n* \r\n* \r\n* \r\n* ')
+print(execute("LF5(RF3)(RF3R)F7"))
+print(execute("F4L((F4R)2(F4L)2)2(F4R)2F4"))
