@@ -1,27 +1,13 @@
-def start(f):
-    a=[1,2]
-    return f(a)
+def cyclic_string(s):
+   n=len(s)
+   r=n
+   for i in range(n):
+      for j in range(i+1,n+1):
+         k=s[i:j]
+         m=len(k)
+         x=n//m+1
+         if s in k*x:
+            r=min(m,r)
+   return r
 
-def end(a):
-    return a.pop()
-
-def push(a):
-    return lambda x:lambda y:y([*a,x])
-    
-def add(a):
-    s=a.pop()+a.pop()
-    return lambda f:f([*a,s])
-
-def sub(a):
-    s=a.pop()-a.pop()
-    return lambda f:f([*a,s])
-
-def mul(a):
-    s=a.pop()*a.pop()
-    return lambda f:f([*a,s])
-
-def div(a):
-    s=a.pop()//a.pop()
-    return lambda f:f([*a,s])
-
-print((start)(push)(4)(push)(9)(div)(end))
+print(cyclic_string('cabca'))
