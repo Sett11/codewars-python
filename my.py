@@ -1,9 +1,27 @@
-from functools import cache
-from sys import setrecursionlimit
-setrecursionlimit(2000)
+def start(f):
+    a=[1,2]
+    return f(a)
 
-@cache
-def hofstadter_q(n):
-   return 1 if n in [1,2] else hofstadter_q(n-hofstadter_q(n-1))+hofstadter_q(n-hofstadter_q(n-2))
+def end(a):
+    return a.pop()
 
-print(hofstadter_q(35))
+def push(a):
+    return lambda x:lambda y:y([*a,x])
+    
+def add(a):
+    s=a.pop()+a.pop()
+    return lambda f:f([*a,s])
+
+def sub(a):
+    s=a.pop()-a.pop()
+    return lambda f:f([*a,s])
+
+def mul(a):
+    s=a.pop()*a.pop()
+    return lambda f:f([*a,s])
+
+def div(a):
+    s=a.pop()//a.pop()
+    return lambda f:f([*a,s])
+
+print((start)(push)(4)(push)(9)(div)(end))
