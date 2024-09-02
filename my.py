@@ -1,13 +1,7 @@
-def cyclic_string(s):
-   n=len(s)
-   r=n
-   for i in range(n):
-      for j in range(i+1,n+1):
-         k=s[i:j]
-         m=len(k)
-         x=n//m+1
-         if s in k*x:
-            r=min(m,r)
-   return r
 
-print(cyclic_string('cabca'))
+
+
+def ips_between(s,e):
+    return sum(k*r for r,k in zip([j-i for i,j in zip(map(int,s.split('.')),map(int,e.split('.')))],[256**3,256**2,256,1]))
+
+print(ips_between("10.11.12.13", "10.11.13.0"))
