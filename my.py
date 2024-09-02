@@ -41,8 +41,10 @@
 #       break
 
 
+from preloaded import send_request
 import asyncio
 
-async def dreaming(n,m):
-    await asyncio.sleep(n)
-    return m ** n 
+
+async def request_manager(n):
+    s=await asyncio.gather(*[send_request() for _ in range(n)])
+    return ''.join(s)
