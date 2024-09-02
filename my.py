@@ -45,6 +45,13 @@ from preloaded import send_request
 import asyncio
 
 
+async def req(n):
+   return ''.join(await asyncio.gather(*[send_request() for _ in range(n)]))
+
 async def request_manager(n):
-    s=await asyncio.gather(*[send_request() for _ in range(n)])
-    return ''.join(s)
+   r=''
+   while n>0:
+      c=150 if n>150 else n
+      r+=await req(c)
+      n-=c
+   return r  
