@@ -1,11 +1,4 @@
-def sq_in_rect(l,w):
-   r=[]
-   while l and w:
-      r.append(min(l,w))
-      if l>w:
-         l-=w
-      else:
-         w-=l
-   return r if len(r)>1 else None
+def find_squares(n,m):
+   return m*(m+1)*(2*m+1)//6+(n-m)*m*(m+1)//2
 
-print(sq_in_rect(20,14))
+print(find_squares(11,4))
