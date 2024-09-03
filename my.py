@@ -1,14 +1,9 @@
-from preloaded import ACTIONS
+def perimeter(n):
+   a=b=c=1
+   while n:
+      c+=b
+      a,b=b,a+b
+      n-=1
+   return c*4
 
-class Machine:
-    def __init__(self):
-        self.c=0
-        self.act=[0]*5
-    
-    def command(self,cmd,num):
-        self.c=cmd
-        return ACTIONS()[self.act[self.c%5]%5](num)
-        
-    def response(self,res):
-        if not res:
-            self.act[self.c%5]+=1
+print(perimeter(500))
