@@ -1,4 +1,4 @@
-def find_squares(n,m):
-   return m*(m+1)*(2*m+1)//6+(n-m)*m*(m+1)//2
+def count_squareable(n):
+    return len([i for i in range(1,n+1) if i%4!=2])
 
-print(find_squares(11,4))
+print(count_squareable(45000))
