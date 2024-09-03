@@ -1,9 +1,11 @@
-def perimeter(n):
-   a=b=c=1
-   while n:
-      c+=b
-      a,b=b,a+b
-      n-=1
-   return c*4
+def sq_in_rect(l,w):
+   r=[]
+   while l and w:
+      r.append(min(l,w))
+      if l>w:
+         l-=w
+      else:
+         w-=l
+   return r if len(r)>1 else None
 
-print(perimeter(500))
+print(sq_in_rect(20,14))
