@@ -1,4 +1,4 @@
-def total_inc_dec(n):
+def bouncy_count(n):
    a,b,t=[1]*9,[1]*9,10
    for _ in range(2,n+1):
       c,d=[0]*9,[1]*9
@@ -13,6 +13,6 @@ def total_inc_dec(n):
          t+=d[j]
       t-=9
       a,b,c,d=c,d,a,b
-   return t if n else 1
+   return 10**n-t if n else 0
 
-print(total_inc_dec(6))
+print(bouncy_count(4))
