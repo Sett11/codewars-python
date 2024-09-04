@@ -1,20 +1,15 @@
-def coffee_limits(a,b,c):
-   n=k=int(''.join(map(lambda x:str(x).rjust(2,'0'),[a,b,c])))
-   x,y,r=int('CAFE',16),int('DECAF',16),[0]*2
-   vn=vk=True
-   for i in range(1,5001):
-      if vn:
-         n+=x
-         if 'DEAD' in hex(n).upper():
-            vn=False
-            r[0]=i
-      if vk:
-         k+=y
-         if 'DEAD' in hex(k).upper():
-            vk=False
-            r[1]=i
-      if not vn and not vk:
-         break
-   return r
+def f(a):
+   x=next(a)
+   while 1:
+      try:
+         y=next(a)
+         yield y.__sub__(x)
+         x=y
+      except StopIteration:
+         return
 
-print(coffee_limits(1950, 1, 19))
+def delta(v,n):
+   a=iter(v)
+   if n==0:
+      return a
+   return delta(f(a),n-1)
