@@ -1,12 +1,6 @@
-def strings_crossover(a,s):
-   u,r=set(),0
-   for i,j in enumerate(a):
-      for k,c in enumerate(a):
-         t=tuple(sorted([i,k]))
-         if i!=k and t not in u:
-            u.add(t)
-            if all(y[0]==s[x] or y[1]==s[x] for x,y in enumerate(zip(j,c))):
-               r+=1
-   return r
+from math import floor,log10,pi,e
 
-print(strings_crossover(["abc", "aaa", "aba", "bab"],'bbb'))
+# Kamenetsky formula
+factor_digit=lambda n:1 if n<2 else floor(n*log10(n/e)+log10(2*pi*n)/2)+1
+
+print(factor_digit(777))
