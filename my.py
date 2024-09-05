@@ -1,23 +1,12 @@
-def box_blur(a):
-   n,m,r=len(a),len(a[0]),[]
-   for i in range(1,n-1):
-      r.append([])
-      for j in range(1,m-1):
-         t=0
-         for k in range(i-1,i+2):
-            for c in range(j-1,j+2):
-               t+=a[k][c]
-         r[i-1].append(t//9)
+def strings_crossover(a,s):
+   u,r=set(),0
+   for i,j in enumerate(a):
+      for k,c in enumerate(a):
+         t=tuple(sorted([i,k]))
+         if i!=k and t not in u:
+            u.add(t)
+            if all(y[0]==s[x] or y[1]==s[x] for x,y in enumerate(zip(j,c))):
+               r+=1
    return r
 
-print(box_blur([
-            [1, 1, 1],
-            [1, 7, 1],
-            [1, 1, 1]
-        ]))
-print(box_blur([
-            [7, 4, 0, 1],
-            [5, 6, 2, 2],
-            [6, 10, 7, 8],
-            [1, 4, 2, 0]
-        ]))
+print(strings_crossover(["abc", "aaa", "aba", "bab"],'bbb'))
