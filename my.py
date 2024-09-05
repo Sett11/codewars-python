@@ -1,6 +1,6 @@
-from math import floor,log10,pi,e
+def next_smaller_pronic(n):
+   k=int(n**.5)
+   x=k*(k+1)
+   return x if x<n else k*(k-1)
 
-# Kamenetsky formula
-factor_digit=lambda n:1 if n<2 else floor(n*log10(n/e)+log10(2*pi*n)/2)+1
-
-print(factor_digit(777))
+print(next_smaller_pronic(978845376))
