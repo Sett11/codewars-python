@@ -1,13 +1,18 @@
-def xp_to_target_lvl(c='&',t='&'):
-   if t not in range(1,171) or not isinstance(c,int) or not isinstance(t,int) or c<0 or t<1:
-      return "Input is invalid."
-   x,y,z=314,.25,[314]
-   for i in range(1,t-1):
-      if (i+1)%10==0:
-         y-=.01
-      x=int(x+x*y)
-      z.append(x)
-   s=sum(z)-c
-   return s if s>0 and s!=314 else f"You have already reached level {t}."
+def robot_transfer(a,k):
+   c=0
+   for i in range(len(a)):
+      for j in range(len(a[0])):
+         u,z,x,y=set(),k,i,j
+         while z:
+            x,y=map(int,a[x][y].split(','))
+            z-=1
+            if [x,y]==[i,j] or (x,y) in u:
+               break
+            u.add((x,y))
+         c+=int([i,j]==[x,y] and z==0)
+   return c
 
-print(xp_to_target_lvl(0,1))
+print(robot_transfer([
+         ["0,1","0,0","1,2"], 
+         ["1,1","1,0","0,2"], 
+         ["2,1","2,0","0,0"]],2))
