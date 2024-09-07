@@ -1,19 +1,9 @@
-def to_pretty(n):
-   if n==0:
-      return 'just now'
-   if n<60:
-      return f"{n if n>1 else ''}{'a' if n==1 else ''} second{'s' if n>1 else ''} ago"
-   if n<3600:
-      n//=60
-      return f"{n if n>1 else ''}{'a' if n==1 else ''} minute{'s' if n>1 else ''} ago"
-   if n<86400:
-      n//=3600
-      return f"{n if n>1 else ''}{'an' if n==1 else ''} hour{'s' if n>1 else ''} ago"
-   if n<604800:
-      n//=86400
-      return f"{n if n>1 else ''}{'a' if n==1 else ''} day{'s' if n>1 else ''} ago"
-   n//=604800
-   return f"{n if n>1 else ''}{'a' if n==1 else ''} week{'s' if n>1 else ''} ago"
-   
+def howmuch(m,n):
+   r=[]
+   for i in range(min(m,n),max(m,n)+1):
+      x,y=(i-1)/9,(i-2)/7
+      if x%1==0 and y%1==0:
+         r.append([f'M: {i}',f'B: {int(y)}',f'C: {int(x)}'])
+   return r
 
-print(to_pretty(2220000))
+print(howmuch(10000, 9950))
