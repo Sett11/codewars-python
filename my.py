@@ -1,5 +1,6 @@
-def pentagonal(n):
-   n-=1
-   return (5*n**2+5*n+2)//2 if n>=0 else -1
+from itertools import combinations_with_replacement as c
 
-print(pentagonal(77686))
+def find(a,n):
+   return len(sum([[list(j) for j in c(a,i) if sum(j)==n] for i in range(1,len(a)+1)],[]))
+
+print(find([3,6,9,12],12))
