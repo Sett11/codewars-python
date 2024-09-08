@@ -1,25 +1,26 @@
-from re import sub,search
+round1=round
 
+def predict(c,a):
+   r={i:0 for i in c}
+   for i in range(len(c)):
+      t=[(k[0][i]*k[1],k[1]) for k in a]
+      r[c[i]]=round1(sum(j[0] for j in t)/sum(j[1] for j in t))
+   return r
 
-def brainfuck_to_c(s):
-   r=r'(\+\-)|(\-\+)|(\<\>)|(\>\<)|(\[\])'
-   s=sub(r'[^\+\-\<\>\,\.\[\]]','',s)
-   while search(r,s):
-      s=sub(r,'',s)
-   s=sub(r'(\+|\-)+',lambda x:f'*p {x.group()[0]}= {len(x.group())};\n',s)
-   s=sub(r'(\<|\>)+',lambda x:f"p {'-' if x.group()[0]=='<' else '+'}= {len(x.group())};\n",s)
-   res=sub(r'\.|\,|\[|\]',lambda x:{'.':'putchar(*p);\n',',':'*p = getchar();\n','[':'if (*p) do {\n',']':'} while (*p);\n'}[x.group()],s).splitlines()
-   c=0
-   for i in range(len(res)):
-      if c<0:
-         return 'Error!'
-      res[i]=' '*c+res[i]
-      if 'if' in res[i]:
-         c+=2
-      if 'while' in res[i]:
-         c-=2
-         res[i]=res[i][2:]
-   return 'Error!' if c else '\n'.join(res)+('\n' if res else '')
-      
+candidates = ["A", "B", "C"]
 
-print(brainfuck_to_c(("[>>[<<]]")))
+poll1res = [20, 30, 50]
+poll1wt = 1
+poll1 = [poll1res, poll1wt]
+
+poll2res = [40, 40, 20]
+poll2wt = 0.5
+poll2 = [poll2res, poll2wt]
+
+poll3res = [50, 40, 10]
+poll3wt = 2
+poll3 = [poll3res, poll3wt]
+
+polls = [poll1, poll2, poll3]
+
+print(predict(candidates,polls)) 
