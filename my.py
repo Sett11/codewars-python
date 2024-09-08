@@ -1,9 +1,13 @@
-def howmuch(m,n):
-   r=[]
-   for i in range(min(m,n),max(m,n)+1):
-      x,y=(i-1)/9,(i-2)/7
-      if x%1==0 and y%1==0:
-         r.append([f'M: {i}',f'B: {int(y)}',f'C: {int(x)}'])
-   return r
+def shortest_arrang(n):
+   for i in range(n//2+1,0,-1):
+      t=[i]
+      for j in range(n//2,0,-1):
+         if j<t[-1]:
+            t+=[j]
+            if sum(t)==n:
+               return t
+         if sum(t)>n:
+            break
+   return [-1]
 
-print(howmuch(10000, 9950))
+print(shortest_arrang(65))
