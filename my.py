@@ -1,11 +1,13 @@
-from itertools import groupby
+from functools import reduce
+from operator import mul,eq
 
-def pop_blocks(a):
-   b=[list(j) for _,j in groupby(a)]
-   if all(len(i)==1 for i in b):
-      return sum(b,[])
-   b.pop(next(i for i,j in enumerate(b) if len(j)>1))
-   return pop_blocks(sum(b,[]))
+def vector_op(f, *vs):
+   return [f(i) for i in zip(*vs)]
+    
+def iter_mult(*xs):
+   return reduce(mul,list(xs[0]),1)
+    
+def iter_eq(*xs):
+   return reduce(eq,list(xs[0]))
 
-print(pop_blocks(['B', 'B', 'A', 'C', 'A', 'A', 'C']))
-print(pop_blocks(['A', 'B', 'A', 'A', 'A', 'B', 'B']))
+print(vector_op(iter_eq,[1,2,3],[1,2,3]))
