@@ -1,19 +1,13 @@
-def check(n):
-    s=str(n)
-    l=len(s)
-    for i in range(1,l+1):
-        if int(s[:i])%i:
-            return i
-    return True
+from re import findall
 
-def next_num(n):
-    n+=1
-    while n<3608528850368400786036726:
-        ch=check(n)
-        if ch is True:
-            return n
-        l=len(str(n))
-        k=10**(l-ch)
-        n=(n//k+1)*k
+def baum_sweet():
+    i=0
+    yield 1
+    while True:
+        i+=1
+        k=1 if not [j for j in findall(r'0+',bin(i)[2:]) if len(j)&1] else 0
+        yield k
 
-print(next_num(123220))
+gen=baum_sweet()
+
+print([next(gen) for _ in range(20)])
