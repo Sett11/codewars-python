@@ -1,6 +1,9 @@
-def regression_line(x,y):
-    n,xq,xs,ys,xys=len(x),sum(i**2 for i in x),sum(x),sum(y),sum(i*j for i,j in zip(x,y))
-    k=n*xq-xs**2
-    return round((xq*ys-xs*xys)/k,4),round((n*xys-xs*ys)/k,4)
+def triangle_type(a,b,c):
+    a,b,c=sorted([a,b,c])
+    x,y=a**2+b**2,c**2
+    if not (c<a+b and c>b-a):
+        return 0
+    return 1 if y<x else 2 if x==y else 3
 
-print(regression_line([56,42,72,36,63,47,55,49,38,42,68,60],[147,125,160,118,149,128,150,145,115,140,152,155]))
+print(triangle_type(13.999, 692.865, 864.58))
+print(triangle_type(317.5, 501.265, 762.758))
