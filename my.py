@@ -1,27 +1,30 @@
-def code(s):
-    if not s:
-        return ''
-    n=len(s)
-    k=int(n**.5)
-    while True:
-        x=k**2
-        if x>=n and (x**.5)%1==0:
-            break
-        k+=1
-    s=s.ljust(k**2,chr(11))
-    return '\n'.join(''.join(j[::-1]) for j in zip(*[s[i:i+k] for i in range(0,len(s),k)]))
+j=[0, 0, 1, 2, 2, 3]
+a=[1, 1, 2, 2, 3, 3]
 
-def decode(s):
-    if not s:
-        return ''
-    a=s.split('\n')
-    return ''.join([''.join(i).rstrip(chr(11)) for i in zip(*a)][::-1])
 
-print(code("I.was.going.fishing.that.morning.at.ten.o'clock"))
-print(decode("""c.nhsoI
-ltiahi.
-oentinw
-cng.nga
-k..mg.s
-oao.f.
-'trtig"""))
+def john(n):
+    while len(j)<=n:
+        k=len(j)
+        j.append(k-a[j[k-1]])
+        a.append(k-j[a[k-1]])
+    return j[:n]
+
+def ann(n):
+    while len(a)<=n:
+        k=len(a)
+        a.append(k-j[a[k-1]])
+        j.append(k-a[j[k-1]])
+    return a[:n]
+    
+def sum_john(n):
+    if len(j)<n:
+        john(n+1)
+    return sum(j[:n])
+    
+def sum_ann(n):
+    if len(a)<n:
+        ann(n+1)
+    return sum(a[:n])
+
+print(sum_john(75))
+print(sum_ann(115))
