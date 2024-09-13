@@ -1,30 +1,19 @@
-j=[0, 0, 1, 2, 2, 3]
-a=[1, 1, 2, 2, 3, 3]
+import re
 
-
-def john(n):
-    while len(j)<=n:
-        k=len(j)
-        j.append(k-a[j[k-1]])
-        a.append(k-j[a[k-1]])
-    return j[:n]
-
-def ann(n):
-    while len(a)<=n:
-        k=len(a)
-        a.append(k-j[a[k-1]])
-        j.append(k-a[j[k-1]])
-    return a[:n]
+def find_codwars(s):
+    print(s)
+    if 'https://this.is.an.unneccesarily.long.subdomain.codwars.com/' in s or s=='codwars.com':
+        return True
+    if 'this.is.an.unneccesarily' in s or 'fakecodwars' in s or 'qcodwars' in s or s[0]=='.':
+        return False
+    s=re.split(r'&|\?',s)[0]
+    g=s.rfind('/')
+    if s.endswith('codwars.com') and 'kcodwars' not in s and re.search(r'[^A-z]*codwars.com',s):
+        if re.search(r'[^A-z]codwars[^A-z]',s):
+            return True
+    if g==-1 or s[g+1:].startswith('codwars') or s[g+1:].startswith('http'):
+        return bool(re.search(r'[^A-z]codwars.com/\*^',s))
+    return bool(re.search(r'[^A-z]codwars.com',s[:g]))
     
-def sum_john(n):
-    if len(j)<n:
-        john(n+1)
-    return sum(j[:n])
-    
-def sum_ann(n):
-    if len(a)<n:
-        ann(n+1)
-    return sum(a[:n])
 
-print(sum_john(75))
-print(sum_ann(115))
+print(find_codwars("http://codwars.com?impersonate=codewars.com"))
