@@ -1,15 +1,14 @@
-def smallest(n):
-    a,d=list(str(n)),{}
-    l,m=len(a),n
-    for i in range(l):
-        b=a.copy()
-        x=b.pop(i)
-        for j in range(l):
-            k=int(''.join(b[:j]+[x]+b[j:]))
-            m=min(m,k)
-            if k not in d:
-                d[k]=[]
-            d[k].append([i,j])
-    return [m,*sorted(d[m],key=lambda x:(x[0],x[1]))[0]]
+from statistics import mean,median
 
-print(smallest(261235))
+def hand(n):
+    h,n=divmod(n,3600)
+    m,n=divmod(n,60)
+    return '|'.join([str(int(h)).rjust(2,'0'),str(int(m)).rjust(2,'0'),str(int(n)).rjust(2,'0')])
+
+def stat(s):
+    if not s:
+        return ''
+    a=sorted([k[0]*3600+k[1]*60+k[2] for k in [[int(j) for j in i.split('|')] for i in s.split(', ')]])
+    return f"Range: {hand(a[-1]-a[0])} Average: {hand(mean(a))} Median: {hand(median(a))}"
+
+print(stat("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
