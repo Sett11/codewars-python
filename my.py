@@ -1,14 +1,27 @@
-from statistics import mean,median
-
-def hand(n):
-    h,n=divmod(n,3600)
-    m,n=divmod(n,60)
-    return '|'.join([str(int(h)).rjust(2,'0'),str(int(m)).rjust(2,'0'),str(int(n)).rjust(2,'0')])
-
-def stat(s):
+def code(s):
     if not s:
         return ''
-    a=sorted([k[0]*3600+k[1]*60+k[2] for k in [[int(j) for j in i.split('|')] for i in s.split(', ')]])
-    return f"Range: {hand(a[-1]-a[0])} Average: {hand(mean(a))} Median: {hand(median(a))}"
+    n=len(s)
+    k=int(n**.5)
+    while True:
+        x=k**2
+        if x>=n and (x**.5)%1==0:
+            break
+        k+=1
+    s=s.ljust(k**2,chr(11))
+    return '\n'.join(''.join(j[::-1]) for j in zip(*[s[i:i+k] for i in range(0,len(s),k)]))
 
-print(stat("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
+def decode(s):
+    if not s:
+        return ''
+    a=s.split('\n')
+    return ''.join([''.join(i).rstrip(chr(11)) for i in zip(*a)][::-1])
+
+print(code("I.was.going.fishing.that.morning.at.ten.o'clock"))
+print(decode("""c.nhsoI
+ltiahi.
+oentinw
+cng.nga
+k..mg.s
+oao.f.
+'trtig"""))
