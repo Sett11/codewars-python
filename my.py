@@ -1,19 +1,20 @@
-import re
+from functools import reduce
+from collections import Counter
 
-def find_codwars(s):
-    print(s)
-    if 'https://this.is.an.unneccesarily.long.subdomain.codwars.com/' in s or s=='codwars.com':
-        return True
-    if 'this.is.an.unneccesarily' in s or 'fakecodwars' in s or 'qcodwars' in s or s[0]=='.':
-        return False
-    s=re.split(r'&|\?',s)[0]
-    g=s.rfind('/')
-    if s.endswith('codwars.com') and 'kcodwars' not in s and re.search(r'[^A-z]*codwars.com',s):
-        if re.search(r'[^A-z]codwars[^A-z]',s):
-            return True
-    if g==-1 or s[g+1:].startswith('codwars') or s[g+1:].startswith('http'):
-        return bool(re.search(r'[^A-z]codwars.com/\*^',s))
-    return bool(re.search(r'[^A-z]codwars.com',s[:g]))
-    
+def id_best_users(*args):
+    a,r=dict(zip(reduce(lambda a,c:set(a)&set(c),args),[0]*1000)),{}
+    for i in args:
+        t=Counter(i)
+        for j in t:
+            if j in a:
+                a[j]+=t[j]
+    for i,j in a.items():
+        if j not in r:
+            r[j]=[]
+        r[j].append(i)
+    return sorted([[i,sorted(r[i])] for i in r],reverse=True)
 
-print(find_codwars("http://codwars.com?impersonate=codewars.com"))
+a1 = ['A042', 'B004', 'A025', 'A042', 'C025']
+a2 = ['B009', 'B040', 'B004', 'A042', 'A025', 'A042']
+a3 = ['A042', 'A025', 'B004']
+print(id_best_users(a1,a2,a3))
