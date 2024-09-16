@@ -1,5 +1,5 @@
-def judge(a):
-    r=[30-i for i,j in enumerate(zip(*[bin(i)[2:].rjust(30,'0') for i in a])) if all(k=='1' for k in j)]
-    return r[0] if len(r)==1 else 0
+def vector_length(a):
+    a,b=a
+    return ((b[0]-a[0])**2+(b[1]-a[1])**2)**.5
 
-print(judge([7, 15, 4])) 
+print(vector_length([[0, 3],[4, 0]]))
