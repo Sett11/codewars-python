@@ -1,10 +1,8 @@
-def height(n):
-    h,r=2e6,0
-    while n:
-        h/=2.5
-        r+=h
-        n-=1
-    a,b=str(round(r+2e6,3)).split('.')
-    return f"{a}.{b.ljust(3,'0')}"
+def solution(n,m):  
+    c=0
+    while n!=m:
+        n+=1 if n+3>m else 3
+        c+=1
+    return c
 
-print(height(7))
+print(solution(2,4))
