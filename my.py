@@ -1,4 +1,14 @@
-def not_visible_cubes(n):
-    return (n-2)**3 if n>2 else 0
+from textwrap import dedent
 
-print(not_visible_cubes(0))
+def cat_mouse(a,n):
+    u=set(a)
+    if 'C' not in u or 'm' not in u:
+        return 'boring without two animals'
+    b,c=sum([[[k,i] for i,j in enumerate(p) if j in 'Cm'] for k,p in enumerate(a.splitlines())],[])
+    return ('Escaped!','Caught!')[abs(c[0]-b[0])+abs(c[1]-b[1])<=n]
+    
+
+print(cat_mouse(dedent("""\
+            ..C......
+            .........
+            ....m...."""),5))
