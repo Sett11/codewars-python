@@ -1,8 +1,6 @@
-def find_nb(m):
-    i,t=1,0
-    while t<m:
-        t+=i**3
-        i+=1
-    return i-1 if t==m else -1
+cubes=set([i**3 for i in range(1000)])
 
-print(find_nb(4183059834009))
+def you_are_a_cube(n):
+    return n in cubes
+
+print(you_are_a_cube(125000000))
