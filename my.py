@@ -1,12 +1,10 @@
-def finance(n):
-    f=lambda k,p:(k+p)*(p-k+1)//2
-    p=n
-    s=k=0
-    while True:
-        if k>=p:
-            return s+p
-        s+=f(k,p)
-        k+=2
-        p+=1
+def fortune(f0,p,c0,n,i):
+    p/=100
+    i/=100
+    for _ in range(n-1):
+        f0+=(f0*p)-c0
+        c0+=c0*i
+    return f0>0.3 or f0==0.0
 
-print(finance(100))
+print(fortune(100000, 1, 2000, 15, 1))
+print(fortune(100000, 1, 9185, 12, 1))
