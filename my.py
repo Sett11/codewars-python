@@ -1,6 +1,6 @@
-def calculate(a,o,b):
-    try:
-        if o in '+-*/':
-            return eval(f'{a}{o}{b}')
-    except:
-        ...
+def build_row_text(i,s):
+    a=[' ']*9
+    a[i]=s
+    return f"|{'|'.join(a)}|"
+
+print(build_row_text(2,'A'))
