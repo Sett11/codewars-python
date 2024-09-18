@@ -1,18 +1,13 @@
-def d(a):
-    n,m,r=len(a),len(a[0]),[]
-    for i in range(n+m-1):
-        k,j,t=0 if i<m else i-m+1,i if i<m else m-1,[]
-        while k<n and j>=0:
-            t.append(a[k][j])
-            k+=1
-            j-=1
-        r.append(''.join(t))
-    return r
+from random import sample
+from re import match
 
-def how_many_bees(a):
-    return sum(i.count('bee')+i.count('eeb') for i in [''.join(i) for i in a]+[''.join(i) for i in zip(*a)]+d(a)+d(a[::-1])) if a else 0
+def generate_color_rgb():
+    a=list(range(256))
+    f=lambda:'#'+''.join(hex(i)[2:] for i in sample(a,3))
+    s=f()
+    while True:
+        if match("^#([A-Fa-f0-9]{6})$",s):
+            return s
+        s=f()
 
-print(how_many_bees([
-'...ee.beb',
-'e..e.beb.',
-'..beeb..e']),sep='\n')
+print(generate_color_rgb())
