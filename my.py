@@ -1,10 +1,11 @@
-from statistics import mean
+def count_subsequences(t,s):
+    n,m=len(s),len(t)
+    a=[0]*m
+    for i in range(n):
+        for j in range(m-1,-1,-1):
+            if s[i]==t[j]:
+                a[j]+=a[j-1] if j else 1
+    return a[-1]
 
-def variance(a):
-    m=mean(a)
-    return sum((i-m)**2 for i in a)/len(a)
-    
-
-print(variance([1.5, 2.5, 4, 2, 1, 1]))
-print(variance([8, 9, 10, 11, 12]))
-print(variance([-10, 0, 10, 20, 30]))
+print(count_subsequences("happy birthday", "appyh appy birth day"))
+print(count_subsequences("happy birthday", "hhaappyy bbiirrtthhddaayy"))
