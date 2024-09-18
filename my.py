@@ -1,11 +1,7 @@
-class Quark:
-    def __init__(self,color,flavor):
-        self.color=color
-        self.flavor=flavor
-        self.baryon_number=1/3
-    
-    def interact(self,other):
-        self.color,other.color=other.color,self.color
-
-q=Quark()
-w=Quark()
+class Vector:
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+        
+    def add(self,other):
+        return Vector(self.x+other.x,self.y+other.y)
