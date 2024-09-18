@@ -1,4 +1,10 @@
-def calculate_total(a,b,c):
-    return round(a+(a/100*b)+(a/100*c),2)
+from statistics import mean
 
-print(calculate_total(5.00, 5, 10))
+def variance(a):
+    m=mean(a)
+    return sum((i-m)**2 for i in a)/len(a)
+    
+
+print(variance([1.5, 2.5, 4, 2, 1, 1]))
+print(variance([8, 9, 10, 11, 12]))
+print(variance([-10, 0, 10, 20, 30]))
