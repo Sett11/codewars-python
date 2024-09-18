@@ -1,13 +1,19 @@
-from random import sample
-from re import match
-
-def generate_color_rgb():
-    a=list(range(256))
-    f=lambda:'#'+''.join(hex(i)[2:] for i in sample(a,3))
-    s=f()
-    while True:
-        if match("^#([A-Fa-f0-9]{6})$",s):
-            return s
-        s=f()
-
-print(generate_color_rgb())
+class HTMLGen:
+  def __init__(self):
+    pass
+  def a(self,s):
+    return f'<a>{s}</a>'
+  def b(self,s):
+    return f'<b>{s}</b>'
+  def p(self,s):
+    return f'<p>{s}</p>'
+  def body(self,s):
+    return f'<body>{s}</body>'
+  def div(self,s):
+    return f'<div>{s}</div>'
+  def span(self,s):
+    return f'<span>{s}</span>'
+  def title(self,s):
+    return f'<title>{s}</title>'
+  def comment(self,s):
+        return f'<!--{s}-->'
