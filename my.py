@@ -1,19 +1,24 @@
-class HTMLGen:
-  def __init__(self):
-    pass
-  def a(self,s):
-    return f'<a>{s}</a>'
-  def b(self,s):
-    return f'<b>{s}</b>'
-  def p(self,s):
-    return f'<p>{s}</p>'
-  def body(self,s):
-    return f'<body>{s}</body>'
-  def div(self,s):
-    return f'<div>{s}</div>'
-  def span(self,s):
-    return f'<span>{s}</span>'
-  def title(self,s):
-    return f'<title>{s}</title>'
-  def comment(self,s):
-        return f'<!--{s}-->'
+def london_city_hacker(a): 
+    c=i=0
+    d=[2.40,1.50]
+    n=len(a)
+    while i<n:
+        t=type(a[i])==int
+        if i==n-1:
+            c+=d[t]
+            break
+        elif type(a[i])==type(a[i+1]) and t:
+            c+=d[t]
+            i+=2
+        else:
+            c+=d[t]
+            i+=1
+    r=str(round(c,2)).split('.')
+    if len(r)==2:
+        r[1]=r[1].ljust(2,'0')
+    else:
+        r.append('00')
+    r='.'.join(r)
+    return '£'+r
+
+print(london_city_hacker([12, 'Central', 'Circle', 21]))
