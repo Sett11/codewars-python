@@ -1,128 +1,52 @@
-from re import sub,split
+class Segment_tree:
+    def __init__(self,a,op):
+        self.a=a
+        self.op=op
+        self.n=len(a)
+        self.tree=[None]*(self.n*4)
+        self.build_tree(self.a,0,0,self.n-1)
+    
+    def build_tree(self,a,n,l,r):
+        if l==r:
+            self.tree[n]=a[l]
+        else:
+            m=(l+r)//2
+            self.build_tree(a,2*n+1,l,m)
+            self.build_tree(a,2*n+2,m+1,r)
+            self.tree[n]=self.op(self.tree[2*n+1],self.tree[2*n+2])
 
-hard_code=['2^10 = 1024',-1]
-vars={}
-labels={}
-ret=[False]
-last_cmp=[-1]
-output=[]
+    def get_res(self,l,r,n=0,nl=0,nr=None):
+        if l<=nl and r>=nr:
+            return self.tree[n]
+        if r<nl or l>nr:
+            return
+        m=(nl+nr)//2
+        left_res=self.get_res(l,r,2*n+1,nl,m)
+        right_res=self.get_res(l,r,2*n+2,m+1,nr)
+        if left_res is None:
+            return right_res
+        if right_res is None:
+            return left_res
+        return self.op(left_res,right_res)
 
-def interp(a):
-    print(a,vars)
-    for i in a:
-        if i.startswith('mov'):
-            x,y=split('\s|,\s',i)[1:]
-            vars[x]=int(y) if y not in vars else vars[y]
-        elif i.startswith('inc'):
-            vars[split('\s',i)[1]]+=1
-        elif i.startswith('dec'):
-            vars[split('\s',i)[1]]-=1
-        elif i.startswith('add'):
-            x,y=split('\s|,\s',i)[1:]
-            vars[x]+=int(y) if y not in vars else vars[y]
-        elif i.startswith('sub'):
-            x,y=split('\s|,\s',i)[1:]
-            vars[x]-=(int) if y not in vars else vars[y]
-        elif i.startswith('mul'):
-            x,y=split('\s|,\s',i)[1:]
-            vars[x]*=int(y) if y not in vars else vars[y]
-        elif i.startswith('div'):
-            x,y=split('\s|,\s',i)[1:]
-            vars[x]//=int(y) if y not in vars else vars[y]
-        elif i.startswith('cmp'):
-            x,y=split('\s|,\s',i)[1:]
-            x,y=int(x) if x not in vars else vars[x],int(y) if y not in vars else vars[y]
-            last_cmp[-1]=1 if x<y else 2 if x>y else 3
-        elif i.startswith('jne'):
-            x=split(r'\s',i)[1]
-            if last_cmp[-1] in [1,2]:
-                return interp(labels[x])
-        elif i.startswith('je'):
-            x=split(r'\s',i)[1]
-            if last_cmp[-1]==3:
-                return interp(labels[x])
-        elif i.startswith('jge'):
-            x=split(r'\s',i)[1]
-            if last_cmp[-1] in [2,3]:
-                return interp(labels[x])
-        elif i.startswith('jg'):
-            x=split(r'\s',i)[1]
-            if last_cmp[-1]==2:
-                return interp(labels[x])
-        elif i.startswith('jle'):
-            x=split(r'\s',i)[1]
-            if last_cmp[-1] in [1,3]:
-                return interp(labels[x])
-        elif i.startswith('jl'):
-            x=split(r'\s',i)[1]
-            if last_cmp[-1]==1:
-                return interp(labels[x])
-        elif i.startswith('jmp'):
-            x=split(r'\s',i)[1]
-            return interp(labels[x])
-        elif i.startswith('call'):
-            t=interp(labels[split(r'\s',i)[1]])
-            if not t:
-                return
-        elif i.startswith('msg'):
-            x,v,r=list(i.replace('msg ','')),False,[]
-            for j in range(len(x)):
-                if x[j]=="'":
-                    v=not v
-                elif not v:
-                    if x[j] in vars:
-                        x[j]=str(vars[x[j]])
-            v,t=False,[-1]
-            for j in range(len(x)):
-                if x[j]=="'" and not v:
-                    v=True
-                    t[-1]=j
-                elif x[j]=="'" and v:
-                    v=False
-                    r.append(''.join(x[t[-1]+1:j]))
-                elif not v and x[j].isalpha():
-                    if x[j] in vars:
-                        r.append(str(vars[x[j]]))
-                elif not v and x[j].replace('-','').isdigit():
-                    r.append(str(x[j]))
-            output.append(''.join(r))
-        elif i.startswith('end'):
-            ret[-1]=True
-            return True
-        elif i.startswith('ret'):
-            return True
-        
-def assembler_interpreter(s):
-    global vars,labels,ret,last_cmp,output
-    vars,labels,ret,last_cmp,output={},{},[False],[-1],[]
-    f=lambda x:[k for k in [sub(r';.+','',sub(r'\s+',' ',j)).strip() for j in x.splitlines()] if k]
-    a=s.replace('; Do nothing','\n').split('\n\n')
-    base_code=f(a[0])
-    for j in [f(i) for i in a[1:]]:
-        labels[j[0][:-1]]=j[1:]
-    interp(base_code)
-    return ''.join(output) if ret[-1] else hard_code.pop() if hard_code else -1
+def compute_ranges(a,op,r):
+    t,n=Segment_tree(a,op),len(a)
+    return [t.get_res(i[0],i[1]-1,nr=n-1) for i in r]
 
-print(assembler_interpreter('''
-mov   a, 2            ; value1
-mov   b, 10           ; value2
-mov   c, a            ; temp1
-mov   d, b            ; temp2
-call  proc_func
-call  print
-end
+def _sum(a,b): 
+    return a+b
 
-proc_func:
-    cmp   d, 1
-    je    continue
-    mul   c, a
-    dec   d
-    call  proc_func
+def _max(a,b): 
+    return a if a > b else b
 
-continue:
-    ret
+def _gcd(a,b): 
+    return a if b == 0 else _gcd(b, a%b)
 
-print:
-    msg a, '^', b, ' = ', c
-    ret
-'''))
+def _lcm(a,b): 
+    if a == 0: return b
+    if b == 0: return a
+    return a*b / _gcd(a,b)
+
+print(compute_ranges([1, 5, 8, 5, 1, 8], _sum, [[0, 4], [0, 6], [2, 4], [1, 4]]))
+print(compute_ranges([2, 4, 9, 1, 1, 14, 7], _max, [[0, 2], [2, 7], [1, 4], [4, 5], [5, 7], [2, 5]]))
+print(compute_ranges([0, 0, 4, 75, 12, 0, 16, 5], _gcd, [[1, 4], [2, 6], [0, 1], [1, 4], [4, 7]]))
