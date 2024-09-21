@@ -1,52 +1,111 @@
-class Segment_tree:
-    def __init__(self,a,op):
-        self.a=a
-        self.op=op
-        self.n=len(a)
-        self.tree=[None]*(self.n*4)
-        self.build_tree(self.a,0,0,self.n-1)
+from collections import deque
+
+def escape(a):
+    d={'<':'L','>':'R','^':'U','v':'D'}
+    w=''
+    r,y=[],[]
+    x=0
+    for i,k in enumerate(a):
+        for j,h in enumerate(k):
+            if h==' ':
+                r.append((i,j))
+                if i==0 or j==0 or i==len(a)-1 or j==len(a[0])-1:
+                    y.append((i,j))
+            if h in d:
+                x=(i,j)
+                r.append(x)
+                w=h
+    if not y:
+        return []
+    g={i:set() for i in r}
+    add=lambda e,c:g[e].add(c) and g[c].add(e)
+    for i in g:
+        t,k=i
+        for j in r:
+            p,q=j
+            if abs(t-p)<=1 and abs(k-q)<=1 and i!=j and [p,q] not in [[t+1,k+1],[t-1,k-1],[t-1,k+1],[t+1,k-1]]:
+                add(i,j)
+    dictances={i:None for i in g}
+    parents=dictances.copy()
+    dictances[x]=0
+    q=deque([x])
+    while q:
+        v=q.popleft()
+        for i in g[v]:
+            if dictances[i] is None:
+                dictances[i]=dictances[v]+1
+                parents[i]=v
+                q.append(i)
+    path=[]
+    while y:
+        v=y.pop()
+        path=[v]
+        parent=parents[v]
+        while not parent is None:
+            path.append(parent)
+            parent=parents[parent]
     
-    def build_tree(self,a,n,l,r):
-        if l==r:
-            self.tree[n]=a[l]
+    path=path[::-1]
+    res=[]
+    for i in range(1,len(path)):
+        t,b=path[i-1]
+        k,n=path[i]
+        if t<k:
+            if w=='v':
+                res.append('F')
+                continue
+            if w=='^':
+                res.append('B')
+            if w=='<':
+                res.append('L')
+            if w=='>':
+                res.append('R')
+            res.append('F')
+            w='v'
+        elif t>k:
+            if w=='^':
+                res.append('F')
+                continue
+            if w=='v':
+                res.append('B')
+            if w=='<':
+                res.append('R')
+            if w=='>':
+                res.append('L')
+            res.append('F')
+            w='^'
+        elif b<n:
+            if w=='>':
+                res.append('F')
+                continue
+            if w=='<':
+                res.append('B')
+            if w=='^':
+                res.append('R')
+            if w=='v':
+                res.append('L')
+            res.append('F')
+            w='>'
         else:
-            m=(l+r)//2
-            self.build_tree(a,2*n+1,l,m)
-            self.build_tree(a,2*n+2,m+1,r)
-            self.tree[n]=self.op(self.tree[2*n+1],self.tree[2*n+2])
+            if w=='<':
+                res.append('F')
+                continue
+            if w=='>':
+                res.append('B')
+            if w=='^':
+                res.append('L')
+            if w=='v':
+                res.append('R')
+            res.append('F')
+            w='<'
+    return res
 
-    def get_res(self,l,r,n=0,nl=0,nr=None):
-        if l<=nl and r>=nr:
-            return self.tree[n]
-        if r<nl or l>nr:
-            return
-        m=(nl+nr)//2
-        left_res=self.get_res(l,r,2*n+1,nl,m)
-        right_res=self.get_res(l,r,2*n+2,m+1,nr)
-        if left_res is None:
-            return right_res
-        if right_res is None:
-            return left_res
-        return self.op(left_res,right_res)
-
-def compute_ranges(a,op,r):
-    t,n=Segment_tree(a,op),len(a)
-    return [t.get_res(i[0],i[1]-1,nr=n-1) for i in r]
-
-def _sum(a,b): 
-    return a+b
-
-def _max(a,b): 
-    return a if a > b else b
-
-def _gcd(a,b): 
-    return a if b == 0 else _gcd(b, a%b)
-
-def _lcm(a,b): 
-    if a == 0: return b
-    if b == 0: return a
-    return a*b / _gcd(a,b)
-
-print(compute_ranges([1, 5, 8, 5, 1, 8], _sum, [[0, 4], [0, 6], [2, 4], [1, 4]]))
-print(compute_ranges([2, 4, 9, 1, 1, 14, 7], _max, [[0, 2], [2, 7], [1, 4], [4, 5], [5, 7], [2, 5]]))
-print(compute_ranges([0, 0, 4, 75, 12, 0, 16, 5], _gcd, [[1, 4], [2, 6], [0, 1], [1, 4], [4, 7]]))
+print(escape(
+['####### #',
+ '#>#   # #',
+ '#   #   #',
+ '#########']))
+print(escape(
+['# #########',
+ '#        >#',
+ '###########']))
