@@ -1,111 +1,88 @@
-from collections import deque
+# from collections import deque
 
-def escape(a):
-    d={'<':'L','>':'R','^':'U','v':'D'}
-    w=''
-    r,y=[],[]
-    x=0
-    for i,k in enumerate(a):
-        for j,h in enumerate(k):
-            if h==' ':
-                r.append((i,j))
-                if i==0 or j==0 or i==len(a)-1 or j==len(a[0])-1:
-                    y.append((i,j))
-            if h in d:
-                x=(i,j)
-                r.append(x)
-                w=h
-    if not y:
-        return []
-    g={i:set() for i in r}
-    add=lambda e,c:g[e].add(c) and g[c].add(e)
-    for i in g:
-        t,k=i
-        for j in r:
-            p,q=j
-            if abs(t-p)<=1 and abs(k-q)<=1 and i!=j and [p,q] not in [[t+1,k+1],[t-1,k-1],[t-1,k+1],[t+1,k-1]]:
-                add(i,j)
-    dictances={i:None for i in g}
-    parents=dictances.copy()
-    dictances[x]=0
-    q=deque([x])
-    while q:
-        v=q.popleft()
-        for i in g[v]:
-            if dictances[i] is None:
-                dictances[i]=dictances[v]+1
-                parents[i]=v
-                q.append(i)
-    path=[]
-    while y:
-        v=y.pop()
-        path=[v]
-        parent=parents[v]
-        while not parent is None:
-            path.append(parent)
-            parent=parents[parent]
+# class Go:
+#     def __init__(self,n,m=None):
+#         if n>25 or (m and m>25):
+#             raise()
+#         self.height=n
+#         self.width=m if m is not None else n
+#         self.size={"height":self.height,"width":self.width}
+#         self.board=[['.']*self.width for _ in range(self.height)]
+#         self.turns=['black','white']
+#         self.stones={'black':'x','white':'o'}
+#         self.turn='black'
+#         self.board_states=deque([self.board])
+#         self.a,self.s=list(map(str,range(1,self.width+1)))[::-1],'ABCDEFGHJKLMNOPQRSTUVWXYZ'[:self.width]
+#         self.handicap=False
+
+#     def check_liberties(self,pos,curr_stone):
+#         ...
+
+#     def move(self,*moves):
+#         for i,j in moves:
+#             try:
+#                 k,p=self.a.index(i),self.s.index(j)
+#             except:
+#                 raise('Cannot place a stone with out of bounds coordinates!')
+#             curr_pos=self.board[k][p]
+#             if curr_pos=='.':
+#                 self.board[k][p]=self.stones[self.turn]
+#                 self.turn='black' if self.turn=='white' else 'white'
+#                 self.board_states.append(self.board)
+#             else:
+#                 raise('Cannot place a stone on an existing stone!')
+
+#     def get_position(self,s):
+#         return self.board[self.a.index(s[0])][self.s.index(s[1])]
+
+#     def handicap_stones(self,n):
+#         x=(self.height,self.width)
+#         if x not in [(9,9),(13,13),(19,19)] or n>9 or len(self.board_states)>1 or self.handicap:
+#             raise()
+#         self.handicap=True
+#         positions={(9,9):[(2,6),(6,2),(6,6),(2,2),(4,4)],
+#                    (13,13):[(3,9),(9,3),(9,9),(3,3),(6,6),(6,3),(6,9),(3,6),(9,6)],
+#                    (19,19):[(3,15),(15,3),(15,15),(3,3),(9,9),(9,3),(9,15),(3,9),(15,9)]}
+#         curr_han,c=positions[x],0
+#         if n>len(curr_han):
+#             raise()
+#         while c<n:
+#             i,j=curr_han[c]
+#             self.board[i][j]=self.stones[self.turn]
+#             c+=1
+
+#     def rollback(self,n):
+#         while n:
+#             self.board_states.pop()
+#             self.board=self.board_states[-1]
+#             self.turn='black' if self.turn=='white' else 'white'
+#             n-=1
     
-    path=path[::-1]
-    res=[]
-    for i in range(1,len(path)):
-        t,b=path[i-1]
-        k,n=path[i]
-        if t<k:
-            if w=='v':
-                res.append('F')
-                continue
-            if w=='^':
-                res.append('B')
-            if w=='<':
-                res.append('L')
-            if w=='>':
-                res.append('R')
-            res.append('F')
-            w='v'
-        elif t>k:
-            if w=='^':
-                res.append('F')
-                continue
-            if w=='v':
-                res.append('B')
-            if w=='<':
-                res.append('R')
-            if w=='>':
-                res.append('L')
-            res.append('F')
-            w='^'
-        elif b<n:
-            if w=='>':
-                res.append('F')
-                continue
-            if w=='<':
-                res.append('B')
-            if w=='^':
-                res.append('R')
-            if w=='v':
-                res.append('L')
-            res.append('F')
-            w='>'
-        else:
-            if w=='<':
-                res.append('F')
-                continue
-            if w=='>':
-                res.append('B')
-            if w=='^':
-                res.append('L')
-            if w=='v':
-                res.append('R')
-            res.append('F')
-            w='<'
-    return res
+#     def pass_turn(self):
+#         self.turn='black' if self.turn=='white' else 'white'
+#         self.board_states.append(self.board)
 
-print(escape(
-['####### #',
- '#>#   # #',
- '#   #   #',
- '#########']))
-print(escape(
-['# #########',
- '#        >#',
- '###########']))
+#     def reset(self):
+#         self.board=self.board_states[0]
+#         self.board_states.clear()
+#         self.turn='black'
+
+
+# game=Go(9)
+# game.handicap_stones(3)
+# game.move("4D","3D","4H","5D","3H","4C","5B","4E")
+
+# print(*game.board,sep='\n')
+
+def rocks(n):
+    c,k=0,1
+    while n:
+        if n>=10**k:
+            c+=9*10**(k-1)*k
+            k+=1
+        else:
+            c+=(n-10**(k-1)+1)*k
+            break
+    return c
+
+print(rocks(100))
