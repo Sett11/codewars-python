@@ -1,6 +1,3 @@
 
-# def distance(a,b):
-#     if len(a)!=len(b) or (not a and not b):
-#         return -1
-#     return sum((a[i]-b[i])**2 for i in range(len(a)))**.5
-
+# def distance_between_points(a,b):
+#     return ((b.x-a.x)**2+(b.y-a.y)**2+(a.z-b.z)**2)**.5
