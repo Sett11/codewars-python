@@ -1,3 +1,6 @@
+def f(x):
+    return [len(x),-len([j for j in x if j.isupper()]),[ord(j) for j in x]]
+
 def left(a,n):
     l,r=0,len(a)
     while r-l>1:
