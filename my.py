@@ -1,101 +1,93 @@
-# from collections import deque
+def trailing_zeros(n):
+    b=bin(n)
+    return len(b)-len(b.rstrip('0'))
 
-# class Go:
-#     def __init__(self,n,m=None):
-#         if n>25 or (m and m>25):
-#             raise()
-#         self.height=n
-#         self.width=m if m is not None else n
-#         self.size={"height":self.height,"width":self.width}
-#         self.board=[['.']*self.width for _ in range(self.height)]
-#         self.turns=['black','white']
-#         self.stones={'black':'x','white':'o'}
-#         self.turn='black'
-#         self.board_states=deque([self.board])
-#         self.a,self.s=list(map(str,range(1,self.width+1)))[::-1],'ABCDEFGHJKLMNOPQRSTUVWXYZ'[:self.width]
-#         self.handicap=False
+alpha={
+  'A': '10111',
+  'B': '111010101',
+  'C': '11101011101',
+  'D': '1110101',
+  'E': '1',
+  'F': '101011101',
+  'G': '111011101',
+  'H': '1010101',
+  'I': '101',
+  'J': '1011101110111',
+  'K': '111010111',
+  'L': '101110101',
+  'M': '1110111',
+  'N': '11101',
+  'O': '11101110111',
+  'P': '10111011101',
+  'Q': '1110111010111',
+  'R': '1011101',
+  'S': '10101',
+  'T': '111',
+  'U': '1010111',
+  'V': '101010111',
+  'W': '101110111',
+  'X': '11101010111',
+  'Y': '1110101110111',
+  'Z': '11101110101',
+  '0': '1110111011101110111',
+  '1': '10111011101110111',
+  '2': '101011101110111',
+  '3': '1010101110111',
+  '4': '10101010111',
+  '5': '101010101',
+  '6': '11101010101',
+  '7': '1110111010101',
+  '8': '111011101110101',
+  '9': '11101110111011101',
+  '.': '10111010111010111',
+  ',': '1110111010101110111',
+  '?': '101011101110101',
+  "'": '1011101110111011101',
+  '!': '1110101110101110111',
+  '/': '1110101011101',
+  '(': '111010111011101',
+  ')': '1110101110111010111',
+  '&': '10111010101',
+  ':': '11101110111010101',
+  ';': '11101011101011101',
+  '=': '1110101010111',
+  '+': '1011101011101',
+  '-': '111010101010111',
+  '_': '10101110111010111',
+  '"': '101110101011101',
+  '$': '10101011101010111',
+  '@': '10111011101011101',
+  ' ': '0'
+}
 
-#     def check_liberties(self,pos,curr_stone):
-#         ...
+def twos_comp(n,l):
+    if (n&(1<<(l-1))):
+        n-=(1<<l)
+    return n
 
-#     def move(self,*moves):
-#         for i,j in moves:
-#             try:
-#                 k,p=self.a.index(i),self.s.index(j)
-#             except:
-#                 raise('Cannot place a stone with out of bounds coordinates!')
-#             curr_pos=self.board[k][p]
-#             if curr_pos=='.':
-#                 self.board[k][p]=self.stones[self.turn]
-#                 self.turn='black' if self.turn=='white' else 'white'
-#                 self.board_states.append(self.board)
-#             else:
-#                 raise('Cannot place a stone on an existing stone!')
+def num_to_bin(num, wordsize):
+    if num < 0:
+        num = 2**wordsize+num
+    base = bin(num)[2:]
+    padding_size = wordsize - len(base)
+    return '0' * padding_size + base
 
-#     def get_position(self,s):
-#         return self.board[self.a.index(s[0])][self.s.index(s[1])]
-
-#     def handicap_stones(self,n):
-#         x=(self.height,self.width)
-#         if x not in [(9,9),(13,13),(19,19)] or n>9 or len(self.board_states)>1 or self.handicap:
-#             raise()
-#         self.handicap=True
-#         positions={(9,9):[(2,6),(6,2),(6,6),(2,2),(4,4)],
-#                    (13,13):[(3,9),(9,3),(9,9),(3,3),(6,6),(6,3),(6,9),(3,6),(9,6)],
-#                    (19,19):[(3,15),(15,3),(15,15),(3,3),(9,9),(9,3),(9,15),(3,9),(15,9)]}
-#         curr_han,c=positions[x],0
-#         if n>len(curr_han):
-#             raise()
-#         while c<n:
-#             i,j=curr_han[c]
-#             self.board[i][j]=self.stones[self.turn]
-#             c+=1
-
-#     def rollback(self,n):
-#         while n:
-#             self.board_states.pop()
-#             self.board=self.board_states[-1]
-#             self.turn='black' if self.turn=='white' else 'white'
-#             n-=1
+class Morse:
+    @classmethod
+    def encode(self,s):
+        a=sum([[alpha[i],'0'*3] for i in s],[])[:-1]
+        t,n=''.join(a),32
+        while n<len(t):
+            n+=32
+        t+='0'*(n-len(t))
+        return [twos_comp(int(t[i:i+32],2),32) for i in range(0,len(t),32)]
     
-#     def pass_turn(self):
-#         self.turn='black' if self.turn=='white' else 'white'
-#         self.board_states.append(self.board)
+    @classmethod
+    def decode(self,a):
+        return ''.join(num_to_bin(i,32) for i in a).rstrip('0')
 
-#     def reset(self):
-#         self.board=self.board_states[0]
-#         self.board_states.clear()
-#         self.turn='black'
+print(Morse.encode('MMM'))
+print(Morse.encode('EEEEEEEIE'))
+print(Morse.encode('HELLO WORLD'))
 
-
-# game=Go(9)
-# game.handicap_stones(3)
-# game.move("4D","3D","4H","5D","3H","4C","5B","4E")
-
-# print(*game.board,sep='\n')
-
-import networkx as nx
-
-def wire_DHD_SG1(a):
-    a=[list(i.strip()) for i in a.splitlines()]
-    n,m,graph=len(a),len(a[0]),nx.Graph()
-    x,y=sum([[(i,j) for j,k in enumerate(p) if k in 'SG'] for i,p in enumerate(a)],[])
-    f=lambda x,y:((y[0]-x[0])**2+(y[1]-x[1])**2)**.5
-    for i in range(n):
-        for j in range(m):
-            if a[i][j]!='X':
-                for k in {(k,p) for k,p in [(i-1,j),(i+1,j),(i,j-1),(i,j+1),(i+1,j+1),(i-1,j-1),(i-1,j+1),(i+1,j-1)] if k>=0 and k<n and p>=0 and p<m and a[k][p]!='X'}:
-                    graph.add_edge((i,j),k,weight=f((i,j),k))
-    if x not in graph or y not in graph or not nx.has_path(graph,(x[0],x[1]),(y[0],y[1])):
-        return 'Oh for crying out loud...'
-    for i,j in nx.shortest_path(graph,(x[0],x[1]),(y[0],y[1]),weight='weight')[1:-1]:
-        a[i][j]='P'
-    return '\n'.join(''.join(i) for i in a)
-    
-
-print(wire_DHD_SG1(
-"""
-SX.
-XX.
-..G
-"""))
+print(Morse.decode([-298086688]))
