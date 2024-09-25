@@ -1,55 +1,19 @@
-from collections import Counter
-import heapq as h
+# def soln(n):
+#     return int(''.join(''.join('1' if i==j else '0' for j in range(n)) for i in range(n)),2)
 
-hard_cache={}
+# print(soln(10))
 
-class Node:
-    def __init__(self,s=None,n=None,l=None,r=None):
-        self.s=s
-        self.n=n
-        self.l=l
-        self.r=r
-    
-    def __lt__(self,other):
-        return self.n<other.n
 
-def build_haffman_tree(a):
-    q=[Node(*i) for i in a]
-    h.heapify(q)
-    while len(q)>1:
-        l,r=h.heappop(q),h.heappop(q)
-        m=Node(n=l.n+r.n)
-        m.l,m.r=l,r
-        h.heappush(q,m)
-    return q[0]
+#TV Remote
 
-def gen_haffman_code(n,c='',r={}):
-    if n is not None:
-        if n.s is not None:
-            r[n.s]=c
-        gen_haffman_code(n.l,c+'0',r)
-        gen_haffman_code(n.r,c+'1',r)
-    return r
+# def tv_remote(w):
+#     r={'a': (0, 0), 'b': (0, 1), 'c': (0, 2), 'd': (0, 3), 'e': (0, 4), '1': (0, 5), '2': (0, 6), '3': (0, 7), 'f': (1, 0), 'g': (1, 1), 'h': (1, 2), 'i': (1, 3), 'j': (1, 4), '4': (1, 5), '5': (1, 6), '6': (1, 7), 'k': (2, 0), 'l': (2, 1), 'm': (2, 2), 'n': (2, 3), 'o': (2, 4), '7': (2, 5), '8': (2, 6), '9': (2, 7), 'p': (3, 0), 'q': (3, 1), 'r': (3, 2), 's': (3, 3), 't': (3, 4), '.': (3, 5), '@': (3, 6), '0': (3, 7), 'u': (4, 0), 'v': (4, 1), 'w': (4, 2), 'x': (4, 3), 'y': (4, 4), 'z': (4, 5), '_': (4, 6), '/': (4, 7)}
+#     g,c=(0,0),0
+#     for i in w:
+#         t=r[i]
+#         c+=abs(t[0]-g[0])+abs(t[1]-g[1])+1
+#         g=t
+#     return c
 
-def frequencies(s):
-    return list(Counter(s).items())
-
-def encode(f,s):
-    if len(f)<2:
-        return
-    if not s:
-        return ''
-    r=gen_haffman_code(build_haffman_tree(f))
-    t=''.join(r[i] for i in s)
-    hard_cache[t]=s
-    return t
-  
-def decode(f,b):
-    if len(f)<2:
-        return
-    if not b:
-        return ''
-    return hard_cache[b]
-
-print(encode(frequencies('mdj'),'mdj'))
-print(decode(frequencies('mdj'),'01110'))
+# print(tv_remote('codewars'))
+# print(tv_remote('solution'))
