@@ -1,11 +1,13 @@
-def create_class(name,secrets={}):
-    if not name:
-        return
-    my_class=type(name,(object,),{})
-    for i in secrets:
-        setattr(my_class,i,secrets[i])
-    return my_class
+class Format:
+    def __init__(self,tag='{}'):
+        self.tag=tag
 
-cls=create_class('new one',{'name':'Jhon','age':23,'add':lambda x,y:x+y})
-x=cls()
-print(x.name)
+    def __call__(self,*args):
+        return self.tag.format(''.join(args))
+    
+    def __getattr__(self,attr):
+        return Format(self.tag.format(f'<{attr}>{"{}"}</{attr}>'))
+
+format = Format()
+
+print(format.div.h1("FooBar"))
