@@ -1,8 +1,29 @@
-LEFT_HAND,RIGHT_HAND={'0001101': 0, '0011001': 1, '0010011': 2, '0111101': 3, '0100011': 4, '0110001': 5, '0101111': 6, '0111011': 7, '0110111': 8, '0001011': 9},{'1110010': 0, '1100110': 1, '1101100': 2, '1000010': 3, '1011100': 4, '1001110': 5, '1010000': 6, '1000100': 7, '1001000': 8, '1110100': 9}
+from math import floor
 
-def read_barcode(s):
-    f=lambda x,y:''.join(str(y[''.join('0' if j==' ' else '1' for j in x[i:i+7])]) for i in range(0,len(x),7))
-    l,r=f(s[3:45],LEFT_HAND),f(s[50:-3],RIGHT_HAND)
-    return f'{l[0]} {l[1:]} {r[:-1]} {r[-1]}'
+class Chiken:
+    def __init__(self,n):
+        self.year=n
+        self.egg=300
+        self.death=False
 
-print(read_barcode('▍ ▍   ▍▍ ▍ ▍▍   ▍  ▍▍  ▍   ▍▍ ▍   ▍▍ ▍   ▍▍ ▍ ▍ ▍ ▍▍▍  ▍ ▍▍  ▍▍ ▍▍ ▍▍  ▍  ▍▍▍ ▍▍  ▍▍ ▍   ▍  ▍ ▍'))
+    def action(self):
+        if not self.death:
+            t=self.egg
+            self.year-=1
+            self.egg=floor(self.egg-self.egg/100*20)
+            if self.year==0:
+                self.death=True
+            return t
+        return 0
+
+
+def egged(n,k):
+    if not n:
+        return 'No chickens yet!'
+    r,t=[],0
+    for _ in range(n):
+        r+=[Chiken(k) for _ in range(3)]
+        t=sum(i.action() for i in r)
+    return t
+
+print(egged(74,10))
