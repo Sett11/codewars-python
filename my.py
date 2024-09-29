@@ -1,7 +1,6 @@
-from itertools import product
+from re import sub
 
-def multiiter(*args):
-    for k in [tuple(j) for j in product(*[list(range(i)) for i in args])]:
-        yield k
+def proofread(s):
+    return sub(r'\.\s[a-z]',lambda x:x.group().upper(),s.lower().replace('ie','ei').capitalize())
 
-print(list(multiiter(3,2)))
+print(proofread("Niether of the fencers wanted to forfiet the match. They both expected to sieze victory."))
