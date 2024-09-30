@@ -1,29 +1,22 @@
-from math import floor
+def f(a,b):
+    if b==0:  
+        return a,1,0
+    else:
+        d,x,y=f(b,a%b)
+        return d,y,x-y*(a//b)
 
-class Chiken:
-    def __init__(self,n):
-        self.year=n
-        self.egg=300
-        self.death=False
+class RSA:
+    def __init__(self,p,q,e):
+        self.e=e
+        self.n=p*q
+        self.d=f(self.e,(p-1)*(q-1))[1]
+    
+    def encrypt(self,m):
+        return pow(m,self.e,self.n)
+    
+    def decrypt(self,c):
+        return pow(c,self.d,self.n)
 
-    def action(self):
-        if not self.death:
-            t=self.egg
-            self.year-=1
-            self.egg=floor(self.egg-self.egg/100*20)
-            if self.year==0:
-                self.death=True
-            return t
-        return 0
-
-
-def egged(n,k):
-    if not n:
-        return 'No chickens yet!'
-    r,t=[],0
-    for _ in range(n):
-        r+=[Chiken(k) for _ in range(3)]
-        t=sum(i.action() for i in r)
-    return t
-
-print(egged(74,10))
+r=RSA(61,53,17)
+print(r.encrypt(665))
+print(r.decrypt(640))
