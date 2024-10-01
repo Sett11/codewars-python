@@ -1,22 +1,22 @@
-def f(a,b):
-    if b==0:  
-        return a,1,0
-    else:
-        d,x,y=f(b,a%b)
-        return d,y,x-y*(a//b)
-
-class RSA:
-    def __init__(self,p,q,e):
-        self.e=e
-        self.n=p*q
-        self.d=f(self.e,(p-1)*(q-1))[1]
+class Point:
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
     
-    def encrypt(self,m):
-        return pow(m,self.e,self.n)
+def dist(a,b):
+    return (a.x-b.x)*(a.x-b.x)+(b.y-a.y)*(b.y-a.y)
     
-    def decrypt(self,c):
-        return pow(c,self.d,self.n)
+def check(a,b,c,d):
+    x,y,z=dist(a,b),dist(a,c),dist(a,d)
+    if 0 in [x,y,z]:
+        return False
+    if (x==y and 2*x==z and 2*dist(b,d)==dist(b,c)) or\
+    (y==z and 2*y==x and 2*dist(c,b)==dist(c,d)) or\
+    (x==z and 2*x==y and 2*dist(b,c)==dist(b,d)):
+        return True
+    return False
 
-r=RSA(61,53,17)
-print(r.encrypt(665))
-print(r.decrypt(640))
+def is_square(a):
+    return check(*map(lambda x:Point(*x),a)) if len(a)==4 else False
+
+print(is_square([(520, 520), (360, 521), (519, 360), (359, 361)]))
