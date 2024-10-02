@@ -1,5 +1,6 @@
 from string import ascii_uppercase
 from functools import reduce
+from re import match
 
 def f(n):
     r=''
@@ -10,18 +11,10 @@ def f(n):
 
 def ff(s):
     return reduce(lambda a,c:a*26+ascii_uppercase.index(c)+1,s,0)
-    
 
-class SpreadSheetHelper:
-    @staticmethod
-    def convert_to_display(x):
-        return str(f(int(x[0])))+str(x[1]+1)
-    
-    @staticmethod
-    def convert_to_internal(x):
-        g=next(i for i,j in enumerate(x) if j.isdigit())
-        a,b=x[:g],x[g:]
-        return ff(a)-1,int(b)-1
-
-print(SpreadSheetHelper.convert_to_display((730,999)))
-print(SpreadSheetHelper.convert_to_internal('ABC1000'))
+def spreadsheet(s):
+    if match(r'^R\d+C\d+$',s):
+        g=s.index('C')
+        return str(f(int(s[g:][1:])-1))+s[:g][1:]
+    g=next(i for i,j in enumerate(s) if j.isdigit())
+    return f'R{s[g:]}C{ff(s[:g])}'
