@@ -1,15 +1,27 @@
-def has_permission(a,b):
-    _all,res,ban=None,set(),set()
-    for i in a:
-        x,y=i.split('_')
-        if x=='*':
-            _all=False if y=='deny' else True if y=='allow' and _all is None else None
-        else:
-            if y=='deny':
-                ban.add(x)
-            else:
-                res.add(x)
-    return (_all and b not in ban) or (b in res and b not in ban)
+from string import ascii_uppercase
+from functools import reduce
 
+def f(n):
+    r=''
+    while n>=0:
+        r=ascii_uppercase[n%26]+r
+        n=n//26-1
+    return r
 
-print(has_permission({'*_allow', 'books_allow', 'movies_deny'}, 'games'))
+def ff(s):
+    return reduce(lambda a,c:a*26+ascii_uppercase.index(c)+1,s,0)
+    
+
+class SpreadSheetHelper:
+    @staticmethod
+    def convert_to_display(x):
+        return str(f(int(x[0])))+str(x[1]+1)
+    
+    @staticmethod
+    def convert_to_internal(x):
+        g=next(i for i,j in enumerate(x) if j.isdigit())
+        a,b=x[:g],x[g:]
+        return ff(a)-1,int(b)-1
+
+print(SpreadSheetHelper.convert_to_display((730,999)))
+print(SpreadSheetHelper.convert_to_internal('ABC1000'))
