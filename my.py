@@ -1,19 +1,15 @@
-def md(a,b):
-    return [[sum(a[i][j]*b[j][k] for j in range(len(a))) for k in range(len(a[0]))] for i in range(len(a[0]))]
+def has_permission(a,b):
+    _all,res,ban=None,set(),set()
+    for i in a:
+        x,y=i.split('_')
+        if x=='*':
+            _all=False if y=='deny' else True if y=='allow' and _all is None else None
+        else:
+            if y=='deny':
+                ban.add(x)
+            else:
+                res.add(x)
+    return (_all and b not in ban) or (b in res and b not in ban)
 
-def multiply(a,b):
-    c=md(a,b)
-    for i in range(len(c)):
-        for j in range(len(c[0])):
-            a[i][j]=c[i][j]
 
-def calc(m,n):
-    a=[[1 if i==j else 0 for j in range(len(m[0]))] for i in range(len(m))]
-    while n:
-        if n&1:
-            multiply(a, m)
-        multiply(m, m)
-        n>>=1
-    return a
-
-print(calc([[1,2], [0,1]],3))
+print(has_permission({'*_allow', 'books_allow', 'movies_deny'}, 'games'))
