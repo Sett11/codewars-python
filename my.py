@@ -1,12 +1,17 @@
-from statistics import mean
+def count(a):
+    q,u=sum([[(i,k) for k,p in enumerate(j) if p=='K'] for i,j in enumerate(a)],[])[0],set()
+    f=lambda x,y:[(i,j) for i,j in [(x+1,y+2),(x-1,y-2),(x+2,y+1),(x-2,y-1),(x+1,y-2),(x+2,y-1),(x-1,y+2),(x-2,y+1)] if 0<=i<8 and 0<=j<8]
+    for i in f(*q):
+        u.update(f(*i))
+    return len(u)
 
-def are_contig_elemen_close_enough(arr, abs_error):
-    return all(abs(arr[i]-arr[i+1])<=abs_error for i in range(len(arr)-1))
-
-def simul_close_to2(arr, abs_error, count = 0):
-    if are_contig_elemen_close_enough(arr,abs_error):
-        return count
-    k=mean(arr)
-    return simul_close_to2([(i+k)/k for i in arr],abs_error,count+1)
-
-print(simul_close_to2([12, 7, 23], pow(10, -5)))
+print(count([
+            ['0', '0', '0', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '0', '0', '0'],
+            ['0', '0', 'K', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '0', '0', '0']
+        ]))
