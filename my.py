@@ -1,21 +1,12 @@
-import gmpy2
-from collections import Counter
-from bisect import bisect
+from statistics import mean
 
-def e(n):
-    l=gmpy2.isqrt(n)+1
-    n+=1
-    b=gmpy2.xmpz(3)
-    b[4:n:2]=-1
-    for i in b.iter_clear(3,l):
-        b[i*i:n:i+i]=-1
-    return list(b.iter_clear(2,n))
+def are_contig_elemen_close_enough(arr, abs_error):
+    return all(abs(arr[i]-arr[i+1])<=abs_error for i in range(len(arr)-1))
 
-primes=e(int(5e6))
+def simul_close_to2(arr, abs_error, count = 0):
+    if are_contig_elemen_close_enough(arr,abs_error):
+        return count
+    k=mean(arr)
+    return simul_close_to2([(i+k)/k for i in arr],abs_error,count+1)
 
-def f(n):
-    c=lambda x:(sum(j for i,j in Counter(str(x)).items() if int(i)%2==0),x)
-    g=bisect(primes,n-1)
-    return max([c(i) for i in primes[:g]])[1]
-
-print(f(1000))
+print(simul_close_to2([12, 7, 23], pow(10, -5)))
