@@ -1,23 +1,26 @@
-from decimal import Decimal as d
+def escape(a):
+    x,y=[[(i,j) for j,k in enumerate(p) if k==2] for i,p in enumerate(a) if 2 in p][0][0]
+    n,m,r,g=len(a),len(a[0]),[],-1
+    a[-1][-1]=1
+    while (x,y)!=(n-1,m-1):
+            try:
+                g=a[x].index(1)
+                s=('L' if g<y else 'R' if g>y else 'D')
+                k=abs(y-g)
+                if not k:
+                    if r:
+                        r[-1]=r[-1][0]+str(int(r[-1][1:])+1)
+                    else:
+                        r.append('D'+str(1))
+                else:
+                    r.append(s+str(k)),r.append('D1')
+                x+=1
+                y=g
+            except:
+                 return r[:-1]
+    return r
+        
 
-def cuckoo_clock(t,n):
-    y=float(t.replace(':','.'))
-    if y%1==0:
-        n-=y
-    t,c=d(t.replace(':','.')),d('0.01')
-    while n>0:
-        s=str(t).split('.')
-        if s[1] in ['15','30','45']:
-            n-=1
-        if s[1]=='60':
-            x=(int(s[0])%12)+1
-            n-=x
-            t=d(x)
-        if n>0:
-            t+=c
-    r=str(t).rjust(2,'0').replace('.',':')
-    return r.rjust(5,'0') if ':' in r else r+':00'
-
-print(cuckoo_clock('03:38',19))
-print(cuckoo_clock("09:53",50))
-print(cuckoo_clock("10:00",10))
+print(escape([[2, 0, 0, 1, 0],
+               [0, 0, 0, 1, 0],
+               [0, 0, 0, 0, 0]]))
