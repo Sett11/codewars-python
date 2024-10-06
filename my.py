@@ -1,26 +1,27 @@
-def escape(a):
-    x,y=[[(i,j) for j,k in enumerate(p) if k==2] for i,p in enumerate(a) if 2 in p][0][0]
-    n,m,r,g=len(a),len(a[0]),[],-1
-    a[-1][-1]=1
-    while (x,y)!=(n-1,m-1):
-            try:
-                g=a[x].index(1)
-                s=('L' if g<y else 'R' if g>y else 'D')
-                k=abs(y-g)
-                if not k:
-                    if r:
-                        r[-1]=r[-1][0]+str(int(r[-1][1:])+1)
-                    else:
-                        r.append('D'+str(1))
-                else:
-                    r.append(s+str(k)),r.append('D1')
-                x+=1
-                y=g
-            except:
-                 return r[:-1]
-    return r
-        
+from sys import settrace
 
-print(escape([[2, 0, 0, 1, 0],
-               [0, 0, 0, 1, 0],
-               [0, 0, 0, 0, 0]]))
+def count_calls(func,*args,**kwargs):
+    a=[-1]
+    def tracer(frame,event,arg):
+       if event=='call':
+         a[0]+=1
+       return tracer
+    settrace(tracer)
+    r=func(*args,**kwargs)
+    return a[0],r
+
+
+def add(a, b):
+  return a + b
+  
+
+def add_ten(a):
+  return add(a, 10)
+
+
+def misc_fun():
+  return add(add_ten(3), add_ten(9))
+
+print(count_calls(misc_fun))
+
+
