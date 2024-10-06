@@ -1,28 +1,34 @@
-import networkx as nx
-import numpy as np
+from math import radians,cos,sin,asin,sqrt
+from itertools import permutations
 
+EARTH_RADIUS = 3959
+OFFICE = {"lat": 51.49984, "long": -0.124663}
 
-hard=[[0, 4, 3, 1, 7, 6, 2, 10, 11, 5, 9, 12, 8, 0],[0, 7, 1, 2, 4, 3, 5, 6, 0],[0,1,2,0]]
+from math import radians, cos, sin, asin, sqrt
 
-def tsp(a):
-    if hard:
-        return hard.pop()
-    g=nx.from_numpy_array(np.array(a),create_using=nx.Graph)
-    return nx.algorithms.approximation.traveling_salesman.threshold_accepting_tsp(g,init_cycle='greedy')
+def haversine(lat1, lon1, lat2, lon2):
+      dLat=radians(lat2-lat1)
+      dLon=radians(lon2-lon1)
+      lat1=radians(lat1)
+      lat2=radians(lat2)
+      a=sin(dLat/2)**2+cos(lat1)*cos(lat2)*sin(dLon/2)**2
+      c=2*asin(sqrt(a))
+      return EARTH_RADIUS*c
 
+def sum_dist(a):
+    return sum(haversine(*a[i],*a[i+1]) for i in range(len(a)-1))
 
-print(tsp([
-            [0,236,237,134,1,31,4,350,63,478,414,361,328],
-            [236,0,458,46,148,401,434,168,458,332,205,171,214],
-            [237,458,0,405,249,220,72,80,149,494,116,470,175],
-            [134,46,405,0,15,235,453,149,100,313,118,392,277],
-            [1,148,249,15,0,122,356,43,182,263,281,484,187],
-            [31,401,220,235,122,0,294,144,444,263,331,154,402],
-            [4,434,72,453,356,294,0,96,469,245,465,336,299],
-            [350,168,80,149,43,144,96,0,171,387,390,66,109],
-            [63,458,149,100,182,444,469,171,0,314,281,420,39],
-            [478,332,494,313,263,263,245,387,314,0,254,323,243],
-            [414,205,116,118,281,331,465,390,281,254,0,130,382],
-            [361,171,470,392,484,154,336,66,420,323,130,0,240],
-            [328,214,175,277,187,402,299,109,39,243,382,240,0]
-        ]))
+def travel_expenses(a):
+    if not all(-90<=i['lat']<=90 and -180<=i['long']<=180 for i in a):
+        return "I am claiming extra holiday!"
+    o,m=[(OFFICE['lat'],OFFICE['long'])],1e9
+    for i in permutations([(i['lat'],i['long']) for i in a]):
+        m=min(m,sum_dist(o+list(i)+o))
+    return 500+m*10
+
+print(travel_expenses([
+  {"lat": 55.8642, "long": -4.2518},
+  {"lat": 52.4862, "long": -1.8904},
+  {"lat": 53.2268, "long": -0.5379},
+  {"lat": 53.5229, "long": -1.1312}
+]))
