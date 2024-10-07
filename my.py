@@ -1,34 +1,24 @@
-from math import radians,cos,sin,asin,sqrt
-from itertools import permutations
+from math import comb
+from itertools import combinations
+from functools import reduce
+from operator import mul
 
-EARTH_RADIUS = 3959
-OFFICE = {"lat": 51.49984, "long": -0.124663}
+def eval_prod_sum(a,nf,na,mv):
+    if [i for i in a if isinstance(i,(str,float))] or [i for i in [nf,na,mv] if isinstance(i,(str,float)) or i<1]:
+        return "Error. Unexpected entries"
+    if nf>len(a):
+        return "Error. Number of factors too high"
+    if na>comb(len(a),nf):
+        return "Error. Number of addens too high"
+    smaller=equal=larger=0
+    for i in combinations([reduce(mul,j) for j in combinations(a,nf)],na):
+        t=sum(i)
+        if t<mv:
+            smaller+=1
+        elif t>mv:
+            larger+=1
+        else:
+            equal+=1
+    return [{f"Below than {mv}": smaller}, {f"Equals to {mv}": equal}, {f"Higher than {mv}": larger}]
 
-from math import radians, cos, sin, asin, sqrt
-
-def haversine(lat1, lon1, lat2, lon2):
-      dLat=radians(lat2-lat1)
-      dLon=radians(lon2-lon1)
-      lat1=radians(lat1)
-      lat2=radians(lat2)
-      a=sin(dLat/2)**2+cos(lat1)*cos(lat2)*sin(dLon/2)**2
-      c=2*asin(sqrt(a))
-      return EARTH_RADIUS*c
-
-def sum_dist(a):
-    return sum(haversine(*a[i],*a[i+1]) for i in range(len(a)-1))
-
-def travel_expenses(a):
-    if not all(-90<=i['lat']<=90 and -180<=i['long']<=180 for i in a):
-        return "I am claiming extra holiday!"
-    o,m=[(OFFICE['lat'],OFFICE['long'])],1e9
-    for i in permutations([(i['lat'],i['long']) for i in a]):
-        m=min(m,sum_dist(o+list(i)+o))
-    return 500+m*10
-
-print(travel_expenses([
-  {"lat": 55.8642, "long": -4.2518},
-  {"lat": 52.4862, "long": -1.8904},
-  {"lat": 53.2268, "long": -0.5379},
-  {"lat": 53.5229, "long": -1.1312}
-]))
+print(eval_prod_sum([-25, 42, -21, 14, -12, 26, -4],3,3,500))
