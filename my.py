@@ -1,24 +1,24 @@
-from math import comb
-from itertools import combinations
-from functools import reduce
-from operator import mul
+import networkx as nx
 
-def eval_prod_sum(a,nf,na,mv):
-    if [i for i in a if isinstance(i,(str,float))] or [i for i in [nf,na,mv] if isinstance(i,(str,float)) or i<1]:
-        return "Error. Unexpected entries"
-    if nf>len(a):
-        return "Error. Number of factors too high"
-    if na>comb(len(a),nf):
-        return "Error. Number of addens too high"
-    smaller=equal=larger=0
-    for i in combinations([reduce(mul,j) for j in combinations(a,nf)],na):
-        t=sum(i)
-        if t<mv:
-            smaller+=1
-        elif t>mv:
-            larger+=1
-        else:
-            equal+=1
-    return [{f"Below than {mv}": smaller}, {f"Equals to {mv}": equal}, {f"Higher than {mv}": larger}]
+def path_finder(a):
+    g=nx.Graph()
+    a=a.splitlines()
+    n,m=len(a),len(a[0])
+    for i in range(n):
+        for j in range(m):
+            if a[i][j]=='.':
+                for k in [(x,y) for x,y in [(i+1,j),(i-1,j),(i,j+1),(i,j-1)] if 0<=x<n and 0<=y<m and a[x][y]=='.']:
+                    g.add_edge((i,j),k)
+    r=g,(0,0),(n-1,m-1)
+    if r[-1] not in g or r[1] not in g or not nx.has_path(*r):
+        return False
+    return nx.shortest_path_length(*r)
 
-print(eval_prod_sum([-25, 42, -21, 14, -12, 26, -4],3,3,500))
+print(path_finder("\n".join([
+  "......",
+  "......",
+  "......",
+  "......",
+  ".....W",
+  "....W."
+])))
