@@ -1,12 +1,4 @@
-from re import sub,search
+def zig_zag_camel(d,h):
+    return (d*d+h*h)**.5 if d/h>1.7 else h+h
 
-def solve(s):
-    if len(s)&1:
-        return -1
-    if search(r'\(\)',s):
-        return solve(sub(r'\(\)','',s))
-    r=sub(r'(\(\()|(\)\))','',s)
-    return (len(s)-len(r))//2+len(r)
-    
-
-print(solve("(((())"))
+print(zig_zag_camel(10,5))
