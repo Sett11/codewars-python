@@ -1,13 +1,12 @@
-import networkx as nx
+from re import sub,search
 
-def strongly_connected_components(a):
-    g=nx.DiGraph()
-    for i in range(len(a)):
-        if not a[i]:
-            g.add_node(i)
-        for j in a[i]:
-            g.add_edge(i,j)
-    return list(nx.strongly_connected_components(g))
+def solve(s):
+    if len(s)&1:
+        return -1
+    if search(r'\(\)',s):
+        return solve(sub(r'\(\)','',s))
+    r=sub(r'(\(\()|(\)\))','',s)
+    return (len(s)-len(r))//2+len(r)
+    
 
-print(strongly_connected_components([[1], [2, 3, 4], [0, 3], [5], [5, 6], [3], [4, 7], [5, 6]]))
-print(strongly_connected_components([[]]))
+print(solve("(((())"))
