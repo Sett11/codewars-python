@@ -1,4 +1,23 @@
-def zig_zag_camel(d,h):
-    return (d*d+h*h)**.5 if d/h>1.7 else h+h
+import numpy as np
+import networkx as nx
 
-print(zig_zag_camel(10,5))
+def maximum_clique(a):
+    if not a:
+        return []
+    g=nx.from_numpy_array(np.array(a),create_using=nx.Graph)
+    return max(nx.algorithms.find_cliques(g),key=len)
+
+print(maximum_clique([
+      [0,1,0,0],
+      [1,0,1,1],
+      [0,1,0,1],
+      [0,1,1,0]
+    ]))
+print(maximum_clique([
+      [0,0,0,1,0,1], 
+      [0,0,1,0,1,0], 
+      [0,1,0,1,0,0], 
+      [1,0,1,0,1,1], 
+      [0,1,0,1,0,0], 
+      [1,0,0,1,0,0]
+    ]))
