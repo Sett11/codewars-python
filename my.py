@@ -1,19 +1,25 @@
-class SiegeState:
+class Marine:
     def __init__(self):
-        self.damage=20
-        self.canMove=False
+        self.health=100
+        
+    def accept(self, visitor):
+        self.health=visitor.visit_light(self.health)
 
-class TankState:
+class Marauder:
     def __init__(self):
-        self.damage=5
-        self.canMove=True
+        self.health=125
+        
+    def accept(self, visitor):
+        self.health=visitor.visit_armored(self.health)
 
-class Tank:
-    def __init__(self):
-        self.state=TankState()
+class TankBullet:
+    def visit_light(self, unit):
+        return unit-21
+        
+    def visit_armored(self, unit):
+        return unit-32
 
-    def can_move(self):
-        return self.state.canMove
-    
-    def damage(self):
-        return self.state.damage
+bullet = TankBullet()
+light = Marine()
+light.accept(bullet)
+print(light.health)
