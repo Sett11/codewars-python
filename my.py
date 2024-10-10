@@ -1,18 +1,19 @@
-class Marine:
-    def __init__(self, damage, armor):
-        self.damage=damage
-        self.armor=armor
+class SiegeState:
+    def __init__(self):
+        self.damage=20
+        self.canMove=False
 
-class Marine_weapon_upgrade:
-    def __init__(self, marine):
-        self.damage=marine.damage+1
-        self.armor=marine.armor
-        
-class Marine_armor_upgrade:
-    def __init__(self, marine):
-        self.damage=marine.damage
-        self.armor=marine.armor+1
+class TankState:
+    def __init__(self):
+        self.damage=5
+        self.canMove=True
 
-m=Marine(10,1)
-m=Marine_weapon_upgrade(m)
-print(m.damage)
+class Tank:
+    def __init__(self):
+        self.state=TankState()
+
+    def can_move(self):
+        return self.state.canMove
+    
+    def damage(self):
+        return self.state.damage
