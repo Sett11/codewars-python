@@ -1,14 +1,25 @@
-from itertools import permutations
-from functools import reduce
+def validate_args(*args):
+    def inner_func(func):
+        def check(*w):
+            for i in w:
+                if not isinstance(i,args):
+                    raise InvalidArgument()
+            return func(*w)
+        check.__name__=func.__name__
+        check.__doc__=func.__doc__
+        return check
+    return inner_func
 
-def check(a,b):
-    return a and b and min(a)>min(b) and max(a)<max(b)
 
-def matryoshka(lst):
-    a=[list(i) for i in permutations(lst)]
-    for i in a:
-        if reduce(lambda x,y:x+y if check(x,y) else [],i):
-            return True
-    return False
+@validate_args(str)
+def say_hello(name):
+    """Say hello to {name}"""
+    return "Hello, " + str(name)
 
-print(matryoshka([[1, 2, 3, 4, 5, 6, 7, 8], [2, 3, 4, 5, 6, 7], [3, 4, 5, 6], [4, 5]]))
+@validate_args(int,float)
+def f(a,b):
+    return a+b
+
+print(say_hello('Jhonny'))
+print(f(1,2.0))
+print(say_hello.__name__)
