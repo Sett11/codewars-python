@@ -1,21 +1,14 @@
-from itertools import groupby
+from itertools import permutations
+from functools import reduce
 
-def consecutive_nums(arr,n):
-    arr.sort()
-    a=[list(j) for _,j in groupby(arr)]
-    while a:
-        t=[]
-        for i in range(n):
-            if i<len(a):
-                if not t or a[i][-1]==t[-1]+1:
-                    t.append(a[i].pop())
-                else:
-                    return False
-        if len(t)!=n:
-            return False
-        a=[k for k in a if k]
-    return True
+def check(a,b):
+    return a and b and min(a)>min(b) and max(a)<max(b)
 
-print(consecutive_nums([2,3,4,5],2))
-print(consecutive_nums([1, 2, 3, 6, 2, 3, 4, 7, 8],3))
-print(consecutive_nums([1, 2, 3, 4, 5], 4))
+def matryoshka(lst):
+    a=[list(i) for i in permutations(lst)]
+    for i in a:
+        if reduce(lambda x,y:x+y if check(x,y) else [],i):
+            return True
+    return False
+
+print(matryoshka([[1, 2, 3, 4, 5, 6, 7, 8], [2, 3, 4, 5, 6, 7], [3, 4, 5, 6], [4, 5]]))
