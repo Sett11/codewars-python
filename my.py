@@ -1,15 +1,21 @@
-import gmpy2
+from itertools import groupby
 
-def e(n):
-    l=gmpy2.isqrt(n)+1
-    n+=1
-    b=gmpy2.xmpz(3)
-    b[4:n:2]=-1
-    for i in b.iter_clear(3,l):
-        b[i*i:n:i+i]=-1
-    return list(b.iter_clear(2,n))
+def consecutive_nums(arr,n):
+    arr.sort()
+    a=[list(j) for _,j in groupby(arr)]
+    while a:
+        t=[]
+        for i in range(n):
+            if i<len(a):
+                if not t or a[i][-1]==t[-1]+1:
+                    t.append(a[i].pop())
+                else:
+                    return False
+        if len(t)!=n:
+            return False
+        a=[k for k in a if k]
+    return True
 
-def channelling_primes(n):
-    return sum(map(lambda x:2**(x-1),e(n)))
-
-print(channelling_primes(21))
+print(consecutive_nums([2,3,4,5],2))
+print(consecutive_nums([1, 2, 3, 6, 2, 3, 4, 7, 8],3))
+print(consecutive_nums([1, 2, 3, 4, 5], 4))
