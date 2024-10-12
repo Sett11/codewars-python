@@ -1,31 +1,9 @@
-from functools import wraps
+def find_treasure(a,x,y):
+    x,y=x-1,y-1
+    while True:
+        i,j=map(lambda z:int(z)-1,list(str(a[x][y])))
+        if (i,j)==(x,y):
+            return int(str(i+1)+str(j+1))
+        x,y=i,j
 
-def count_calls(func):
-    @wraps(func)
-    def counter(*args, **kwargs):
-        counter.call_count += 1
-        return func(*args, **kwargs)
-    counter.call_count = 0
-    return counter
-
-def memoize(fn):
-    cache={}
-    def dec(n):
-        if n in cache:
-            return cache[n]
-        r=fn(n)
-        cache[n]=r
-        return r
-    dec.__name__=fn.__name__
-    dec.__doc__=fn.__doc__
-    return dec
-
-@count_calls
-@memoize
-def fib(n):
-    return [0,1][n] if n<=1 else fib(n-1)+fib(n-2)
-
-print(fib(10))
-print(fib.call_count)
-print(fib(10))
-print(fib.call_count)
+print(find_treasure([ [34,21,32,44,25], [21,41,43,14,31], [31,45,52,42,23], [33,15,51,44,35], [21,52,33,13,44] ],3,4))
