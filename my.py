@@ -1,9 +1,14 @@
-def find_treasure(a,x,y):
-    x,y=x-1,y-1
-    while True:
-        i,j=map(lambda z:int(z)-1,list(str(a[x][y])))
-        if (i,j)==(x,y):
-            return int(str(i+1)+str(j+1))
-        x,y=i,j
+def triangle(s):
+    d={'BB': "B", 'BG': "R", 'BR': "G", 'GB': "R", 'GG': "G", 'GR': "B", 'RB': "G", 'RG': "B", 'RR': "R"}
+    while len(s)>1:
+        n,r,c=len(s),'',1
+        while n%(c*3)==1:
+            c*=3
+        for i in range(0,n-1,c):
+            r+=d[s[i]+s[i+c]]
+        s=r
+    return s
 
-print(find_treasure([ [34,21,32,44,25], [21,41,43,14,31], [31,45,52,42,23], [33,15,51,44,35], [21,52,33,13,44] ],3,4))
+
+print(triangle('RBRGBRBGGRRRBGBBBGG'*100))
+print(triangle('RRBGBBBGGRBRGBRBGGR'*100))
