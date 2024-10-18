@@ -1,11 +1,33 @@
-import numpy as np
+from collections import defaultdict
+from itertools import combinations
 
-what=[1.478940994,1.478896272,1.478197397,1.414213562]
+def check_triangle(x1,y1,x2,y2,x3,y3):
+    return 0.5*abs(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))
 
-def len_curve(n):
-    if what:
-        return what.pop()
-    a=np.linspace(0,1,n+1)
-    return np.trapz(np.sqrt(1+((2*a)**2)),a)
+def count_col_triang(a):
+    d,r,k=defaultdict(list),{},0
+    for i in a:
+        d[i[-1]].append(i[0])
+    for i in d:
+        r[i]=0
+        for x,y,z in combinations(d[i],3):
+            if check_triangle(*x,*y,*z):
+                r[i]+=1
+                k+=1
+    v=r.values()
+    m=max(v)
+    return [len(a),len(v),k,sorted(i[0] for i in r.items() if i[1]==m)+[m] if k else []]
 
-print(len_curve(1))
+print(count_col_triang([[[3, -4], "blue"],  [[-7, -1], "red"], [[7, -6], "yellow"], [[2, 5], "yellow"],
+ [[1, -5], "red"], [[-1, 4], "red"], [[1, 7], "red"],[[-3, 5], "red"], [[-3, -5], "blue"], [[4, 1], "blue"] ]))
+print(count_col_triang([[[3, -4],
+        'blue'], [[-7, -1], 'red'], 
+        [[7, -6], 'yellow'], [[2, 5], 'yellow'], 
+        [[1, -5], 'red'], [[1, 1], 'red'], 
+        [[1, 7], 'red'], [[1, 4], 'red'], 
+        [[-3, -5], 'blue'], [[4, 1], 'blue']]))
+print(count_col_triang([[[1, -2], 'red'], 
+        [[7, -6], 'yellow'], [[2, 5], 'yellow'],
+        [[1, -5], 'red'], [[1, 1], 'red'], 
+        [[1, 7], 'red'], [[1, 4], 'red'], 
+        [[-3, -5], 'blue'], [[4, 1], 'blue']]))
