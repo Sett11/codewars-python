@@ -12,7 +12,7 @@ def zfunc(s):
 		else:
 			k=i-l
 			if z[k]<r-i+1:
-				z[i]=z[k]
+				z[i]=z[k] 
 			else:
 				l=i
 				while r<n and s[r-l]==s[r]:
