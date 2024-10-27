@@ -1,25 +1,17 @@
-def all_alone(a):
-    n,m,u,v=len(a),len(a[0]),set(),True
-    def dfs(i,j):
-        nonlocal v
-        if not v or i<0 or i>=n or j<0 or j>=m or (i,j) in u or a[i][j] not in 'Xo ':
-            return
-        if a[i][j]=='o':
-            v=False
-            return
-        u.add((i,j))
-        dfs(i+1,j),dfs(i-1,j),dfs(i,j+1),dfs(i,j-1)
-    for i in range(n):
-        for j in range(m):
-            if a[i][j]=='X':
-                dfs(i,j)
-    return v
+import networkx as nx
 
-print(all_alone([
-            list("  o                o        #######"),
-            list("###############             #     #"),
-            list("#             #        o    #     #"),
-            list("#  X          ###############     #"),
-            list("#                                 #"),
-            list("###################################")
-        ]))
+def shortest_path(a,s,e):
+    g=nx.DiGraph()
+    [[g.add_edge(i,j,weight=a[i][j]) for j in a[i]] for i in a]
+    p=sorted(nx.all_shortest_paths(g,s,e,weight=lambda x,y,_:g[x][y]['weight']))
+    return [i for i in p if len(i)==len(min(p,key=len))]
+
+print(shortest_path({'a' : {'b': 10, 'c': 20, 'e':20},
+            'b' : {'a': 10, 'd': 20},
+            'c' : {'a': 10, 'f': 20},
+            'd' : {'b': 10, 'e': 20, 'g': 20},
+            'e' : {'a': 10, 'd': 20, 'f': 20},                      
+            'f' : {'c': 10, 'e': 20, 'h': 20},
+            'g' : {'d': 10, 'h': 20},
+            'h' : {'g': 10, 'f': 20},
+},'a','f'))
