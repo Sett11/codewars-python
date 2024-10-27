@@ -1,16 +1,9 @@
-def x_marks_the_spot(a):
-    r=[]
-    for i,j in enumerate(a):
-        for k,p in enumerate(j):
-            if p=='x':
-                r.append([i,k])
-    return r[0] if r and len(r)==1 else []
+def leader_b(user, user_score, your_score):
+    if user_score<your_score:
+        return 'Winning!'
+    if user_score==your_score:
+        return "Only need one!"
+    a,b=divmod(user_score-your_score,3)
+    return "To beat {}'s score, I must complete {} Beta kata and {} 8kyu kata.{}".format(user,a,b,' Dammit!' if a+b>1000 else '')
 
-print(x_marks_the_spot([
-          ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
-          ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
-          ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
-          ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
-          ['o', 'o', 'o', 'o', 'o', 'o', 'x', 'o'],
-          ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o']
-        ]))
+print(leader_b('g964', 36097, 20000))
