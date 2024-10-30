@@ -1,8 +1,39 @@
-def find_missing_number(a):
-    m=max(a,default=1)
-    try:
-        return (set(range(1,m+1))^set(a)).pop()
-    except:
-        return m+1
+def sq(a,x,y,m):
+    for i in range(m-1):
+        w,t=m-i,0
+        for j in a[x:x+w]:
+            t+=sum([int(k==' ') for k in j[y:y+w]])
+            if t==w**2:
+                return w
 
-print(find_missing_number([1,2,4]))
+def _max(a):
+    n,m=len(a),1
+    for i in range(n):
+        for j in range(n):
+            x=sq(a,i,j,min(n-i,n-j))
+            y=sq([p[::-1] for p in a][::-1],i,j,min(n-i,n-j))
+            if x:
+                for k in range(2,x+1):
+                    m=max(k,m)
+            if y:
+                for k in range(2,y+1):
+                    m=max(k,m)
+    return m*m
+
+print(_max([
+[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+[' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' '],
+[' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+['X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]))
+print(_max([
+            ["X", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", "X", " ", "X", " "],
+            [" ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", "X"],
+            [" ", " ", " ", " ", " ", " "]
+        ]))
