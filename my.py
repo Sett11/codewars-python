@@ -1,11 +1,14 @@
-from collections import deque
+def phone_call(min1, min2_10, min11, s):
+    for i in range(1,100):
+        if i==1:
+            s-=min1
+        elif i in range(2,11):
+            s-=min2_10
+        else:
+            s-=min11
+        if s<=0:
+            break
+    return i if not s else i-1
 
-def ticker(s,w,c):
-    n=len(s)
-    a,b=deque([' ']*w),deque(s)
-    while c:
-        a.append(b.popleft()),b.append(a.popleft())
-        c-=1
-    return ''.join(a)
-
-print(ticker('Hello world!', 10, 4))
+print(phone_call(6,2,6,58))
+print(phone_call(10,1,2,22))
