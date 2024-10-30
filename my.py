@@ -1,17 +1,11 @@
-from collections import Counter
+from collections import deque
 
-def count_contiguous_distinct(k,a):
-    n,q=len(a),Counter(a[:k])
-    r=[len(q)]
-    for i in range(n-k):
-        if a[i] in q:
-            q[a[i]]-=1
-            if not q[a[i]]:
-                del q[a[i]]
-        if a[i+k] not in q:
-            q[a[i+k]]=0
-        q[a[i+k]]+=1
-        r.append(len(q))
-    return r
+def ticker(s,w,c):
+    n=len(s)
+    a,b=deque([' ']*w),deque(s)
+    while c:
+        a.append(b.popleft()),b.append(a.popleft())
+        c-=1
+    return ''.join(a)
 
-print(count_contiguous_distinct(2,[1, 2, 1, 3, 4, 2, 3,3]))
+print(ticker('Hello world!', 10, 4))
