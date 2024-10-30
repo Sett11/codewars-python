@@ -1,15 +1,17 @@
-from collections import deque
-from re import sub
+from collections import Counter
 
-def postfix_evaluator(s):
-    q,a=deque(),s.replace('/','//').split()
-    for i in a:
-        if sub(r'-','',i).isdigit():
-            q.append(int(i))
-        else:
-            p,t=q.pop(),q.pop()
-            q.append(eval(f'{t}{i}{p}'))
-    return q[-1]
+def count_contiguous_distinct(k,a):
+    n,q=len(a),Counter(a[:k])
+    r=[len(q)]
+    for i in range(n-k):
+        if a[i] in q:
+            q[a[i]]-=1
+            if not q[a[i]]:
+                del q[a[i]]
+        if a[i+k] not in q:
+            q[a[i+k]]=0
+        q[a[i+k]]+=1
+        r.append(len(q))
+    return r
 
-print(postfix_evaluator("21 21 +"))
-print(postfix_evaluator("4 8 + 6 5 - * 3 2 - 2 2 + * /"))
+print(count_contiguous_distinct(2,[1, 2, 1, 3, 4, 2, 3,3]))
