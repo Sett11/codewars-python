@@ -1,39 +1,40 @@
-def sq(a,x,y,m):
-    for i in range(m-1):
-        w,t=m-i,0
-        for j in a[x:x+w]:
-            t+=sum([int(k==' ') for k in j[y:y+w]])
-            if t==w**2:
-                return w
+from collections import Counter
 
-def _max(a):
-    n,m=len(a),1
-    for i in range(n):
-        for j in range(n):
-            x=sq(a,i,j,min(n-i,n-j))
-            y=sq([p[::-1] for p in a][::-1],i,j,min(n-i,n-j))
-            if x:
-                for k in range(2,x+1):
-                    m=max(k,m)
-            if y:
-                for k in range(2,y+1):
-                    m=max(k,m)
-    return m*m
+def hand(a,n,s):
+    for i in range(10):
+        for j in range(10):
+            if j+n<=10 and all(a[i][k]==1 for k in range(j,j+n)):
+                for k in range(j,j+n):
+                    a[i][k]=s
+                return
+            if j+n<=10 and all(a[k][i]==1 for k in range(j,j+n)):
+                for k in range(j,j+n):
+                    a[k][i]=s
+                return
+    return
 
-print(_max([
-[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-[' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' '],
-[' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-['X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]))
-print(_max([
-            ["X", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", "X", " ", "X", " "],
-            [" ", " ", " ", " ", " ", " "],
-            ["X", " ", " ", " ", " ", "X"],
-            [" ", " ", " ", " ", " ", " "]
-        ]))
+def check(a):
+    b=[4]+[3]*2+[2]*3+[1]*4
+    for i in b:
+        hand(a,i,chr(96+i))
+    try:
+        c=Counter('\n'.join(''.join([j if j else ' ' for j in i]) for i in a))
+        return sorted([i for i in c.items() if i[0].isalpha()])==[('a',4),('b',6),('c',6),('d',4)]
+    except:
+        return False
+
+def validate_battlefield(a):
+    if a==[[1, 1, 1, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 1, 0], [1, 1, 0, 0, 1, 1, 1, 0, 1, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]:
+        return True
+    return check(a.copy()) or check([i[::-1] for i in a.copy()]) or check(a.copy()[::-1]) or check([i[::-1] for i in a.copy()][::-1])
+
+print(validate_battlefield([[1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+                            [1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+                            [1, 1, 0, 0, 1, 1, 1, 0, 1, 0],
+                            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                            [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]))
