@@ -1,9 +1,6 @@
-def divisible_count(x,y,k):
-    return (y//k)-((x-1)//k)
+from math import lcm
 
-print(divisible_count(x=1403301900265323690531138572053880024218531,
-y = 4600319395666899136859916446385340933332334,
-k = 3975))
-print(divisible_count(x = 5862413216007111840996441910940983970854906,
-y = 8353394985382020029144896187055386031808064,
-k = 1435))
+def candies_to_buy(n):
+    return lcm(*range(1,n+1))
+
+print(candies_to_buy(9))
