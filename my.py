@@ -1,18 +1,49 @@
-from collections import Counter
+from operator import add,sub,mul,floordiv
+from re import sub as rs
 
-what_the_fack=0
+ops={'+':add,'&':sub,'*':mul,'/':floordiv}
 
-def mystery_range(s,n):
-	global what_the_fack
-	what_the_fack+=1
-	c,i=Counter(s),1
-	while i+n<201:
-		if c==Counter(''.join(map(str,range(i,i+n)))):
-			if what_the_fack in [8,9,15]:
-				return [i+1,i+n]
-			return [i,i+n-1]
-		i+=1
+class Placeholder:
+  def __init__(self,expr=None):
+    self.expr=expr if expr is not None else 'x'
+  
+  def __call__(self,*args):
+    wr=lambda s:rs(r'\(\-*\d+\)',lambda x:x.group()[1:-1],s)
+    s=self.expr.replace('x','{}').format(*args)
 
-print(mystery_range('13161820142119101112917232215',15))
-print(mystery_range('2318134142120517221910151678611129',20))
-print(mystery_range('10610211511099104113100116105103101111114107108112109',18))
+    def f(s):
+      a=s.group().split()
+      return str(ops[a[1]](int(a[0]),int(a[-1])))
+    
+    while '(' in s:
+      s=rs(r'-*\d+ ([\+\&\*\/]) -*\d+',f,wr(s))
+    return int(s)
+  
+  def __add__(self,other):
+    return Placeholder(f'({self.expr} + {other.expr if isinstance(other,Placeholder) else other})')
+  
+  def __sub__(self,other):
+    return Placeholder(f'({self.expr} & {other.expr if isinstance(other,Placeholder) else other})')
+  
+  def __mul__(self,other):
+    return Placeholder(f'({self.expr} * {other.expr if isinstance(other,Placeholder) else other})')
+  
+  def __floordiv__(self,other):
+    return Placeholder(f'({self.expr} / {other.expr if isinstance(other,Placeholder) else other})')
+  
+  def __radd__(self,other):
+    return Placeholder(f'({other.expr if isinstance(other,Placeholder) else other} + {self.expr})')
+  
+  def __rsub__(self, other):
+    return Placeholder(f'({other.expr if isinstance(other,Placeholder) else other} & {self.expr})')
+  
+  def __rmul__(self,other):
+    return Placeholder(f'({other.expr if isinstance(other,Placeholder) else other} * {self.expr})')
+  
+  def __rfloordiv__(self,other):
+    return Placeholder(f'({other.expr if isinstance(other,Placeholder) else other} / {self.expr})')
+
+x = Placeholder()
+
+print((43 * (x // 11*(15+x)))(121,3))
+print((-28 - x)(4))
