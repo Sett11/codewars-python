@@ -1,16 +1,14 @@
-def longest_sequence(n):
-    l=r=c=s=1
-    while c<=n:
-        if s<n:
-            r+=1
-            c=r**2
-            s+=c
-        elif s>n:
-            s-=l**2
-            l+=1
-        else:
-            return list(range(l,r+1))
-    return []
-
-
-print(longest_sequence(595))
+def reverse_list(h):
+    if not h:
+        return
+    r=[]
+    while h:
+        r.append(h.value)
+        h=h.next
+    h=c=Node(None,None)
+    while len(r)>1:
+        c.value=r.pop()
+        c.next=Node(None,None)
+        c=c.next
+    c.value=r[0] if r else None
+    return h
