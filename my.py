@@ -1,11 +1,13 @@
-def wheat_from_chaff(a):
-    b=[i for i,j in enumerate(a) if j<0]
-    for i in range(len(a)):
-        if a[i]>0 and b:
-            x=b.pop()
-            if x>i:
-                a[i],a[x]=a[x],a[i]
-    return a
+class EoO(list):
+    store=['Odd','Even']
 
-print(wheat_from_chaff([-3,4,-10,2,-6]))
-print(wheat_from_chaff([8,10,-6,-7,9]))
+    def __call__(self,val):
+        return EoO.store[val%2==0]
+
+    def __getitem__(self,val):
+        return EoO.store[val%2==0]
+
+even_or_odd=EoO()
+
+print(even_or_odd(2))
+print(even_or_odd[3])
