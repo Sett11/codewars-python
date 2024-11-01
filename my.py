@@ -1,13 +1,9 @@
-class EoO(list):
-    store=['Odd','Even']
+from math import factorial as f
+from functools import reduce
+from operator import mul
+from collections import Counter
 
-    def __call__(self,val):
-        return EoO.store[val%2==0]
+def uniq_count(s):
+    return f(len(s))//reduce(mul,map(f,Counter(s.lower()).values())) if s else 1
 
-    def __getitem__(self,val):
-        return EoO.store[val%2==0]
-
-even_or_odd=EoO()
-
-print(even_or_odd(2))
-print(even_or_odd[3])
+print(uniq_count('ABBb'))
