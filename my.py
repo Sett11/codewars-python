@@ -1,14 +1,11 @@
-def reverse_list(h):
-    if not h:
-        return
-    r=[]
-    while h:
-        r.append(h.value)
-        h=h.next
-    h=c=Node(None,None)
-    while len(r)>1:
-        c.value=r.pop()
-        c.next=Node(None,None)
-        c=c.next
-    c.value=r[0] if r else None
-    return h
+from itertools import groupby
+
+def rank(a):
+    r,d,k=[list(j) for _,j in groupby(sorted(a))],{},0
+    for i in r:
+        n=len(i)
+        d[i[0]]=sum(range(k,k+n))/n
+        k+=n
+    return [d[i] for i in a]
+
+print(rank([1, 2, 0, 3, 7, 1, 11, 1, 2]))
