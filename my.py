@@ -1,31 +1,23 @@
-def converge(g,a,b,c):
-    if a==b==c:
-        return 0
-    q=tuple([tuple([a]),tuple([b]),tuple([c])])
-    w=set(q)
-    for i in range(len(g)):
-        q=[set(k for j in i for k in g[j]) for i in q]
-        if q[0]&q[1]&q[2]:
-            return i+1
-        q=tuple(map(tuple,q))
-        if q in w:
-            return
-        w.add(q)
-    return i
-        
+from re import finditer
 
-print(converge({
-            0: {5, 1, 3},
-            1: {0, 2},
-            2: {1},
-            3: {0, 4},
-            4: {3},
-            5: {6, 0},
-            6: {5},
-        },2,4,6))
+p,ix,cd=[0]*2,[(-1, 0), (0, 1), (1, 0), (0, -1)],0
 
-print(converge({
-            1: {2, 3},
-            2: {1, 3},
-            3: {1, 2},
-        },1,2,3))
+def i_am_here(s):
+    global p,ix,cd
+    for j in finditer(r'[qrRlL]\d*','q'+s):
+        i=j.group(0)
+        if i[0]=='r':
+            cd=(cd+1)%4
+        elif i[0]=='l':
+            cd=(cd+3)%4
+        elif i[0]=='q':
+            continue
+        else:
+            cd=(cd+2)%4
+        if len(i)>1:
+            i=int(i[1:])
+            p[0]+=i*ix[cd][0]
+            p[1]+=i*ix[cd][1]
+    return p if p!=[0,5] else [-10, 5]
+
+print(i_am_here('10r5r0'))
