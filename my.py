@@ -1,15 +1,17 @@
-def is_keith_number(n):
-    if n<10:
-        return False
-    a,i=list(map(int,str(n))),1
-    while True:
-        s=sum(a)
-        if s==n:
-            return i
-        if i>100:
-            return False
-        a=a[1:]
-        a.append(s)
-        i+=1
+def nonstop_hotspot(s):
+    a,b=map(str.strip,s.split('P'))
+    c=0
+    for i in a[::-1]:
+        if i=='*':
+            c+=1
+        if i=='#':
+            break
+    for i in b:
+        if i=='*':
+            c+=1
+        if i=='#':
+            break
+    return c
 
-print(is_keith_number(196))
+
+print(nonstop_hotspot('*  * #  * P # * #'))
