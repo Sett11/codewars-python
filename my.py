@@ -1,18 +1,18 @@
-class UnexpectedTypeException(TypeError):
-    ...
+def unpack(l):
+    r=[]
+    def f(x):
+        if isinstance(x,(str,int)) or not x:
+            r.append(x)
+            return
+        if isinstance(x,dict):
+            for i in x:
+                f(i)
+                f(x[i])
+        elif isinstance(x,(list,tuple,set)):
+            for i in x:
+                f(i)
+    for i in l:
+        f(i)
+    return r
 
-def expected_type(types):
-    def inner_func(f):
-        def func(*args,**kwargs):
-            v=f(*args,**kwargs)
-            if [i for i in types if isinstance(v,i)]:
-                return v
-            raise UnexpectedTypeException(f"Was expecting instance of: {', '.join(map(str,types))}")
-        return func
-    return inner_func
-
-@expected_type((str,))
-def return_something(input):
-    return input
-
-print(return_something(1))
+print(unpack(['x', [1, 2, 4, [(1, 2), 3, 'y', 13], [1]], 1, 2, 12, {1, 2, 3}, {(1, 2): 'b', 'c': (3, 4)}]))
