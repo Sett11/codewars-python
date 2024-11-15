@@ -1,18 +1,18 @@
-from time import sleep
-from time import time
+class UnexpectedTypeException(TypeError):
+    ...
 
-
-def timer(n):
+def expected_type(types):
     def inner_func(f):
         def func(*args,**kwargs):
-            s=time()
-            f(*args,**kwargs)
-            return time()-s<=n
+            v=f(*args,**kwargs)
+            if [i for i in types if isinstance(v,i)]:
+                return v
+            raise UnexpectedTypeException(f"Was expecting instance of: {', '.join(map(str,types))}")
         return func
     return inner_func
 
-@timer(1)
-def foo():
-    sleep(0.1)
+@expected_type((str,))
+def return_something(input):
+    return input
 
-print(foo())
+print(return_something(1))
