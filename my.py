@@ -1,11 +1,13 @@
-from collections import Counter
+class DefaultList(list):
+    def __init__(self,a,d):
+        super().__init__(a)
+        self.d=d
 
-def histogram(a,b):
-    if not a:
-        return []
-    a,r=sorted(Counter(a).items()),[]
-    for i in range(0,a[-1][0]+1,b):
-        r.append(sum([j[1] for j in a if i<=j[0]<i+b]))
-    return r
+    def __getitem__(self,n):
+        try:
+            return super().__getitem__(n)
+        except:
+            return self.d
 
-print(histogram([1, 1, 0, 1, 3, 2, 6], 1))
+lst = DefaultList(['hello', 'abcd', '123', 123, True, False], 'default_value')
+print(lst[10])
