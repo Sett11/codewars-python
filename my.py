@@ -1,7 +1,8 @@
-def get_w(h):
-    if h<2:
-        return []
-    a=[(' '*(h-i-1)+'*'+' '*(i*2-1)+'*'+' '*(h-i-1)).replace('**','*') for i in range(h-1,-1,-1)]
-    return [i+j[1:] for i,j in zip(a,a)]
+def visits_on_circular_road(n,a):
+    t,s=1,0
+    for i in a:
+        s+=min(n-i+t,n-t+i,abs(t-i))
+        t=i
+    return s
 
-print(*get_w(22),sep='\n')
+print(visits_on_circular_road(6,[3, 6, 1, 4, 1]))
