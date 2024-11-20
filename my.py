@@ -1,8 +1,7 @@
-def visits_on_circular_road(n,a):
-    t,s=1,0
-    for i in a:
-        s+=min(n-i+t,n-t+i,abs(t-i))
-        t=i
-    return s
+from math import comb
 
-print(visits_on_circular_road(6,[3, 6, 1, 4, 1]))
+def est_subsets(a):
+    n=len(set(a))
+    return sum(comb(n,i) for i in range(1,n+1))
+
+print(est_subsets(['a', 'z', 'z', 'z', 'b', 'j', 'f', 'k', 'b', 'd', 'j', 'j', 'n', 'm', 'm']))
