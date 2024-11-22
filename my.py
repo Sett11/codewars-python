@@ -1,3 +1,4 @@
-circle_slash=lambda n:(n-(1<<31-bin(n)[2:].rjust(32,'0').find('1')))*2+1
+def sequence(n):
+    return [0, 1, 1, 2, 0, 2, 2, 1][(n-1)%8]
 
-print(circle_slash(219))
+print(sequence(5))
