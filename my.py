@@ -1,51 +1,20 @@
-class Interpreter:
-    def __init__(self):
-        self.stack=[[0],[0],[0]]
-        self.pointer=0
+from random import shuffle
 
-    def dec(self,n):
-        n-=1
-        if n<0:
-            return 2
-        return n
-    
-    def inc(self,n):
-        return (n+1)%3
+def find_replaced(a):
+    a.sort()
+    r,i=[0]*2,1
+    while i<len(a):
+        if a[i]-a[i-1]!=1:
+            if a[i]-a[i-1]:
+                r[0]=a[i]-1
+            else:
+                r[1]=a[i]
+            if all(j for j in r):
+                return tuple(r)
+        i+=1
 
-    def read(self,s):
-        i,r,g=0,'',None
-        s+=' '
-        while i<len(s):
-            if s[i]=='+':
-                self.stack[self.pointer][-1]+=1
-            elif s[i]=='-':
-                self.stack[self.pointer][-1]-=1
-            elif s[i]=='<':
-                self.stack[self.dec(self.pointer)].append(self.stack[self.pointer].pop())
-            elif s[i]=='>':
-                self.stack[self.inc(self.pointer)].append(self.stack[self.pointer].pop())
-            elif s[i]=='*':
-                self.stack[self.pointer].append(0)
-            elif s[i]=='^':
-                self.stack[self.pointer].pop()
-            elif s[i]=='#':
-                self.pointer=self.inc(self.pointer)
-            elif s[i]==',':
-                t,j='',i+1
-                while s[j].isdigit():
-                    t+=s[j]
-                    j+=1
-                i=j-1
-                self.stack[self.pointer].append(int(t))
-            elif s[i]=='.':
-                r+=str(self.stack[self.pointer][-1])
-            elif s[i]=='[':
-                g=i
-            elif s[i]==']':
-                if self.stack[self.pointer][-1]>0:
-                    i=g
-            i+=1
-        return r
+arr=list(range(1,1000))
+arr[40]=arr[42]
+shuffle(arr)
 
-i=Interpreter()
-print(i.read('*.,53*.,86.,58'))
+print(find_replaced(arr))
