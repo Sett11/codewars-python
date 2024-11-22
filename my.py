@@ -1,4 +1,9 @@
-def sequence(n):
-    return [0, 1, 1, 2, 0, 2, 2, 1][(n-1)%8]
-
-print(sequence(5))
+def find_ball(scales):
+    for i in range(1,8,2):
+        leftPan = [i-1]
+        rightPan = [i]
+        w = scales.get_weight(leftPan, rightPan)
+        if w < 0:
+            return leftPan[0]
+        if w > 0:
+            return rightPan[0]
