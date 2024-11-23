@@ -1,15 +1,18 @@
-def assistance(w):
-    if w<=25:
-        return 'Only lock' if w==25 else "Nothing to hang" if w==20 else 'Error'
-    plates,r={25: 'red', 20: 'blue', 15: 'yellow', 10: 'green', 5: 'black', 2.5: 'orange', 1.25: 'white'},[]
-    w-=25
-    for i in plates:
-        if w>i and i*2<=w:
-            k=0
-            while w>i and i*2<=w:
-                k+=1
-                w-=i*2
-            r.append(f'{k} {plates[i]}{"s" if k>1 else ""}')
-    return ', '.join(r)+', lock' if w==0 else 'Error'
+from functools import cache
 
-print(assistance(345))
+def target_game(a):
+    m=float('-inf')
+    @cache
+    def f(a,t):
+        nonlocal m
+        if not a:
+            m=max(m,t)
+            return
+        k=a[0]
+        if t+k>t:
+            f(a[2:],t+k)
+        f(a[1:],t)
+    f(tuple(a),0)
+    return m
+
+print(target_game([11, 82, 47, 48, 80, 35, 73, 99, 86, 32, 32]))
