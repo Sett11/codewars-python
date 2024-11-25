@@ -1,4 +1,9 @@
-def letter_pattern(a):
-    return ''.join('*' if len(set(i))>1 else i[0] for i in zip(*a))
+def reduce_by_rules(lst,r):
+    a,i=lst[::-1],0
+    while len(a)>1:
+        a.append(r[i%len(r)](a.pop(),a.pop()))
+        i+=1
+    return a[0]
 
-print(letter_pattern(['war', 'rad', 'dad']))
+rules = [lambda a, b: a + b, lambda a, b: a - b]
+print(reduce_by_rules([2.0, 2.0, 3.0, 4.0],rules))
