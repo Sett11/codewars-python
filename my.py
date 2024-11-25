@@ -1,102 +1,26 @@
-def snake_collision(board,moves):
-    r,n,m,a=moves.split(),len(board),len(board[0]),[list(i) for i in board]
-    if not r or all(i.isalpha() for i in r):
-        return (0,2),0
-    dir,cd,count,snake,i,j='R',int(r.pop(0) if r[0].isdigit() else 0),0,[(0,0),(0,1),(0,2)],0,2
-    if len(r)&1:
-        r.append('0')
-    r=[(r[i],r[i+1]) for i in range(0,len(r),2)]
-    l=len(r)
-    while l>=0:
-        while cd:
-            if dir=='R':
-                if j==m-1 or a[i][j+1] not in '-$':
-                    return (i,j),count+1
-                else:
-                    if a[i][j+1]=='-':
-                        for x in range(len(snake)-1):
-                            t=snake[x]
-                            a[t[0]][t[1]]='-'
-                            snake[x]=snake[x+1]
-                        j+=1
-                        snake[-1]=i,j
-                        for x,y in snake:
-                            a[x][y]='o'
-                    else:
-                        j+=1
-                        snake.append((i,j))
-                        a[i][j]='o'
-            elif dir=='L':
-                if j==0 or a[i][j-1] not in '-$':
-                    return (i,j),count+1
-                else:
-                    if a[i][j-1]=='-':
-                        for x in range(len(snake)-1):
-                            t=snake[x]
-                            a[t[0]][t[1]]='-'
-                            snake[x]=snake[x+1]
-                        j-=1
-                        snake[-1]=i,j
-                        for x,y in snake:
-                            a[x][y]='o'
-                    else:
-                        j-=1
-                        snake.append((i,j))
-                        a[i][j]='o'
-            elif dir=='D':
-                if i==n-1 or a[i+1][j] not in '-$':
-                    return (i,j),count+1
-                else:
-                    if a[i+1][j]=='-':
-                        for x in range(len(snake)-1):
-                            t=snake[x]
-                            a[t[0]][t[1]]='-'
-                            snake[x]=snake[x+1]
-                        i+=1
-                        snake[-1]=i,j
-                        for x,y in snake:
-                            a[x][y]='o'
-                    else:
-                        i+=1
-                        snake.append((i,j))
-                        a[i][j]='o'
-            elif dir=='U':
-                if i==0 or a[i-1][j] not in '-$':
-                    return (i,j),count+1
-                else:
-                    if a[i-1][j]=='-':
-                        for x in range(len(snake)-1):
-                            t=snake[x]
-                            a[t[0]][t[1]]='-'
-                            snake[x]=snake[x+1]
-                        i-=1
-                        snake[-1]=i,j
-                        for x,y in snake:
-                            a[x][y]='o'
-                    else:
-                        i-=1
-                        snake.append((i,j))
-                        a[i][j]='o'
-            cd-=1
-            count+=1
-        if not r:
-            break
-        t=r.pop(0)
-        dir,cd=t[0],int(t[1])
-    return (i,j),count
+def dots_and_boxes(a):
+	d,c,r,u,q=[0]*2,0,[i for i in range(0,max(sum([list(i) for i in a],[]))+1)],set(),set()
+	l=len(r)
+	k=int(l**.5)
+	r=[r[i:i+k] for i in range(0,l,k)]
+	def f():
+		w=set()
+		for i in range(k-1):
+			for j in range(k-1):
+				t=((r[i][j],r[i][j+1]),(r[i][j+1],r[i+1][j+1]),(r[i+1][j],r[i+1][j+1]),(r[i][j],r[i+1][j]))
+				if t not in q and all(x in u for x in t):
+					w.add(t)
+		return w
+	for i in a:
+		u.add(tuple(sorted(i)))
+		x=f()
+		if x:
+			q.update(x)
+			d[c]+=len(x)
+		else:
+			c=1 if c==0 else 0
+	return tuple(d)
+		
 
-print(snake_collision([
-              'ooo------$--$$$------',
-              '-----$$$--$--$---$--$',
-              '-$-----$--$-$---$----',
-              '------$$$----$---$---',
-              '--$$--$---------$$---',
-              '-----$$---$$$--$$--$-',
-              '----$-----$-$----$--$',
-              '$-----$-$$---$$---$--',
-              '$--------------------',
-              '-------$---$------$-$',
-              '----$-$$----------$$-',
-              '--$-$$$--$-$--$-----$',
-              '$------$--$----------'
-          ],'8 D 5 L 7 D 6 L 4 D 8 R 3 U 7 R 8 U 1 L 3 U 5 R 2 D 5 R 5 U 1 L 2 U 7 L 7 D 4 R 6 U 6 L 2 D 7 R 3 D 6 L 2 U 3 R 3 U 5 L 5 U 3 L 7 D 7 R'),sep='\n')
+print(dots_and_boxes(((0,1),(7,8),(1,2),(6,7),(0,3),(5,8),(3,4),(1,4),(4,5),(2,5),(4,7),(3,6))))
+print(dots_and_boxes(((0,1),(1,2),(2,5),(5,4),(4,7),(7,8),(8,5),(1,4),(6,7),(3,6),(3,0),(3,4))))
