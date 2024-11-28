@@ -1,16 +1,57 @@
-VALID_WORDS=set(['legless', 'rather', 'fact', 'meal', 'blue', 'money', 'one', 'once', 'crashing', 'thoughts', 'jobs', 'than', 'initially', 'borrowed', 'way', 'chocolate', 'speaks', 'first', 'song', 'revels', 'think', 'teeth', 'list', 'only', 'couldnt', 'us', 'years', 'no', 'research', 'perhaps', 'weeks', 'realise', 'adventure', 'hes', 'real', 'recommend', 'doll', 'best', 'bread', 'wait', 'thinking', 'step', 'life', 'writing', 'eating', 'june', 'shake', 'turned', 'has', 'buy', 'you', 'eaters', 'under', 'currently', 'baggage', 'comes', 'handkerchief', 'walk', 'pig', 'does', 'drive', 'are', 'luck', 'math', 'i', 'donkey', 'leave', 'clean', 'she', 'passed', 'noisy', 'checked', 'easter', 'dentist', 'authority', 'true', 'read', 'this', 'getting', 'so', 'little', 'sometimes', 'like', 'asking', 'school', 'green', 'letter', 'at', 'twinkling', 'away', 'harder', 'yesterday', 'wrote', 'after', 'recently', 'japanese', 'taste', 'joe', 'shore', 'windows', 'country', 'please', 'ended', 'voice', 'playing', 'impassable', 'be', 'any', 'goodbye', 'hear', 'nickname', 'a', 'least', 'seats', 'lazy', 'sandwiches', 'floor', 'red', 'day', 'mysterious', 'loss', 'oh', 'free', 'know', 'anyway', 'proud', 'laptop', 'thing', 'music', 'back', 'or', 'said', 'exciting', 'sky', 'ass', 'gotten', 'piece', 'advised', 'had', 'stay', 'they', 'together', 'sundays', 'everything', 'would', 'work', 'table', 'dont', 'white', 'not', 'alone', 'metaphysics', 'else', 'want', 'was', 'clock', 'italy', 'vividly', 'wont', 'subsequently', 'mind', 'kite', 'consumption', 'sixtyfour', 'up', 'anyone', 'bird', 'asked', 'year', 'otherwise', 'syrup', 'says', 'home', 'early', 'tomorrow', 'middle', 'roof', 'above', 'returned', 'house', 'however', 'bad', 'rock', '1111', 'cream', 'freezer', 'werent', 'off', 'check', 'lizard', 'he', 'apple', 'plays', 'malls', 'make', 'different', 'colors', 'shooter', 'short', 'class', '1234', 'with', 'midsent', 'everyone', 'just', 'paints', 'remember', 'quick', '1', 'random', 'again', 'can', 'shop', 'them', 'asia', 'many', 'cheese', 'combining', 'great', 'better', 'likes', 'is', 'there', 'jumps', 'yeah', 'counting', 'start', 'completely', 'id', 'dark', 'young', 'laugh', 'all', 'meet', 'often', 'wednesday', 'still', 'visited', 'me', 'ruin', 'youre', 'until', 'same', 'by', 'on', 'other', 'movie', 'purple', 'throughout', 'sentence', 'mary', 'alive', 'how', 'in', 'love', 'longer', 'time', '4', 'nancy', 'ends', 'unique', 'really', 'we', 'glass', 'appreciated', 'room', 'busy', 'stole', 'babies', 'memory', 'promotion', 'dog', 'lease', 'tuna', 'slammed', 'him', 'africa', 'sounds', 'three', 'abstraction', 'hurry', 'been', 'things', 'attendance', 'diary', 'information', 'made', 'flew', 'for', 'later', 'used', 'environment', 'ice', 'buttered', 'enough', 'party', 'cows', 'someone', 'should', 'hour', 'cookies', 'pets', 'hands', 'two', 'out', 'didnt', 'told', 'story', 'but', 'officiates', 'maple', 'thought', 'always', 'will', 'sunburnt', 'as', 'spotted', 'loud', 'frame', 'yourself', 'fairy', 'share', 'clear', 'glittering', 'something', 'discovered', 'fish', 'from', 'too', 'vacant', 'conditions', 'why', 'long', 'having', 'your', 'today', 'suit', 'need', 'sauce', 'bold', 'eat', 'fine', 'learning', 'to', 'donation', 'store', 'approaches', 'lovely', 'favorite', 'river', 'persons', 'pie', 'velocity', 'come', 'next', 'what', 'coherent', 'ever', 'book', 'pastels', 'striped', 'place', 'have', 'piano', 'saying', 'town', 'christmas', 'her', 'shut', 'the', 'cats', 'stop', 'isnt', 'gem', 'do', 'each', 'help', 'onesie', 'spend', 'tooth', 'tom', 'lets', 'outside', 'gods', 'hump', 'open', 'english', 'and', 'last', 'his', 'try', 'tries', 'calories', 'poker', 'did', 'may', 'blog', 'quite', 'broken', 'rain', 'person', 'saw', 'our', 'compensates', 'test', 'hasnt', 'if', 'my', 'about', 'rent', 'coming', 'milk', 'more', 'toasted', 'friday', 'find', 'go', 'mum', 'were', 'going', 'ago', 'when', 'tomato', 'yet', 'places', 'small', 'body', 'cheat', 'am', 'human', 'front', 'an', 'got', 'camel', 'join', 'bunny', 'lot', 'decorated', 'susan', 'amount', 'door', 'paper', 'sure', 'hand', 'good', 'detailed', 'high', 'it', 'get', 'ran', 'records', 'of', 'lake', 'see', 'now', 'happy', 'stars', 'very', 'fence', 'within', 'sight', 'works', 'popcorn', 'roads', 'sugar', 'that', 'ill', 'sick', 'went', 'cool', 'wasnt', 'nor', 'caramel', 'never', 'let', 'worm', 'neatly', 'night', 'arrived', 'older', 'fox', 'pretty', 'car', 'folded', 'reason', 'its', 'people', 'plan', 'stranger', 'here', 'waves', 'dessert', 'brown', 'where', 'right', 'combined', 'take', 'wow', 'over', 'clocks', 'old', 'either', 'sentences', 'greatly'])
+# from collections import defaultdict
 
-def max_match(s):
-    r=[]
-    while len(s)>1:
-        for i in range(len(s),0,-1):
-            if s[:i] in VALID_WORDS:
-                r.append(s[:i])
-                s=s[i:]
-                break
-        else:
-            r.append(s[0])
-            s=s[1:]
-    return r+([s] if s else [])
+# def loneliest(s):
+#     a,d,m=s.strip(),defaultdict(list),0
+#     n=len(a)
+#     def f(k):
+#         i,j,c=k-1,k+1,0
+#         while i>=0:
+#             if a[i]==' ':
+#                 c+=1
+#             else:
+#                 break
+#             i-=1
+#         while j<n:
+#             if a[j]==' ':
+#                 c+=1
+#             else:
+#                 break
+#             j+=1
+#         return c
+#     for i in range(n):
+#         if a[i].isalpha():
+#             k=f(i)
+#             m=max(k,m)
+#             d[k].append(a[i])
+#     return d[m]
 
-print(max_match('ewingsa'))
+
+# print(loneliest('abc d   ef  g   h i j      '))
+# print(loneliest('abc'))
+
+
+# Memesorting
+
+# def memesorting(s):
+#     d={'Roma':['b','u','g'],'Maxim':['b','o','o','m'],'Danik':['e','d','i','t','s']}
+#     for i in s.lower():
+#         for j in d:
+#             if i==d[j][0]:
+#                 d[j].pop(0)
+#                 if not d[j]:
+#                     return j
+#     return 'Vlad'
+
+# print(memesorting('This is programmer meme ecause it has bug'))
+
+# Vowel Recognition
+
+# def vowel_recognition(s):
+#     a,c,b,n=s.lower(),0,'aioue',len(s)
+#     for i in range(len(a)):
+#         if a[i] in b:
+#             c+=(n-i)+(i*(n-i))
+#     return c
+
+
+# print(vowel_recognition('baceb'))
