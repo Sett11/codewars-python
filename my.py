@@ -1,11 +1,8 @@
-def memesorting(s):
-    d={'Roma':['b','u','g'],'Maxim':['b','o','o','m'],'Danik':['e','d','i','t','s']}
-    for i in s.lower():
-        for j in d:
-            if i==d[j][0]:
-                d[j].pop(0)
-                if not d[j]:
-                    return j
-    return 'Vlad'
+def vowel_recognition(s):
+    a,c,b,n=s.lower(),0,'aioue',len(s)
+    for i in range(len(a)):
+        if a[i] in b:
+            c+=(n-i)+(i*(n-i))
+    return c
 
-print(memesorting('This is programmer meme ecause it has bug'))
+print(vowel_recognition('baceb'))
