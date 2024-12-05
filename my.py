@@ -1,18 +1,3 @@
-# from collections import defaultdict
-
-# def my_hash_map(a):
-#     r=defaultdict(list)
-#     f=lambda x:r[sum(ord(i) for i in x)].append(x)
-#     [f(i) for i in a]
-#     return dict(r)
-
-# print(my_hash_map(["alphabet"]))
-
-
-
-
-# Strong password?
-
 # def check_password(s):
 #     v=len(s) in range(8,21)
 #     def f(x,y):
