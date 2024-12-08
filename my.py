@@ -1,18 +1,3 @@
-# def check_password(s):
-#     v=len(s) in range(8,21)
-#     def f(x,y):
-#         nonlocal s
-#         z=bool([i for i in x if ord(i) in y])
-#         s=''.join(i for i in s if ord(i) not in y)
-#         return z
-#     return ['not valid','valid'][v and f(s,range(65,91)) and f(s,range(97,123)) and f(s,range(48,57)) and f(s,[ord(i) for i in '!@#$%^&*?']) and not s]
-
-# print(check_password('P1@pP1@p'))
-
-
-
-# Keystroking
-
 # def num_key_strokes(s):
 #     return sum(1 if i.islower() or (not i.isalpha() and i not in '~!@#$%^&*?()_+{}"|:<>') else 2 for i in s)
 
