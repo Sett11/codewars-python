@@ -1,17 +1,7 @@
-from collections import defaultdict
+from string import ascii_lowercase
 
-def min_repeating_character_difference(s):
-    if len(s)==len(set(s)):
-        return
-    a,m=defaultdict(list),float('inf')
-    for i in range(len(s)):
-        x=s.find(s[i],i+1)
-        if x>-1:
-            k=x-i
-            if k==1:
-                return 1,s[i]
-            m=min(m,k)
-            a[k].append(s[i])
-    return m,a[m][0]
+def decipher(a):
+    s=' '+ascii_lowercase
+    return ''.join(s[sum(s.index(j) for j in i)//len(i)] for i in zip(*a))
 
-print(min_repeating_character_difference('abded'))
+print(decipher(["u lk zxuq hfk as fouh","y l  zpuv  xe at sicd","welvayfuqbfpeaauaqcrc"]))
