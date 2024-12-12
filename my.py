@@ -1,7 +1,8 @@
-from string import ascii_lowercase
+from re import sub
+from math import prod
 
-def decipher(a):
-    s=' '+ascii_lowercase
-    return ''.join(s[sum(s.index(j) for j in i)//len(i)] for i in zip(*a))
+def digit_multiplication(s):
+    return eval(sub(r'\d+',lambda x:str(prod(map(int,x.group()))),s))
 
-print(decipher(["u lk zxuq hfk as fouh","y l  zpuv  xe at sicd","welvayfuqbfpeaauaqcrc"]))
+print(digit_multiplication("266-66"))
+print(digit_multiplication("555"))
