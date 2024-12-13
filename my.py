@@ -1,8 +1,7 @@
-from re import sub
-from math import prod
+def adjacent_double_double_letters(s):
+    for i in range(len(s)-3):
+        if s[i]==s[i+1] and s[i+2]==s[i+3]:
+            return True
+    return False
 
-def digit_multiplication(s):
-    return eval(sub(r'\d+',lambda x:str(prod(map(int,x.group()))),s))
-
-print(digit_multiplication("266-66"))
-print(digit_multiplication("555"))
+print(adjacent_double_double_letters('balloon'))
