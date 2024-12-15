@@ -1,7 +1,2 @@
-def adjacent_double_double_letters(s):
-    for i in range(len(s)-3):
-        if s[i]==s[i+1] and s[i+2]==s[i+3]:
-            return True
-    return False
-
-print(adjacent_double_double_letters('balloon'))
+def window(x,y,lst):
+    return [k for k in [lst[i:i+x] for i in range(0,len(lst),y)] if len(k)==x]+([] if x else [[]])
