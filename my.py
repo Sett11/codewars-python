@@ -1,2 +1,8 @@
-def window(x,y,lst):
-    return [k for k in [lst[i:i+x] for i in range(0,len(lst),y)] if len(k)==x]+([] if x else [[]])
+def fantastic_person(a):
+    return next(iter(i for i,j in enumerate(a) if all(k for k in j)),-1)
+
+print(fantastic_person([
+                            [True, True, True], 
+                            [False, True, True], 
+                            [False, False, True]
+                        ]))
