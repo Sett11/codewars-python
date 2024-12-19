@@ -1,8 +1,4 @@
-from string import ascii_uppercase as a
+from math import pi
 
-def get_row(n):
-    n=n if n<=26 else n%26 or 26
-    s=iter(a[n:])
-    return ''.join(next(s) if i=='&' else i for i in (a[n-1]*n).ljust(26,'&'))
-
-print(get_row(730548))
+def square_area(n):
+    return round(pow(n*4/(pi*2),2),2)
