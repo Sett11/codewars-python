@@ -1,13 +1,6 @@
-def crossedwords(a,b):
-    r,k=[],next(i for i,j in enumerate(b) if j in a)
-    q=a.index(b[k])
-    for i in range(len(b)):
-        if i!=k:
-            t=''.join(' ' if j!=q else b[i] for j in range(len(a)))
-            r.append(t)
-        else:
-            r.append(a)
-    return '\n'.join(r)+'\n'
+from math import log
 
-print(crossedwords('ABXC', 'WXYZ'))
-print(crossedwords('GRAPHICAL', 'SYNTHESIS'))
+def how_many_measurements(n):
+    return 0 if n==1 else 1 if n<5 else int(log(n*3)/log(3))
+
+print(how_many_measurements(8))
