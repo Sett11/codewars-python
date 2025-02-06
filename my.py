@@ -1,6 +1,8 @@
-from math import log
+def sort_by_bit(a): 
+    r=['0']*32
+    for i in a:
+        r[i]='1'
+    return int(''.join(r[::-1]),2)
 
-def how_many_measurements(n):
-    return 0 if n==1 else 1 if n<5 else int(log(n*3)/log(3))
-
-print(how_many_measurements(8))
+print(sort_by_bit([30, 0]))
+print(sort_by_bit([1, 2, 0, 4]))
