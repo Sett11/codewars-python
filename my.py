@@ -1,8 +1,8 @@
-def sort_by_bit(a): 
-    r=['0']*32
-    for i in a:
-        r[i]='1'
-    return int(''.join(r[::-1]),2)
+def four_piles(n,y):
+    for  i in range(1,n):
+        x=[(i+y),(i-y),(i*y),(i/y)]
+        if sum(x)==n and all(j for j in x):
+            return x
+    return []
 
-print(sort_by_bit([30, 0]))
-print(sort_by_bit([1, 2, 0, 4]))
+print(four_piles(48,3))
