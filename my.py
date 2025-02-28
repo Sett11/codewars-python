@@ -1,8 +1,4 @@
-def tram(n,a,b):
-    m=k=0
-    for i in range(n):
-        k+=b[i]-a[i]
-        m=max(m,k)
-    return m
+def find_jane(n):
+    return n//2 if n&1 else n//2-1
 
-print(tram(2, [0, 2, 4, 4], [3, 5, 2, 0]))
+print(find_jane(5))
