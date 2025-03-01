@@ -1,4 +1,7 @@
-def find_jane(n):
-    return n//2 if n&1 else n//2-1
+def normalize(a,v=None):
+    if not a:
+        return []
+    m=len(max(a,key=len))
+    return [i+[v]*(m-len(i)) for i in a]
 
-print(find_jane(5))
+print(normalize([[1, 4, 2, 6, 7, 2], [3, 1, 4], [8, 9, 4, 4, 0, 9, 8]]))
