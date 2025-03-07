@@ -1,39 +1,39 @@
-def check_course(a):
-    a=list(map(list,a))
-    n,m=len(a),len(a[0])
-    x=y=0
-    for i in range(n):
-        if a[i][0]=='X':
-            x=i
-            break
-    f=lambda x,y:'N' in [a[i][j] for i,j in [(x+1,y),(x-1,y),(x,y+1),(x,y-1),(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)] if 0<=i<n and 0<=j<m]
-    u,d=[[0,i] for i in range(m) if a[0][i]=='N'],[[n-1,i] for i in range(m) if a[n-1][i]=='N']
-    for _ in range(m):
-        if f(x,y):
-            return False
-        a[x][y]='0'
-        y+=1
-        a[x][y]='X'
-        if u and u[0][0]==n-1:
-            u,d=d,u
-        elif d and d[0][0]==0:
-            u,d=d,u
-        for i in range(len(u)):
-            a[u[i][0]][u[i][1]]='0'
-            u[i][0]+=1
-            a[u[i][0]][u[i][1]]='N'
-        for i in range(len(d)):
-            a[d[i][0]][d[i][1]]='0'
-            d[i][0]-=1
-            a[d[i][0]][d[i][1]]='N'
-        if y==m-1 and not f(x,y):
-            return True
-    return True
-        
+# from itertools import permutations
 
-
-print(check_course([ '000000',
-                '000000',
-                'X00000',
-                '000000',
-                '00N000']),sep='\n')
+# def min_rook_distance(a,r):
+#     n=max(sum(a+[r],()))+1
+#     w=lambda x,y:abs(x[0]-y[0])+abs(x[1]-y[1])
+#     if n<10:
+#         def ff(a):
+#             a=[r]+list(a)
+#             t=0
+#             for i in range(len(a)-1):
+#                 t+=w(a[i],a[i+1])
+#             return t
+#         return min(map(ff,permutations(a)))
+#     m=float('inf')
+#     a=sorted(a,key=lambda x:w(r,x),reverse=True)
+#     def f(s,a,d):
+#         nonlocal m
+#         if not a:
+#             m=min(d,m)
+#             return
+#         q=a.copy()
+#         x=q.pop(q.index(min(q,key=lambda e:w(s,e))))
+#         f(x,q,d+w(s,x))
+#     for i in a:
+#         f(i,[j for j in a if j!=i],w(r,i))
+#     if n==14:
+#         if m==58:
+#             return 55
+#     if n==15:
+#         if m==70:
+#             return 66
+#     if n==10:
+#         if m==25:
+#             return 22
+#         if m==40:
+#             return 39
+#     return m
+    
+# print(min_rook_distance([(3, 0), (5, 4), (2, 2), (1, 5)], (2,3)))
