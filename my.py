@@ -1,48 +1,37 @@
+import heapq
 from collections import deque
 
-def can_reach_end(a,n,m,M):
-    q,u,ps=deque(),set(),{}
-    for i in range(n):
-        if a[i][0]<=M:
-            q.append((k:=(i,0))),u.add(k)
-            ps[k]=None
-    while q:
-        i,j=q.popleft()
-        if j==m-1:
-            path=[]
-            c=(i,j)
+def f(a,b):
+    q,w=a
+    x,y=b
+    return 'down' if x<q else 'up' if x>q else 'right' if y<w else 'left'
+
+def cheapest_path(a,s,e):
+    if s==e:
+        return []
+    n,m,h,r,u=len(a),len(a[0]),[(a[s[0]][s[1]],s)],{s:None},set()
+    while h:
+        v,(i,j)=heapq.heappop(h)
+        if (i,j) in u:
+            continue
+        u.add((i,j))
+        if (i,j)==e:
+            c,q=(i,j),deque()
             while c is not None:
-                path.insert(0,c)
-                c=ps[c]
-            return path
-        t=[(i+1,j),(i-1,j),(i,j+1),(i,j-1),(i-1,j-1),(i+1,j+1),(i+1,j-1),(i-1,j+1)]
-        for x,y in t:
-            if 0<=x<n and 0<=y<m and (x,y) not in u and a[x][y]<=M:
-                q.append((x,y)),u.add((x,y))
-                ps[(x,y)]=(i,j)
-    return None
-
-def shallowest_path(a):
-    n,m=len(a),len(a[0])
-    l,r,p=min(min(i) for i in a),max(max(i) for i in a),None
-    while l<=r:
-        M=(l+r)//2
-        path=can_reach_end(a,n,m,M)
-        if path:
-            p=path
-            r=M-1
-        else:
-            l=M+1
-    return p
+                nc=r[c]
+                if nc:
+                    q.appendleft(f(c,nc))
+                c=nc
+            return list(q)
+        for x,y in [(x,y) for x,y in [(i+1,j),(i-1,j),(i,j+1),(i,j-1)] if 0<=x<n and 0<=y<m]:
+            if (x,y) not in r or (r[(x,y)] is not None and v+a[x][y]<a[r[(x,y)][0]][r[(x,y)][1]]):
+                r[(x,y)]=(i,j)
+            heapq.heappush(h,(v+a[x][y],(x,y)))
 
 
-print(shallowest_path([
-[1, 8, 8],
-[8, 1, 8],
-[8, 1, 8],
-[8, 1, 8],
-[8, 1, 8],
-[8, 8, 1],
-[8, 1, 8],
-[8, 1, 1],
-[1, 8, 8]]))
+print(cheapest_path([[1,9,1],[2,9,1],[2,1,1]],(0,0),(0,2)))
+print(cheapest_path([[1, 19, 1, 1, 1],
+                     [1, 19, 1, 19, 1],
+                     [1, 19, 1, 19, 1],
+                     [1, 19, 1, 19, 1],
+                     [1, 1, 1, 19, 1]], (0, 0), (4, 4)))
