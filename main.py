@@ -1,14 +1,9 @@
-def split_numbers(n):
-    x=bin(n)[2:][::-1]
-    a,b=list('0'*len(x)),list('0'*len(x))
-    n=1
-    for i in range(len(x)):
-        if x[i]=='1' and n&1:
-            a[i]='1'
-            n += 1
-        elif x[i]=='1' and not n&1:
-            b[i]='1'
-            n += 1
-    return int(''.join(a[::-1]),2),int(''.join(b[::-1]),2)
+def find_the_number_plate(id):
+    a, n = [], id // 999
+    for _ in range(3):
+        a.append(chr(ord('a') + n % 26))
+        n //= 26
+    return ''.join(a) + str(id % 999 + 1).zfill(3)
 
-print(split_numbers(13))
+print(find_the_number_plate(234567))
+print(find_the_number_plate(43056))
