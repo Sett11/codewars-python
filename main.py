@@ -1,8 +1,7 @@
-def pyramid(s):
-    N = (s - 2) // 4
-    vertices = N + 1
-    edges = 2 * N
-    faces = N + 1
-    return (vertices, edges, faces, N)
+def get_sum(n):
+    s1 = n * (n + 1) * (2 * n + 1) // 3
+    s2 = 3 * n * (n + 1) // 2
+    s3 = n + 1
+    return s1 + s2 + s3
 
-print(pyramid(42))
+print(get_sum(3))
