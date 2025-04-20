@@ -1,7 +1,6 @@
-def get_sum(n):
-    s1 = n * (n + 1) * (2 * n + 1) // 3
-    s2 = 3 * n * (n + 1) // 2
-    s3 = n + 1
-    return s1 + s2 + s3
+import os
 
-print(get_sum(3))
+def mkdirp(*dir):
+    os.makedirs(os.path.join(*dir), exist_ok=True)
+
+mkdirp("a", "b", "c")
