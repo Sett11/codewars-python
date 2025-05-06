@@ -1,28 +1,18 @@
-def solve(arr):
-    if not arr:
-        return []
+def solution(molar_mass1, molar_mass2, given_mass1, given_mass2, volume, temp):
+    # Переводим температуру из °C в K
+    temp_kelvin = temp + 273.15
     
-    roads = []
-    directions = []
+    # Рассчитываем количество вещества для каждого газа (в молях)
+    n1 = given_mass1 / molar_mass1
+    n2 = given_mass2 / molar_mass2
     
-    for step in arr:
-        parts = step.split(' on ')
-        directions.append(parts[0])
-        roads.append(parts[1])
+    # Суммарное количество вещества
+    n_total = n1 + n2
     
-    reversed_roads = roads[::-1]
-    reversed_directions = ['Begin']
+    # Газовая постоянная R
+    R = 0.082  # dm³·atm·K⁻¹·mol⁻¹
     
-    for original_dir in directions[:0:-1]:
-        if original_dir == 'Left':
-            reversed_directions.append('Right')
-        elif original_dir == 'Right':
-            reversed_directions.append('Left')
-        else:
-            reversed_directions.append(original_dir)
+    # Рассчитываем общее давление
+    total_pressure = (n_total * R * temp_kelvin) / volume
     
-    result = []
-    for dir, road in zip(reversed_directions, reversed_roads):
-        result.append(f"{dir} on {road}")
-    
-    return result
+    return total_pressure
