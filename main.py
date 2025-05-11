@@ -1,7 +1,1 @@
-import math
-
-def ice_brick_volume(radius, bottle_length, rim_length):
-    side = radius * math.sqrt(2)
-    height = bottle_length - rim_length
-    volume = side ** 2 * height
-    return int(volume)
+count_squares=lambda x: 1 if x==0 else (x+1)**3 - (x-1)**3
