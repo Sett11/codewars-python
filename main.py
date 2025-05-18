@@ -1,13 +1,26 @@
-def painted_faces(length, n):
-    if length == 1:
-        return 1 if n == 6 else 0
-    if n == 0:
-        return (length - 2) ** 3 if length >= 2 else 0
-    elif n == 1:
-        return 6 * (length - 2) ** 2 if length >= 2 else 0
-    elif n == 2:
-        return 12 * (length - 2) if length >= 2 else 0
-    elif n == 3:
-        return 8 if length >= 2 else 0
-    else:
-        return 0
+def movie_times(open, close, length):
+    showtimes = []
+    current_hour = open
+    current_min = 0
+    
+    # Если кинотеатр закрывается раньше, чем открывается (например, работает ночью)
+    if close <= open:
+        close += 24
+    
+    while True:
+        # Проверяем, что фильм успеет закончиться до закрытия
+        end_hour = current_hour + (current_min + length) // 60
+        end_min = (current_min + length) % 60
+        
+        if end_hour > close or (end_hour == close and end_min > 0):
+            break
+        
+        # Добавляем текущее время в список
+        showtimes.append((current_hour % 24, current_min))
+        
+        # Добавляем 15 минут для перерыва
+        current_min += length + 15
+        current_hour += current_min // 60
+        current_min = current_min % 60
+    
+    return showtimes
