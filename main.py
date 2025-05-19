@@ -1,26 +1,27 @@
-def movie_times(open, close, length):
-    showtimes = []
-    current_hour = open
-    current_min = 0
+def brightest(colors):
+    max_brightness = -1
+    brightest_color = ""
     
-    # Если кинотеатр закрывается раньше, чем открывается (например, работает ночью)
-    if close <= open:
-        close += 24
+    for color in colors:
+        # Извлекаем компоненты R, G, B
+        r = color[1:3]
+        g = color[3:5]
+        b = color[5:7]
+        
+        # Конвертируем из hex в int
+        r_int = int(r, 16)
+        g_int = int(g, 16)
+        b_int = int(b, 16)
+        
+        # Находим максимальное значение компонента
+        current_brightness = max(r_int, g_int, b_int)
+        
+        # Сравниваем с текущей максимальной яркостью
+        if current_brightness > max_brightness:
+            max_brightness = current_brightness
+            brightest_color = color
+        elif current_brightness == max_brightness:
+            # Если яркость такая же, оставляем первый встретившийся цвет
+            pass
     
-    while True:
-        # Проверяем, что фильм успеет закончиться до закрытия
-        end_hour = current_hour + (current_min + length) // 60
-        end_min = (current_min + length) % 60
-        
-        if end_hour > close or (end_hour == close and end_min > 0):
-            break
-        
-        # Добавляем текущее время в список
-        showtimes.append((current_hour % 24, current_min))
-        
-        # Добавляем 15 минут для перерыва
-        current_min += length + 15
-        current_hour += current_min // 60
-        current_min = current_min % 60
-    
-    return showtimes
+    return brightest_color
