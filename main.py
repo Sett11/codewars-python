@@ -1,16 +1,13 @@
-def count_min_rotations(dice):
-    opposite = {1:6, 2:5, 3:4, 4:3, 5:2, 6:1}
-    min_rotations = float('inf')
+def solve(before, after):
+    avg_before, dist_before = before
+    avg_after, dist_after = after
     
-    for target in range(1, 7):
-        total = 0
-        for face in dice:
-            if face == target:
-                continue
-            if opposite[face] == target:
-                total += 2
-            else:
-                total += 1
-        if total < min_rotations:
-            min_rotations = total
-    return min_rotations
+    total_fuel_before = (avg_before * dist_before) / 100
+    total_fuel_after = (avg_after * dist_after) / 100
+    
+    fuel_during = total_fuel_after - total_fuel_before
+    dist_during = dist_after - dist_before
+    
+    avg_during = (fuel_during / dist_during) * 100 if dist_during != 0 else 0.0
+    
+    return round(avg_during, 1)
