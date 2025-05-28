@@ -1,11 +1,7 @@
-def is_valid(positions):
-    # Проверяем, что король находится между двумя ладьями
-    rook_indices = [i for i, piece in enumerate(positions) if piece == 'R']
-    king_index = positions.index('K')
-    if not (rook_indices[0] < king_index < rook_indices[1]):
-        return False
-    # Проверяем, что слоны на клетках разного цвета
-    bishop_indices = [i for i, piece in enumerate(positions) if piece == 'B']
-    if (bishop_indices[0] % 2) == (bishop_indices[1] % 2):
-        return False
-    return True
+def decompose_single_strand(s):
+    result = []
+    for i in range(3):
+        result.append(f"Frame {i+1}: {s[:i]+(' ' if i else '')+' '.join([''.join(s[j:j+3]) for j in range(i, len(s), 3)])}")
+    return "\n".join(result)
+
+print(decompose_single_strand("AGGTGACACCGCAAGCCTTATATTAGC"))
