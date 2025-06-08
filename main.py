@@ -1,5 +1,15 @@
-f=lambda x,y:'=><'[(x>y)-(x<y)]
+def is_cleanly_nested(a):
+    u = set()
+    def f(e):
+        nonlocal u
+        u.add(all(i for i in e) or all(not i for i in e))
+        for i in e:
+            f(i)
+        return
+    f(a)
+    return (len(u)==1 and u.pop())
 
-print(f(2,3))
-print(f(3,3))
-print(f(3,2))
+print(is_cleanly_nested([]))
+print(is_cleanly_nested([[],[]]))
+print(is_cleanly_nested([ [ [[]], [[]], [[]]  ], [[]] , [[]]  ]))
+print(is_cleanly_nested([ [ [ [[]],[[]], []  ], [[]] ] , [ [] ] ]))
