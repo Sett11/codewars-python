@@ -1,36 +1,14 @@
-def flotsam(a):
-    n, m, u, q, r, max_w, names, s = len(a), len(a[0]), set(), set(), [], 1e3, {'F':'Frank', 'S':'Sam', 'T':'Tom'}, ''
-    def check(i,j):
-        return a[i-1][j] == '~' or a[i+1][j] == '~' or a[i][j+1] == '~' or a[i][j-1] == '~'
-    for i in range(n):
-        for j in range(m):
-            if j == 0 and a[i][j] == '~':
-                max_w = min(i, max_w)
-            if a[i][j] in '~':
-                u.add((i,j))
-            if a[i][j] == 'x' and check(i,j):
-                u.add((i,j))
-            if a[i][j] in 'FST':
-                r.append((i,j))
-    def f(i,j):
-        if i<max_w or i<0 or i>=n or j<0 or j>=m or (t:=(i,j)) in q or a[i][j] not in 'FST x~':
-            return
-        q.add(t)
-        if i >= max_w and a[i][j] in ' x':
-            a[i][j] = '~'
-        f(i+1,j),f(i-1,j),f(i,j+1),f(i,j-1)
-    for i in u:
-        f(*i)
-    for i,j in r:
-        if not check(i,j):
-            s += names[a[i][j]] + ' '
-    return ' '.join(sorted(s.split()))
+def micro_world(a, k):
+    a.sort()
+    i, w = 0, True
+    while w:
+        w = False
+        for i in range(len(a)-1):
+            if a[i] < a[i+1] and a[i+1] <= a[i] + k:
+                w = True
+                a.pop(i)
+                break
+    return len(a)
 
-print(flotsam([
-            [' ',' ', ' ',' ',' ',' ',' ',' ',' ','|','-','|',' ','|','-','|',' ','|','-','|',' ',' ',' ',' ',' ',' ',' ',' '],
-            [' ',' ', ' ',' ',' ',' ',' ',' ',' ','|',' ','|',' ','|',' ','|',' ','|',' ','|',' ',' ',' ',' ',' ',' ',' ',' '],
-            ['~','\\','-','-','-','-','-','-','-','|','-','|','-','|','-','|','-','|','-','|','-','-','-','-','-','-','/','~'],
-            ['~','~','\\',' ',' ',' ','F',' ',' ',' ','│',' ',' ',' ','S',' ',' ',' ','│',' ',' ',' ','T',' ',' ','x','~','~'],
-            ['~','~','~','\\','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','/','~','~','~'],
-            ['~','~','~' ,'~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~','~'],
-        ]))
+print(micro_world([101, 53, 42, 102, 101, 55, 54], 1))
+print(micro_world([20, 15, 10, 15, 20, 25], 5))
