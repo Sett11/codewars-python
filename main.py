@@ -1,24 +1,11 @@
-import numpy as np
+def countdown(n):
+    v, t = n < 0, abs(n)
+    s = t / 1000
+    h = s // 3600
+    rs = s % 3600
+    m = rs // 60
+    sec = rs % 60
+    return f"{'-' if v else '+'}{str(int(h)).rjust(2,'0')}:{str(int(m)).rjust(2, '0')}:{str(int(sec)).rjust(2,'0')}"
 
-def check(x):
-    if isinstance(x, (int, float)):
-        x = np.array([x])
-    n = (np.sqrt(8 * x + 1) - 1) / 2
-    return n == np.floor(n)
-
-def search_start(x):
-    while x % 3 != 0:
-        x+=1
-    return x
-
-def same_col_seq(n, k, col):
-    nums = {'blue': 0, 'red': 1, 'yellow': 2}
-    s = search_start(n+1) + nums[col]
-    a = np.arange(s, 2 * k * n + 4, 3)
-    mask = check(a)
-    return [int(i) for i in a[mask][:k]]
-    
-
-print(same_col_seq(3, 3, 'blue'))
-print(same_col_seq(250, 6, 'yellow'))
-print(same_col_seq(17076, 20, 'blue'))
+print(countdown(-154800000))
+print(countdown(61000))
