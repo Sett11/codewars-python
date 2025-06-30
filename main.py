@@ -1,11 +1,11 @@
-from itertools import groupby
-from collections import Counter
+from statistics import mean
 
-def same_length(s):
-    if s[0] == '0':
-        return False
-    a, c = [len(list(j)) for i,j in groupby(s)], Counter(s)
-    return all(a[i] == a[i+1] for i in range(0, len(a) - 1, 2)) and c['1'] == c['0']
+def get_min_avg_max(k, a):
+    r, q = [], []
+    for i in a:
+        t = i[k:-k]
+        r.append((min(t), mean(t), max(t)))
+        q.extend(t)
+    return r + [(min(q), mean(q), max(q))]
 
-print(same_length('1011100010'))
-print(same_length('00110100001111'))
+print(get_min_avg_max(2, [[800, 1200, 2100, 4100, 1300, 700], [1000, 1500, 4500, 5000, 5800, 2000, 1500]]))
