@@ -1,11 +1,20 @@
-from statistics import mean
+from string import ascii_uppercase as a, digits as d
+from collections import Counter
 
-def get_min_avg_max(k, a):
-    r, q = [], []
-    for i in a:
-        t = i[k:-k]
-        r.append((min(t), mean(t), max(t)))
-        q.extend(t)
-    return r + [(min(q), mean(q), max(q))]
+def convert(n, b, w=1):
+    r, s = (d + a)[:b], ''
+    while n > 0:
+        s = r[n%b] + s
+        n //= b
+    return s.rjust(w, '0')
 
-print(get_min_avg_max(2, [[800, 1200, 2100, 4100, 1300, 700], [1000, 1500, 4500, 5000, 5800, 2000, 1500]]))
+def validate(b, w, a):
+    s = ''.join(convert(i, b, w) for i in a)
+    c = Counter(s)
+    for i in range(len(a)):
+        if c[convert(i, b)] != a[i]:
+            return False
+    return True
+
+print(validate(16,2,[0x1B, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00]))
