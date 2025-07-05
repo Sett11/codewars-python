@@ -1,8 +1,5 @@
-def calculate_damage(y, o, n, m):
-    r, t = 50 * (n / m), {'>':2, '==': 1, '<': .5}
-    if y == o:
-        return r * .5
-    a = ['fire > grass', 'fire < water', 'fire == electric', 'water < grass', 'water < electric', 'grass == electric', 'grass < fire', 'water > fire', 'grass > water', 'electric > water', 'electric == fire', 'electric == grass']
-    return r * t[[i.split()[1] for i in a if (s := i.split())[0] == y and s[-1] == o][0]]
-    
-print(calculate_damage("fire", "water", 100, 100))
+# def get_villain_name(d):
+#     s = str(d).split()[0].split('-')
+#     f = [ "The Evil","The Vile","The Cruel", "The Trashy","The Despicable", "The Embarrassing", "The Disreputable","The Atrocious", "The Twirling",  "The Orange","The Terrifying", "The Awkward"]
+#     l = ["Mustache", "Pickle", "Hood Ornament", "Raisin", "Recycling Bin", "Potato", "Tomato", "House Cat", "Teaspoon", "Laundry Basket"]
+#     return f'{f[int(s[1]) - 1]} {l[int(s[-1][-1])]}'
