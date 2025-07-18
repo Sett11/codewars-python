@@ -1,11 +1,11 @@
-def int_rac(n, x):
-    c = 1
-    while True:
-        y = (x + n // x) // 2
-        if abs(x - y) < 1:
-            break
-        c += 1
-        x = y
-    return c
+def barista(a):
+    if not a:
+        return 0
+    a.sort()
+    r = [a[0]]
+    for i in a[1:]:
+        r.append(r[-1] + 2 + i)
+    return sum(r)
 
-print(int_rac(125348,300))
+print(barista([4,3,2]))
+print(barista([2,10,5,3,9]))
