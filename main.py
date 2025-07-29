@@ -1,18 +1,9 @@
-def highest_prod(a):
-    m = 0
-    def k(a):
-        nonlocal m
-        t = r = 1
-        for i in a:
-            m = max(m, i)
-            t *= i
-            if t > r:
-                r = t
-            if t < 1:
-                t = 1
-        return r
-    r = max(list(map(k, a)) + list(map(k, zip(*a))))
-    return r if r != m else 0
+def sel_number(n, d):
+    c = 0
+    for i in range(12, n+1):
+        s = str(i)
+        if len(set(s)) == len(s) and '0' not in s and ''.join(sorted(s)) == s and max(int(s[j]) - int(s[j-1]) for j in range(1, len(s))) <= d:
+            c += 1
+    return c
 
-print(highest_prod([[2, 1, 4, 1], [0, 4, 8, 1], [1, 0, 10, 0]]))
-print(highest_prod([[2, 0, 4, 0], [0, 0, 0, 0], [1, 0, 10, 0]]))
+print(sel_number(47, 3))
