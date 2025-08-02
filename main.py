@@ -1,30 +1,3 @@
-# Simple Fun #306: Super Brain
-
-# def super_brain(a, o):
-#     def add(x,y,n):
-#         for i in range(x-1,y):
-#             a[i] += n
-#     def delete(n):
-#         a.pop(n-1)
-#     def reverse(x,y):
-#         a[x-1:y] = a[x-1:y][::-1]
-#     def resolve(x,y,n):
-#         b = a[x-1:y]
-#         while n:
-#             b.append(b.pop(0))
-#             n -= 1
-#         a[x-1:y] = b
-#     def insert(x,y):
-#         a.insert(x-1, y)
-#     def _min(x,y):
-#         return min(a[x-1:y])
-#     d = {'ADD':add, 'DELETE': delete, 'REVERSE':reverse, 'REVOLVE': resolve, 'INSERT':insert, 'MIN':_min}
-#     return [d[(j:=i.split())[0]](*map(int, j[1:])) for i in o][-1]
-
-# print(super_brain([23,8,16,9,95,51,2],["REVOLVE 2 7 2","MIN 3 6"]))
-
-
-
 # Thinking & Testing : Retention and discard
 
 # def mystery(n):
