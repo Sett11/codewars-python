@@ -1,10 +1,16 @@
-def create_triangle(s):
-    r = [s]
-    while len(r[-1].strip()) > 1:
-        w, t = r[-1].split(), []
-        for i in range(len(w)-1):
-            t.append('+' if w[i] == w[i+1] else '-')
-        r.append(' '.join(t).center(len(r[0]), ' '))
-    return '\n'.join(r)
+def pro_categorization(a, b):
+    u, r = sorted(set(sum(b, []))), []
+    for i in u:
+        t = [[i], []]
+        for j in range(len(b)):
+            if i in b[j]:
+                t[1].append(a[j])
+        t[1].sort()
+        r.append(t)
+    return r
 
-print(create_triangle("+ + - + - + +"))
+print(pro_categorization(["Jack", "Leon", "Maria"], [
+            ["Computer repair", "Handyman", "House cleaning"],
+            ["Computer lessons", "Computer repair", "Data recovery service"],
+            ["Computer lessons", "House cleaning"]
+        ]))
