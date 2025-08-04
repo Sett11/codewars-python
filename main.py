@@ -1,16 +1,13 @@
-def pro_categorization(a, b):
-    u, r = sorted(set(sum(b, []))), []
-    for i in u:
-        t = [[i], []]
-        for j in range(len(b)):
-            if i in b[j]:
-                t[1].append(a[j])
-        t[1].sort()
-        r.append(t)
-    return r
+from collections import Counter
 
-print(pro_categorization(["Jack", "Leon", "Maria"], [
-            ["Computer repair", "Handyman", "House cleaning"],
-            ["Computer lessons", "Computer repair", "Data recovery service"],
-            ["Computer lessons", "House cleaning"]
-        ]))
+def buy_fruits(a, b):
+    c = sorted(Counter(b).values(), reverse=True)
+    mn = mx = k = 0
+    x, y = sorted(a), sorted(a,reverse=True)
+    for i in c:
+        mn += x[k] * i
+        mx += y[k] * i
+        k += 1
+    return mn, mx
+
+print(buy_fruits([3,5,1,6,8,1],["peach","grapefruit","banana","orange","orange"]))
