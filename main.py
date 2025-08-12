@@ -1,31 +1,16 @@
-from re import match
+def f(a,b):
+    return  sum(i == j or i =='#' for i,j in zip(a,b)) == len(a)
 
-def three_wishes(a, b, c, d):
-    r = [i.replace('I want ', '') for i in [b, c, d]]
-    if [i for i in r if match(r'\d+ wishes', i)]:
-        return []
-    for i in r:
-        t, v = i.split(), False
-        x = int(t[0])
-        y = ' '.join(t[1:])
-        if x > 1:
-            y = y[:-1]
-        for i in range(len(a)):
-            if a[i] == y:
-                while x:
-                    a.insert(i, y)
-                    x -= 1
-                v = True
-                break
-        if not v:
-            a.extend([y] * x)
-    return a
+def scratch(a):
+    r = 0
+    ans = ["tiger","rabbit","dragon","snake","rat","ox","pig","dog","cock","sheep","horse","monkey"]
+    vals = ['5', '10', '20', '50', '100', '200', '500', '1000', '2000', '5000', '10000']
+    for i in [i.split() for i in a]:
+        if len(set(map(len,i[:-1]))) == 1:
+            an, va = [j for j in ans if len(j) == len(i[0])], [j for j in vals if len(j) == len(i[-1])]
+            x, y = [[f(j, k) for j in i[:-1]] for k in an], [f(i[-1], j) for j in va]
+            if [j for j in range(len(x)) if all(x[j])]:
+                r += int(max([va[j] for j in range(len(y)) if y[j]]))
+    return r
 
-print(three_wishes([
-            'gold coin','gold coin','gold coin', 'silver coin','silver coin',
-            'water','water','water','water', 'food','food','food','food',
-            'book','book', 'weapon','weapon', 'clothe','clothe', 'medicine','medicine',
-            'tool','tool'],
-        'I want 1 food',
-        'I want 2 books',
-        'I want 1 girl'))
+print(scratch(['#####t #####t #####t 5##', '###### ###### ###### 1#', 'c### c### c### 5', '###### ###### ###### 5', '### #a# #a# #0#', 'c### c### ###k 1####']))
