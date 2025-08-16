@@ -1,42 +1,32 @@
-from re import search
+def super_pad(s, n, f=" "):
+    if not n:
+        return ''
+    if not f:
+        return s[-n:]
+    if  f[0] not in '<>^':
+        a, b, r, i = list(s), list(f), [], 0
+        while len(r+a) < n:
+            r.append(b[i%len(b)])
+            i += 1
+        return ''.join(r+a)[-n:]
+    if f[0] == '<':
+        a, b, r, i = list(s), list(f[1:]), [], 0
+        while len(r+a) < n:
+            r.append(b[i%len(b)])
+            i += 1
+        return ''.join(r+a)[-n:]
+    if f[0] == '>':
+        return (s+f[1:]*n)[:n]
+    a, b, c, r = list(s), list(f[1:]), list(f[1:]), []
+    if not b:
+        return s[-n:]
+    i = j = 0
+    while len(r+a) < n:
+        r.append(b[i%len(b)])
+        if len(r+a) < n:
+            a.append(c[j%len(c)])
+        i+=1
+        j+=1
+    return ''.join(r+a)
 
-def cowboys_dollars(a):
-    s, l, r = 'This Rhinestone Cowboy has {} dollar bills in his right boot and {} in the left', 0, 0
-    for i in range(2):
-        t = a[i].split('\n')
-        for j in t:
-            if j:
-                if '&' in j:
-                    break
-                if search(r'\[\(1\)\]', j):
-                    if i == 0:
-                        l += 1
-                    else:
-                        r += 1
-    return s.format(r, l)
-
-left ='''
-   ,|___|,
-   |     |
-   |     |
-   |[(1)]|
-   | ==  |
-   |[(1)]|
-   /    &|
-.-'`  ,   )****
-|         |   **
-`~~~~~~~~~~    ^'''
-right ='''
-   ,|___|,
-   |[(1)]|
-   |     |
-   |[(1)]|
-   | ==  |
-   |[(1)]|
-   /    &|
-.-'`  ,   )****
-|[(1)]    |   **
-`~~~~~~~~~~    ^'''
-boots = [left, right]
-
-print(cowboys_dollars(boots))
+print(super_pad("test", 7, "^more complex"))
