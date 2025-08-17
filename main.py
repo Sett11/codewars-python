@@ -1,32 +1,22 @@
-def super_pad(s, n, f=" "):
-    if not n:
-        return ''
-    if not f:
-        return s[-n:]
-    if  f[0] not in '<>^':
-        a, b, r, i = list(s), list(f), [], 0
-        while len(r+a) < n:
-            r.append(b[i%len(b)])
-            i += 1
-        return ''.join(r+a)[-n:]
-    if f[0] == '<':
-        a, b, r, i = list(s), list(f[1:]), [], 0
-        while len(r+a) < n:
-            r.append(b[i%len(b)])
-            i += 1
-        return ''.join(r+a)[-n:]
-    if f[0] == '>':
-        return (s+f[1:]*n)[:n]
-    a, b, c, r = list(s), list(f[1:]), list(f[1:]), []
-    if not b:
-        return s[-n:]
-    i = j = 0
-    while len(r+a) < n:
-        r.append(b[i%len(b)])
-        if len(r+a) < n:
-            a.append(c[j%len(c)])
-        i+=1
-        j+=1
-    return ''.join(r+a)
+from re import search, sub
 
-print(super_pad("test", 7, "^more complex"))
+def roast_legacy(s):
+    s = s.lower()
+    print(s)
+    comp = set(["slow!", "expensive!", "manual!", "down!", "hostage!", "security!"])
+    points = {"cobol": 1000, "nonobject": 500, "monolithic": 500, "fax": 100, "modem": 100, "thickclient": 50, "tape": 50, "floppy": 50, "oldschoolit": 50}
+    r1 = 'These guys are already DevOps and in the Cloud and the business is happy!'
+    r2 = 'Burn baby burn disco inferno {} points earned in this roasting and {} complaints resolved!'
+    c = p = 0
+    for i in comp:
+        while search(i, s):
+            c += 1
+            s = sub(i, '', s, count=1)
+    for i in points:
+        while search(i, s):
+            p += points[i]
+            s = sub(i, '', s, count=1)
+    return r1 if c+p == 0 else r2.format(p, c)
+
+
+print(roast_legacy('expensive!NONOBJECTexpensive!NONOBJECThostage!JAVASCRIPTexpensive!DEVOPS'))
