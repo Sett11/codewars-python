@@ -1,21 +1,42 @@
-from math import ceil
+a, b, c = "qwertyuiop", "asdfghjkl", "zxcvbnm,."
 
-def who_would_win(o1, o2):
-    f, w, c = lambda x : ceil(x["number"]) * x["damage"], lambda x: x["number"] * x["hitpoints"], 1
-    while o1["number"] > 0 and o2["number"] > 0:
-        if c & 1:
-            o2["number"] = (w(o2) - f(o1)) / o2["hitpoints"]
-        else:
-            o1["number"] = (w(o1) - f(o2)) / o1["hitpoints"]
-        c += 1
-    if (r := o1["number"]) > 0:
-        return f'{ceil(r)} {o1["type"]}(s) won'
-    return f'{ceil(o2["number"])} {o2["type"]}(s) won'
-            
+def z(s, a, n, v):
+    if not a:
+        return s
+    i, l = a.index(s), len(a)
+    if v == '+':
+        return a[(i + n) % l] if a else s
+    while n:
+        i -= 1
+        if i < 0:
+            i = l - 1
+        n -= 1
+    return a[i]
 
-print(who_would_win({ "type": "Roc", "hitpoints": 40, "number": 6, "damage":8 },
-     { "type": "Unicorn", "hitpoints": 40, "number": 4, "damage":13}))
-print(who_would_win({ "type": "Titan",       "hitpoints": 300,"number": 1, "damage":50},
-     { "type": "Battle Dwarf","hitpoints": 20, "number": 25,"damage":4}))
-print(who_would_win({ "type": "Paladin",     "hitpoints": 50, "number": 8 , "damage":20},
-     { "type": "Skeleton",    "hitpoints": 4 , "number": 100,"damage":3 }))
+def f(s, n, dir):
+    q = s.isupper()
+    x = s.lower()
+    v = a if x in a else b if x in b else c if x in c else None
+    if dir == '-' and s in '<>':
+        v = c
+        x = ',' if s == '<' else '.'
+        q = True
+    k = list(map(int,str(n).rjust(3,'0')))
+    w = k[0] if v == a else k[1] if v == b else k[2] if v == c else None
+    r = z(x, v, w, dir)
+    res = r.upper() if q else r
+    if q and res in ',.':
+        if res == ',':
+            return '<'
+        return '>'
+    return res
+
+def encrypt(s, n):
+    return ''.join(f(i, n, '+') for i in s)
+    
+def decrypt(s, n):
+    return ''.join(f(i, n, '-') for i in s)
+
+
+print(encrypt("Ball", 134))
+print(decrypt('}bdjX tvmo hedpmy', 3))
